@@ -88,6 +88,12 @@
       margin-top: 20px;
     }
 
+    /* Garantir que os botões não mudem de posição após o clique */
+    .navbar, .content, button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
@@ -182,14 +188,6 @@
     <p>Quando meus amigos ou familiares escolhem fazer algo em um lugar onde eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.</p>
     <button onclick="setAnswer(5, 'PRAGMÁTICO')">CONCORDO</button>
     <button onclick="setAnswer(5, 'AFILIATIVO')">DISCORDO</button>
-
-    <p>Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.</p>
-    <button onclick="setAnswer(6, 'PRAGMÁTICO')">CONCORDO</button>
-    <button onclick="setAnswer(6, 'AFILIATIVO')">DISCORDO</button>
-
-    <p>Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa, isso me ajuda a ver se ela está sendo receptiva ou não com o que eu estou falando.</p>
-    <button onclick="setAnswer(7, 'AFILIATIVO')">CONCORDO</button>
-    <button onclick="setAnswer(7, 'PRAGMÁTICO')">DISCORDO</button>
 
     <div id="result-enfoque" class="result"></div>
   </div>
