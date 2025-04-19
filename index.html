@@ -1,106 +1,167 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teste de Concordo ou Discordo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teste de Tipagem</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0c8056;
+      background-color: #1c7c5a;
       color: white;
       text-align: center;
     }
+
     .navbar {
-      background-color: #8c2743;
+      background-color: #931c55;
       display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 10px 0;
     }
-    .navbar img {
-      width: 30px;
-      height: 30px;
-      cursor: pointer;
-    }
+
     .tab {
-      display: none;
-      padding: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 10px 15px;
+      color: white;
     }
-    .tab.active {
+
+    .tab:hover {
+      background-color: #c93b7e;
+    }
+
+    .content {
+      display: none;
+      padding: 30px 20px;
+    }
+
+    .active {
       display: block;
     }
-    h2 {
-      background-color: #8c2743;
-      padding: 10px;
-      margin: 0 -20px 20px;
-    }
-    .pergunta {
+
+    .title {
+      font-size: 22px;
+      font-weight: bold;
       margin-bottom: 20px;
-      background-color: #00875a;
-      padding: 10px;
-      border-radius: 10px;
+      text-transform: uppercase;
     }
-    .botoes {
-      margin-top: 10px;
+
+    .question {
+      margin-bottom: 20px;
     }
-    button {
+
+    .button-group button {
       margin: 5px;
       padding: 10px 20px;
-      font-weight: bold;
       border: none;
       border-radius: 5px;
+      font-weight: bold;
       cursor: pointer;
     }
+
     .concordo {
-      background-color: #cc4b4b;
+      background-color: #c94848;
       color: white;
     }
+
     .discordo {
-      background-color: #cc4b4b;
+      background-color: #c94848;
       color: white;
-    }
-    .resultado-btn {
-      background-color: #f0e0c6;
-      color: black;
-    }
-    .responder-btn {
-      background-color: #d05f77;
-      color: white;
-    }
-    .footer {
-      margin-top: 30px;
-      font-size: 0.8em;
     }
   </style>
 </head>
 <body>
+
   <div class="navbar">
-    <img src="icone-home.png" onclick="showTab(0)" title="Página Inicial">
-    <img src="icone1.png" onclick="showTab(1)" title="Orientação">
-    <img src="icone2.png" onclick="showTab(2)" title="Postura">
-    <img src="icone3.png" onclick="showTab(3)" title="Enfoque">
-    <img src="icone4.png" onclick="showTab(4)" title="Organização">
-    <img src="icone5.png" onclick="showTab(5)" title="Comunicação">
-    <img src="icone6.png" onclick="showTab(6)" title="Interpretação">
-    <img src="icone7.png" onclick="showTab(7)" title="Resultado">
+    <div class="tab" onclick="showTab('inicio')">PÁGINA INICIAL</div>
+    <div class="tab" onclick="showTab('orientacao')">DICOTOMIA ORIENTAÇÃO</div>
+    <div class="tab" onclick="showTab('postura')">DICOTOMIA POSTURA</div>
+    <div class="tab" onclick="showTab('enfoque')">DICOTOMIA ENFOQUE</div>
+    <div class="tab" onclick="showTab('organizacao')">DICOTOMIA ORGANIZAÇÃO</div>
+    <div class="tab" onclick="showTab('comunicacao')">DICOTOMIA COMUNICAÇÃO</div>
+    <div class="tab" onclick="showTab('interpretacao')">DICOTOMIA INTERPRETAÇÃO</div>
+    <div class="tab" onclick="showTab('resultado')">RESULTADO TIPOLÓGICO</div>
   </div>
 
-  <div id="tab0" class="tab active">
-    <h2>PÁGINA INICIAL</h2>
+  <div id="inicio" class="content active">
+    <div class="title">Página Inicial</div>
     <p>Este teste é resultado do aprendizado adquirido durante o Curso de Tipagem, ministrado por @RobertaBernardon com base na teoria de Linda Berens.</p>
-    <div class="footer">TESTE ORGANIZADO E PRODUZIDO POR HERMES DAMIÃO BELLO</div>
+    <p style="font-size: 12px; margin-top: 40px;">TESTE ORGANIZADO E PRODUZIDO POR HERMES DAMIÃO BELLO</p>
   </div>
 
-  <!-- As outras abas serão inseridas aqui na sequência com base nas próximas mensagens -->
+  <div id="orientacao" class="content">
+    <div class="title">DICOTOMIA ORIENTAÇÃO</div>
+    <div class="question">
+      Geralmente durante uma conversa, quando algo me vem à cabeça, não consigo me conter e acabo interrompendo a outra pessoa para falar sobre isso.<br>
+      <div class="button-group">
+        <button class="concordo">CONCORDO</button>
+        <button class="discordo">DISCORDO</button>
+      </div>
+    </div>
+    <div class="question">
+      Quase sempre não me importo se alguém está desinformado sobre algo, não é meu problema se ela está desatualizada.<br>
+      <div class="button-group">
+        <button class="concordo">CONCORDO</button>
+        <button class="discordo">DISCORDO</button>
+      </div>
+    </div>
+    <!-- Você pode continuar com as outras perguntas da aba ORIENTAÇÃO aqui -->
+  </div>
+
+  <div id="postura" class="content">
+    <div class="title">DICOTOMIA POSTURA</div>
+    <div class="question">
+      Tenho uma certa impaciência, prefiro fazer as coisas, dar andamento às coisas ao invés de ficar aguardando e me preparando.<br>
+      <div class="button-group">
+        <button class="concordo">CONCORDO</button>
+        <button class="discordo">DISCORDO</button>
+      </div>
+    </div>
+    <div class="question">
+      Tendo a ser mais flexível, isso me ajuda a adaptar minhas ações conforme os problemas forem surgindo, isso me faz ser melhor contornando obstáculos do percurso.<br>
+      <div class="button-group">
+        <button class="concordo">CONCORDO</button>
+        <button class="discordo">DISCORDO</button>
+      </div>
+    </div>
+    <!-- Continue adicionando o restante das perguntas da aba POSTURA aqui -->
+  </div>
+
+  <!-- Demais abas ainda serão preenchidas -->
+  <div id="enfoque" class="content">
+    <div class="title">DICOTOMIA ENFOQUE</div>
+    <p>Conteúdo será inserido aqui...</p>
+  </div>
+
+  <div id="organizacao" class="content">
+    <div class="title">DICOTOMIA ORGANIZAÇÃO</div>
+    <p>Conteúdo será inserido aqui...</p>
+  </div>
+
+  <div id="comunicacao" class="content">
+    <div class="title">DICOTOMIA COMUNICAÇÃO</div>
+    <p>Conteúdo será inserido aqui...</p>
+  </div>
+
+  <div id="interpretacao" class="content">
+    <div class="title">DICOTOMIA INTERPRETAÇÃO</div>
+    <p>Conteúdo será inserido aqui...</p>
+  </div>
+
+  <div id="resultado" class="content">
+    <div class="title">RESULTADO TIPOLÓGICO</div>
+    <p>Conteúdo será fornecido depois...</p>
+  </div>
 
   <script>
-    function showTab(index) {
-      const tabs = document.querySelectorAll('.tab');
+    function showTab(tabId) {
+      const tabs = document.querySelectorAll('.content');
       tabs.forEach(tab => tab.classList.remove('active'));
-      document.getElementById(`tab${index}`).classList.add('active');
+      document.getElementById(tabId).classList.add('active');
     }
   </script>
+
 </body>
 </html>
