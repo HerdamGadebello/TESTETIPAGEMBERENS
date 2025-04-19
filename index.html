@@ -2,73 +2,105 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Página Inicial</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste de Concordo ou Discordo</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      background-color: #0c8056;
+      color: white;
+      text-align: center;
     }
-    .topbar {
-      background-color: #8a1540;
+    .navbar {
+      background-color: #8c2743;
       display: flex;
       justify-content: space-around;
       align-items: center;
       padding: 10px;
     }
-    .topbar img {
+    .navbar img {
       width: 30px;
+      height: 30px;
+      cursor: pointer;
     }
-    .titlebar {
-      background-color: #8a1540;
-      color: white;
-      text-align: center;
+    .tab {
+      display: none;
+      padding: 20px;
+    }
+    .tab.active {
+      display: block;
+    }
+    h2 {
+      background-color: #8c2743;
+      padding: 10px;
+      margin: 0 -20px 20px;
+    }
+    .pergunta {
+      margin-bottom: 20px;
+      background-color: #00875a;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .botoes {
+      margin-top: 10px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
       font-weight: bold;
-      padding: 5px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
-    .content {
-      padding: 30px;
-      max-width: 800px;
-      margin: auto;
-      text-align: justify;
+    .concordo {
+      background-color: #cc4b4b;
+      color: white;
     }
-    .content h2 {
-      color: #8a1540;
-      text-align: center;
+    .discordo {
+      background-color: #cc4b4b;
+      color: white;
+    }
+    .resultado-btn {
+      background-color: #f0e0c6;
+      color: black;
+    }
+    .responder-btn {
+      background-color: #d05f77;
+      color: white;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 0.8em;
     }
   </style>
 </head>
 <body>
-
-  <!-- Barra de abas com ícones -->
-  <div class="topbar">
-    <a href="index.html"><img src="home-icon.png" alt="Início"></a>
-    <img src="icone2.png" alt="Ícone 2">
-    <img src="icone3.png" alt="Ícone 3">
-    <img src="icone4.png" alt="Ícone 4">
-    <img src="icone5.png" alt="Ícone 5">
-    <img src="icone6.png" alt="Ícone 6">
-    <img src="icone7.png" alt="Ícone 7">
-    <img src="icone8.png" alt="Ícone 8">
+  <div class="navbar">
+    <img src="icone-home.png" onclick="showTab(0)" title="Página Inicial">
+    <img src="icone1.png" onclick="showTab(1)" title="Orientação">
+    <img src="icone2.png" onclick="showTab(2)" title="Postura">
+    <img src="icone3.png" onclick="showTab(3)" title="Enfoque">
+    <img src="icone4.png" onclick="showTab(4)" title="Organização">
+    <img src="icone5.png" onclick="showTab(5)" title="Comunicação">
+    <img src="icone6.png" onclick="showTab(6)" title="Interpretação">
+    <img src="icone7.png" onclick="showTab(7)" title="Resultado">
   </div>
 
-  <!-- Título da aba -->
-  <div class="titlebar">
-    PÁGINA INICIAL
+  <div id="tab0" class="tab active">
+    <h2>PÁGINA INICIAL</h2>
+    <p>Este teste é resultado do aprendizado adquirido durante o Curso de Tipagem, ministrado por @RobertaBernardon com base na teoria de Linda Berens.</p>
+    <div class="footer">TESTE ORGANIZADO E PRODUZIDO POR HERMES DAMIÃO BELLO</div>
   </div>
 
-  <!-- Conteúdo principal -->
-  <div class="content">
-    <h2>Bem-vindos ao Teste</h2>
-    <p>
-      Este é um teste com o intuito de investigar traços de orientação tipológica baseados nas atitudes de concordância e discordância com proposições simples.
-    </p>
-    <p>
-      O teste é composto por oito dicotomias. Para cada uma delas, você será apresentado a uma série de frases. Em cada frase, escolha se você concorda ou discorda.
-    </p>
-    <p>
-      A proposta é oferecer uma ferramenta investigativa e não um diagnóstico fechado. Os resultados devem ser interpretados com cuidado e, se possível, discutidos com um profissional qualificado.
-    </p>
-  </div>
+  <!-- As outras abas serão inseridas aqui na sequência com base nas próximas mensagens -->
 
+  <script>
+    function showTab(index) {
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => tab.classList.remove('active'));
+      document.getElementById(`tab${index}`).classList.add('active');
+    }
+  </script>
 </body>
 </html>
