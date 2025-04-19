@@ -81,7 +81,8 @@
     #resultadoPostura,
     #resultadoEnfoque,
     #resultadoOrganizacao,
-    #resultadoComunicacao {
+    #resultadoComunicacao,
+    #resultadoInterpretacao {
       text-align: center;
       margin-top: 30px;
       font-size: 18px;
@@ -312,6 +313,54 @@
     <div id="resultadoComunicacao">RESULTADO: INDEFINIDO</div>
   </div>
 
+  <div id="interpretacao" class="content">
+    <div class="title">DICOTOMIA INTERPRETAÇÃO</div>
+
+    <p>Tendo a ser uma pessoa mais cética, bem mais pé no chão. Muito raro eu cair nesse papinho de signo e outras coisas afins.</p>
+    <div class="button-container" id="interpretacaoQ1">
+      <button onclick="responderInterpretacao(0, 'CONCRETO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(0, 'ABSTRATO', this)">DISCORDO</button>
+    </div>
+
+    <p>Posso parecer meio acomodado e conformado para as pessoas, mas é que eu gosto de focar mais no que é presente agora. Esse negócio de ir atrás dos sonhos e ideais não cola comigo, nem tudo é possível de se realizar.</p>
+    <div class="button-container" id="interpretacaoQ2">
+      <button onclick="responderInterpretacao(1, 'CONCRETO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(1, 'ABSTRATO', this)">DISCORDO</button>
+    </div>
+
+    <p>Minha inclinação maior é divagar nas coisas que podem acontecem futuramente, penso bastante sobre como pode ser a sociedade do futuro, as novas tecnologias que podem surgir e o que eu poderia estar fazendo nessas novas situações.</p>
+    <div class="button-container" id="interpretacaoQ3">
+      <button onclick="responderInterpretacao(2, 'ABSTRATO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(2, 'CONCRETO', this)">DISCORDO</button>
+    </div>
+
+    <p>Tenho bastante maestria com coisas artesanais, seja em cozinhar, costurar, desenhar, manusear ou de mais artesanatos. Sinto um grande prazer em cada etapa do processo disso.</p>
+    <div class="button-container" id="interpretacaoQ4">
+      <button onclick="responderInterpretacao(3, 'CONCRETO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(3, 'ABSTRATO', this)">DISCORDO</button>
+    </div>
+
+    <p>Costumo ser uma pessoa precavida, é natural para mim elucubrar coisas que podem me acometer e já me preparo mentalmente para lidar com elas.</p>
+    <div class="button-container" id="interpretacaoQ5">
+      <button onclick="responderInterpretacao(4, 'ABSTRATO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(4, 'CONCRETO', this)">DISCORDO</button>
+    </div>
+
+    <p>Meus amigos e familiares frequentemente falam que eu "viajo na maionese", mas é que é muito bacana ficar pensamento nas alternativas das coisas, se as coisas fossem de outra maneira, se a história tivesse sido diferente.</p>
+    <div class="button-container" id="interpretacaoQ6">
+      <button onclick="responderInterpretacao(5, 'ABSTRATO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(5, 'CONCRETO', this)">DISCORDO</button>
+    </div>
+
+    <p>Adoro livros e filmes investigativos e suspense, perceber os cenários de crimes, analisar as inconsistências, prestar atenção nos detalhes e ir associando os materiais. Geralmente eu sou bem assertivo em quem cometeu o crime só observando tudo isso.</p>
+    <div class="button-container" id="interpretacaoQ7">
+      <button onclick="responderInterpretacao(6, 'CONCRETO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(6, 'ABSTRATO', this)">DISCORDO</button>
+    </div>
+
+    <div id="resultadoInterpretacao">RESULTADO: INDEFINIDO</div>
+  </div>
+
   <script>
     // Objetos para armazenar respostas
     const respostasOrientacao = {};
@@ -319,6 +368,7 @@
     const respostasEnfoque = {};
     const respostasOrganizacao = {};
     const respostasComunicacao = {};
+    const respostasInterpretacao = {};
 
     function showTab(tabId) {
       document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
@@ -386,6 +436,20 @@
           });
         }
       }
+
+      if (tabId === 'interpretacao') {
+        for (const [index, resposta] of Object.entries(respostasInterpretacao)) {
+          const containerId = `interpretacaoQ${parseInt(index) + 1}`;
+          const buttons = document.querySelectorAll(`#${containerId} button`);
+          buttons.forEach(b => {
+            b.classList.remove('selected');
+            if ((resposta === 'ABSTRATO' && b.textContent === 'CONCORDO') || 
+                (resposta === 'CONCRETO' && b.textContent === 'DISCORDO')) {
+              b.classList.add('selected');
+            }
+          });
+        }
+      }
     }
 
     // Funções de resposta para cada aba
@@ -422,18 +486,12 @@
     }
 
     function responderComunicacao(index, resposta, button) {
-      // Remove seleção apenas dos botões desta pergunta específica
       const containerId = `comunicacaoQ${index + 1}`;
       const buttons = document.querySelectorAll(`#${containerId} button`);
       buttons.forEach(b => b.classList.remove('selected'));
-      
-      // Adiciona seleção ao botão clicado
       button.classList.add('selected');
-      
-      // Armazena resposta
       respostasComunicacao[index] = resposta;
       
-      // Calcula resultado
       const valores = Object.values(respostasComunicacao);
       const contagem = {
         INFORMATIVO: valores.filter(v => v === 'INFORMATIVO').length,
@@ -446,6 +504,27 @@
       else resultado = "INDEFINIDO";
 
       document.getElementById("resultadoComunicacao").innerText = `RESULTADO: ${resultado}`;
+    }
+
+    function responderInterpretacao(index, resposta, button) {
+      const containerId = `interpretacaoQ${index + 1}`;
+      const buttons = document.querySelectorAll(`#${containerId} button`);
+      buttons.forEach(b => b.classList.remove('selected'));
+      button.classList.add('selected');
+      respostasInterpretacao[index] = resposta;
+      
+      const valores = Object.values(respostasInterpretacao);
+      const contagem = {
+        ABSTRATO: valores.filter(v => v === 'ABSTRATO').length,
+        CONCRETO: valores.filter(v => v === 'CONCRETO').length
+      };
+
+      let resultado;
+      if (contagem.ABSTRATO >= 4) resultado = "ABSTRATO";
+      else if (contagem.CONCRETO >= 4) resultado = "CONCRETO";
+      else resultado = "INDEFINIDO";
+
+      document.getElementById("resultadoInterpretacao").innerText = `RESULTADO: ${resultado}`;
     }
   </script>
 </body>
