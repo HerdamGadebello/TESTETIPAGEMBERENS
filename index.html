@@ -79,7 +79,8 @@
 
     #resultadoOrientacao,
     #resultadoPostura,
-    #resultadoEnfoque {
+    #resultadoEnfoque,
+    #resultadoOrganizacao {
       text-align: center;
       margin-top: 30px;
       font-size: 18px;
@@ -224,68 +225,61 @@
       <button onclick="responderEnfoque(6, this, 'PRAGMÁTICO', 'AFILIATIVO')">DISCORDO</button>
     </div>
 
-    <div id="organizacao" class="content">
-  <div class="title">DICOTOMIA ORGANIZAÇÃO</div>
-
-  <p>Eu entendo que as regras existem para que as coisas não virem uma baderna, mas também é necessário particularizar os casos, muitas vezes é preciso afrouxar as estruturas para que acordos benéficos sejam estabelecidos.</p>
-  <div class="button-container" id="organizacaoQ1">
-    <button onclick="responderOrganizacao(0, 'INTERESSADO', this)">CONCORDO</button>
-    <button onclick="responderOrganizacao(0, 'ESTRUTURADO', this)">DISCORDO</button>
-  </div>
-
-  <p>Curto manter minha rotina, fazer as coisas que geralmente faço no horário que faço, fico muito estressado quando um imprevisto acontece.</p>
-  <div class="button-container" id="organizacaoQ2">
-    <button onclick="responderOrganizacao(1, 'ESTRUTURADO', this)">CONCORDO</button>
-    <button onclick="responderOrganizacao(1, 'INTERESSADO', this)">DISCORDO</button>
-  </div>
-
-  <p>Se o meu trabalho exige que eu siga um protocolo de atendimento, busco sempre o seguir, não costumo abrir exceções a respeito disso.</p>
-  <div class="button-container" id="organizacaoQ3">
-    <button onclick="responderOrganizacao(2, 'ESTRUTURADO', this)">CONCORDO</button>
-    <button onclick="responderOrganizacao(2, 'INTERESSADO', this)">DISCORDO</button>
-  </div>
-
-  <p>Às vezes, por buscar garantir que as coisas funcionem, posso soar um pouco ríspido(a) na maneira de tratar as pessoas.</p>
-  <div class="button-container" id="organizacaoQ4">
-    <button onclick="responderOrganizacao(3, 'ESTRUTURADO', this)">CONCORDO</button>
-    <button onclick="responderOrganizacao(3, 'INTERESSADO', this)">DISCORDO</button>
-  </div>
-
-  <p>Para mim, justiça é aplicar o que é devido a cada indivíduo, não dá para sair batendo o martelo usando a mesma medida para todo mundo, até porque se uma pessoa furta alimentos para sustentar os filhos, ela não deve sofrer a mesma pena que uma pessoa que roubou por mero desejo e capricho.</p>
-  <div class="button-container" id="organizacaoQ5">
-    <button onclick="responderOrganizacao(4, 'INTERESSADO', this)">CONCORDO</button>
-    <button onclick="responderOrganizacao(4, 'ESTRUTURADO', this)">DISCORDO</button>
-  </div>
-
-  <p>Pessoas que moralizam tudo são muito tediosas, penso que se as pessoas envolvidas numa situação não veem problema nela, não tem por que achar ruim.</p>
-  <div class="button-container" id="organizacaoQ6">
-    <button onclick="responderOrganizacao(5, 'INTERESSADO', this)">CONCORDO</button>
-    <button onclick="responderOrganizacao(5, 'ESTRUTURADO', this)">DISCORDO</button>
-  </div>
-
-  <p>Sou adepto do ditado “o combinado não sai caro”, afinal se a pessoa é adulta ela responsável e consciente das próprias ações.</p>
-  <div class="button-container" id="organizacaoQ7">
-    <button onclick="responderOrganizacao(6, 'INTERESSADO', this)">CONCORDO</button>
-    <button onclick="responderOrganizacao(6, 'ESTRUTURADO', this)">DISCORDO</button>
-  </div>
-
-  <div id="resultadoOrganizacao">RESULTADO: INDEFINIDO</div>
-</div>
-
     <div id="resultadoEnfoque">RESULTADO: INDEFINIDO</div>
+  </div>
+
+  <div id="organizacao" class="content">
+    <div class="title">DICOTOMIA ORGANIZAÇÃO</div>
+
+    <p>Eu entendo que as regras existem para que as coisas não virem uma baderna, mas também é necessário particularizar os casos, muitas vezes é preciso afrouxar as estruturas para que acordos benéficos sejam estabelecidos.</p>
+    <div class="button-container" id="organizacaoQ1">
+      <button onclick="responderOrganizacao(0, 'INTERESSADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(0, 'ESTRUTURADO', this)">DISCORDO</button>
+    </div>
+
+    <p>Curto manter minha rotina, fazer as coisas que geralmente faço no horário que faço, fico muito estressado quando um imprevisto acontece.</p>
+    <div class="button-container" id="organizacaoQ2">
+      <button onclick="responderOrganizacao(1, 'ESTRUTURADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(1, 'INTERESSADO', this)">DISCORDO</button>
+    </div>
+
+    <p>Se o meu trabalho exige que eu siga um protocolo de atendimento, busco sempre o seguir, não costumo abrir exceções a respeito disso.</p>
+    <div class="button-container" id="organizacaoQ3">
+      <button onclick="responderOrganizacao(2, 'ESTRUTURADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(2, 'INTERESSADO', this)">DISCORDO</button>
+    </div>
+
+    <p>Às vezes, por buscar garantir que as coisas funcionem, posso soar um pouco ríspido(a) na maneira de tratar as pessoas.</p>
+    <div class="button-container" id="organizacaoQ4">
+      <button onclick="responderOrganizacao(3, 'ESTRUTURADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(3, 'INTERESSADO', this)">DISCORDO</button>
+    </div>
+
+    <p>Para mim, justiça é aplicar o que é devido a cada indivíduo, não dá para sair batendo o martelo usando a mesma medida para todo mundo, até porque se uma pessoa furta alimentos para sustentar os filhos, ela não deve sofrer a mesma pena que uma pessoa que roubou por mero desejo e capricho.</p>
+    <div class="button-container" id="organizacaoQ5">
+      <button onclick="responderOrganizacao(4, 'INTERESSADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(4, 'ESTRUTURADO', this)">DISCORDO</button>
+    </div>
+
+    <p>Pessoas que moralizam tudo são muito tediosas, penso que se as pessoas envolvidas numa situação não veem problema nela, não tem por que achar ruim.</p>
+    <div class="button-container" id="organizacaoQ6">
+      <button onclick="responderOrganizacao(5, 'INTERESSADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(5, 'ESTRUTURADO', this)">DISCORDO</button>
+    </div>
+
+    <p>Sou adepto do ditado “o combinado não sai caro”, afinal se a pessoa é adulta ela responsável e consciente das próprias ações.</p>
+    <div class="button-container" id="organizacaoQ7">
+      <button onclick="responderOrganizacao(6, 'INTERESSADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(6, 'ESTRUTURADO', this)">DISCORDO</button>
+    </div>
+
+    <div id="resultadoOrganizacao">RESULTADO: INDEFINIDO</div>
   </div>
 
   <script>
     function showTab(tabId) {
       document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
-    }
-
-    function responderEnfoque(index, button, resultado1, resultado2) {
-      const buttons = document.querySelectorAll(`#enfoque #question${index + 1} button`);
-      buttons.forEach(b => b.classList.remove('selected'));
-      button.classList.add('selected');
-      document.getElementById("resultadoEnfoque").innerText = "RESULTADO: " + (index % 2 === 0 ? resultado1 : resultado2);
     }
 
     function responderOrientacao(index, resposta, button) {
@@ -300,6 +294,20 @@
       buttons.forEach(b => b.classList.remove('selected'));
       button.classList.add('selected');
       document.getElementById("resultadoPostura").innerText = "RESULTADO: " + resposta;
+    }
+
+    function responderEnfoque(index, button, resultado1, resultado2) {
+      const buttons = document.querySelectorAll(`#enfoque #question${index + 1} button`);
+      buttons.forEach(b => b.classList.remove('selected'));
+      button.classList.add('selected');
+      document.getElementById("resultadoEnfoque").innerText = "RESULTADO: " + (index % 2 === 0 ? resultado1 : resultado2);
+    }
+
+    function responderOrganizacao(index, resposta, button) {
+      const buttons = document.querySelectorAll(`#organizacao .button-container button`);
+      buttons.forEach(b => b.classList.remove('selected'));
+      button.classList.add('selected');
+      document.getElementById("resultadoOrganizacao").innerText = "RESULTADO: " + resposta;
     }
   </script>
 
