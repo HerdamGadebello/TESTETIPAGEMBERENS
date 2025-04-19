@@ -14,9 +14,17 @@
     .navbar {
       background-color: #931c55;
       display: flex;
-      justify-content: space-around;
       flex-wrap: wrap;
+      justify-content: center;
       padding: 10px 0;
+    }
+
+    .navbar-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      max-width: 900px;
     }
 
     .tab {
@@ -25,10 +33,19 @@
       font-weight: bold;
       color: white;
       text-align: center;
+      margin: 2px;
+      flex: 1;
+      min-width: 200px;
+      max-width: 220px;
+      box-sizing: border-box;
     }
 
     .tab:hover {
       background-color: #b13370;
+    }
+
+    .tab.active-tab {
+      background-color: #d14d8a;
     }
 
     .content {
@@ -71,10 +88,19 @@
       font-weight: bold;
       font-family: Abadi, sans-serif;
       cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #a8323d;
     }
 
     button.selected {
       background-color: #1CC27F;
+    }
+
+    button.selected:hover {
+      background-color: #16a56a;
     }
 
     #resultadoOrientacao,
@@ -87,20 +113,25 @@
       margin-top: 30px;
       font-size: 18px;
       font-weight: bold;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
 
   <div class="navbar">
-    <div class="tab" onclick="showTab('inicio')">PÁGINA INICIAL</div>
-    <div class="tab" onclick="showTab('orientacao')">DICOTOMIA ORIENTAÇÃO</div>
-    <div class="tab" onclick="showTab('postura')">DICOTOMIA POSTURA</div>
-    <div class="tab" onclick="showTab('enfoque')">DICOTOMIA ENFOQUE</div>
-    <div class="tab" onclick="showTab('organizacao')">DICOTOMIA ORGANIZAÇÃO</div>
-    <div class="tab" onclick="showTab('comunicacao')">DICOTOMIA COMUNICAÇÃO</div>
-    <div class="tab" onclick="showTab('interpretacao')">DICOTOMIA INTERPRETAÇÃO</div>
-    <div class="tab" onclick="showTab('resultado')">RESULTADO TIPOLÓGICO</div>
+    <div class="navbar-container">
+      <div class="tab active-tab" onclick="showTab('inicio')">PÁGINA INICIAL</div>
+      <div class="tab" onclick="showTab('orientacao')">DICOTOMIA ORIENTAÇÃO</div>
+      <div class="tab" onclick="showTab('postura')">DICOTOMIA POSTURA</div>
+      <div class="tab" onclick="showTab('enfoque')">DICOTOMIA ENFOQUE</div>
+      <div class="tab" onclick="showTab('organizacao')">DICOTOMIA ORGANIZAÇÃO</div>
+      <div class="tab" onclick="showTab('comunicacao')">DICOTOMIA COMUNICAÇÃO</div>
+      <div class="tab" onclick="showTab('interpretacao')">DICOTOMIA INTERPRETAÇÃO</div>
+      <div class="tab" onclick="showTab('resultado')">RESULTADO TIPOLÓGICO</div>
+    </div>
   </div>
 
   <div id="inicio" class="content active">
@@ -361,6 +392,11 @@
     <div id="resultadoInterpretacao">RESULTADO: INDEFINIDO</div>
   </div>
 
+  <div id="resultado" class="content">
+    <div class="title">RESULTADO TIPOLÓGICO</div>
+    <p>Os resultados serão exibidos aqui após completar todas as dicotomias.</p>
+  </div>
+
   <script>
     // Objetos para armazenar respostas
     const respostasOrientacao = {};
@@ -370,103 +406,63 @@
     const respostasComunicacao = {};
     const respostasInterpretacao = {};
 
+    // Objeto para armazenar resultados finais de cada dicotomia
+    const resultados = {
+      orientacao: "INDEFINIDO",
+      postura: "INDEFINIDO",
+      enfoque: "INDEFINIDO",
+      organizacao: "INDEFINIDO",
+      comunicacao: "INDEFINIDO",
+      interpretacao: "INDEFINIDO"
+    };
+
     function showTab(tabId) {
+      // Atualiza a aba ativa na navbar
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active-tab'));
+      document.querySelector(`.tab[onclick="showTab('${tabId}')"]`).classList.add('active-tab');
+      
+      // Mostra o conteúdo da aba selecionada
       document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
-
-      // Reaplica seleções nas abas
-      if (tabId === 'orientacao') {
-        for (const [index, resposta] of Object.entries(respostasOrientacao)) {
-          const buttons = document.querySelectorAll(`#orientacao .button-container:nth-child(${parseInt(index) + 2}) button`);
-          buttons.forEach(b => {
-            b.classList.remove('selected');
-            if (b.textContent === (resposta === 'INICIADOR' ? 'CONCORDO' : 'DISCORDO')) {
-              b.classList.add('selected');
-            }
-          });
-        }
-      }
-
-      if (tabId === 'postura') {
-        for (const [index, resposta] of Object.entries(respostasPostura)) {
-          const buttons = document.querySelectorAll(`#postura .button-container:nth-child(${parseInt(index) + 2}) button`);
-          buttons.forEach(b => {
-            b.classList.remove('selected');
-            if (b.textContent === (resposta === 'MOVIMENTADOR' ? 'CONCORDO' : 'DISCORDO')) {
-              b.classList.add('selected');
-            }
-          });
-        }
-      }
-
-      if (tabId === 'enfoque') {
-        for (const [index, resposta] of Object.entries(respostasEnfoque)) {
-          const buttons = document.querySelectorAll(`#enfoque #question${parseInt(index) + 1} button`);
-          buttons.forEach(b => {
-            b.classList.remove('selected');
-            if (b.classList.contains('selected')) {
-              b.classList.add('selected');
-            }
-          });
-        }
-      }
-
-      if (tabId === 'organizacao') {
-        for (const [index, resposta] of Object.entries(respostasOrganizacao)) {
-          const buttons = document.querySelectorAll(`#organizacao .button-container:nth-child(${parseInt(index) + 2}) button`);
-          buttons.forEach(b => {
-            b.classList.remove('selected');
-            if (b.textContent === (resposta === 'INTERESSADO' ? 'CONCORDO' : 'DISCORDO')) {
-              b.classList.add('selected');
-            }
-          });
-        }
-      }
-
-      if (tabId === 'comunicacao') {
-        for (const [index, resposta] of Object.entries(respostasComunicacao)) {
-          const containerId = `comunicacaoQ${parseInt(index) + 1}`;
-          const buttons = document.querySelectorAll(`#${containerId} button`);
-          buttons.forEach(b => {
-            b.classList.remove('selected');
-            if ((resposta === 'INFORMATIVO' && b.textContent === 'CONCORDO') || 
-                (resposta === 'DIRETO' && b.textContent === 'DISCORDO')) {
-              b.classList.add('selected');
-            }
-          });
-        }
-      }
-
-      if (tabId === 'interpretacao') {
-        for (const [index, resposta] of Object.entries(respostasInterpretacao)) {
-          const containerId = `interpretacaoQ${parseInt(index) + 1}`;
-          const buttons = document.querySelectorAll(`#${containerId} button`);
-          buttons.forEach(b => {
-            b.classList.remove('selected');
-            if ((resposta === 'ABSTRATO' && b.textContent === 'CONCORDO') || 
-                (resposta === 'CONCRETO' && b.textContent === 'DISCORDO')) {
-              b.classList.add('selected');
-            }
-          });
-        }
-      }
     }
 
     // Funções de resposta para cada aba
     function responderOrientacao(index, resposta, button) {
-      respostasOrientacao[index] = resposta;
       const buttons = document.querySelectorAll(`#orientacao .button-container:nth-child(${index + 2}) button`);
       buttons.forEach(b => b.classList.remove('selected'));
       button.classList.add('selected');
-      document.getElementById("resultadoOrientacao").innerText = "RESULTADO: " + resposta;
+      respostasOrientacao[index] = resposta;
+      
+      // Calcula resultado
+      const valores = Object.values(respostasOrientacao);
+      const contagem = {
+        INICIADOR: valores.filter(v => v === 'INICIADOR').length,
+        RESPONDEDOR: valores.filter(v => v === 'RESPONDEDOR').length
+      };
+      
+      resultados.orientacao = contagem.INICIADOR > contagem.RESPONDEDOR ? "INICIADOR" : 
+                            contagem.RESPONDEDOR > contagem.INICIADOR ? "RESPONDEDOR" : "INDEFINIDO";
+      
+      document.getElementById("resultadoOrientacao").innerText = `RESULTADO: ${resultados.orientacao}`;
     }
 
     function responderPostura(index, resposta, button) {
-      respostasPostura[index] = resposta;
       const buttons = document.querySelectorAll(`#postura .button-container:nth-child(${index + 2}) button`);
       buttons.forEach(b => b.classList.remove('selected'));
       button.classList.add('selected');
-      document.getElementById("resultadoPostura").innerText = "RESULTADO: " + resposta;
+      respostasPostura[index] = resposta;
+      
+      // Calcula resultado
+      const valores = Object.values(respostasPostura);
+      const contagem = {
+        MOVIMENTADOR: valores.filter(v => v === 'MOVIMENTADOR').length,
+        CONTROLADOR: valores.filter(v => v === 'CONTROLADOR').length
+      };
+      
+      resultados.postura = contagem.MOVIMENTADOR > contagem.CONTROLADOR ? "MOVIMENTADOR" : 
+                         contagem.CONTROLADOR > contagem.MOVIMENTADOR ? "CONTROLADOR" : "INDEFINIDO";
+      
+      document.getElementById("resultadoPostura").innerText = `RESULTADO: ${resultados.postura}`;
     }
 
     function responderEnfoque(index, button, resultado1, resultado2) {
@@ -474,15 +470,37 @@
       buttons.forEach(b => b.classList.remove('selected'));
       button.classList.add('selected');
       respostasEnfoque[index] = index % 2 === 0 ? resultado1 : resultado2;
-      document.getElementById("resultadoEnfoque").innerText = "RESULTADO: " + (index % 2 === 0 ? resultado1 : resultado2);
+      
+      // Calcula resultado
+      const valores = Object.values(respostasEnfoque);
+      const contagem = {
+        PRAGMÁTICO: valores.filter(v => v === 'PRAGMÁTICO').length,
+        AFILIATIVO: valores.filter(v => v === 'AFILIATIVO').length
+      };
+      
+      resultados.enfoque = contagem.PRAGMÁTICO > contagem.AFILIATIVO ? "PRAGMÁTICO" : 
+                          contagem.AFILIATIVO > contagem.PRAGMÁTICO ? "AFILIATIVO" : "INDEFINIDO";
+      
+      document.getElementById("resultadoEnfoque").innerText = `RESULTADO: ${resultados.enfoque}`;
     }
 
     function responderOrganizacao(index, resposta, button) {
-      respostasOrganizacao[index] = resposta;
       const buttons = document.querySelectorAll(`#organizacao .button-container:nth-child(${index + 2}) button`);
       buttons.forEach(b => b.classList.remove('selected'));
       button.classList.add('selected');
-      document.getElementById("resultadoOrganizacao").innerText = "RESULTADO: " + resposta;
+      respostasOrganizacao[index] = resposta;
+      
+      // Calcula resultado
+      const valores = Object.values(respostasOrganizacao);
+      const contagem = {
+        INTERESSADO: valores.filter(v => v === 'INTERESSADO').length,
+        ESTRUTURADO: valores.filter(v => v === 'ESTRUTURADO').length
+      };
+      
+      resultados.organizacao = contagem.INTERESSADO > contagem.ESTRUTURADO ? "INTERESSADO" : 
+                              contagem.ESTRUTURADO > contagem.INTERESSADO ? "ESTRUTURADO" : "INDEFINIDO";
+      
+      document.getElementById("resultadoOrganizacao").innerText = `RESULTADO: ${resultados.organizacao}`;
     }
 
     function responderComunicacao(index, resposta, button) {
@@ -498,12 +516,10 @@
         DIRETO: valores.filter(v => v === 'DIRETO').length
       };
 
-      let resultado;
-      if (contagem.INFORMATIVO >= 3) resultado = "INFORMATIVO";
-      else if (contagem.DIRETO >= 3) resultado = "DIRETO";
-      else resultado = "INDEFINIDO";
+      resultados.comunicacao = contagem.INFORMATIVO >= 3 ? "INFORMATIVO" :
+                             contagem.DIRETO >= 3 ? "DIRETO" : "INDEFINIDO";
 
-      document.getElementById("resultadoComunicacao").innerText = `RESULTADO: ${resultado}`;
+      document.getElementById("resultadoComunicacao").innerText = `RESULTADO: ${resultados.comunicacao}`;
     }
 
     function responderInterpretacao(index, resposta, button) {
@@ -519,12 +535,10 @@
         CONCRETO: valores.filter(v => v === 'CONCRETO').length
       };
 
-      let resultado;
-      if (contagem.ABSTRATO >= 4) resultado = "ABSTRATO";
-      else if (contagem.CONCRETO >= 4) resultado = "CONCRETO";
-      else resultado = "INDEFINIDO";
+      resultados.interpretacao = contagem.ABSTRATO >= 4 ? "ABSTRATO" :
+                               contagem.CONCRETO >= 4 ? "CONCRETO" : "INDEFINIDO";
 
-      document.getElementById("resultadoInterpretacao").innerText = `RESULTADO: ${resultado}`;
+      document.getElementById("resultadoInterpretacao").innerText = `RESULTADO: ${resultados.interpretacao}`;
     }
   </script>
 </body>
