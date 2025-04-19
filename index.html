@@ -65,18 +65,12 @@
     }
 
     button:hover {
-      background-color: #b13370;
+      background-color: #a63a45;
     }
 
     button.clicked {
       background-color: #1CC27F;
-    }
-
-    #resultadoOrientacao {
-      margin-top: 20px;
-      font-size: 20px;
-      font-weight: bold;
-      text-align: center;
+      color: white;
     }
   </style>
 </head>
@@ -100,40 +94,40 @@
   </div>
 
   <div id="orientacao" class="content">
-  <div class="title">DICOTOMIA ORIENTAÇÃO</div>
+    <div class="title">DICOTOMIA ORIENTAÇÃO</div>
 
-  <div class="pergunta">
-    <p>Geralmente durante uma conversa, quando algo me vem à cabeça, não consigo me conter e acabo interrompendo a outra pessoa para falar sobre isso.</p>
-    <button onclick="saveAnswer(1, 'INICIADOR', this)">CONCORDO</button>
-    <button onclick="saveAnswer(1, 'RESPONDEDOR', this)">DISCORDO</button>
+    <div class="pergunta">
+      <p>Geralmente durante uma conversa, quando algo me vem à cabeça, não consigo me conter e acabo interrompendo a outra pessoa para falar sobre isso.</p>
+      <button onclick="saveAnswer(1, 'INICIADOR', this)">CONCORDO</button>
+      <button onclick="saveAnswer(1, 'RESPONDEDOR', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta">
+      <p>Quase sempre não me importo se alguém está desinformado sobre algo, não é meu problema se ela está desatualizada.</p>
+      <button onclick="saveAnswer(2, 'RESPONDEDOR', this)">CONCORDO</button>
+      <button onclick="saveAnswer(2, 'INICIADOR', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta">
+      <p>Usualmente durante uma conversa, prefiro terminar minha linha de pensamento, extraindo o que é possível sobre o tema, não gosto de mudança repentina de assunto.</p>
+      <button onclick="saveAnswer(3, 'RESPONDEDOR', this)">CONCORDO</button>
+      <button onclick="saveAnswer(3, 'INICIADOR', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta">
+      <p>Minha maior tendência é escutar o que os outros têm a me dizer, é natural para mim guardar e processar o que me dizem antes de expor o que eu penso.</p>
+      <button onclick="saveAnswer(4, 'RESPONDEDOR', this)">CONCORDO</button>
+      <button onclick="saveAnswer(4, 'INICIADOR', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta">
+      <p>Geralmente sou muito inquieto, tenho uma propensão de participar ativamente das coisas, adoro compartilhar assuntos, participar de conversas e frequentemente não percebo que posso estar incomodando.</p>
+      <button onclick="saveAnswer(5, 'INICIADOR', this)">CONCORDO</button>
+      <button onclick="saveAnswer(5, 'RESPONDEDOR', this)">DISCORDO</button>
+    </div>
+
+    <div id="resultadoOrientacao">RESULTADO:</div>
   </div>
-
-  <div class="pergunta">
-    <p>Quase sempre não me importo se alguém está desinformado sobre algo, não é meu problema se ela está desatualizada.</p>
-    <button onclick="saveAnswer(2, 'RESPONDEDOR', this)">CONCORDO</button>
-    <button onclick="saveAnswer(2, 'INICIADOR', this)">DISCORDO</button>
-  </div>
-
-  <div class="pergunta">
-    <p>Usualmente durante uma conversa, prefiro terminar minha linha de pensamento, extraindo o que é possível sobre o tema, não gosto de mudança repentina de assunto.</p>
-    <button onclick="saveAnswer(3, 'RESPONDEDOR', this)">CONCORDO</button>
-    <button onclick="saveAnswer(3, 'INICIADOR', this)">DISCORDO</button>
-  </div>
-
-  <div class="pergunta">
-    <p>Minha maior tendência é escutar o que os outros têm a me dizer, é natural para mim guardar e processar o que me dizem antes de expor o que eu penso.</p>
-    <button onclick="saveAnswer(4, 'RESPONDEDOR', this)">CONCORDO</button>
-    <button onclick="saveAnswer(4, 'INICIADOR', this)">DISCORDO</button>
-  </div>
-
-  <div class="pergunta">
-    <p>Geralmente sou muito inquieto, tenho uma propensão de participar ativamente das coisas, adoro compartilhar assuntos, participar de conversas e frequentemente não percebo que posso estar incomodando.</p>
-    <button onclick="saveAnswer(5, 'INICIADOR', this)">CONCORDO</button>
-    <button onclick="saveAnswer(5, 'RESPONDEDOR', this)">DISCORDO</button>
-  </div>
-
-  <div id="resultadoOrientacao">RESULTADO:</div>
-</div>
 
   <div id="postura" class="content">
     <div class="title">DICOTOMIA POSTURA</div>
@@ -162,60 +156,46 @@
 
   <div id="resultado" class="content">
     <div class="title">RESULTADO TIPOLÓGICO</div>
-    <p id="resultadoTexto">Conteúdo em construção…</p>
+    <p>Conteúdo em construção…</p>
   </div>
 
   <script>
-    let respostas = {
-      1: '',
-      2: '',
-      3: '',
-      4: '',
-      5: ''
-    };
-
-    function saveAnswer(pergunta, resposta, btn) {
-  respostas[pergunta] = resposta;
-
-  // Encontra o grupo da pergunta (div.pergunta) e limpa a seleção apenas nela
-  const perguntaDiv = btn.closest('.pergunta');
-  const buttons = perguntaDiv.querySelectorAll('button');
-  buttons.forEach(button => button.classList.remove('clicked'));
-
-  // Aplica a seleção apenas no botão clicado
-  btn.classList.add('clicked');
-
-  calcularResultado();
-}
-
-    function calcularResultado() {
-      let iniciadorCount = 0;
-      let respondedoresCount = 0;
-
-      for (let i = 1; i <= 5; i++) {
-        if (respostas[i] === 'INICIADOR') {
-          iniciadorCount++;
-        } else if (respostas[i] === 'RESPONDEDOR') {
-          respondedoresCount++;
-        }
-      }
-
-      let resultado = 'INDEFINIDO';
-
-      if (iniciadorCount >= 3) {
-        resultado = 'INICIADOR';
-      } else if (respondedoresCount >= 3) {
-        resultado = 'RESPONDEDOR';
-      }
-
-      // Exibe o resultado na parte inferior da aba "orientacao"
-      document.getElementById('resultadoOrientacao').innerText = 'RESULTADO: ' + resultado;
-    }
-
     function showTab(tabId) {
       const contents = document.querySelectorAll('.content');
       contents.forEach((c) => c.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
+    }
+
+    const respostas = {};
+
+    function saveAnswer(pergunta, resposta, btn) {
+      respostas[pergunta] = resposta;
+
+      const perguntaDiv = btn.closest('.pergunta');
+      const buttons = perguntaDiv.querySelectorAll('button');
+      buttons.forEach(button => button.classList.remove('clicked'));
+
+      btn.classList.add('clicked');
+
+      calcularResultado();
+    }
+
+    function calcularResultado() {
+      const contagem = { INICIADOR: 0, RESPONDEDOR: 0 };
+      for (let i = 1; i <= 5; i++) {
+        if (respostas[i]) {
+          contagem[respostas[i]]++;
+        }
+      }
+
+      let resultado = "INDEFINIDO";
+      if (contagem.INICIADOR >= 3) {
+        resultado = "INICIADOR";
+      } else if (contagem.RESPONDEDOR >= 3) {
+        resultado = "RESPONDEDOR";
+      }
+
+      document.getElementById('resultadoOrientacao').innerText = "RESULTADO: " + resultado;
     }
   </script>
 
