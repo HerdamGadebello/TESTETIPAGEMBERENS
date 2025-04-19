@@ -56,8 +56,8 @@
     button {
       margin: 5px 10px 20px 0;
       padding: 8px 15px;
-      background-color: white;
-      color: #1c7c5a;
+      background-color: #8D2B34;
+      color: white;
       border: none;
       border-radius: 4px;
       font-weight: bold;
@@ -65,7 +65,18 @@
     }
 
     button:hover {
-      background-color: #ddd;
+      background-color: #b13370;
+    }
+
+    button.clicked {
+      background-color: #1CC27F;
+    }
+
+    #resultadoTexto {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
     }
   </style>
 </head>
@@ -92,20 +103,21 @@
     <div class="title">DICOTOMIA ORIENTAÇÃO</div>
 
     <p>Geralmente durante uma conversa, quando algo me vem à cabeça, não consigo me conter e acabo interrompendo a outra pessoa para falar sobre isso.</p>
-    <button onclick="saveAnswer(1, 'INICIADOR')">CONCORDO</button> <button onclick="saveAnswer(1, 'RESPONDEDOR')">DISCORDO</button>
+    <button onclick="saveAnswer(1, 'INICIADOR', this)">CONCORDO</button> <button onclick="saveAnswer(1, 'RESPONDEDOR', this)">DISCORDO</button>
 
     <p>Quase sempre não me importo se alguém está desinformado sobre algo, não é meu problema se ela está desatualizada.</p>
-    <button onclick="saveAnswer(2, 'RESPONDEDOR')">CONCORDO</button> <button onclick="saveAnswer(2, 'INICIADOR')">DISCORDO</button>
+    <button onclick="saveAnswer(2, 'RESPONDEDOR', this)">CONCORDO</button> <button onclick="saveAnswer(2, 'INICIADOR', this)">DISCORDO</button>
 
     <p>Usualmente durante uma conversa, prefiro terminar minha linha de pensamento, extraindo o que é possível sobre o tema, não gosto de mudança repentina de assunto.</p>
-    <button onclick="saveAnswer(3, 'RESPONDEDOR')">CONCORDO</button> <button onclick="saveAnswer(3, 'INICIADOR')">DISCORDO</button>
+    <button onclick="saveAnswer(3, 'RESPONDEDOR', this)">CONCORDO</button> <button onclick="saveAnswer(3, 'INICIADOR', this)">DISCORDO</button>
 
     <p>Minha maior tendência é escutar o que os outros têm a me dizer, é natural para mim guardar e processar o que me dizem antes de expor o que eu penso.</p>
-    <button onclick="saveAnswer(4, 'RESPONDEDOR')">CONCORDO</button> <button onclick="saveAnswer(4, 'INICIADOR')">DISCORDO</button>
+    <button onclick="saveAnswer(4, 'RESPONDEDOR', this)">CONCORDO</button> <button onclick="saveAnswer(4, 'INICIADOR', this)">DISCORDO</button>
 
     <p>Geralmente sou muito inquieto, tenho uma propensão de participar ativamente das coisas, adoro compartilhar assuntos, participar de conversas e frequentemente não percebo que posso estar incomodando.</p>
-    <button onclick="saveAnswer(5, 'INICIADOR')">CONCORDO</button> <button onclick="saveAnswer(5, 'RESPONDEDOR')">DISCORDO</button>
+    <button onclick="saveAnswer(5, 'INICIADOR', this)">CONCORDO</button> <button onclick="saveAnswer(5, 'RESPONDEDOR', this)">DISCORDO</button>
 
+    <div id="resultadoOrientacao" style="margin-top: 20px; font-size: 20px; text-align: center; font-weight: bold;">RESULTADO: </div>
   </div>
 
   <div id="postura" class="content">
@@ -147,8 +159,14 @@
       5: ''
     };
 
-    function saveAnswer(pergunta, resposta) {
+    function saveAnswer(pergunta, resposta, btn) {
       respostas[pergunta] = resposta;
+
+      // Alterar cor do botão clicado
+      const buttons = btn.parentNode.querySelectorAll('button');
+      buttons.forEach(button => button.classList.remove('clicked'));
+      btn.classList.add('clicked');
+
       calcularResultado();
     }
 
@@ -172,7 +190,8 @@
         resultado = 'RESPONDEDOR';
       }
 
-      document.getElementById('resultadoTexto').innerText = resultado;
+      // Exibe o resultado na parte inferior da aba "orientacao"
+      document.getElementById('resultadoOrientacao').innerText = 'RESULTADO: ' + resultado;
     }
 
     function showTab(tabId) {
