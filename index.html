@@ -4,12 +4,6 @@
   <meta charset="UTF-8">
   <title>Teste de Tipagem</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Abadi&display=swap');
-    @font-face {
-      font-family: 'Aharoni';
-      src: local('Aharoni'), url('https://fonts.cdnfonts.com/s/16411/Aharoni.woff') format('woff');
-    }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -56,49 +50,31 @@
 
     .pergunta {
       text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .pergunta p {
-      font-size: 16px;
-      font-family: 'Aharoni', Arial, sans-serif;
-      margin-bottom: 10px;
+      font-family: 'Aharoni', sans-serif;
+      margin-bottom: 25px;
     }
 
     .botoes {
       display: flex;
       justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 10px;
     }
 
-    .botoes button {
-      font-family: 'Abadi', Arial, sans-serif;
-      font-size: 14px;
-      padding: 8px 20px;
+    button {
       background-color: #8D2B34;
       color: white;
+      padding: 8px 15px;
       border: none;
       border-radius: 4px;
       font-weight: bold;
+      font-family: 'Abadi', sans-serif;
       cursor: pointer;
-      transition: background-color 0.2s;
     }
 
-    .botoes button:hover {
-      background-color: #a63a45;
-    }
-
-    .botoes button.clicked {
-      background-color: #1CC27F;
-      color: white;
-    }
-
-    #resultadoOrientacao {
-      font-size: 18px;
-      text-align: center;
-      margin-top: 30px;
-      font-weight: bold;
+    button.clicked {
+      background-color: #1CC27F !important;
+      color: white !important;
     }
   </style>
 </head>
@@ -121,98 +97,101 @@
     <p style="font-size: 12px; margin-top: 40px;">TESTE ORGANIZADO E PRODUZIDO POR HERMES DAMIÃO BELLO</p>
   </div>
 
+  <!-- ABA ORIENTAÇÃO -->
   <div id="orientacao" class="content">
     <div class="title">DICOTOMIA ORIENTAÇÃO</div>
 
     <div class="pergunta">
       <p>Geralmente durante uma conversa, quando algo me vem à cabeça, não consigo me conter e acabo interrompendo a outra pessoa para falar sobre isso.</p>
       <div class="botoes">
-        <button onclick="saveAnswer(1, 'INICIADOR', this)">CONCORDO</button>
-        <button onclick="saveAnswer(1, 'RESPONDEDOR', this)">DISCORDO</button>
+        <button onclick="saveResposta(1, 'INICIADOR', this)">CONCORDO</button>
+        <button onclick="saveResposta(1, 'RESPONDEDOR', this)">DISCORDO</button>
       </div>
     </div>
 
     <div class="pergunta">
       <p>Quase sempre não me importo se alguém está desinformado sobre algo, não é meu problema se ela está desatualizada.</p>
       <div class="botoes">
-        <button onclick="saveAnswer(2, 'RESPONDEDOR', this)">CONCORDO</button>
-        <button onclick="saveAnswer(2, 'INICIADOR', this)">DISCORDO</button>
+        <button onclick="saveResposta(2, 'RESPONDEDOR', this)">CONCORDO</button>
+        <button onclick="saveResposta(2, 'INICIADOR', this)">DISCORDO</button>
       </div>
     </div>
 
     <div class="pergunta">
       <p>Usualmente durante uma conversa, prefiro terminar minha linha de pensamento, extraindo o que é possível sobre o tema, não gosto de mudança repentina de assunto.</p>
       <div class="botoes">
-        <button onclick="saveAnswer(3, 'RESPONDEDOR', this)">CONCORDO</button>
-        <button onclick="saveAnswer(3, 'INICIADOR', this)">DISCORDO</button>
+        <button onclick="saveResposta(3, 'RESPONDEDOR', this)">CONCORDO</button>
+        <button onclick="saveResposta(3, 'INICIADOR', this)">DISCORDO</button>
       </div>
     </div>
 
     <div class="pergunta">
       <p>Minha maior tendência é escutar o que os outros têm a me dizer, é natural para mim guardar e processar o que me dizem antes de expor o que eu penso.</p>
       <div class="botoes">
-        <button onclick="saveAnswer(4, 'RESPONDEDOR', this)">CONCORDO</button>
-        <button onclick="saveAnswer(4, 'INICIADOR', this)">DISCORDO</button>
+        <button onclick="saveResposta(4, 'RESPONDEDOR', this)">CONCORDO</button>
+        <button onclick="saveResposta(4, 'INICIADOR', this)">DISCORDO</button>
       </div>
     </div>
 
     <div class="pergunta">
       <p>Geralmente sou muito inquieto, tenho uma propensão de participar ativamente das coisas, adoro compartilhar assuntos, participar de conversas e frequentemente não percebo que posso estar incomodando.</p>
       <div class="botoes">
-        <button onclick="saveAnswer(5, 'INICIADOR', this)">CONCORDO</button>
-        <button onclick="saveAnswer(5, 'RESPONDEDOR', this)">DISCORDO</button>
+        <button onclick="saveResposta(5, 'INICIADOR', this)">CONCORDO</button>
+        <button onclick="saveResposta(5, 'RESPONDEDOR', this)">DISCORDO</button>
       </div>
     </div>
 
     <div id="resultadoOrientacao">RESULTADO:</div>
   </div>
 
+  <!-- ABA POSTURA -->
   <div id="postura" class="content">
-  <div class="title">DICOTOMIA POSTURA</div>
+    <div class="title">DICOTOMIA POSTURA</div>
 
-  <div class="pergunta">
-    <p>Tenho uma certa impaciência, prefiro fazer as coisas, dar andamento as coisas ao invés de ficar aguardando.</p>
-    <div class="botoes">
-      <button onclick="savePostura(1, 'MOVIMENTADOR', this)">CONCORDO</button>
-      <button onclick="savePostura(1, 'CONTROLADOR', this)">DISCORDO</button>
+    <div class="pergunta">
+      <p>Tenho uma certa impaciência, prefiro fazer as coisas, dar andamento as coisas ao invés de ficar aguardando.</p>
+      <div class="botoes">
+        <button onclick="savePostura(1, 'MOVIMENTADOR', this)">CONCORDO</button>
+        <button onclick="savePostura(1, 'CONTROLADOR', this)">DISCORDO</button>
+      </div>
     </div>
+
+    <div class="pergunta">
+      <p>Tendo a ser mais flexível, isso me ajuda a adaptar minhas ações conforme os problemas forem surgindo, isso me faz ser melhor contornando obstáculos do percurso.</p>
+      <div class="botoes">
+        <button onclick="savePostura(2, 'MOVIMENTADOR', this)">CONCORDO</button>
+        <button onclick="savePostura(2, 'CONTROLADOR', this)">DISCORDO</button>
+      </div>
+    </div>
+
+    <div class="pergunta">
+      <p>Sou uma pessoa que preza pelo primor, na escola meus cadernos eram muito caprichados, meu estojo tinha cores de caneta para cada parte do texto.</p>
+      <div class="botoes">
+        <button onclick="savePostura(3, 'CONTROLADOR', this)">CONCORDO</button>
+        <button onclick="savePostura(3, 'MOVIMENTADOR', this)">DISCORDO</button>
+      </div>
+    </div>
+
+    <div class="pergunta">
+      <p>Na execução do que deve ser feito tendo a ser mais vagaroso, gasto muito mais tempo refletindo sobre como deve ser feito, assim na hora da execução, o trabalho saia impecável.</p>
+      <div class="botoes">
+        <button onclick="savePostura(4, 'CONTROLADOR', this)">CONCORDO</button>
+        <button onclick="savePostura(4, 'MOVIMENTADOR', this)">DISCORDO</button>
+      </div>
+    </div>
+
+    <div class="pergunta">
+      <p>Nas apresentações dos trabalhos da escola, eu geralmente não me preparava muito, estudava um pouco antes da aula e improvisava na hora a partir de algumas coisas que eu já sabia.</p>
+      <div class="botoes">
+        <button onclick="savePostura(5, 'MOVIMENTADOR', this)">CONCORDO</button>
+        <button onclick="savePostura(5, 'CONTROLADOR', this)">DISCORDO</button>
+      </div>
+    </div>
+
+    <div id="resultadoPostura">RESULTADO:</div>
   </div>
 
-  <div class="pergunta">
-    <p>Tendo a ser mais flexível, isso me ajuda a adaptar minhas ações conforme os problemas forem surgindo, isso me faz ser melhor contornando obstáculos do percurso.</p>
-    <div class="botoes">
-      <button onclick="savePostura(2, 'MOVIMENTADOR', this)">CONCORDO</button>
-      <button onclick="savePostura(2, 'CONTROLADOR', this)">DISCORDO</button>
-    </div>
-  </div>
-
-  <div class="pergunta">
-    <p>Sou uma pessoa que preza pelo primor, na escola meus cadernos eram muito caprichados, meu estojo tinha cores de caneta para cada parte do texto.</p>
-    <div class="botoes">
-      <button onclick="savePostura(3, 'CONTROLADOR', this)">CONCORDO</button>
-      <button onclick="savePostura(3, 'MOVIMENTADOR', this)">DISCORDO</button>
-    </div>
-  </div>
-
-  <div class="pergunta">
-    <p>Na execução do que deve ser feito tendo a ser mais vagaroso, gasto muito mais tempo refletindo sobre como deve ser feito, assim na hora da execução, o trabalho saia impecável.</p>
-    <div class="botoes">
-      <button onclick="savePostura(4, 'CONTROLADOR', this)">CONCORDO</button>
-      <button onclick="savePostura(4, 'MOVIMENTADOR', this)">DISCORDO</button>
-    </div>
-  </div>
-
-  <div class="pergunta">
-    <p>Nas apresentações dos trabalhos da escola, eu geralmente não me preparava muito, estudava um pouco antes da aula e improvisava na hora a partir de algumas coisas que eu já sabia.</p>
-    <div class="botoes">
-      <button onclick="savePostura(5, 'MOVIMENTADOR', this)">CONCORDO</button>
-      <button onclick="savePostura(5, 'CONTROLADOR', this)">DISCORDO</button>
-    </div>
-  </div>
-
-  <div id="resultadoPostura">RESULTADO:</div>
-</div>
-
+  <!-- ABAS RESTANTES -->
   <div id="enfoque" class="content">
     <div class="title">DICOTOMIA ENFOQUE</div>
     <p>Conteúdo em construção…</p>
@@ -245,36 +224,46 @@
       document.getElementById(tabId).classList.add('active');
     }
 
-    const respostas = {};
-
-    function saveAnswer(pergunta, resposta, btn) {
-      respostas[pergunta] = resposta;
-
+    const respostasOrientacao = {};
+    function saveResposta(pergunta, resposta, btn) {
+      respostasOrientacao[pergunta] = resposta;
       const perguntaDiv = btn.closest('.pergunta');
       const buttons = perguntaDiv.querySelectorAll('button');
-      buttons.forEach(button => button.classList.remove('clicked'));
-
+      buttons.forEach(b => b.classList.remove('clicked'));
       btn.classList.add('clicked');
-
-      calcularResultado();
+      calcularResultadoOrientacao();
     }
 
-    function calcularResultado() {
+    function calcularResultadoOrientacao() {
       const contagem = { INICIADOR: 0, RESPONDEDOR: 0 };
       for (let i = 1; i <= 5; i++) {
-        if (respostas[i]) {
-          contagem[respostas[i]]++;
-        }
+        if (respostasOrientacao[i]) contagem[respostasOrientacao[i]]++;
       }
-
       let resultado = "INDEFINIDO";
-      if (contagem.INICIADOR >= 3) {
-        resultado = "INICIADOR";
-      } else if (contagem.RESPONDEDOR >= 3) {
-        resultado = "RESPONDEDOR";
-      }
-
+      if (contagem.INICIADOR >= 3) resultado = "INICIADOR";
+      else if (contagem.RESPONDEDOR >= 3) resultado = "RESPONDEDOR";
       document.getElementById('resultadoOrientacao').innerText = "RESULTADO: " + resultado;
+    }
+
+    const respostasPostura = {};
+    function savePostura(pergunta, resposta, btn) {
+      respostasPostura[pergunta] = resposta;
+      const perguntaDiv = btn.closest('.pergunta');
+      const buttons = perguntaDiv.querySelectorAll('button');
+      buttons.forEach(b => b.classList.remove('clicked'));
+      btn.classList.add('clicked');
+      calcularResultadoPostura();
+    }
+
+    function calcularResultadoPostura() {
+      const contagem = { CONTROLADOR: 0, MOVIMENTADOR: 0 };
+      for (let i = 1; i <= 5; i++) {
+        if (respostasPostura[i]) contagem[respostasPostura[i]]++;
+      }
+      let resultado = "INDEFINIDO";
+      if (contagem.CONTROLADOR >= 3) resultado = "CONTROLADOR";
+      else if (contagem.MOVIMENTADOR >= 3) resultado = "MOVIMENTADOR";
+      document.getElementById('resultadoPostura').innerText = "RESULTADO: " + resultado;
     }
   </script>
 
