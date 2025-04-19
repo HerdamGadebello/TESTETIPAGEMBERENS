@@ -175,15 +175,18 @@
     };
 
     function saveAnswer(pergunta, resposta, btn) {
-      respostas[pergunta] = resposta;
+  respostas[pergunta] = resposta;
 
-      // Alterar cor do botão clicado
-      const buttons = btn.parentNode.querySelectorAll('button');
-      buttons.forEach(button => button.classList.remove('clicked'));
-      btn.classList.add('clicked');
+  // Encontra o grupo da pergunta (div.pergunta) e limpa a seleção apenas nela
+  const perguntaDiv = btn.closest('.pergunta');
+  const buttons = perguntaDiv.querySelectorAll('button');
+  buttons.forEach(button => button.classList.remove('clicked'));
 
-      calcularResultado();
-    }
+  // Aplica a seleção apenas no botão clicado
+  btn.classList.add('clicked');
+
+  calcularResultado();
+}
 
     function calcularResultado() {
       let iniciadorCount = 0;
