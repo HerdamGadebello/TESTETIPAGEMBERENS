@@ -117,6 +117,32 @@
       background-color: rgba(0, 0, 0, 0.2);
       border-radius: 5px;
     }
+
+    /* Estilos específicos para a página inicial */
+    #inicio {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .logo-container {
+      width: 70%;
+      max-width: 600px;
+      margin: 20px auto 40px;
+    }
+
+    .logo-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      margin-top: 30px;
+      padding-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -137,7 +163,12 @@
   <div id="inicio" class="content active">
     <div class="title">Página Inicial</div>
     <p>Este teste é resultado do aprendizado adquirido durante o Curso de Tipagem, ministrado por @RobertaBernardon com base na teoria de Linda Berens.</p>
-    <p style="font-size: 12px; margin-top: 40px;">TESTE ORGANIZADO E PRODUZIDO POR HERMES DAMIÃO BELLO</p>
+    
+    <div class="logo-container">
+      <img src="ALLTYPES.png" alt="ALLTYPES">
+    </div>
+    
+    <p class="footer-text">TESTE ORGANIZADO E PRODUZIDO POR HERMES DAMIÃO BELLO</p>
   </div>
 
   <div id="orientacao" class="content">
