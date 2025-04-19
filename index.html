@@ -34,6 +34,7 @@
     .content {
       display: none;
       padding: 20px;
+      text-align: center;
     }
 
     .active {
@@ -72,6 +73,10 @@
       color: white;
     }
 
+    .button.active {
+      background-color: #1CC27F;
+    }
+
     .result {
       font-size: 20px;
       margin-top: 20px;
@@ -91,6 +96,58 @@
     <div class="tab" onclick="showTab('comunicacao')">DICOTOMIA COMUNICAÇÃO</div>
     <div class="tab" onclick="showTab('interpretacao')">DICOTOMIA INTERPRETAÇÃO</div>
     <div class="tab" onclick="showTab('resultado')">RESULTADO TIPOLÓGICO</div>
+  </div>
+
+  <div id="orientacao" class="content">
+    <div class="title">DICOTOMIA ORIENTAÇÃO</div>
+
+    <p>Geralmente durante uma conversa, quando algo me vem à cabeça, não consigo me conter e acabo interrompendo a outra pessoa para falar sobre isso.</p>
+    <button onclick="setAnswer(1, 'INICIADOR')">CONCORDO</button>
+    <button onclick="setAnswer(1, 'RESPONDEDOR')">DISCORDO</button>
+
+    <p>Quase sempre não me importo se alguém está desinformado sobre algo, não é meu problema se ela está desatualizada.</p>
+    <button onclick="setAnswer(2, 'RESPONDEDOR')">CONCORDO</button>
+    <button onclick="setAnswer(2, 'INICIADOR')">DISCORDO</button>
+
+    <p>Usualmente durante uma conversa, prefiro terminar minha linha de pensamento, extraindo o que é possível sobre o tema, não gosto de mudança repentina de assunto.</p>
+    <button onclick="setAnswer(3, 'RESPONDEDOR')">CONCORDO</button>
+    <button onclick="setAnswer(3, 'INICIADOR')">DISCORDO</button>
+
+    <p>Minha maior tendência é escutar o que os outros têm a me dizer, é natural para mim guardar e processar o que me dizem antes de expor o que eu penso.</p>
+    <button onclick="setAnswer(4, 'RESPONDEDOR')">CONCORDO</button>
+    <button onclick="setAnswer(4, 'INICIADOR')">DISCORDO</button>
+
+    <p>Geralmente sou muito inquieto, tenho uma propensão de participar ativamente das coisas, adoro compartilhar assuntos, participar de conversas e frequentemente não percebo que posso estar incomodando.</p>
+    <button onclick="setAnswer(5, 'INICIADOR')">CONCORDO</button>
+    <button onclick="setAnswer(5, 'RESPONDEDOR')">DISCORDO</button>
+
+    <div id="result-orientacao" class="result"></div>
+  </div>
+
+  <div id="postura" class="content">
+    <div class="title">DICOTOMIA POSTURA</div>
+
+    <p>Tenho uma certa impaciência, prefiro fazer as coisas, dar andamento as coisas ao invés de ficar aguardando.</p>
+    <button onclick="setAnswer(1, 'MOVIMENTADOR')">CONCORDO</button>
+    <button onclick="setAnswer(1, 'CONTROLADOR')">DISCORDO</button>
+
+    <p>Tendo a ser mais flexível, isso me ajuda a adaptar minhas ações conforme os problemas forem surgindo, isso me faz ser melhor contornando obstáculos do percurso.</p>
+    <button onclick="setAnswer(2, 'CONTROLADOR')">CONCORDO</button>
+    <button onclick="setAnswer(2, 'MOVIMENTADOR')">DISCORDO</button>
+
+    <p>Sou uma pessoa que preza pelo primor, na escola meus cadernos eram muito caprichados, meu estojo tinha cores de caneta para cada parte do texto.</p>
+    <button onclick="setAnswer(3, 'CONTROLADOR')">CONCORDO</button>
+    <button onclick="setAnswer(3, 'MOVIMENTADOR')">DISCORDO</button>
+
+    <p>Na execução do que deve ser feito tendo a ser mais vagaroso, gasto muito mais tempo refletindo sobre como deve ser feito, assim na hora da execução, o trabalho saia impecável.</p>
+    <button onclick="setAnswer(4, 'CONTROLADOR')">CONCORDO</button>
+    <button onclick="setAnswer(4, 'MOVIMENTADOR')">DISCORDO</button>
+
+    <p>Nas apresentações dos trabalhos da escola, eu geralmente não me preparava muito, estudava um pouco antes da aula e improvisava na hora a partir de algumas coisas que eu já sabia.</p>
+    <button onclick="setAnswer(5, 'MOVIMENTADOR')">CONCORDO</button>
+    <button onclick="setAnswer(5, 'CONTROLADOR')">DISCORDO</button>
+
+    <div id="result-postura" class="result"></div>
   </div>
 
   <div id="enfoque" class="content">
@@ -133,17 +190,34 @@
     function setAnswer(pergunta, valor) {
       respostas[pergunta] = valor;
       updateResult();
+      updateButtonState(pergunta, valor);
+    }
+
+    function updateButtonState(pergunta, valor) {
+      // Reset all buttons
+      let buttons = document.querySelectorAll(`button`);
+      buttons.forEach(button => button.classList.remove('active'));
+
+      // Mark the clicked button as active
+      let activeButton = document.querySelector(`button[onclick*="setAnswer(${pergunta}, '${valor}'"]`);
+      activeButton.classList.add('active');
     }
 
     function updateResult() {
       let pragmático = 0;
       let afiliativo = 0;
+      let movimentador = 0;
+      let controlador = 0;
 
       for (let i = 1; i <= 7; i++) {
         if (respostas[i] === "PRAGMÁTICO") {
           pragmático++;
         } else if (respostas[i] === "AFILIATIVO") {
           afiliativo++;
+        } else if (respostas[i] === "MOVIMENTADOR") {
+          movimentador++;
+        } else if (respostas[i] === "CONTROLADOR") {
+          controlador++;
         }
       }
 
@@ -152,10 +226,16 @@
         resultado = "PRAGMÁTICO";
       } else if (afiliativo >= 4) {
         resultado = "AFILIATIVO";
+      } else if (movimentador >= 4) {
+        resultado = "MOVIMENTADOR";
+      } else if (controlador >= 4) {
+        resultado = "CONTROLADOR";
       } else {
         resultado = "INDEFINIDO";
       }
 
+      document.getElementById("result-orientacao").textContent = "RESULTADO: " + resultado;
+      document.getElementById("result-postura").textContent = "RESULTADO: " + resultado;
       document.getElementById("result-enfoque").textContent = "RESULTADO: " + resultado;
     }
 
