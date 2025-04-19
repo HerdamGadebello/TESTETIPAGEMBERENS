@@ -428,9 +428,14 @@
 
     // Funções de resposta para cada aba
     function responderOrientacao(index, resposta, button) {
-      const buttons = document.querySelectorAll(`#orientacao .button-container:nth-child(${index + 2}) button`);
+      // Remove a seleção de todos os botões da mesma pergunta
+      const buttons = button.parentElement.querySelectorAll('button');
       buttons.forEach(b => b.classList.remove('selected'));
+      
+      // Marca apenas o botão clicado
       button.classList.add('selected');
+      
+      // Armazena a resposta
       respostasOrientacao[index] = resposta;
       
       // Calcula resultado
@@ -447,9 +452,14 @@
     }
 
     function responderPostura(index, resposta, button) {
-      const buttons = document.querySelectorAll(`#postura .button-container:nth-child(${index + 2}) button`);
+      // Remove a seleção de todos os botões da mesma pergunta
+      const buttons = button.parentElement.querySelectorAll('button');
       buttons.forEach(b => b.classList.remove('selected'));
+      
+      // Marca apenas o botão clicado
       button.classList.add('selected');
+      
+      // Armazena a resposta
       respostasPostura[index] = resposta;
       
       // Calcula resultado
