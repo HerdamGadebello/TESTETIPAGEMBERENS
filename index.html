@@ -168,9 +168,50 @@
   </div>
 
   <div id="postura" class="content">
-    <div class="title">DICOTOMIA POSTURA</div>
-    <p>Conteúdo em construção…</p>
+  <div class="title">DICOTOMIA POSTURA</div>
+
+  <div class="pergunta">
+    <p>Tenho uma certa impaciência, prefiro fazer as coisas, dar andamento as coisas ao invés de ficar aguardando.</p>
+    <div class="botoes">
+      <button onclick="savePostura(1, 'MOVIMENTADOR', this)">CONCORDO</button>
+      <button onclick="savePostura(1, 'CONTROLADOR', this)">DISCORDO</button>
+    </div>
   </div>
+
+  <div class="pergunta">
+    <p>Tendo a ser mais flexível, isso me ajuda a adaptar minhas ações conforme os problemas forem surgindo, isso me faz ser melhor contornando obstáculos do percurso.</p>
+    <div class="botoes">
+      <button onclick="savePostura(2, 'MOVIMENTADOR', this)">CONCORDO</button>
+      <button onclick="savePostura(2, 'CONTROLADOR', this)">DISCORDO</button>
+    </div>
+  </div>
+
+  <div class="pergunta">
+    <p>Sou uma pessoa que preza pelo primor, na escola meus cadernos eram muito caprichados, meu estojo tinha cores de caneta para cada parte do texto.</p>
+    <div class="botoes">
+      <button onclick="savePostura(3, 'CONTROLADOR', this)">CONCORDO</button>
+      <button onclick="savePostura(3, 'MOVIMENTADOR', this)">DISCORDO</button>
+    </div>
+  </div>
+
+  <div class="pergunta">
+    <p>Na execução do que deve ser feito tendo a ser mais vagaroso, gasto muito mais tempo refletindo sobre como deve ser feito, assim na hora da execução, o trabalho saia impecável.</p>
+    <div class="botoes">
+      <button onclick="savePostura(4, 'CONTROLADOR', this)">CONCORDO</button>
+      <button onclick="savePostura(4, 'MOVIMENTADOR', this)">DISCORDO</button>
+    </div>
+  </div>
+
+  <div class="pergunta">
+    <p>Nas apresentações dos trabalhos da escola, eu geralmente não me preparava muito, estudava um pouco antes da aula e improvisava na hora a partir de algumas coisas que eu já sabia.</p>
+    <div class="botoes">
+      <button onclick="savePostura(5, 'MOVIMENTADOR', this)">CONCORDO</button>
+      <button onclick="savePostura(5, 'CONTROLADOR', this)">DISCORDO</button>
+    </div>
+  </div>
+
+  <div id="resultadoPostura">RESULTADO:</div>
+</div>
 
   <div id="enfoque" class="content">
     <div class="title">DICOTOMIA ENFOQUE</div>
