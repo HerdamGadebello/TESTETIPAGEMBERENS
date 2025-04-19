@@ -200,6 +200,7 @@
       width: 100%;
       height: auto;
       border-radius: 10px;
+      display: none; /* Inicialmente escondido */
     }
 
     .type-description {
@@ -549,7 +550,75 @@
       interpretacao: "INDEFINIDO"
     };
 
-    // Função corrigida para mostrar as abas
+    // Descrições dos tipos de personalidade
+    const typeDescriptions = {
+      "ESTJ": {
+        title: "ESTJ - O Executivo",
+        text: "Práticos, realistas e orientados para fatos. Decisivos e rápidos para implementar decisões. Organizam projetos e pessoas para fazer as coisas acontecerem, com foco em obter resultados da maneira mais eficiente possível."
+      },
+      "ESFJ": {
+        title: "ESFJ - O Cônsul",
+        text: "Calorosos, atenciosos e harmoniosos. Excelentes em criar e manter ambientes sociais agradáveis. Valorizam a tradição e a cooperação, e trabalham duro para garantir que as necessidades dos outros sejam atendidas."
+      },
+      "ISTJ": {
+        title: "ISTJ - O Inspetor",
+        text: "Responsáveis, práticos e organizados. Valorizam a ordem e a segurança, seguindo regras e procedimentos estabelecidos. Confiáveis e meticulosos, com uma forte ética de trabalho."
+      },
+      "ISFJ": {
+        title: "ISFJ - O Protetor",
+        text: "Atentos, dedicados e calorosos. Protetores por natureza, sempre cuidando das necessidades dos outros. Valorizam a harmonia e a estabilidade, e têm uma memória excepcional para detalhes pessoais."
+      },
+      "ESTP": {
+        title: "ESTP - O Empreendedor",
+        text: "Energéticos, adaptáveis e orientados para ação. Vivem no momento e adoram resolver problemas no local. Pragmáticos e persuasivos, com uma habilidade natural para lidar com crises."
+      },
+      "ESFP": {
+        title: "ESFP - O Animador",
+        text: "Espontâneos, entusiasmáticos e sociáveis. Adoram estar no centro das atenções e trazer diversão para qualquer situação. Vivem no presente e valorizam experiências compartilhadas."
+      },
+      "ISTP": {
+        title: "ISTP - O Artesão",
+        text: "Analíticos, práticos e habilidosos com ferramentas e sistemas. Resolvem problemas de maneira lógica e eficiente. Independentes e adaptáveis, com uma abordagem descontraída da vida."
+      },
+      "ISFP": {
+        title: "ISFP - O Aventureiro",
+        text: "Artísticos, sensíveis e orientados para o presente. Valorizam a autenticidade e a liberdade pessoal. Quietos e reservados, mas calorosos e atenciosos com aqueles próximos a eles."
+      },
+      "ENTJ": {
+        title: "ENTJ - O Comandante",
+        text: "Líderes naturais, estratégicos e determinados. Excelentes em ver o panorama geral e organizar sistemas e pessoas para alcançar objetivos. Confiantes e assertivos na tomada de decisões."
+      },
+      "ENTP": {
+        title: "ENTP - O Inovador",
+        text: "Criativos, engenhosos e rápidos intelectualmente. Adoram debater ideias e encontrar soluções inovadoras para problemas. Entusiasmados e visionários, sempre buscando novas possibilidades."
+      },
+      "INTJ": {
+        title: "INTJ - O Arquiteto",
+        text: "Estratégicos, independentes e orientados para o futuro. Excelentes em desenvolver planos e sistemas complexos. Valorizam a competência e a lógica acima de tudo."
+      },
+      "INTP": {
+        title: "INTP - O Lógico",
+        text: "Analíticos, curiosos e teóricos. Fascinados por entender como as coisas funcionam. Valorizam a precisão lógica e podem passar horas explorando ideias complexas."
+      },
+      "ENFJ": {
+        title: "ENFJ - O Protagonista",
+        text: "Carismáticos, inspiradores e empáticos. Excelentes em motivar e guiar os outros em direção ao crescimento pessoal. Valorizam profundamente as conexões humanas e a harmonia."
+      },
+      "ENFP": {
+        title: "ENFP - O Ativista",
+        text: "Entusiasmados, criativos e sociáveis. Adoram explorar possibilidades e inspirar os outros. Otimistas e espontâneos, com uma paixão por novas ideias e experiências."
+      },
+      "INFJ": {
+        title: "INFJ - O Conselheiro",
+        text: "Profundos, idealistas e determinados. Buscam significado e conexão em tudo que fazem. Excelentes em entender as motivações dos outros e em trabalhar por causas importantes."
+      },
+      "INFP": {
+        title: "INFP - O Mediador",
+        text: "Idealistas, autênticos e orientados por valores. Buscam viver em harmonia com seus princípios internos. Criativos e compassivos, sempre buscando ajudar os outros de maneiras significativas."
+      }
+    };
+
+    // Função para mostrar as abas
     function showTab(tabId) {
       // Remove a classe 'active-tab' de todas as abas
       document.querySelectorAll('.tab').forEach(tab => {
@@ -562,20 +631,48 @@
         clickedTab.classList.add('active-tab');
       }
       
-      // Remove a classe 'active' de todos os conteúdos
+      // Oculta todos os conteúdos
       document.querySelectorAll('.content').forEach(content => {
-        content.classList.remove('active');
+        content.style.display = 'none';
       });
       
-      // Adiciona a classe 'active' apenas ao conteúdo da aba clicada
+      // Mostra apenas o conteúdo da aba clicada
       const contentToShow = document.getElementById(tabId);
       if (contentToShow) {
-        contentToShow.classList.add('active');
+        contentToShow.style.display = 'block';
       }
       
       // Se for a aba de resultado, calcula os resultados
       if (tabId === 'resultado') {
         calcularResultados();
+      }
+    }
+
+    // Função para carregar a imagem do tipo
+    function carregarImagemTipo(tipo) {
+      const imgElement = document.getElementById('typeImage');
+      if (tipo && tipo !== "INDEFINIDO") {
+        // Tenta carregar JPG primeiro
+        const img = new Image();
+        img.src = `${tipo}.jpg`;
+        img.onload = function() {
+          imgElement.src = this.src;
+          imgElement.style.display = 'block';
+        };
+        img.onerror = function() {
+          // Se não encontrar JPG, tenta PNG
+          const imgPng = new Image();
+          imgPng.src = `${tipo}.png`;
+          imgPng.onload = function() {
+            imgElement.src = this.src;
+            imgElement.style.display = 'block';
+          };
+          imgPng.onerror = function() {
+            imgElement.style.display = 'none';
+          };
+        };
+      } else {
+        imgElement.style.display = 'none';
       }
     }
 
@@ -698,8 +795,6 @@
       return possiveisTipos.length > 0 ? possiveisTipos[0] : "INDEFINIDO";
     }
 
-    // Textos descritivos para cada tipo (mantido igual)
-
     // Função para calcular todos os resultados
     function calcularResultados() {
       // Calcula temperamento, estilo e orientação
@@ -722,16 +817,18 @@
       document.getElementById('typeText').textContent = typeInfo.text;
       
       // Carrega a imagem correspondente
-      if (tipoPersonalidade !== "INDEFINIDO") {
-        document.getElementById('typeImage').src = `${tipoPersonalidade}.png`;
-        document.getElementById('typeImage').alt = tipoPersonalidade;
-      }
+      carregarImagemTipo(tipoPersonalidade);
     }
 
-    // Funções de resposta para cada aba (mantidas iguais)
+    // Funções de resposta para cada aba
     function responderOrientacao(index, resposta, button) {
-      const buttons = document.querySelectorAll(`#orientacao .button-container:nth-child(${index + 2}) button`);
-      buttons.forEach(b => b.classList.remove('selected'));
+      // Remove seleção de todos os botões desta pergunta
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      // Adiciona seleção apenas ao botão clicado
       button.classList.add('selected');
       respostasOrientacao[index] = resposta;
       
@@ -749,8 +846,13 @@
     }
 
     function responderPostura(index, resposta, button) {
-      const buttons = document.querySelectorAll(`#postura .button-container:nth-child(${index + 2}) button`);
-      buttons.forEach(b => b.classList.remove('selected'));
+      // Remove seleção de todos os botões desta pergunta
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      // Adiciona seleção apenas ao botão clicado
       button.classList.add('selected');
       respostasPostura[index] = resposta;
       
@@ -768,8 +870,13 @@
     }
 
     function responderEnfoque(index, button, resultado1, resultado2) {
-      const buttons = document.querySelectorAll(`#enfoque #question${index + 1} button`);
-      buttons.forEach(b => b.classList.remove('selected'));
+      // Remove seleção de todos os botões desta pergunta
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      // Adiciona seleção apenas ao botão clicado
       button.classList.add('selected');
       respostasEnfoque[index] = index % 2 === 0 ? resultado1 : resultado2;
       
@@ -787,8 +894,13 @@
     }
 
     function responderOrganizacao(index, resposta, button) {
-      const buttons = document.querySelectorAll(`#organizacao .button-container:nth-child(${index + 2}) button`);
-      buttons.forEach(b => b.classList.remove('selected'));
+      // Remove seleção de todos os botões desta pergunta
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      // Adiciona seleção apenas ao botão clicado
       button.classList.add('selected');
       respostasOrganizacao[index] = resposta;
       
@@ -806,9 +918,13 @@
     }
 
     function responderComunicacao(index, resposta, button) {
-      const containerId = `comunicacaoQ${index + 1}`;
-      const buttons = document.querySelectorAll(`#${containerId} button`);
-      buttons.forEach(b => b.classList.remove('selected'));
+      // Remove seleção de todos os botões desta pergunta
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      // Adiciona seleção apenas ao botão clicado
       button.classList.add('selected');
       respostasComunicacao[index] = resposta;
       
@@ -825,9 +941,13 @@
     }
 
     function responderInterpretacao(index, resposta, button) {
-      const containerId = `interpretacaoQ${index + 1}`;
-      const buttons = document.querySelectorAll(`#${containerId} button`);
-      buttons.forEach(b => b.classList.remove('selected'));
+      // Remove seleção de todos os botões desta pergunta
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      // Adiciona seleção apenas ao botão clicado
       button.classList.add('selected');
       respostasInterpretacao[index] = resposta;
       
