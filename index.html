@@ -280,31 +280,31 @@
     <div class="title">DICOTOMIA COMUNICAÇÃO</div>
 
     <p>Gosto de instigar as pessoas quando estou conversando com elas, acho mais interessante fazer um "charminho" ao invés de chegar já deixando claro minhas intenções.</p>
-    <div class="button-container">
+    <div class="button-container" id="comunicacaoQ1">
       <button onclick="responderComunicacao(0, 'INFORMATIVO', this)">CONCORDO</button>
       <button onclick="responderComunicacao(0, 'DIRETO', this)">DISCORDO</button>
     </div>
 
     <p>Minha fala tende a ser mais retilínea, conduzo o que eu falo de maneira mais centrada, raramente me perco ou me embaralho no que estou falando.</p>
-    <div class="button-container">
+    <div class="button-container" id="comunicacaoQ2">
       <button onclick="responderComunicacao(1, 'DIRETO', this)">CONCORDO</button>
       <button onclick="responderComunicacao(1, 'INFORMATIVO', this)">DISCORDO</button>
     </div>
 
     <p>Meus amigos e colegas costumam falar que eu passo muito uma vibe "professor", isso porque eu normalmente trago muito contexto na minha comunicação, e descrevo muito sobre as coisas que falo.</p>
-    <div class="button-container">
+    <div class="button-container" id="comunicacaoQ3">
       <button onclick="responderComunicacao(2, 'INFORMATIVO', this)">CONCORDO</button>
       <button onclick="responderComunicacao(2, 'DIRETO', this)">DISCORDO</button>
     </div>
 
     <p>Detesto fazer rodeios para falar o que eu pretendo, prefiro chegar e já falar o que está acontecendo do que preparar a outra pessoa para receber a informação.</p>
-    <div class="button-container">
+    <div class="button-container" id="comunicacaoQ4">
       <button onclick="responderComunicacao(3, 'DIRETO', this)">CONCORDO</button>
       <button onclick="responderComunicacao(3, 'INFORMATIVO', this)">DISCORDO</button>
     </div>
 
     <p>Com frequência sou mal interpretado pelas pessoas, acho que é porque eu costumo oscilar muito sutilmente na minha forma de falar, ás vezes começo falando sério, depois faço graça e ironizo e isso acaba meio que "bugando" as pessoas.</p>
-    <div class="button-container">
+    <div class="button-container" id="comunicacaoQ5">
       <button onclick="responderComunicacao(4, 'INFORMATIVO', this)">CONCORDO</button>
       <button onclick="responderComunicacao(4, 'DIRETO', this)">DISCORDO</button>
     </div>
@@ -375,7 +375,8 @@
 
       if (tabId === 'comunicacao') {
         for (const [index, resposta] of Object.entries(respostasComunicacao)) {
-          const buttons = document.querySelectorAll(`#comunicacao .button-container:nth-child(${parseInt(index) + 2}) button`);
+          const containerId = `comunicacaoQ${parseInt(index) + 1}`;
+          const buttons = document.querySelectorAll(`#${containerId} button`);
           buttons.forEach(b => {
             b.classList.remove('selected');
             if ((resposta === 'INFORMATIVO' && b.textContent === 'CONCORDO') || 
@@ -421,10 +422,16 @@
     }
 
     function responderComunicacao(index, resposta, button) {
-      respostasComunicacao[index] = resposta;
-      const buttons = document.querySelectorAll(`#comunicacao .button-container:nth-child(${index + 2}) button`);
+      // Remove seleção apenas dos botões desta pergunta específica
+      const containerId = `comunicacaoQ${index + 1}`;
+      const buttons = document.querySelectorAll(`#${containerId} button`);
       buttons.forEach(b => b.classList.remove('selected'));
+      
+      // Adiciona seleção ao botão clicado
       button.classList.add('selected');
+      
+      // Armazena resposta
+      respostasComunicacao[index] = resposta;
       
       // Calcula resultado
       const valores = Object.values(respostasComunicacao);
