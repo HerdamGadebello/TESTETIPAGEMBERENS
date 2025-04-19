@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teste de Tipagem</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #006b3f;
+      color: white;
+    }
+    header {
+      background-color: #8a2c6b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      flex-wrap: wrap;
+    }
+    .icon-tab {
+      width: 40px;
+      height: 40px;
+      background-color: #d690a1;
+      margin: 2px;
+      border-radius: 5px;
+    }
+    .tab-title {
+      width: 100%;
+      background-color: #c02b65;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-weight: bold;
+    }
+    .tab-content {
+      display: none;
+      padding: 20px;
+      text-align: center;
+    }
+    .active {
+      display: block;
+    }
+    .question {
+      background-color: #008c5a;
+      margin: 10px auto;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 600px;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-concordo {
+      background-color: #e6645d;
+      color: white;
+    }
+    .btn-discordo {
+      background-color: #5b2c6f;
+      color: white;
+    }
+    .bottom-buttons {
+      margin-top: 30px;
+    }
+    .btn-resultado {
+      background-color: #f5e4c3;
+      color: black;
+    }
+    .btn-responder {
+      background-color: #e05a7d;
+      color: white;
+    }
+    small {
+      display: block;
+      margin-top: 40px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="icon-tab" onclick="showTab(0)"></div>
+    <div class="icon-tab" onclick="showTab(1)"></div>
+    <div class="icon-tab"></div>
+    <div class="icon-tab"></div>
+    <div class="icon-tab"></div>
+    <div class="icon-tab"></div>
+    <div class="icon-tab"></div>
+    <div class="icon-tab"></div>
+    <div class="tab-title" id="tabTitle">PÁGINA INICIAL</div>
+  </header>
+
+  <!-- Página Inicial -->
+  <div class="tab-content active" id="tab0">
+    <p>
+      Este teste é resultado do aprendizado adquirido durante o Curso de Tipagem, ministrado por @RobertaBernardon com base na teoria de Linda Berens.
+    </p>
+    <small>TESTE ORGANIZADO E PRODUZIDO POR HERMES DAMIÃO BELLO</small>
+  </div>
+
+  <!-- Dicotomia Orientação -->
+  <div class="tab-content" id="tab1">
+    <div class="question">Geralmente durante uma conversa, quando algo me vem à cabeça, não consigo me conter e acabo interrompendo a outra pessoa para falar sobre isso.
+      <br>
+      <button class="btn-concordo">CONCORDO</button>
+      <button class="btn-discordo">DISCORDO</button>
+    </div>
+    <div class="question">Quase sempre não me importo se alguém está desinformado sobre algo, não é meu problema se ele está desatualizado.
+      <br>
+      <button class="btn-concordo">CONCORDO</button>
+      <button class="btn-discordo">DISCORDO</button>
+    </div>
+    <div class="question">Durante uma conversa, prefiro terminar minha linha de pensamento, atraindo o que é possível sobre o tema, não gosto de mudar rapidamente de assunto.
+      <br>
+      <button class="btn-concordo">CONCORDO</button>
+      <button class="btn-discordo">DISCORDO</button>
+    </div>
+    <div class="question">Minha maior tendência é escutar o que os outros têm a me dizer, é natural para mim guardar e processar o que me dizem antes de expor o que eu penso.
+      <br>
+      <button class="btn-concordo">CONCORDO</button>
+      <button class="btn-discordo">DISCORDO</button>
+    </div>
+    <div class="question">Geralmente sou muito inquieto, tenho uma propensão de participar ativamente das coisas, adoro compartilhar assuntos, opiniões e conversar com pessoas mesmo que o assunto não seja de conhecimento profundo.
+      <br>
+      <button class="btn-concordo">CONCORDO</button>
+      <button class="btn-discordo">DISCORDO</button>
+    </div>
+
+    <div class="bottom-buttons">
+      <button class="btn-resultado">RESULTADO</button>
+      <button class="btn-responder">RESPONDER</button>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll(".tab-content");
+    const tabTitle = document.getElementById("tabTitle");
+
+    function showTab(index) {
+      tabs.forEach((tab, i) => {
+        tab.classList.toggle("active", i === index);
+      });
+      const titles = ["PÁGINA INICIAL", "DICOTOMIA ORIENTAÇÃO"];
+      tabTitle.textContent = titles[index] || "ABAS FUTURAS";
+    }
+  </script>
+</body>
+</html>
