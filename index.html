@@ -92,19 +92,19 @@
     <div class="title">DICOTOMIA ORIENTAÇÃO</div>
 
     <p>Geralmente durante uma conversa, quando algo me vem à cabeça, não consigo me conter e acabo interrompendo a outra pessoa para falar sobre isso.</p>
-    <button>CONCORDO</button> <button>DISCORDO</button>
+    <button onclick="saveAnswer(1, 'INICIADOR')">CONCORDO</button> <button onclick="saveAnswer(1, 'RESPONDEDOR')">DISCORDO</button>
 
     <p>Quase sempre não me importo se alguém está desinformado sobre algo, não é meu problema se ela está desatualizada.</p>
-    <button>CONCORDO</button> <button>DISCORDO</button>
+    <button onclick="saveAnswer(2, 'RESPONDEDOR')">CONCORDO</button> <button onclick="saveAnswer(2, 'INICIADOR')">DISCORDO</button>
 
     <p>Usualmente durante uma conversa, prefiro terminar minha linha de pensamento, extraindo o que é possível sobre o tema, não gosto de mudança repentina de assunto.</p>
-    <button>CONCORDO</button> <button>DISCORDO</button>
+    <button onclick="saveAnswer(3, 'RESPONDEDOR')">CONCORDO</button> <button onclick="saveAnswer(3, 'INICIADOR')">DISCORDO</button>
 
     <p>Minha maior tendência é escutar o que os outros têm a me dizer, é natural para mim guardar e processar o que me dizem antes de expor o que eu penso.</p>
-    <button>CONCORDO</button> <button>DISCORDO</button>
+    <button onclick="saveAnswer(4, 'RESPONDEDOR')">CONCORDO</button> <button onclick="saveAnswer(4, 'INICIADOR')">DISCORDO</button>
 
     <p>Geralmente sou muito inquieto, tenho uma propensão de participar ativamente das coisas, adoro compartilhar assuntos, participar de conversas e frequentemente não percebo que posso estar incomodando.</p>
-    <button>CONCORDO</button> <button>DISCORDO</button>
+    <button onclick="saveAnswer(5, 'INICIADOR')">CONCORDO</button> <button onclick="saveAnswer(5, 'RESPONDEDOR')">DISCORDO</button>
 
   </div>
 
@@ -135,10 +135,46 @@
 
   <div id="resultado" class="content">
     <div class="title">RESULTADO TIPOLÓGICO</div>
-    <p>Conteúdo em construção…</p>
+    <p id="resultadoTexto">Conteúdo em construção…</p>
   </div>
 
   <script>
+    let respostas = {
+      1: '',
+      2: '',
+      3: '',
+      4: '',
+      5: ''
+    };
+
+    function saveAnswer(pergunta, resposta) {
+      respostas[pergunta] = resposta;
+      calcularResultado();
+    }
+
+    function calcularResultado() {
+      let iniciadorCount = 0;
+      let respondedoresCount = 0;
+
+      for (let i = 1; i <= 5; i++) {
+        if (respostas[i] === 'INICIADOR') {
+          iniciadorCount++;
+        } else if (respostas[i] === 'RESPONDEDOR') {
+          respondedoresCount++;
+        }
+      }
+
+      let resultado = 'INDEFINIDO';
+
+      if (iniciadorCount >= 3) {
+        resultado = 'INICIADOR';
+      } else if (respondedoresCount >= 3) {
+        resultado = 'RESPONDEDOR';
+      }
+
+      document.getElementById('resultadoTexto').innerText = resultado;
+    }
+
     function showTab(tabId) {
       const contents = document.querySelectorAll('.content');
       contents.forEach((c) => c.classList.remove('active'));
