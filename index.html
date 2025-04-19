@@ -80,7 +80,8 @@
     #resultadoOrientacao,
     #resultadoPostura,
     #resultadoEnfoque,
-    #resultadoOrganizacao {
+    #resultadoOrganizacao,
+    #resultadoComunicacao {
       text-align: center;
       margin-top: 30px;
       font-size: 18px;
@@ -182,7 +183,7 @@
   <div id="enfoque" class="content">
     <div class="title">DICOTOMIA ENFOQUE</div>
 
-    <p>Com frequência sou chamado(a) de “ovelha negra” da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.</p>
+    <p>Com frequência sou chamado(a) de "ovelha negra" da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.</p>
     <div class="button-container" id="question1">
       <button onclick="responderEnfoque(0, this, 'PRAGMÁTICO', 'AFILIATIVO')">CONCORDO</button>
       <button onclick="responderEnfoque(0, this, 'AFILIATIVO', 'PRAGMÁTICO')">DISCORDO</button>
@@ -200,7 +201,7 @@
       <button onclick="responderEnfoque(2, this, 'PRAGMÁTICO', 'AFILIATIVO')">DISCORDO</button>
     </div>
 
-    <p>Não gosto muito de fazer “a social”, sou péssimo em fingir ser sociável com pessoas que não me interessam.</p>
+    <p>Não gosto muito de fazer "a social", sou péssimo em fingir ser sociável com pessoas que não me interessam.</p>
     <div class="button-container" id="question4">
       <button onclick="responderEnfoque(3, this, 'PRAGMÁTICO', 'AFILIATIVO')">CONCORDO</button>
       <button onclick="responderEnfoque(3, this, 'AFILIATIVO', 'PRAGMÁTICO')">DISCORDO</button>
@@ -266,7 +267,7 @@
       <button onclick="responderOrganizacao(5, 'ESTRUTURADO', this)">DISCORDO</button>
     </div>
 
-    <p>Sou adepto do ditado “o combinado não sai caro”, afinal se a pessoa é adulta ela responsável e consciente das próprias ações.</p>
+    <p>Sou adepto do ditado "o combinado não sai caro", afinal se a pessoa é adulta ela responsável e consciente das próprias ações.</p>
     <div class="button-container">
       <button onclick="responderOrganizacao(6, 'INTERESSADO', this)">CONCORDO</button>
       <button onclick="responderOrganizacao(6, 'ESTRUTURADO', this)">DISCORDO</button>
@@ -275,15 +276,91 @@
     <div id="resultadoOrganizacao">RESULTADO: INDEFINIDO</div>
   </div>
 
+  <div id="comunicacao" class="content">
+    <div class="title">DICOTOMIA COMUNICAÇÃO</div>
+
+    <p>Gosto de instigar as pessoas quando estou conversando com elas, acho mais interessante fazer um "charminho" ao invés de chegar já deixando claro minhas intenções.</p>
+    <div class="button-container">
+      <button onclick="responderComunicacao(0, 'INFORMATIVO', this)">CONCORDO</button>
+      <button onclick="responderComunicacao(0, 'DIRETO', this)">DISCORDO</button>
+    </div>
+
+    <p>Minha fala tende a ser mais retilínea, conduzo o que eu falo de maneira mais centrada, raramente me perco ou me embaralho no que estou falando.</p>
+    <div class="button-container">
+      <button onclick="responderComunicacao(1, 'DIRETO', this)">CONCORDO</button>
+      <button onclick="responderComunicacao(1, 'INFORMATIVO', this)">DISCORDO</button>
+    </div>
+
+    <p>Meus amigos e colegas costumam falar que eu passo muito uma vibe "professor", isso porque eu normalmente trago muito contexto na minha comunicação, e descrevo muito sobre as coisas que falo.</p>
+    <div class="button-container">
+      <button onclick="responderComunicacao(2, 'INFORMATIVO', this)">CONCORDO</button>
+      <button onclick="responderComunicacao(2, 'DIRETO', this)">DISCORDO</button>
+    </div>
+
+    <p>Detesto fazer rodeios para falar o que eu pretendo, prefiro chegar e já falar o que está acontecendo do que preparar a outra pessoa para receber a informação.</p>
+    <div class="button-container">
+      <button onclick="responderComunicacao(3, 'DIRETO', this)">CONCORDO</button>
+      <button onclick="responderComunicacao(3, 'INFORMATIVO', this)">DISCORDO</button>
+    </div>
+
+    <p>Com frequência sou mal interpretado pelas pessoas, acho que é porque eu costumo oscilar muito sutilmente na minha forma de falar, ás vezes começo falando sério, depois faço graça e ironizo e isso acaba meio que "bugando" as pessoas.</p>
+    <div class="button-container">
+      <button onclick="responderComunicacao(4, 'INFORMATIVO', this)">CONCORDO</button>
+      <button onclick="responderComunicacao(4, 'DIRETO', this)">DISCORDO</button>
+    </div>
+
+    <div id="resultadoComunicacao">RESULTADO: INDEFINIDO</div>
+  </div>
+
   <script>
-    // Objeto para armazenar as respostas da ORGANIZAÇÃO
+    // Objetos para armazenar respostas
+    const respostasOrientacao = {};
+    const respostasPostura = {};
+    const respostasEnfoque = {};
     const respostasOrganizacao = {};
+    const respostasComunicacao = {};
 
     function showTab(tabId) {
       document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
 
-      // Reaplica os botões selecionados ao voltar para ORGANIZAÇÃO
+      // Reaplica seleções nas abas
+      if (tabId === 'orientacao') {
+        for (const [index, resposta] of Object.entries(respostasOrientacao)) {
+          const buttons = document.querySelectorAll(`#orientacao .button-container:nth-child(${parseInt(index) + 2}) button`);
+          buttons.forEach(b => {
+            b.classList.remove('selected');
+            if (b.textContent === (resposta === 'INICIADOR' ? 'CONCORDO' : 'DISCORDO')) {
+              b.classList.add('selected');
+            }
+          });
+        }
+      }
+
+      if (tabId === 'postura') {
+        for (const [index, resposta] of Object.entries(respostasPostura)) {
+          const buttons = document.querySelectorAll(`#postura .button-container:nth-child(${parseInt(index) + 2}) button`);
+          buttons.forEach(b => {
+            b.classList.remove('selected');
+            if (b.textContent === (resposta === 'MOVIMENTADOR' ? 'CONCORDO' : 'DISCORDO')) {
+              b.classList.add('selected');
+            }
+          });
+        }
+      }
+
+      if (tabId === 'enfoque') {
+        for (const [index, resposta] of Object.entries(respostasEnfoque)) {
+          const buttons = document.querySelectorAll(`#enfoque #question${parseInt(index) + 1} button`);
+          buttons.forEach(b => {
+            b.classList.remove('selected');
+            if (b.classList.contains('selected')) {
+              b.classList.add('selected');
+            }
+          });
+        }
+      }
+
       if (tabId === 'organizacao') {
         for (const [index, resposta] of Object.entries(respostasOrganizacao)) {
           const buttons = document.querySelectorAll(`#organizacao .button-container:nth-child(${parseInt(index) + 2}) button`);
@@ -295,6 +372,44 @@
           });
         }
       }
+
+      if (tabId === 'comunicacao') {
+        for (const [index, resposta] of Object.entries(respostasComunicacao)) {
+          const buttons = document.querySelectorAll(`#comunicacao .button-container:nth-child(${parseInt(index) + 2}) button`);
+          buttons.forEach(b => {
+            b.classList.remove('selected');
+            if ((resposta === 'INFORMATIVO' && b.textContent === 'CONCORDO') || 
+                (resposta === 'DIRETO' && b.textContent === 'DISCORDO')) {
+              b.classList.add('selected');
+            }
+          });
+        }
+      }
+    }
+
+    // Funções de resposta para cada aba
+    function responderOrientacao(index, resposta, button) {
+      respostasOrientacao[index] = resposta;
+      const buttons = document.querySelectorAll(`#orientacao .button-container:nth-child(${index + 2}) button`);
+      buttons.forEach(b => b.classList.remove('selected'));
+      button.classList.add('selected');
+      document.getElementById("resultadoOrientacao").innerText = "RESULTADO: " + resposta;
+    }
+
+    function responderPostura(index, resposta, button) {
+      respostasPostura[index] = resposta;
+      const buttons = document.querySelectorAll(`#postura .button-container:nth-child(${index + 2}) button`);
+      buttons.forEach(b => b.classList.remove('selected'));
+      button.classList.add('selected');
+      document.getElementById("resultadoPostura").innerText = "RESULTADO: " + resposta;
+    }
+
+    function responderEnfoque(index, button, resultado1, resultado2) {
+      const buttons = document.querySelectorAll(`#enfoque #question${index + 1} button`);
+      buttons.forEach(b => b.classList.remove('selected'));
+      button.classList.add('selected');
+      respostasEnfoque[index] = index % 2 === 0 ? resultado1 : resultado2;
+      document.getElementById("resultadoEnfoque").innerText = "RESULTADO: " + (index % 2 === 0 ? resultado1 : resultado2);
     }
 
     function responderOrganizacao(index, resposta, button) {
@@ -305,25 +420,25 @@
       document.getElementById("resultadoOrganizacao").innerText = "RESULTADO: " + resposta;
     }
 
-    function responderOrientacao(index, resposta, button) {
-      const buttons = document.querySelectorAll(`#orientacao .button-container button`);
+    function responderComunicacao(index, resposta, button) {
+      respostasComunicacao[index] = resposta;
+      const buttons = document.querySelectorAll(`#comunicacao .button-container:nth-child(${index + 2}) button`);
       buttons.forEach(b => b.classList.remove('selected'));
       button.classList.add('selected');
-      document.getElementById("resultadoOrientacao").innerText = "RESULTADO: " + resposta;
-    }
+      
+      // Calcula resultado
+      const valores = Object.values(respostasComunicacao);
+      const contagem = {
+        INFORMATIVO: valores.filter(v => v === 'INFORMATIVO').length,
+        DIRETO: valores.filter(v => v === 'DIRETO').length
+      };
 
-    function responderPostura(index, resposta, button) {
-      const buttons = document.querySelectorAll(`#postura .button-container button`);
-      buttons.forEach(b => b.classList.remove('selected'));
-      button.classList.add('selected');
-      document.getElementById("resultadoPostura").innerText = "RESULTADO: " + resposta;
-    }
+      let resultado;
+      if (contagem.INFORMATIVO >= 3) resultado = "INFORMATIVO";
+      else if (contagem.DIRETO >= 3) resultado = "DIRETO";
+      else resultado = "INDEFINIDO";
 
-    function responderEnfoque(index, button, resultado1, resultado2) {
-      const buttons = document.querySelectorAll(`#enfoque #question${index + 1} button`);
-      buttons.forEach(b => b.classList.remove('selected'));
-      button.classList.add('selected');
-      document.getElementById("resultadoEnfoque").innerText = "RESULTADO: " + (index % 2 === 0 ? resultado1 : resultado2);
+      document.getElementById("resultadoComunicacao").innerText = `RESULTADO: ${resultado}`;
     }
   </script>
 </body>
