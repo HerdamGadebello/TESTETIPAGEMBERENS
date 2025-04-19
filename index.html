@@ -78,8 +78,7 @@
     }
 
     #resultadoOrientacao,
-    #resultadoPostura,
-    #resultadoEnfoque {
+    #resultadoPostura {
       text-align: center;
       margin-top: 30px;
       font-size: 18px;
@@ -108,63 +107,123 @@
 
   <div id="orientacao" class="content">
     <div class="title">DICOTOMIA ORIENTAÇÃO</div>
-    <!-- conteúdo da aba orientação -->
-    <!-- permanece inalterado -->
+
+    <p>Geralmente durante uma conversa, quando algo me vem à cabeça, não consigo me conter e acabo interrompendo a outra pessoa para falar sobre isso.</p>
+    <div class="button-container">
+      <button onclick="responderOrientacao(0, 'INICIADOR', this)">CONCORDO</button>
+      <button onclick="responderOrientacao(0, 'RESPONDEDOR', this)">DISCORDO</button>
+    </div>
+
+    <p>Quase sempre não me importo se alguém está desinformado sobre algo, não é meu problema se ela está desatualizada.</p>
+    <div class="button-container">
+      <button onclick="responderOrientacao(1, 'RESPONDEDOR', this)">CONCORDO</button>
+      <button onclick="responderOrientacao(1, 'INICIADOR', this)">DISCORDO</button>
+    </div>
+
+    <p>Usualmente durante uma conversa, prefiro terminar minha linha de pensamento, extraindo o que é possível sobre o tema, não gosto de mudança repentina de assunto.</p>
+    <div class="button-container">
+      <button onclick="responderOrientacao(2, 'RESPONDEDOR', this)">CONCORDO</button>
+      <button onclick="responderOrientacao(2, 'INICIADOR', this)">DISCORDO</button>
+    </div>
+
+    <p>Minha maior tendência é escutar o que os outros têm a me dizer, é natural para mim guardar e processar o que me dizem antes de expor o que eu penso.</p>
+    <div class="button-container">
+      <button onclick="responderOrientacao(3, 'RESPONDEDOR', this)">CONCORDO</button>
+      <button onclick="responderOrientacao(3, 'INICIADOR', this)">DISCORDO</button>
+    </div>
+
+    <p>Geralmente sou muito inquieto, tenho uma propensão de participar ativamente das coisas, adoro compartilhar assuntos, participar de conversas e frequentemente não percebo que posso estar incomodando.</p>
+    <div class="button-container">
+      <button onclick="responderOrientacao(4, 'INICIADOR', this)">CONCORDO</button>
+      <button onclick="responderOrientacao(4, 'RESPONDEDOR', this)">DISCORDO</button>
+    </div>
+
+    <div id="resultadoOrientacao">RESULTADO: INDEFINIDO</div>
   </div>
 
   <div id="postura" class="content">
     <div class="title">DICOTOMIA POSTURA</div>
-    <!-- conteúdo da aba postura -->
-    <!-- permanece inalterado -->
+
+    <p>Tenho uma certa impaciência, prefiro fazer as coisas, dar andamento as coisas ao invés de ficar aguardando.</p>
+    <div class="button-container">
+      <button onclick="responderPostura(0, 'MOVIMENTADOR', this)">CONCORDO</button>
+      <button onclick="responderPostura(0, 'CONTROLADOR', this)">DISCORDO</button>
+    </div>
+
+    <p>Tendo a ser mais flexível, isso me ajuda a adaptar minhas ações conforme os problemas forem surgindo, isso me faz ser melhor contornando obstáculos do percurso.</p>
+    <div class="button-container">
+      <button onclick="responderPostura(1, 'MOVIMENTADOR', this)">CONCORDO</button>
+      <button onclick="responderPostura(1, 'CONTROLADOR', this)">DISCORDO</button>
+    </div>
+
+    <p>Sou uma pessoa que preza pelo primor, na escola meus cadernos eram muito caprichados, meu estojo tinha cores de caneta para cada parte do texto.</p>
+    <div class="button-container">
+      <button onclick="responderPostura(2, 'CONTROLADOR', this)">CONCORDO</button>
+      <button onclick="responderPostura(2, 'MOVIMENTADOR', this)">DISCORDO</button>
+    </div>
+
+    <p>Na execução do que deve ser feito tendo a ser mais vagaroso, gasto muito mais tempo refletindo sobre como deve ser feito, assim na hora da execução, o trabalho saia impecável.</p>
+    <div class="button-container">
+      <button onclick="responderPostura(3, 'CONTROLADOR', this)">CONCORDO</button>
+      <button onclick="responderPostura(3, 'MOVIMENTADOR', this)">DISCORDO</button>
+    </div>
+
+    <p>Nas apresentações dos trabalhos da escola, eu geralmente não me preparava muito, estudava um pouco antes da aula e improvisava na hora a partir de algumas coisas que eu já sabia.</p>
+    <div class="button-container">
+      <button onclick="responderPostura(4, 'MOVIMENTADOR', this)">CONCORDO</button>
+      <button onclick="responderPostura(4, 'CONTROLADOR', this)">DISCORDO</button>
+    </div>
+
+    <div id="resultadoPostura">RESULTADO: INDEFINIDO</div>
   </div>
 
-  <div id="enfoque" class="content">
-    <div class="title">DICOTOMIA ENFOQUE</div>
+<div id="enfoque" class="content">
+  <div class="title">DICOTOMIA ENFOQUE</div>
 
-    <p>Com frequência sou chamado(a) de “ovelha negra” da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.</p>
-    <div class="button-container">
-      <button onclick="responderEnfoque(0, 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(0, 'AFILIATIVO', this)">DISCORDO</button>
-    </div>
-
-    <p>Costumo me sentir desconfortável em ambientes de trabalho muito competitivos, com metas rígidas e cobranças constantes; esse tipo de clima acaba me desgastando bastante.</p>
-    <div class="button-container">
-      <button onclick="responderEnfoque(1, 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(1, 'PRAGMÁTICO', this)">DISCORDO</button>
-    </div>
-
-    <p>Sou uma pessoa bastante amistosa, gosto de participar dos rolês com os amigos e detesto gente monossilábica. Até porque se eu não estou interessado em conversar com alguém, tento dar um jeito menos babaca de sair da conversa.</p>
-    <div class="button-container">
-      <button onclick="responderEnfoque(2, 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(2, 'PRAGMÁTICO', this)">DISCORDO</button>
-    </div>
-
-    <p>Não gosto muito de fazer “a social”, sou péssimo em fingir ser sociável com pessoas que não me interessam.</p>
-    <div class="button-container">
-      <button onclick="responderEnfoque(3, 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(3, 'AFILIATIVO', this)">DISCORDO</button>
-    </div>
-
-    <p>Quando meus amigos ou familiares escolhem fazer algo em um lugar onde eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.</p>
-    <div class="button-container">
-      <button onclick="responderEnfoque(4, 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(4, 'AFILIATIVO', this)">DISCORDO</button>
-    </div>
-
-    <p>Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.</p>
-    <div class="button-container">
-      <button onclick="responderEnfoque(5, 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(5, 'AFILIATIVO', this)">DISCORDO</button>
-    </div>
-
-    <p>Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa, isso me ajuda a ver se ela está sendo receptiva ou não com o que eu estou falando.</p>
-    <div class="button-container">
-      <button onclick="responderEnfoque(6, 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(6, 'PRAGMÁTICO', this)">DISCORDO</button>
-    </div>
-
-    <div id="resultadoEnfoque">RESULTADO: INDEFINIDO</div>
+  <p>Com frequência sou chamado(a) de “ovelha negra” da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.</p>
+  <div class="button-container">
+    <button onclick="responderEnfoque(0, 'PRAGMÁTICO', this)">CONCORDO</button>
+    <button onclick="responderEnfoque(0, 'AFILIATIVO', this)">DISCORDO</button>
   </div>
+
+  <p>Costumo me sentir desconfortável em ambientes de trabalho muito competitivos, com metas rígidas e cobranças constantes; esse tipo de clima acaba me desgastando bastante.</p>
+  <div class="button-container">
+    <button onclick="responderEnfoque(1, 'AFILIATIVO', this)">CONCORDO</button>
+    <button onclick="responderEnfoque(1, 'PRAGMÁTICO', this)">DISCORDO</button>
+  </div>
+
+  <p>Sou uma pessoa bastante amistosa, gosto de participar dos rolês com os amigos e detesto gente monossilábica. Até porque se eu não estou interessado em conversar com alguém, tento dar um jeito menos babaca de sair da conversa.</p>
+  <div class="button-container">
+    <button onclick="responderEnfoque(2, 'AFILIATIVO', this)">CONCORDO</button>
+    <button onclick="responderEnfoque(2, 'PRAGMÁTICO', this)">DISCORDO</button>
+  </div>
+
+  <p>Não gosto muito de fazer “a social”, sou péssimo em fingir ser sociável com pessoas que não me interessam.</p>
+  <div class="button-container">
+    <button onclick="responderEnfoque(3, 'PRAGMÁTICO', this)">CONCORDO</button>
+    <button onclick="responderEnfoque(3, 'AFILIATIVO', this)">DISCORDO</button>
+  </div>
+
+  <p>Quando meus amigos ou familiares escolhem fazer algo em um lugar onde eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.</p>
+  <div class="button-container">
+    <button onclick="responderEnfoque(4, 'PRAGMÁTICO', this)">CONCORDO</button>
+    <button onclick="responderEnfoque(4, 'AFILIATIVO', this)">DISCORDO</button>
+  </div>
+
+  <p>Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.</p>
+  <div class="button-container">
+    <button onclick="responderEnfoque(5, 'PRAGMÁTICO', this)">CONCORDO</button>
+    <button onclick="responderEnfoque(5, 'AFILIATIVO', this)">DISCORDO</button>
+  </div>
+
+  <p>Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa, isso me ajuda a ver se ela está sendo receptiva ou não com o que eu estou falando.</p>
+  <div class="button-container">
+    <button onclick="responderEnfoque(6, 'AFILIATIVO', this)">CONCORDO</button>
+    <button onclick="responderEnfoque(6, 'PRAGMÁTICO', this)">DISCORDO</button>
+  </div>
+
+  <div id="resultadoEnfoque">RESULTADO: INDEFINIDO</div>
+</div>
 
   <div id="organizacao" class="content">
     <div class="title">DICOTOMIA ORGANIZAÇÃO</div>
@@ -194,7 +253,6 @@
 
     const respostasOrientacao = Array(5).fill(null);
     const respostasPostura = Array(5).fill(null);
-    const respostasEnfoque = Array(7).fill(null);
 
     function responderOrientacao(pergunta, valor, botao) {
       respostasOrientacao[pergunta] = valor;
@@ -206,12 +264,6 @@
       respostasPostura[pergunta] = valor;
       atualizarSelecaoBotao(botao);
       calcularResultado(respostasPostura, 'resultadoPostura', 'MOVIMENTADOR', 'CONTROLADOR');
-    }
-
-    function responderEnfoque(pergunta, valor, botao) {
-      respostasEnfoque[pergunta] = valor;
-      atualizarSelecaoBotao(botao);
-      calcularResultadoEnfoque();
     }
 
     function atualizarSelecaoBotao(botaoSelecionado) {
@@ -232,19 +284,6 @@
       else if (counts[tipo2] >= 3) resultado = tipo2;
 
       document.getElementById(resultadoId).innerText = `RESULTADO: ${resultado}`;
-    }
-
-    function calcularResultadoEnfoque() {
-      const counts = { 'PRAGMÁTICO': 0, 'AFILIATIVO': 0 };
-      respostasEnfoque.forEach(r => {
-        if (r) counts[r]++;
-      });
-
-      let resultado = 'INDEFINIDO';
-      if (counts['AFILIATIVO'] >= 4) resultado = 'AFILIATIVO';
-      else if (counts['PRAGMÁTICO'] >= 4) resultado = 'PRAGMÁTICO';
-
-      document.getElementById('resultadoEnfoque').innerText = `RESULTADO: ${resultado}`;
     }
   </script>
 </body>
