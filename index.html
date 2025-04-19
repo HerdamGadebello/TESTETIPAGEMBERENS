@@ -3,29 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <title>Página Inicial</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+    .topbar {
+      background-color: #8a1540;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px;
+    }
+    .topbar img {
+      width: 30px;
+    }
+    .titlebar {
+      background-color: #8a1540;
+      color: white;
+      text-align: center;
+      font-weight: bold;
+      padding: 5px;
+    }
+    .content {
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+      text-align: justify;
+    }
+    .content h2 {
+      color: #8a1540;
+      text-align: center;
+    }
+  </style>
 </head>
-<body style="margin:0; font-family:Arial, sans-serif;">
+<body>
 
-  <!-- Barra de ícones -->
-  <div style="background-color:#8a1540; display:flex; justify-content:space-around; padding:10px;">
-    <a href="index.html"><img src="home-icon.png" alt="Início" style="width:30px;"></a>
-    <img src="icone2.png" alt="Ícone 2" style="width:30px;">
-    <img src="icone3.png" alt="Ícone 3" style="width:30px;">
-    <img src="icone4.png" alt="Ícone 4" style="width:30px;">
-    <img src="icone5.png" alt="Ícone 5" style="width:30px;">
-    <img src="icone6.png" alt="Ícone 6" style="width:30px;">
-    <img src="icone7.png" alt="Ícone 7" style="width:30px;">
-    <img src="icone8.png" alt="Ícone 8" style="width:30px;">
+  <!-- Barra de abas com ícones -->
+  <div class="topbar">
+    <a href="index.html"><img src="home-icon.png" alt="Início"></a>
+    <img src="icone2.png" alt="Ícone 2">
+    <img src="icone3.png" alt="Ícone 3">
+    <img src="icone4.png" alt="Ícone 4">
+    <img src="icone5.png" alt="Ícone 5">
+    <img src="icone6.png" alt="Ícone 6">
+    <img src="icone7.png" alt="Ícone 7">
+    <img src="icone8.png" alt="Ícone 8">
   </div>
 
   <!-- Título da aba -->
-  <div style="background-color:#8a1540; color:white; text-align:center; font-weight:bold; padding:5px;">
+  <div class="titlebar">
     PÁGINA INICIAL
   </div>
 
   <!-- Conteúdo principal -->
-  <div style="padding: 30px; text-align: justify; max-width: 800px; margin: auto;">
-    <h2 style="color:#8a1540; text-align:center;">Bem-vindos ao Teste</h2>
+  <div class="content">
+    <h2>Bem-vindos ao Teste</h2>
     <p>
       Este é um teste com o intuito de investigar traços de orientação tipológica baseados nas atitudes de concordância e discordância com proposições simples.
     </p>
