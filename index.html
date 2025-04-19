@@ -78,12 +78,14 @@
     }
 
     #resultadoOrientacao,
-    #resultadoPostura {
+    #resultadoPostura,
+    #resultadoEnfoque {
       text-align: center;
       margin-top: 30px;
       font-size: 18px;
       font-weight: bold;
     }
+
   </style>
 </head>
 <body>
@@ -177,72 +179,52 @@
     <div id="resultadoPostura">RESULTADO: INDEFINIDO</div>
   </div>
 
-<div id="enfoque" class="content">
-  <div class="title">DICOTOMIA ENFOQUE</div>
+  <div id="enfoque" class="content">
+    <div class="title">DICOTOMIA ENFOQUE</div>
 
-  <p>Com frequência sou chamado(a) de “ovelha negra” da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.</p>
-  <div class="button-container">
-    <button onclick="responderEnfoque(0, this, 'PRAGMÁTICO', 'AFILIATIVO')">CONCORDO</button>
-    <button onclick="responderEnfoque(0, this, 'AFILIATIVO', 'PRAGMÁTICO')">DISCORDO</button>
-  </div>
+    <p>Com frequência sou chamado(a) de “ovelha negra” da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.</p>
+    <div class="button-container">
+      <button onclick="responderEnfoque(0, this, 'PRAGMÁTICO', 'AFILIATIVO')">CONCORDO</button>
+      <button onclick="responderEnfoque(0, this, 'AFILIATIVO', 'PRAGMÁTICO')">DISCORDO</button>
+    </div>
 
-  <p>Costumo me sentir desconfortável em ambientes de trabalho muito competitivos, com metas rígidas e cobranças constantes; esse tipo de clima acaba me desgastando bastante.</p>
-  <div class="button-container">
-    <button onclick="responderEnfoque(1, this, 'AFILIATIVO', 'PRAGMÁTICO')">CONCORDO</button>
-    <button onclick="responderEnfoque(1, this, 'PRAGMÁTICO', 'AFILIATIVO')">DISCORDO</button>
-  </div>
+    <p>Costumo me sentir desconfortável em ambientes de trabalho muito competitivos, com metas rígidas e cobranças constantes; esse tipo de clima acaba me desgastando bastante.</p>
+    <div class="button-container">
+      <button onclick="responderEnfoque(1, this, 'AFILIATIVO', 'PRAGMÁTICO')">CONCORDO</button>
+      <button onclick="responderEnfoque(1, this, 'PRAGMÁTICO', 'AFILIATIVO')">DISCORDO</button>
+    </div>
 
-  <p>Sou uma pessoa bastante amistosa, gosto de participar dos rolês com os amigos e detesto gente monossilábica. Até porque se eu não estou interessado em conversar com alguém, tento dar um jeito menos babaca de sair da conversa.</p>
-  <div class="button-container">
-    <button onclick="responderEnfoque(2, this, 'AFILIATIVO', 'PRAGMÁTICO')">CONCORDO</button>
-    <button onclick="responderEnfoque(2, this, 'PRAGMÁTICO', 'AFILIATIVO')">DISCORDO</button>
-  </div>
+    <p>Sou uma pessoa bastante amistosa, gosto de participar dos rolês com os amigos e detesto gente monossilábica. Até porque se eu não estou interessado em conversar com alguém, tento dar um jeito menos babaca de sair da conversa.</p>
+    <div class="button-container">
+      <button onclick="responderEnfoque(2, this, 'AFILIATIVO', 'PRAGMÁTICO')">CONCORDO</button>
+      <button onclick="responderEnfoque(2, this, 'PRAGMÁTICO', 'AFILIATIVO')">DISCORDO</button>
+    </div>
 
-  <p>Não gosto muito de fazer “a social”, sou péssimo em fingir ser sociável com pessoas que não me interessam.</p>
-  <div class="button-container">
-    <button onclick="responderEnfoque(3, this, 'PRAGMÁTICO', 'AFILIATIVO')">CONCORDO</button>
-    <button onclick="responderEnfoque(3, this, 'AFILIATIVO', 'PRAGMÁTICO')">DISCORDO</button>
-  </div>
+    <p>Não gosto muito de fazer “a social”, sou péssimo em fingir ser sociável com pessoas que não me interessam.</p>
+    <div class="button-container">
+      <button onclick="responderEnfoque(3, this, 'PRAGMÁTICO', 'AFILIATIVO')">CONCORDO</button>
+      <button onclick="responderEnfoque(3, this, 'AFILIATIVO', 'PRAGMÁTICO')">DISCORDO</button>
+    </div>
 
-  <p>Quando meus amigos ou familiares escolhem fazer algo em um lugar onde eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.</p>
-  <div class="button-container">
-    <button onclick="responderEnfoque(4, this, 'PRAGMÁTICO', 'AFILIATIVO')">CONCORDO</button>
-    <button onclick="responderEnfoque(4, this, 'AFILIATIVO', 'PRAGMÁTICO')">DISCORDO</button>
-  </div>
+    <p>Quando meus amigos ou familiares escolhem fazer algo em um lugar onde eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.</p>
+    <div class="button-container">
+      <button onclick="responderEnfoque(4, this, 'PRAGMÁTICO', 'AFILIATIVO')">CONCORDO</button>
+      <button onclick="responderEnfoque(4, this, 'AFILIATIVO', 'PRAGMÁTICO')">DISCORDO</button>
+    </div>
 
-  <p>Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.</p>
-  <div class="button-container">
-    <button onclick="responderEnfoque(5, this, 'PRAGMÁTICO', 'AFILIATIVO')">CONCORDO</button>
-    <button onclick="responderEnfoque(5, this, 'AFILIATIVO', 'PRAGMÁTICO')">DISCORDO</button>
-  </div>
+    <p>Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.</p>
+    <div class="button-container">
+      <button onclick="responderEnfoque(5, this, 'PRAGMÁTICO', 'AFILIATIVO')">CONCORDO</button>
+      <button onclick="responderEnfoque(5, this, 'AFILIATIVO', 'PRAGMÁTICO')">DISCORDO</button>
+    </div>
 
-  <p>Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa, isso me ajuda a ver se ela está sendo receptiva ou não com o que eu estou falando.</p>
-  <div class="button-container">
-    <button onclick="responderEnfoque(6, this, 'AFILIATIVO', 'PRAGMÁTICO')">CONCORDO</button>
-    <button onclick="responderEnfoque(6, this, 'PRAGMÁTICO', 'AFILIATIVO')">DISCORDO</button>
-  </div>
+    <p>Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa, isso me ajuda a ver se ela está sendo receptiva ou não com o que eu estou falando.</p>
+    <div class="button-container">
+      <button onclick="responderEnfoque(6, this, 'AFILIATIVO', 'PRAGMÁTICO')">CONCORDO</button>
+      <button onclick="responderEnfoque(6, this, 'PRAGMÁTICO', 'AFILIATIVO')">DISCORDO</button>
+    </div>
 
-  <div id="resultadoEnfoque">RESULTADO: INDEFINIDO</div>
-</div>
-
-  <div id="organizacao" class="content">
-    <div class="title">DICOTOMIA ORGANIZAÇÃO</div>
-    <p>Conteúdo em construção…</p>
-  </div>
-
-  <div id="comunicacao" class="content">
-    <div class="title">DICOTOMIA COMUNICAÇÃO</div>
-    <p>Conteúdo em construção…</p>
-  </div>
-
-  <div id="interpretacao" class="content">
-    <div class="title">DICOTOMIA INTERPRETAÇÃO</div>
-    <p>Conteúdo em construção…</p>
-  </div>
-
-  <div id="resultado" class="content">
-    <div class="title">RESULTADO TIPOLÓGICO</div>
-    <p>Conteúdo em construção…</p>
+    <div id="resultadoEnfoque">RESULTADO: INDEFINIDO</div>
   </div>
 
   <script>
@@ -251,40 +233,27 @@
       document.getElementById(tabId).classList.add('active');
     }
 
-    const respostasOrientacao = Array(5).fill(null);
-    const respostasPostura = Array(5).fill(null);
-
-    function responderOrientacao(pergunta, valor, botao) {
-      respostasOrientacao[pergunta] = valor;
-      atualizarSelecaoBotao(botao);
-      calcularResultado(respostasOrientacao, 'resultadoOrientacao', 'INICIADOR', 'RESPONDEDOR');
+    function responderOrientacao(index, resposta, button) {
+      const buttons = document.querySelectorAll(`#orientacao .button-container button`);
+      buttons.forEach(b => b.classList.remove('selected'));
+      button.classList.add('selected');
+      document.getElementById("resultadoOrientacao").innerText = "RESULTADO: " + resposta;
     }
 
-    function responderPostura(pergunta, valor, botao) {
-      respostasPostura[pergunta] = valor;
-      atualizarSelecaoBotao(botao);
-      calcularResultado(respostasPostura, 'resultadoPostura', 'MOVIMENTADOR', 'CONTROLADOR');
+    function responderPostura(index, resposta, button) {
+      const buttons = document.querySelectorAll(`#postura .button-container button`);
+      buttons.forEach(b => b.classList.remove('selected'));
+      button.classList.add('selected');
+      document.getElementById("resultadoPostura").innerText = "RESULTADO: " + resposta;
     }
 
-    function atualizarSelecaoBotao(botaoSelecionado) {
-      const container = botaoSelecionado.parentElement;
-      container.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
-      botaoSelecionado.classList.add('selected');
-    }
-
-    function calcularResultado(respostas, resultadoId, tipo1, tipo2) {
-      const counts = { [tipo1]: 0, [tipo2]: 0 };
-      respostas.forEach(r => {
-        if (r === tipo1) counts[tipo1]++;
-        else if (r === tipo2) counts[tipo2]++;
-      });
-
-      let resultado = 'INDEFINIDO';
-      if (counts[tipo1] >= 3) resultado = tipo1;
-      else if (counts[tipo2] >= 3) resultado = tipo2;
-
-      document.getElementById(resultadoId).innerText = `RESULTADO: ${resultado}`;
+    function responderEnfoque(index, button, resultado1, resultado2) {
+      const buttons = document.querySelectorAll(`#enfoque .button-container button`);
+      buttons.forEach(b => b.classList.remove('selected'));
+      button.classList.add('selected');
+      document.getElementById("resultadoEnfoque").innerText = "RESULTADO: " + (index % 2 === 0 ? resultado1 : resultado2);
     }
   </script>
+
 </body>
 </html>
