@@ -142,12 +142,13 @@
       margin: 20px 0;
       position: relative;
       padding-left: 50px;
+      text-align: center; /* Centraliza o texto da pergunta */
     }
 
     .numero-pergunta {
       position: absolute;
       left: 0;
-      top: 0;
+      top: -20px; /* Ajuste a posição para cima */
       width: 36px;
       height: 36px;
       background-color: var(--cor-numero);
@@ -165,7 +166,7 @@
       font-size: 16px;
       margin: 0;
       font-family: 'Aharoni', sans-serif;
-      text-align: justify;
+      text-align: center; /* Centraliza o texto da pergunta */
       line-height: 1.6;
       transition: var(--transicao);
       padding: 5px 0;
@@ -596,7 +597,7 @@
 
     <div class="pergunta-container">
       <div class="numero-pergunta">1</div>
-      <p class="pergunta-texto">Tenho uma certa impaciência, prefiro fazer as coisas, dar andamento as coisas ao invés de ficar aguardando.</p>
+      <p class="pergunta-texto">Tenho uma certa impaciência, prefiro fazer as coisas, dar andamento às coisas ao invés de ficar aguardando.</p>
     </div>
     <div class="button-container">
       <button onclick="responderPostura(0, 'MOVIMENTADOR', this)">CONCORDO</button>
