@@ -648,8 +648,8 @@
       <p class="pergunta-texto">Com frequência sou chamado(a) de "ovelha negra" da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(0, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(0, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(0, 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(0, 'AFILIATIVO', this)">DISCORDO</button>
     </div>
 
     <div class="pergunta-container">
@@ -657,8 +657,8 @@
       <p class="pergunta-texto">Costumo me sentir desconfortável em ambientes de trabalho muito competitivos, com metas rígidas e cobranças constantes; esse tipo de clima acaba me desgastando bastante.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(1, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(1, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(1, 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(1, 'PRAGMÁTICO', this)">DISCORDO</button>
     </div>
 
     <div class="pergunta-container">
@@ -666,8 +666,8 @@
       <p class="pergunta-texto">Sou uma pessoa bastante amistosa, gosto de participar dos rolês com os amigos e detesto gente monossilábica. Até porque se eu não estou interessado em conversar com alguém, tento dar um jeito menos babaca de sair da conversa.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(2, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(2, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(2, 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(2, 'PRAGMÁTICO', this)">DISCORDO</button>
     </div>
 
     <div class="pergunta-container">
@@ -675,8 +675,8 @@
       <p class="pergunta-texto">Não gosto muito de fazer "a social", sou péssimo em fingir ser sociável com pessoas que não me interessam.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(3, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(3, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(3, 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(3, 'AFILIATIVO', this)">DISCORDO</button>
     </div>
 
     <div class="pergunta-container">
@@ -684,8 +684,8 @@
       <p class="pergunta-texto">Quando meus amigos ou familiares escolhem fazer algo em um lugar onde eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(4, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(4, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(4, 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(4, 'AFILIATIVO', this)">DISCORDO</button>
     </div>
 
     <div class="pergunta-container">
@@ -693,8 +693,8 @@
       <p class="pergunta-texto">Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(5, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(5, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(5, 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(5, 'AFILIATIVO', this)">DISCORDO</button>
     </div>
 
     <div class="pergunta-container">
@@ -702,8 +702,8 @@
       <p class="pergunta-texto">Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa, isso me ajuda a ver se ela está sendo receptiva ou não com o que eu estou falando.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(6, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(6, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(6, 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(6, 'PRAGMÁTICO', this)">DISCORDO</button>
     </div>
 
     <div id="resultadoEnfoque"></div>
@@ -1104,12 +1104,12 @@
       const contagemInterpretacao = contarRespostas(respostasInterpretacao);
       const contagemOrganizacao = contarRespostas(respostasOrganizacao);
 
-      const enfoqueAfiliativo = contagemEnfoque['AFILIATIVO'] >= 5;
-      const enfoquePragmatico = contagemEnfoque['PRAGMÁTICO'] >= 5;
-      const interpretacaoAbstrato = contagemInterpretacao['ABSTRATO'] >= 5;
-      const interpretacaoConcreto = contagemInterpretacao['CONCRETO'] >= 5;
-      const organizacaoInteressado = contagemOrganizacao['INTERESSADO'] >= 5;
-      const organizacaoEstruturado = contagemOrganizacao['ESTRUTURADO'] >= 5;
+      const enfoqueAfiliativo = contagemEnfoque['AFILIATIVO'] >= 4;
+      const enfoquePragmatico = contagemEnfoque['PRAGMÁTICO'] >= 4;
+      const interpretacaoAbstrato = contagemInterpretacao['ABSTRATO'] >= 4;
+      const interpretacaoConcreto = contagemInterpretacao['CONCRETO'] >= 4;
+      const organizacaoInteressado = contagemOrganizacao['INTERESSADO'] >= 4;
+      const organizacaoEstruturado = contagemOrganizacao['ESTRUTURADO'] >= 4;
 
       if (enfoqueAfiliativo) {
         if (interpretacaoAbstrato) return "NF";
@@ -1183,12 +1183,12 @@
       const contagemPostura = contarRespostas(respostasPostura);
       const contagemComunicacao = contarRespostas(respostasComunicacao);
 
-      const orientacaoIniciador = contagemOrientacao['INICIADOR'] >= 4;
-      const orientacaoRespondedor = contagemOrientacao['RESPONDEDOR'] >= 4;
-      const posturaControlador = contagemPostura['CONTROLADOR'] >= 4;
-      const posturaMovimentador = contagemPostura['MOVIMENTADOR'] >= 4;
-      const comunicacaoDireto = contagemComunicacao['DIRETO'] >= 4;
-      const comunicacaoInformativo = contagemComunicacao['INFORMATIVO'] >= 4;
+      const orientacaoIniciador = contagemOrientacao['INICIADOR'] >= 3;
+      const orientacaoRespondedor = contagemOrientacao['RESPONDEDOR'] >= 3;
+      const posturaControlador = contagemPostura['CONTROLADOR'] >= 3;
+      const posturaMovimentador = contagemPostura['MOVIMENTADOR'] >= 3;
+      const comunicacaoDireto = contagemComunicacao['DIRETO'] >= 3;
+      const comunicacaoInformativo = contagemComunicacao['INFORMATIVO'] >= 3;
 
       if (orientacaoIniciador) {
         if (comunicacaoDireto || posturaControlador) return "ESTRUTURADOR";
@@ -1297,7 +1297,7 @@
       });
       
       // Define o limite com base no número de perguntas
-      const minimo = totalPerguntas === 5 ? 3 : Math.ceil(totalPerguntas / 2) + 1;
+      const minimo = totalPerguntas === 5 ? 3 : 4;
       
       for (const [valor, quantidade] of Object.entries(contagem)) {
         if (quantidade >= minimo) {
@@ -1351,14 +1351,13 @@
       atualizarResultado('postura', 'resultadoPostura');
     }
 
-    function responderEnfoque(index, resposta1, resposta2, button) {
+    function responderEnfoque(index, resposta, button) {
       const container = button.parentElement;
       container.querySelectorAll('button').forEach(b => {
         b.classList.remove('selected');
       });
       
       button.classList.add('selected');
-      const resposta = button.textContent === 'CONCORDO' ? resposta1 : resposta2;
       respostasEnfoque[index] = resposta;
       atualizarResultado('enfoque', 'resultadoEnfoque');
     }
