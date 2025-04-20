@@ -142,13 +142,13 @@
       margin: 20px 0;
       position: relative;
       padding-left: 50px;
-      text-align: center;
+      text-align: center; /* Centraliza o texto da pergunta */
     }
 
     .numero-pergunta {
       position: absolute;
       left: 0;
-      top: -20px;
+      top: -20px; /* Ajuste a posição para cima */
       width: 36px;
       height: 36px;
       background-color: var(--cor-numero);
@@ -166,7 +166,7 @@
       font-size: 16px;
       margin: 0;
       font-family: 'Aharoni', sans-serif;
-      text-align: center;
+      text-align: center; /* Centraliza o texto da pergunta */
       line-height: 1.6;
       transition: var(--transicao);
       padding: 5px 0;
@@ -446,6 +446,7 @@
       transform: translateZ(5px);
     }
 
+    /* Efeito de profundidade para os containers */
     .content > div:not(.title):not(.button-container) {
       transition: var(--transicao);
     }
@@ -454,6 +455,7 @@
       transform: translateZ(5px);
     }
 
+    /* Melhorias para mobile */
     @media (max-width: 768px) {
       .type-details {
         flex-direction: column;
@@ -496,6 +498,7 @@
       }
     }
 
+    /* Acessibilidade - reduzir movimento para quem preferir */
     @media (prefers-reduced-motion) {
       .content,
       button,
@@ -586,7 +589,7 @@
       <button onclick="responderOrientacao(4, 'RESPONDEDOR', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoOrientacao"></div>
+    <div id="resultadoOrientacao"><script>document.currentScript.parentElement.innerText = calcularResultadoDicotomia(respostasOrientacao, 5);</script></div>
   </div>
 
   <div id="postura" class="content">
@@ -637,7 +640,7 @@
       <button onclick="responderPostura(4, 'CONTROLADOR', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoPostura"></div>
+    <div id="resultadoPostura"><script>document.currentScript.parentElement.innerText = calcularResultadoDicotomia(respostasPostura, 5);</script></div>
   </div>
 
   <div id="enfoque" class="content">
@@ -706,7 +709,7 @@
       <button onclick="responderEnfoque(6, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoEnfoque"></div>
+    <div id="resultadoEnfoque"><script>document.currentScript.parentElement.innerText = calcularResultadoDicotomia(respostasEnfoque, 7);</script></div>
   </div>
 
   <div id="organizacao" class="content">
@@ -775,7 +778,7 @@
       <button onclick="responderOrganizacao(6, 'ESTRUTURADO', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoOrganizacao"></div>
+    <div id="resultadoOrganizacao"><script>document.currentScript.parentElement.innerText = calcularResultadoDicotomia(respostasOrganizacao, 7);</script></div>
   </div>
 
   <div id="comunicacao" class="content">
@@ -826,7 +829,7 @@
       <button onclick="responderComunicacao(4, 'DIRETO', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoComunicacao"></div>
+    <div id="resultadoComunicacao"><script>document.currentScript.parentElement.innerText = calcularResultadoDicotomia(respostasComunicacao, 5);</script></div>
   </div>
 
   <div id="interpretacao" class="content">
@@ -895,7 +898,7 @@
       <button onclick="responderInterpretacao(6, 'ABSTRATO', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoInterpretacao"></div>
+    <div id="resultadoInterpretacao"><script>document.currentScript.parentElement.innerText = calcularResultadoDicotomia(respostasInterpretacao, 7);</script></div>
   </div>
 
   <div id="resultado" class="content">
@@ -1231,11 +1234,16 @@
       carregarImagemTipo(tipoPersonalidade);
     }
 
-    // Função para calcular o resultado de uma dicotomia (CORRIGIDA)
+    // Função para verificar se todas as perguntas de uma dicotomia foram respondidas
+    function verificarRespostasCompletas(dicotomia, respostas) {
+      const total = totalPerguntas[dicotomia];
+      const respondidas = Object.keys(respostas).length;
+      return respondidas >= Math.ceil(total / 2) + 1;
+    }
+
+    // Função para calcular o resultado de uma dicotomia
     function calcularResultadoDicotomia(respostas, dicotomia) {
       const valores = Object.values(respostas);
-      if (valores.length === 0) return null;
-      
       const contagem = {};
       
       // Contar ocorrências de cada valor
@@ -1243,47 +1251,38 @@
         contagem[valor] = (contagem[valor] || 0) + 1;
       });
       
-      // Determinar o valor com mais respostas
-      let resultado = null;
-      let maxContagem = 0;
+      // Determinar o valor necessário para definir o resultado (metade + 1)
+      const minimo = Math.ceil(totalPerguntas[dicotomia] / 2) + 1;
       
+      // Verificar se algum valor atingiu o mínimo
       for (const [valor, quantidade] of Object.entries(contagem)) {
-        if (quantidade > maxContagem) {
-          maxContagem = quantidade;
-          resultado = valor;
+        if (quantidade >= minimo) {
+          return valor;
         }
       }
       
-      // Verificar se temos respostas suficientes (maioria simples)
-      const totalRespostas = valores.length;
-      const totalPerguntasDicotomia = totalPerguntas[dicotomia];
-      
-      // Se respondemos pelo menos metade + 1 perguntas, podemos definir o resultado
-      if (totalRespostas >= Math.ceil(totalPerguntasDicotomia / 2)) {
-        return resultado;
-      }
-      
-      return null;
+      return null; // Retorna null se nenhum valor atingiu o mínimo
     }
 
-    // Função para atualizar o resultado de uma dicotomia (CORRIGIDA)
+    // Função para atualizar o resultado de uma dicotomia
     function atualizarResultado(dicotomia, elementoId) {
-      const respostasDicotomia = 
+      const resultado = calcularResultadoDicotomia(
         dicotomia === 'orientacao' ? respostasOrientacao :
         dicotomia === 'postura' ? respostasPostura :
         dicotomia === 'enfoque' ? respostasEnfoque :
         dicotomia === 'organizacao' ? respostasOrganizacao :
         dicotomia === 'comunicacao' ? respostasComunicacao :
-        respostasInterpretacao;
+        respostasInterpretacao,
+        dicotomia
+      );
       
-      const resultado = calcularResultadoDicotomia(respostasDicotomia, dicotomia);
       resultados[dicotomia] = resultado;
       
       const elemento = document.getElementById(elementoId);
       if (resultado) {
         elemento.innerHTML = `RESULTADO: ${resultado}`;
       } else {
-        elemento.innerHTML = `RESPONDA MAIS PERGUNTAS<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span>`;
+        elemento.innerHTML = `PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span>`;
       }
     }
 
@@ -1360,6 +1359,217 @@
     document.addEventListener('DOMContentLoaded', function() {
       showTab('inicio');
     });
-  </script>
+  
+// Função para calcular o temperamento (SJ, SP, NT, NF) - ATUALIZADA COM AS NOVAS REGRAS
+function calcularTemperamento() {
+  const interpretacao = resultados.interpretacao;
+  const enfoque = resultados.enfoque;
+  const organizacao = resultados.organizacao;
+  
+  // Contagem de respostas para cada dicotomia
+  const contagemEnfoque = contarRespostas(respostasEnfoque);
+  const contagemInterpretacao = contarRespostas(respostasInterpretacao);
+  const contagemOrganizacao = contarRespostas(respostasOrganizacao);
+
+  // Verifica se há predominância em ENFOQUE (5+ respostas)
+  const enfoqueAfiliativo = contagemEnfoque['AFILIATIVO'] >= 5;
+  const enfoquePragmatico = contagemEnfoque['PRAGMÁTICO'] >= 5;
+  
+  // Verifica se há predominância em INTERPRETAÇÃO (5+ respostas)
+  const interpretacaoAbstrato = contagemInterpretacao['ABSTRATO'] >= 5;
+  const interpretacaoConcreto = contagemInterpretacao['CONCRETO'] >= 5;
+  
+  // Verifica se há predominância em ORGANIZAÇÃO (5+ respostas)
+  const organizacaoInteressado = contagemOrganizacao['INTERESSADO'] >= 5;
+  const organizacaoEstruturado = contagemOrganizacao['ESTRUTURADO'] >= 5;
+
+  // Aplica as regras de prioridade
+  if (enfoqueAfiliativo) {
+    if (interpretacaoAbstrato) {
+      return "NF"; // Regra 2: ENFOQUE AFILIATIVO + INTERPRETAÇÃO ABSTRATO -> NF
+    } else if (interpretacaoConcreto) {
+      return "SJ"; // Regra 3: ENFOQUE AFILIATIVO + INTERPRETAÇÃO CONCRETO -> SJ
+    }
+    // Regra 1: ENFOQUE AFILIATIVO -> SJ ou NF (vamos priorizar NF se também tiver INTERESSADO)
+    if (organizacaoInteressado) {
+      return "NF";
+    }
+    return "SJ";
+  }
+
+  if (enfoquePragmatico) {
+    if (interpretacaoAbstrato) {
+      return "NT"; // Regra 5: ENFOQUE PRAGMÁTICO + INTERPRETAÇÃO ABSTRATO -> NT
+    } else if (interpretacaoConcreto) {
+      return "SP"; // Regra 6: ENFOQUE PRAGMÁTICO + INTERPRETAÇÃO CONCRETO -> SP
+    }
+    // Regra 4: ENFOQUE PRAGMÁTICO -> SP ou NT (vamos priorizar NT se também tiver ESTRUTURADO)
+    if (organizacaoEstruturado) {
+      return "NT";
+    }
+    return "SP";
+  }
+
+  if (organizacaoInteressado) {
+    // Regra 7: ORGANIZAÇÃO INTERESSADO -> NF ou SP
+    if (interpretacaoAbstrato) {
+      return "NF";
+    } else if (interpretacaoConcreto) {
+      return "SP";
+    }
+    return Math.random() > 0.5 ? "NF" : "SP"; // Se não houver preferência clara
+  }
+
+  if (organizacaoEstruturado) {
+    // Regra 8: ORGANIZAÇÃO ESTRUTURADO -> SJ ou NT
+    if (interpretacaoAbstrato) {
+      return "NT";
+    } else if (interpretacaoConcreto) {
+      return "SJ";
+    }
+    return Math.random() > 0.5 ? "SJ" : "NT"; // Se não houver preferência clara
+  }
+
+  if (interpretacaoAbstrato) {
+    // Regra 9: INTERPRETAÇÃO ABSTRATO -> NF ou NT
+    return enfoque === 'AFILIATIVO' ? "NF" : "NT";
+  }
+
+  if (interpretacaoConcreto) {
+    // Regra 10: INTERPRETAÇÃO CONCRETO -> SJ ou SP
+    return enfoque === 'PRAGMÁTICO' ? "SP" : "SJ";
+  }
+
+  // Se nenhuma regra se aplicar, usa o cálculo original
+  const countSJ = 
+    (enfoque === 'AFILIATIVO' ? 1 : 0) + 
+    (organizacao === 'ESTRUTURADO' ? 1 : 0) + 
+    (interpretacao === 'CONCRETO' ? 1 : 0);
+  
+  const countSP = 
+    (interpretacao === 'CONCRETO' ? 1 : 0) + 
+    (enfoque === 'PRAGMÁTICO' ? 1 : 0) + 
+    (organizacao === 'INTERESSADO' ? 1 : 0);
+  
+  const countNT = 
+    (interpretacao === 'ABSTRATO' ? 1 : 0) + 
+    (enfoque === 'PRAGMÁTICO' ? 1 : 0) + 
+    (organizacao === 'INTERESSADO' ? 1 : 0);
+  
+  const countNF = 
+    (interpretacao === 'ABSTRATO' ? 1 : 0) + 
+    (enfoque === 'AFILIATIVO' ? 1 : 0) + 
+    (organizacao === 'INTERESSADO' ? 1 : 0);
+  
+  if (countSJ >= 2) return "SJ";
+  if (countSP >= 2) return "SP";
+  if (countNT >= 2) return "NT";
+  if (countNF >= 2) return "NF";
+  
+  return "INDEFINIDO";
+}
+
+// Função para calcular o estilo (ESTRUTURADOR, INAUGURADOR, FINALIZADOR, BASTIDOR) - ATUALIZADA COM AS NOVAS REGRAS
+function calcularEstilo() {
+  const orientacao = resultados.orientacao;
+  const postura = resultados.postura;
+  const comunicacao = resultados.comunicacao;
+  
+  // Contagem de respostas para cada dicotomia
+  const contagemOrientacao = contarRespostas(respostasOrientacao);
+  const contagemPostura = contarRespostas(respostasPostura);
+  const contagemComunicacao = contarRespostas(respostasComunicacao);
+
+  // Verifica se há predominância em ORIENTAÇÃO (4+ respostas)
+  const orientacaoIniciador = contagemOrientacao['INICIADOR'] >= 4;
+  const orientacaoRespondedor = contagemOrientacao['RESPONDEDOR'] >= 4;
+  
+  // Verifica se há predominância em POSTURA (4+ respostas)
+  const posturaControlador = contagemPostura['CONTROLADOR'] >= 4;
+  const posturaMovimentador = contagemPostura['MOVIMENTADOR'] >= 4;
+  
+  // Verifica se há predominância em COMUNICAÇÃO (4+ respostas)
+  const comunicacaoDireto = contagemComunicacao['DIRETO'] >= 4;
+  const comunicacaoInformativo = contagemComunicacao['INFORMATIVO'] >= 4;
+
+  // Aplica as regras de prioridade para estilo
+  if (orientacaoIniciador) {
+    if (comunicacaoDireto || posturaControlador) {
+      return "ESTRUTURADOR"; // Regras 13 e 14
+    }
+    if (comunicacaoInformativo || posturaMovimentador) {
+      return "INAUGURADOR"; // Regras 15 e 16
+    }
+    // Regra 12: ORIENTAÇÃO INICIADOR -> ESTRUTURADOR ou INAUGURADOR
+    return Math.random() > 0.5 ? "ESTRUTURADOR" : "INAUGURADOR";
+  }
+
+  if (orientacaoRespondedor) {
+    if (comunicacaoInformativo || posturaControlador) {
+      return "BASTIDOR"; // Regras 17 e 18
+    }
+    if (comunicacaoDireto || posturaMovimentador) {
+      return "FINALIZADOR"; // Regras 19 e 20
+    }
+    // Regra 11: ORIENTAÇÃO RESPONDEDOR -> FINALIZADOR ou BASTIDOR
+    return Math.random() > 0.5 ? "FINALIZADOR" : "BASTIDOR";
+  }
+
+  // Se nenhuma regra se aplicar, usa o cálculo original
+  const countEstruturador = 
+    (orientacao === 'INICIADOR' ? 1 : 0) + 
+    (postura === 'CONTROLADOR' ? 1 : 0) + 
+    (comunicacao === 'DIRETO' ? 1 : 0);
+  
+  const countInaugurador = 
+    (orientacao === 'INICIADOR' ? 1 : 0) + 
+    (postura === 'MOVIMENTADOR' ? 1 : 0) + 
+    (comunicacao === 'INFORMATIVO' ? 1 : 0);
+  
+  const countFinalizador = 
+    (orientacao === 'RESPONDEDOR' ? 1 : 0) + 
+    (postura === 'MOVIMENTADOR' ? 1 : 0) + 
+    (comunicacao === 'DIRETO' ? 1 : 0);
+  
+  const countBastidor = 
+    (orientacao === 'RESPONDEDOR' ? 1 : 0) + 
+    (postura === 'CONTROLADOR' ? 1 : 0) + 
+    (comunicacao === 'INFORMATIVO' ? 1 : 0);
+  
+  if (countEstruturador >= 2) return "ESTRUTURADOR";
+  if (countInaugurador >= 2) return "INAUGURADOR";
+  if (countFinalizador >= 2) return "FINALIZADOR";
+  if (countBastidor >= 2) return "BASTIDOR";
+  
+  return "INDEFINIDO";
+}
+
+// Função auxiliar para contar respostas
+function contarRespostas(respostas) {
+  const contagem = {};
+  Object.values(respostas).forEach(valor => {
+    contagem[valor] = (contagem[valor] || 0) + 1;
+  });
+  return contagem;
+}
+
+
+// Função genérica para calcular resultado de uma dicotomia com base na maioria (metade + 1)
+function calcularResultadoDicotomia(respostas, totalPerguntas) {
+  const contagem = {};
+  Object.values(respostas).forEach(valor => {
+    contagem[valor] = (contagem[valor] || 0) + 1;
+  });
+
+  const maioria = Math.floor(totalPerguntas / 2) + 1;
+  for (const chave in contagem) {
+    if (contagem[chave] >= maioria) {
+      return chave;
+    }
+  }
+  return "INDEFINIDO";
+}
+
+</script>
 </body>
 </html>
