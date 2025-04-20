@@ -1457,9 +1457,26 @@ function mostrarDestoantes(tipo) {
     }
 
     // Inicialização - garantir que a página inicial esteja ativa ao carregar
-    document.addEventListener('DOMContentLoaded', function() {
-      showTab('inicio');
-    });
+    
+document.addEventListener('DOMContentLoaded', function() {
+  // Esconde todos os conteúdos
+  document.querySelectorAll('.content').forEach(content => {
+    content.style.display = 'none';
+  });
+
+  // Mostra somente a aba inicial
+  const inicioTab = document.getElementById('inicio');
+  if (inicioTab) {
+    inicioTab.style.display = 'block';
+  }
+
+  // Ativa visualmente a aba inicial
+  const tabInicio = Array.from(document.querySelectorAll('.tab')).find(tab => tab.getAttribute('onclick') === "showTab('inicio')");
+  if (tabInicio) {
+    tabInicio.classList.add('active-tab');
+  }
+});
+    
   </script>
 </body>
 </html>
