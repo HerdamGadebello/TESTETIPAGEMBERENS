@@ -436,7 +436,7 @@
     .type-text {
       font-size: 18px;
       line-height: 1.7;
-      text-align: center;
+      text-align: justify;
       display: none;
       transition: var(--transicao);
     }
@@ -589,7 +589,7 @@
       <button onclick="responderOrientacao(4, 'RESPONDEDOR', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoOrientacao"></div>
+    <div id="resultadoOrientacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
 
   <div id="postura" class="content">
@@ -640,7 +640,7 @@
       <button onclick="responderPostura(4, 'CONTROLADOR', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoPostura"></div>
+    <div id="resultadoPostura">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
 
   <div id="enfoque" class="content">
@@ -709,7 +709,7 @@
       <button onclick="responderEnfoque(6, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoEnfoque"></div>
+    <div id="resultadoEnfoque">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
 
   <div id="organizacao" class="content">
@@ -778,7 +778,7 @@
       <button onclick="responderOrganizacao(6, 'ESTRUTURADO', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoOrganizacao"></div>
+    <div id="resultadoOrganizacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
 
   <div id="comunicacao" class="content">
@@ -829,7 +829,7 @@
       <button onclick="responderComunicacao(4, 'DIRETO', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoComunicacao"></div>
+    <div id="resultadoComunicacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
 
   <div id="interpretacao" class="content">
@@ -898,7 +898,7 @@
       <button onclick="responderInterpretacao(6, 'ABSTRATO', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoInterpretacao"></div>
+    <div id="resultadoInterpretacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
 
   <div id="resultado" class="content">
@@ -1243,135 +1243,122 @@
 
     // Função para calcular o resultado de uma dicotomia
     function calcularResultadoDicotomia(respostas, dicotomia) {
-  const valores = Object.values(respostas);
-  const contagem = {};
-
-  valores.forEach(valor => {
-    contagem[valor] = (contagem[valor] || 0) + 1;
-  });
-
-  // Encontrar o valor mais frequente
-  let maisFrequente = null;
-  let maiorContagem = 0;
-
-  for (const [valor, quantidade] of Object.entries(contagem)) {
-    if (quantidade > maiorContagem) {
-      maisFrequente = valor;
-      maiorContagem = quantidade;
+      const valores = Object.values(respostas);
+      const contagem = {};
+      
+      // Contar ocorrências de cada valor
+      valores.forEach(valor => {
+        contagem[valor] = (contagem[valor] || 0) + 1;
+      });
+      
+      // Determinar o valor necessário para definir o resultado (metade + 1)
+      const minimo = Math.ceil(totalPerguntas[dicotomia] / 2) + 1;
+      
+      // Verificar se algum valor atingiu o mínimo
+      for (const [valor, quantidade] of Object.entries(contagem)) {
+        if (quantidade >= minimo) {
+          return valor;
+        }
+      }
+      
+      return null; // Retorna null se nenhum valor atingiu o mínimo
     }
-  }
 
-  return maisFrequente;
-}
-
-// Função para calcular o estilo (ESTRUTURADOR, INAUGURADOR, FINALIZADOR, BASTIDOR) - ATUALIZADA COM AS NOVAS REGRAS
-function calcularEstilo() {
-  const orientacao = resultados.orientacao;
-  const postura = resultados.postura;
-  const comunicacao = resultados.comunicacao;
-  
-  // Contagem de respostas para cada dicotomia
-  const contagemOrientacao = contarRespostas(respostasOrientacao);
-  const contagemPostura = contarRespostas(respostasPostura);
-  const contagemComunicacao = contarRespostas(respostasComunicacao);
-
-  // Verifica se há predominância em ORIENTAÇÃO (4+ respostas)
-  const orientacaoIniciador = contagemOrientacao['INICIADOR'] >= 4;
-  const orientacaoRespondedor = contagemOrientacao['RESPONDEDOR'] >= 4;
-  
-  // Verifica se há predominância em POSTURA (4+ respostas)
-  const posturaControlador = contagemPostura['CONTROLADOR'] >= 4;
-  const posturaMovimentador = contagemPostura['MOVIMENTADOR'] >= 4;
-  
-  // Verifica se há predominância em COMUNICAÇÃO (4+ respostas)
-  const comunicacaoDireto = contagemComunicacao['DIRETO'] >= 4;
-  const comunicacaoInformativo = contagemComunicacao['INFORMATIVO'] >= 4;
-
-  // Aplica as regras de prioridade para estilo
-  if (orientacaoIniciador) {
-    if (comunicacaoDireto || posturaControlador) {
-      return "ESTRUTURADOR"; // Regras 13 e 14
+    // Função para atualizar o resultado de uma dicotomia
+    function atualizarResultado(dicotomia, elementoId) {
+      const resultado = calcularResultadoDicotomia(
+        dicotomia === 'orientacao' ? respostasOrientacao :
+        dicotomia === 'postura' ? respostasPostura :
+        dicotomia === 'enfoque' ? respostasEnfoque :
+        dicotomia === 'organizacao' ? respostasOrganizacao :
+        dicotomia === 'comunicacao' ? respostasComunicacao :
+        respostasInterpretacao,
+        dicotomia
+      );
+      
+      resultados[dicotomia] = resultado;
+      
+      const elemento = document.getElementById(elementoId);
+      if (resultado) {
+        elemento.innerHTML = `RESULTADO: ${resultado}`;
+      } else {
+        elemento.innerHTML = `PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span>`;
+      }
     }
-    if (comunicacaoInformativo || posturaMovimentador) {
-      return "INAUGURADOR"; // Regras 15 e 16
+
+    function responderOrientacao(index, resposta, button) {
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      button.classList.add('selected');
+      respostasOrientacao[index] = resposta;
+      atualizarResultado('orientacao', 'resultadoOrientacao');
     }
-    // Regra 12: ORIENTAÇÃO INICIADOR -> ESTRUTURADOR ou INAUGURADOR
-    return Math.random() > 0.5 ? "ESTRUTURADOR" : "INAUGURADOR";
-  }
 
-  if (orientacaoRespondedor) {
-    if (comunicacaoInformativo || posturaControlador) {
-      return "BASTIDOR"; // Regras 17 e 18
+    function responderPostura(index, resposta, button) {
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      button.classList.add('selected');
+      respostasPostura[index] = resposta;
+      atualizarResultado('postura', 'resultadoPostura');
     }
-    if (comunicacaoDireto || posturaMovimentador) {
-      return "FINALIZADOR"; // Regras 19 e 20
+
+    function responderEnfoque(index, resposta1, resposta2, button) {
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      button.classList.add('selected');
+      
+      // Determina a resposta com base no texto do botão
+      const resposta = button.textContent === 'CONCORDO' ? resposta1 : resposta2;
+      respostasEnfoque[index] = resposta;
+      atualizarResultado('enfoque', 'resultadoEnfoque');
     }
-    // Regra 11: ORIENTAÇÃO RESPONDEDOR -> FINALIZADOR ou BASTIDOR
-    return Math.random() > 0.5 ? "FINALIZADOR" : "BASTIDOR";
-  }
 
-  // Se nenhuma regra se aplicar, usa o cálculo original
-  const countEstruturador = 
-    (orientacao === 'INICIADOR' ? 1 : 0) + 
-    (postura === 'CONTROLADOR' ? 1 : 0) + 
-    (comunicacao === 'DIRETO' ? 1 : 0);
-  
-  const countInaugurador = 
-    (orientacao === 'INICIADOR' ? 1 : 0) + 
-    (postura === 'MOVIMENTADOR' ? 1 : 0) + 
-    (comunicacao === 'INFORMATIVO' ? 1 : 0);
-  
-  const countFinalizador = 
-    (orientacao === 'RESPONDEDOR' ? 1 : 0) + 
-    (postura === 'MOVIMENTADOR' ? 1 : 0) + 
-    (comunicacao === 'DIRETO' ? 1 : 0);
-  
-  const countBastidor = 
-    (orientacao === 'RESPONDEDOR' ? 1 : 0) + 
-    (postura === 'CONTROLADOR' ? 1 : 0) + 
-    (comunicacao === 'INFORMATIVO' ? 1 : 0);
-  
-  if (countEstruturador >= 2) return "ESTRUTURADOR";
-  if (countInaugurador >= 2) return "INAUGURADOR";
-  if (countFinalizador >= 2) return "FINALIZADOR";
-  if (countBastidor >= 2) return "BASTIDOR";
-  
-  return "INDEFINIDO";
-}
-
-// Função auxiliar para contar respostas
-function contarRespostas(respostas) {
-  const contagem = {};
-  Object.values(respostas).forEach(valor => {
-    contagem[valor] = (contagem[valor] || 0) + 1;
-  });
-  return contagem;
-}
-
-
-// Função genérica para calcular resultado de uma dicotomia com base na maioria (metade + 1)
-function calcularResultadoDicotomia(respostas, dicotomia) {
-  const valores = Object.values(respostas);
-  const contagem = {};
-
-  valores.forEach(valor => {
-    contagem[valor] = (contagem[valor] || 0) + 1;
-  });
-
-  // Encontrar o valor mais frequente
-  let maisFrequente = null;
-  let maiorContagem = 0;
-
-  for (const [valor, quantidade] of Object.entries(contagem)) {
-    if (quantidade > maiorContagem) {
-      maisFrequente = valor;
-      maiorContagem = quantidade;
+    function responderOrganizacao(index, resposta, button) {
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      button.classList.add('selected');
+      respostasOrganizacao[index] = resposta;
+      atualizarResultado('organizacao', 'resultadoOrganizacao');
     }
-  }
 
-  return maisFrequente;
-}
+    function responderComunicacao(index, resposta, button) {
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      button.classList.add('selected');
+      respostasComunicacao[index] = resposta;
+      atualizarResultado('comunicacao', 'resultadoComunicacao');
+    }
 
-</script>
+    function responderInterpretacao(index, resposta, button) {
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      button.classList.add('selected');
+      respostasInterpretacao[index] = resposta;
+      atualizarResultado('interpretacao', 'resultadoInterpretacao');
+    }
+
+    // Inicialização - garantir que a página inicial esteja ativa ao carregar
+    document.addEventListener('DOMContentLoaded', function() {
+      showTab('inicio');
+    });
+  </script>
 </body>
 </html>
