@@ -1433,6 +1433,29 @@ function mostrarDestoantes(tipo) {
     document.addEventListener('DOMContentLoaded', function() {
       showTab('inicio');
     });
-  </script>
+  <script>
+  function showTab(tabId) {
+    // Remove 'active' de todas as abas
+    const tabs = document.querySelectorAll('.content');
+    tabs.forEach(tab => tab.classList.remove('active'));
+
+    // Adiciona 'active' à aba selecionada
+    const selectedTab = document.getElementById(tabId);
+    if (selectedTab) {
+      selectedTab.classList.add('active');
+    }
+
+    // Atualiza o estilo das abas na barra de navegação
+    const navTabs = document.querySelectorAll('.tab');
+    navTabs.forEach(navTab => navTab.classList.remove('active-tab'));
+    const activeNavTab = Array.from(navTabs).find(navTab => navTab.getAttribute('onclick') === `showTab('${tabId}')`);
+    if (activeNavTab) {
+      activeNavTab.classList.add('active-tab');
+    }
+  }
+
+  // Exibe a aba inicial ao carregar a página
+  showTab('inicio');
+</script>
 </body>
 </html>
