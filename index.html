@@ -1046,36 +1046,36 @@
 
     // Função para mostrar as abas
     
-    function showTab(tabId) {
-      // Remove a classe 'active-tab' de todas as abas
-      document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.remove('active-tab');
-      });
+function showTab(tabId) {
+  // Remover 'active-tab' de todas as abas
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.classList.remove('active-tab');
+  });
 
-      // Adiciona a classe 'active-tab' à aba clicada
-      const clickedTab = document.querySelector(`.tab[onclick="showTab('${tabId}')"]`);
-      if (clickedTab) {
-        clickedTab.classList.add('active-tab');
-      }
+  // Adicionar 'active-tab' à aba clicada
+  const clickedTab = Array.from(document.querySelectorAll('.tab')).find(tab => tab.getAttribute('onclick') === `showTab('${tabId}')`);
+  if (clickedTab) {
+    clickedTab.classList.add('active-tab');
+  }
 
-      // Esconde todos os conteúdos
-      document.querySelectorAll('.content').forEach(content => {
-        content.style.display = 'none';
-        content.classList.remove('active');
-      });
+  // Esconder todos os conteúdos
+  document.querySelectorAll('.content').forEach(content => {
+    content.style.display = 'none';
+  });
 
-      // Mostra o conteúdo da aba clicada
-      const contentToShow = document.getElementById(tabId);
-      if (contentToShow) {
-        contentToShow.style.display = 'block';
-        contentToShow.classList.add('active');
-      }
+  // Mostrar conteúdo da aba selecionada
+  const contentToShow = document.getElementById(tabId);
+  if (contentToShow) {
+    contentToShow.style.display = 'block';
+  }
 
-      // Se for a aba de resultado, atualiza os resultados
-      if (tabId === 'resultado') {
-        calcularResultados();
-      }
-    }
+  // Se for resultado, calcular
+  if (tabId === 'resultado') {
+    calcularResultados();
+    const tipo = document.getElementById("typeResult").textContent;
+    mostrarDestoantes(tipo);
+  }
+}
     );
       
       // Adiciona a classe 'active-tab' apenas à aba clicada
