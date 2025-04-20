@@ -1046,11 +1046,41 @@
 
     // Função para mostrar as abas
     
+
 function showTab(tabId) {
-  // Remover 'active-tab' de todas as abas
+  // Remove a classe 'active-tab' de todas as abas
   document.querySelectorAll('.tab').forEach(tab => {
     tab.classList.remove('active-tab');
   });
+
+  // Ativa a aba clicada
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => {
+    const onclickAttr = tab.getAttribute('onclick');
+    if (onclickAttr && onclickAttr.includes(tabId)) {
+      tab.classList.add('active-tab');
+    }
+  });
+
+  // Esconde todas as seções de conteúdo
+  document.querySelectorAll('.content').forEach(content => {
+    content.style.display = 'none';
+  });
+
+  // Exibe a aba correspondente
+  const contentToShow = document.getElementById(tabId);
+  if (contentToShow) {
+    contentToShow.style.display = 'block';
+  }
+
+  // Se for resultado, calcula
+  if (tabId === 'resultado') {
+    calcularResultados();
+    const tipo = document.getElementById("typeResult").textContent;
+    mostrarDestoantes(tipo);
+  }
+}
+    );
 
   // Adicionar 'active-tab' à aba clicada
   const clickedTab = Array.from(document.querySelectorAll('.tab')).find(tab => tab.getAttribute('onclick') === `showTab('${tabId}')`);
@@ -1458,11 +1488,28 @@ function mostrarDestoantes(tipo) {
 
     // Inicialização - garantir que a página inicial esteja ativa ao carregar
     
+
 document.addEventListener('DOMContentLoaded', function() {
-  // Esconde todos os conteúdos
+  // Oculta todas as abas
   document.querySelectorAll('.content').forEach(content => {
     content.style.display = 'none';
   });
+
+  // Mostra a aba inicial
+  const inicioTab = document.getElementById('inicio');
+  if (inicioTab) {
+    inicioTab.style.display = 'block';
+  }
+
+  // Marca a aba inicial como ativa
+  const tabInicio = Array.from(document.querySelectorAll('.tab')).find(tab =>
+    tab.getAttribute('onclick') === "showTab('inicio')"
+  );
+  if (tabInicio) {
+    tabInicio.classList.add('active-tab');
+  }
+});
+    
 
   // Mostra somente a aba inicial
   const inicioTab = document.getElementById('inicio');
