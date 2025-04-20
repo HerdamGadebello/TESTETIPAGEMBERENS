@@ -436,7 +436,7 @@
     .type-text {
       font-size: 18px;
       line-height: 1.7;
-      text-align: justify;
+      text-align: center;
       display: none;
       transition: var(--transicao);
     }
@@ -589,7 +589,7 @@
       <button onclick="responderOrientacao(4, 'RESPONDEDOR', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoOrientacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
+    <div id="resultadoOrientacao"><script>document.currentScript.parentElement.innerText = calcularResultadoDicotomia(respostasOrientacao, 5);</script></div>
   </div>
 
   <div id="postura" class="content">
@@ -640,7 +640,7 @@
       <button onclick="responderPostura(4, 'CONTROLADOR', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoPostura">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
+    <div id="resultadoPostura"><script>document.currentScript.parentElement.innerText = calcularResultadoDicotomia(respostasPostura, 5);</script></div>
   </div>
 
   <div id="enfoque" class="content">
@@ -709,7 +709,7 @@
       <button onclick="responderEnfoque(6, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoEnfoque">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
+    <div id="resultadoEnfoque"><script>document.currentScript.parentElement.innerText = calcularResultadoDicotomia(respostasEnfoque, 7);</script></div>
   </div>
 
   <div id="organizacao" class="content">
@@ -778,7 +778,7 @@
       <button onclick="responderOrganizacao(6, 'ESTRUTURADO', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoOrganizacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
+    <div id="resultadoOrganizacao"><script>document.currentScript.parentElement.innerText = calcularResultadoDicotomia(respostasOrganizacao, 7);</script></div>
   </div>
 
   <div id="comunicacao" class="content">
@@ -829,7 +829,7 @@
       <button onclick="responderComunicacao(4, 'DIRETO', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoComunicacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
+    <div id="resultadoComunicacao"><script>document.currentScript.parentElement.innerText = calcularResultadoDicotomia(respostasComunicacao, 5);</script></div>
   </div>
 
   <div id="interpretacao" class="content">
@@ -898,7 +898,7 @@
       <button onclick="responderInterpretacao(6, 'ABSTRATO', this)">DISCORDO</button>
     </div>
 
-    <div id="resultadoInterpretacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
+    <div id="resultadoInterpretacao"><script>document.currentScript.parentElement.innerText = calcularResultadoDicotomia(respostasInterpretacao, 7);</script></div>
   </div>
 
   <div id="resultado" class="content">
@@ -1552,6 +1552,24 @@ function contarRespostas(respostas) {
   });
   return contagem;
 }
+
+
+// Função genérica para calcular resultado de uma dicotomia com base na maioria (metade + 1)
+function calcularResultadoDicotomia(respostas, totalPerguntas) {
+  const contagem = {};
+  Object.values(respostas).forEach(valor => {
+    contagem[valor] = (contagem[valor] || 0) + 1;
+  });
+
+  const maioria = Math.floor(totalPerguntas / 2) + 1;
+  for (const chave in contagem) {
+    if (contagem[chave] >= maioria) {
+      return chave;
+    }
+  }
+  return "INDEFINIDO";
+}
+
 </script>
 </body>
 </html>
