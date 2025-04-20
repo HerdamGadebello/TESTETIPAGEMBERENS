@@ -1028,6 +1028,8 @@
 
     // Função para mostrar as abas
     function showTab(tabId) {
+      console.log(`showTab chamado com tabId: ${tabId}`); // Log para depuração
+
       // Remove a classe 'active-tab' de todas as abas
       document.querySelectorAll('.tab').forEach(tab => {
         tab.classList.remove('active-tab');
@@ -1039,6 +1041,9 @@
       );
       if (clickedTab) {
         clickedTab.classList.add('active-tab');
+        console.log(`Aba ativa: ${clickedTab.textContent}`);
+      } else {
+        console.warn(`Aba com tabId '${tabId}' não encontrada`);
       }
 
       // Oculta todos os conteúdos e remove a classe 'active'
@@ -1047,11 +1052,14 @@
         content.style.display = 'none';
       });
 
-      // Mostra o conteúdo da aba selecionada e adiciona a classe 'active'
+      // Mostra o conteúdo da aba selecionada
       const contentToShow = document.getElementById(tabId);
       if (contentToShow) {
         contentToShow.classList.add('active');
         contentToShow.style.display = 'block';
+        console.log(`Conteúdo exibido: ${tabId}`);
+      } else {
+        console.error(`Elemento com id '${tabId}' não encontrado`);
       }
 
       // Se for a aba de resultado, calcula os resultados
@@ -1397,4 +1405,59 @@
       atualizarResultado('orientacao', 'resultadoOrientacao');
     }
 
-    function responderPostura(index, resposta, button)
+    function responderPostura(index, resposta, button) {
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      button.classList.add('selected');
+      respostasPostura[index] = resposta;
+      atualizarResultado('postura', 'resultadoPostura');
+    }
+
+    function responderEnfoque(index, resposta, button) {
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      button.classList.add('selected');
+      respostasEnfoque[index] = resposta;
+      atualizarResultado('enfoque', 'resultadoEnfoque');
+    }
+
+    function responderOrganizacao(index, resposta, button) {
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      button.classList.add('selected');
+      respostasOrganizacao[index] = resposta;
+      atualizarResultado('organizacao', 'resultadoOrganizacao');
+    }
+
+    function responderComunicacao(index, resposta, button) {
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      button.classList.add('selected');
+      respostasComunicacao[index] = resposta;
+      atualizarResultado('comunicacao', 'resultadoComunicacao');
+    }
+
+    function responderInterpretacao(index, resposta, button) {
+      const container = button.parentElement;
+      container.querySelectorAll('button').forEach(b => {
+        b.classList.remove('selected');
+      });
+      
+      button.classList.add('selected');
+      respostasInterpretacao[index] = resposta;
+      atualizarResultado('interpretacao', 'resultadoInterpretacao');
+    }
+
+    // Inicializa a aba inicial
