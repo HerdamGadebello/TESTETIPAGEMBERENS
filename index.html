@@ -513,7 +513,20 @@
         animation: none !important;
       }
     }
-  </style>
+  
+.destoante-box {
+  background-color: #FFD700;
+  color: black;
+  padding: 15px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-family: 'Aharoni', sans-serif;
+  text-align: center;
+  margin-bottom: 15px;
+  box-shadow: var(--sombra);
+}
+
+</style>
 </head>
 <body>
 
@@ -922,6 +935,8 @@
     <div class="type-box" id="typeResult">-</div>
     
     <div class="type-details" id="typeDetails">
+<div id="destoantesContainer" style="margin: 20px auto; max-width: 800px;"></div>
+
       <div class="type-image">
         <img id="typeImage" src="" alt="Tipo de personalidade">
       </div>
@@ -1205,7 +1220,56 @@
       return possiveisTipos.length > 0 ? possiveisTipos[0] : "INDEFINIDO";
     }
 
-    // Função para calcular todos os resultados
+    
+// Adicionando função para verificar dicotomias destoantes com base no tipo
+function mostrarDestoantes(tipo) {
+  const gabarito = {
+    ESTJ: ["CONCRETO", "AFILIATIVO", "ESTRUTURADO", "DIRETO", "INICIADOR", "CONTROLADOR"],
+    ESFJ: ["CONCRETO", "AFILIATIVO", "ESTRUTURADO", "INFORMATIVO", "INICIADOR", "MOVIMENTADOR"],
+    ISTJ: ["CONCRETO", "AFILIATIVO", "ESTRUTURADO", "DIRETO", "RESPONDEDOR", "MOVIMENTADOR"],
+    ISFJ: ["CONCRETO", "AFILIATIVO", "ESTRUTURADO", "INFORMATIVO", "RESPONDEDOR", "CONTROLADOR"],
+    ESTP: ["CONCRETO", "PRAGMÁTICO", "INTERESSADO", "DIRETO", "INICIADOR", "CONTROLADOR"],
+    ESFP: ["CONCRETO", "PRAGMÁTICO", "INTERESSADO", "INFORMATIVO", "INICIADOR", "MOVIMENTADOR"],
+    ISTP: ["CONCRETO", "PRAGMÁTICO", "INTERESSADO", "DIRETO", "RESPONDEDOR", "MOVIMENTADOR"],
+    ISFP: ["CONCRETO", "PRAGMÁTICO", "INTERESSADO", "INFORMATIVO", "RESPONDEDOR", "CONTROLADOR"],
+    ENTJ: ["ABSTRATO", "PRAGMÁTICO", "ESTRUTURADO", "DIRETO", "INICIADOR", "CONTROLADOR"],
+    ENTP: ["ABSTRATO", "PRAGMÁTICO", "ESTRUTURADO", "INFORMATIVO", "INICIADOR", "MOVIMENTADOR"],
+    INTJ: ["ABSTRATO", "PRAGMÁTICO", "ESTRUTURADO", "DIRETO", "RESPONDEDOR", "MOVIMENTADOR"],
+    INTP: ["ABSTRATO", "PRAGMÁTICO", "ESTRUTURADO", "INFORMATIVO", "RESPONDEDOR", "CONTROLADOR"],
+    ENFJ: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "DIRETO", "INICIADOR", "CONTROLADOR"],
+    ENFP: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "INFORMATIVO", "INICIADOR", "MOVIMENTADOR"],
+    INFJ: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "DIRETO", "RESPONDEDOR", "MOVIMENTADOR"],
+    INFP: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "INFORMATIVO", "RESPONDEDOR", "MOVIMENTADOR"]
+  };
+
+  const dicotomiasUsuario = [
+    resultados.interpretacao,
+    resultados.enfoque,
+    resultados.organizacao,
+    resultados.comunicacao,
+    resultados.orientacao,
+    resultados.postura
+  ];
+
+  const container = document.getElementById("destoantesContainer");
+  container.innerHTML = ""; // limpa conteúdo anterior
+
+  if (!tipo || !gabarito[tipo]) return;
+
+  const dicotomiasEsperadas = gabarito[tipo];
+
+  for (let i = 0; i < dicotomiasEsperadas.length; i++) {
+    if (dicotomiasUsuario[i] && dicotomiasUsuario[i] !== dicotomiasEsperadas[i]) {
+      const div = document.createElement("div");
+      div.className = "destoante-box";
+      div.innerHTML = "<strong>DICOTOMIA DESTOANTE:</strong> " + dicotomiasUsuario[i];
+      container.appendChild(div);
+    }
+  }
+}
+
+
+// Função para calcular todos os resultados
     function calcularResultados() {
       // Calcula temperamento, estilo e orientação
       const temperamento = calcularTemperamento();
@@ -1251,15 +1315,25 @@
         contagem[valor] = (contagem[valor] || 0) + 1;
       });
       
-      // Determinar o valor necessário para definir o resultado (metade + 1)
-      const minimo = Math.ceil(totalPerguntas[dicotomia] / 2) + 1;
-      
+      // Verificar a quantidade mínima necessária (4 para 7 perguntas, 3 para 5 perguntas)
+      let minimo;
+      if (totalPerguntas[dicotomia] === 7) {
+        minimo = 4;
+      } else if (totalPerguntas[dicotomia] === 5) {
+        minimo = 3;
+      } else {
+        minimo = Math.ceil(totalPerguntas[dicotomia] / 2) + 1;
+      }
+
       // Verificar se algum valor atingiu o mínimo
       for (const [valor, quantidade] of Object.entries(contagem)) {
         if (quantidade >= minimo) {
           return valor;
         }
       }
+      
+      return null; // Retorna null se nenhum valor atingiu o mínimo
+    }
       
       return null; // Retorna null se nenhum valor atingiu o mínimo
     }
