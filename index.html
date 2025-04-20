@@ -648,8 +648,8 @@
       <p class="pergunta-texto">Com frequência sou chamado(a) de "ovelha negra" da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(0, 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(0, 'AFILIATIVO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(0, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(0, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
     </div>
 
     <div class="pergunta-container">
@@ -657,8 +657,8 @@
       <p class="pergunta-texto">Costumo me sentir desconfortável em ambientes de trabalho muito competitivos, com metas rígidas e cobranças constantes; esse tipo de clima acaba me desgastando bastante.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(1, 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(1, 'PRAGMÁTICO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(1, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(1, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
     </div>
 
     <div class="pergunta-container">
@@ -666,8 +666,8 @@
       <p class="pergunta-texto">Sou uma pessoa bastante amistosa, gosto de participar dos rolês com os amigos e detesto gente monossilábica. Até porque se eu não estou interessado em conversar com alguém, tento dar um jeito menos babaca de sair da conversa.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(2, 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(2, 'PRAGMÁTICO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(2, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(2, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
     </div>
 
     <div class="pergunta-container">
@@ -675,8 +675,8 @@
       <p class="pergunta-texto">Não gosto muito de fazer "a social", sou péssimo em fingir ser sociável com pessoas que não me interessam.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(3, 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(3, 'AFILIATIVO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(3, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(3, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
     </div>
 
     <div class="pergunta-container">
@@ -684,8 +684,8 @@
       <p class="pergunta-texto">Quando meus amigos ou familiares escolhem fazer algo em um lugar onde eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(4, 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(4, 'AFILIATIVO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(4, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(4, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
     </div>
 
     <div class="pergunta-container">
@@ -693,8 +693,8 @@
       <p class="pergunta-texto">Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(5, 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(5, 'AFILIATIVO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(5, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(5, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
     </div>
 
     <div class="pergunta-container">
@@ -702,8 +702,8 @@
       <p class="pergunta-texto">Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa, isso me ajuda a ver se ela está sendo receptiva ou não com o que eu estou falando.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(6, 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(6, 'PRAGMÁTICO', this)">DISCORDO</button>
+      <button onclick="responderEnfoque(6, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(6, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
     </div>
 
     <div id="resultadoEnfoque"></div>
@@ -771,8 +771,8 @@
       <p class="pergunta-texto">Sou adepto ao ditado "o combinado não sai caro", afinal se a pessoa é adulta, ela é responsável e consciente das próprias ações.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderOrganizacao(6, 'ESTRUTURADO', this)">CONCORDO</button>
-      <button onclick="responderOrganizacao(6, 'INTERESSADO', this)">DISCORDO</button>
+      <button onclick="responderOrganizacao(6, 'INTERESSADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(6, 'ESTRUTURADO', this)">DISCORDO</button>
     </div>
 
     <div id="resultadoOrganizacao"></div>
@@ -1022,7 +1022,7 @@
       },
       "INFP": {
         title: "O CURANDEIRO",
-        text: "Linda Berens caracteriza o INFP como 'Curadores' - tipos autênticos e compassivos guiados por seus valores internos. Como Idealistas (NF), são tecelões de significado, transformando experiências em narrativas que inspiram crescimento pessoal e social.\n\nSua profundidade emocional (Introverted Feeling dominante) os torna mediadores naturais de conflitos humanos, embora possam evitar confronto direto. Precisem desenvolver assertividade (Função Inferior: Extraverted Thinking) para defender suas causas sem perder sua sensibilidade característica."
+        text: "Linda Berens caracteriza o INFP como 'Curadores' - tipos autênticos e compassivos guiados por seus valores internos. Como Idealistas (NF), são tecelões de significado, transformando experiências em narrativas que inspiram crescimento pessoal e social.\n\nSua profundidade emocional (Introverted Feeling dominante) os torna mediadores naturais de conflitos humanos, embora possam evitar confronto direto. Precisam desenvolver assertividade (Função Inferior: Extraverted Thinking) para defender suas causas sem perder sua sensibilidade característica."
       }
     };
 
@@ -1033,7 +1033,7 @@
         tab.classList.remove('active-tab');
       });
       
-      // Adiciona a classe 'active-tab' à aba clicada
+      // Adiciona a classe 'active-tab' apenas à aba clicada
       const clickedTab = document.querySelector(`.tab[onclick="showTab('${tabId}')"]`);
       if (clickedTab) {
         clickedTab.classList.add('active-tab');
@@ -1041,14 +1041,12 @@
       
       // Oculta todos os conteúdos
       document.querySelectorAll('.content').forEach(content => {
-        content.classList.remove('active');
         content.style.display = 'none';
       });
       
-      // Mostra o conteúdo da aba clicada
+      // Mostra apenas o conteúdo da aba clicada
       const contentToShow = document.getElementById(tabId);
       if (contentToShow) {
-        contentToShow.classList.add('active');
         contentToShow.style.display = 'block';
       }
       
@@ -1085,175 +1083,113 @@
       }
     }
 
-    // Função para contar respostas
-    function contarRespostas(respostas) {
-      const contagem = {};
-      Object.values(respostas).forEach(valor => {
-        contagem[valor] = (contagem[valor] || 0) + 1;
-      });
-      return contagem;
-    }
-
-    // Função para calcular o temperamento
+    // Função para calcular o temperamento (SJ, SP, NT, NF)
     function calcularTemperamento() {
       const interpretacao = resultados.interpretacao;
       const enfoque = resultados.enfoque;
       const organizacao = resultados.organizacao;
       
-      const contagemEnfoque = contarRespostas(respostasEnfoque);
-      const contagemInterpretacao = contarRespostas(respostasInterpretacao);
-      const contagemOrganizacao = contarRespostas(respostasOrganizacao);
-
-      const enfoqueAfiliativo = contagemEnfoque['AFILIATIVO'] >= 4;
-      const enfoquePragmatico = contagemEnfoque['PRAGMÁTICO'] >= 4;
-      const interpretacaoAbstrato = contagemInterpretacao['ABSTRATO'] >= 4;
-      const interpretacaoConcreto = contagemInterpretacao['CONCRETO'] >= 4;
-      const organizacaoInteressado = contagemOrganizacao['INTERESSADO'] >= 4;
-      const organizacaoEstruturado = contagemOrganizacao['ESTRUTURADO'] >= 4;
-
-      if (enfoqueAfiliativo) {
-        if (interpretacaoAbstrato) return "NF";
-        if (interpretacaoConcreto) return "SJ";
-        if (organizacaoInteressado) return "NF";
-        return "SJ";
-      }
-
-      if (enfoquePragmatico) {
-        if (interpretacaoAbstrato) return "NT";
-        if (interpretacaoConcreto) return "SP";
-        if (organizacaoEstruturado) return "NT";
-        return "SP";
-      }
-
-      if (organizacaoInteressado) {
-        if (interpretacaoAbstrato) return "NF";
-        if (interpretacaoConcreto) return "SP";
-        return Math.random() > 0.5 ? "NF" : "SP";
-      }
-
-      if (organizacaoEstruturado) {
-        if (interpretacaoAbstrato) return "NT";
-        if (interpretacaoConcreto) return "SJ";
-        return Math.random() > 0.5 ? "SJ" : "NT";
-      }
-
-      if (interpretacaoAbstrato) {
-        return enfoque === 'AFILIATIVO' ? "NF" : "NT";
-      }
-
-      if (interpretacaoConcreto) {
-        return enfoque === 'PRAGMÁTICO' ? "SP" : "SJ";
-      }
-
+      // Verifica SJ (AFILIATIVO, ESTRUTURADO e CONCRETO)
       const countSJ = 
         (enfoque === 'AFILIATIVO' ? 1 : 0) + 
         (organizacao === 'ESTRUTURADO' ? 1 : 0) + 
         (interpretacao === 'CONCRETO' ? 1 : 0);
       
+      // Verifica SP (CONCRETO, PRAGMÁTICO e INTERESSADO)
       const countSP = 
         (interpretacao === 'CONCRETO' ? 1 : 0) + 
         (enfoque === 'PRAGMÁTICO' ? 1 : 0) + 
         (organizacao === 'INTERESSADO' ? 1 : 0);
       
+      // Verifica NT (ABSTRATO, PRAGMÁTICO e INTERESSADO)
       const countNT = 
         (interpretacao === 'ABSTRATO' ? 1 : 0) + 
         (enfoque === 'PRAGMÁTICO' ? 1 : 0) + 
         (organizacao === 'INTERESSADO' ? 1 : 0);
       
+      // Verifica NF (ABSTRATO, AFILIATIVO e INTERESSADO)
       const countNF = 
         (interpretacao === 'ABSTRATO' ? 1 : 0) + 
         (enfoque === 'AFILIATIVO' ? 1 : 0) + 
         (organizacao === 'INTERESSADO' ? 1 : 0);
       
+      // Determina o temperamento com base nos resultados
       if (countSJ >= 2) return "SJ";
       if (countSP >= 2) return "SP";
       if (countNT >= 2) return "NT";
       if (countNF >= 2) return "NF";
-      
       return "INDEFINIDO";
     }
 
-    // Função para calcular o estilo
+    // Função para calcular o estilo (ESTRUTURADOR, INAUGURADOR, FINALIZADOR, BASTIDOR)
     function calcularEstilo() {
       const orientacao = resultados.orientacao;
       const postura = resultados.postura;
       const comunicacao = resultados.comunicacao;
       
-      const contagemOrientacao = contarRespostas(respostasOrientacao);
-      const contagemPostura = contarRespostas(respostasPostura);
-      const contagemComunicacao = contarRespostas(respostasComunicacao);
-
-      const orientacaoIniciador = contagemOrientacao['INICIADOR'] >= 3;
-      const orientacaoRespondedor = contagemOrientacao['RESPONDEDOR'] >= 3;
-      const posturaControlador = contagemPostura['CONTROLADOR'] >= 3;
-      const posturaMovimentador = contagemPostura['MOVIMENTADOR'] >= 3;
-      const comunicacaoDireto = contagemComunicacao['DIRETO'] >= 3;
-      const comunicacaoInformativo = contagemComunicacao['INFORMATIVO'] >= 3;
-
-      if (orientacaoIniciador) {
-        if (comunicacaoDireto || posturaControlador) return "ESTRUTURADOR";
-        if (comunicacaoInformativo || posturaMovimentador) return "INAUGURADOR";
-        return Math.random() > 0.5 ? "ESTRUTURADOR" : "INAUGURADOR";
-      }
-
-      if (orientacaoRespondedor) {
-        if (comunicacaoInformativo || posturaControlador) return "BASTIDOR";
-        if (comunicacaoDireto || posturaMovimentador) return "FINALIZADOR";
-        return Math.random() > 0.5 ? "FINALIZADOR" : "BASTIDOR";
-      }
-
+      // Verifica ESTRUTURADOR (INICIADOR, CONTROLADOR e DIRETO)
       const countEstruturador = 
         (orientacao === 'INICIADOR' ? 1 : 0) + 
         (postura === 'CONTROLADOR' ? 1 : 0) + 
         (comunicacao === 'DIRETO' ? 1 : 0);
       
+      // Verifica INAUGURADOR (INICIADOR, MOVIMENTADOR e INFORMATIVO)
       const countInaugurador = 
         (orientacao === 'INICIADOR' ? 1 : 0) + 
         (postura === 'MOVIMENTADOR' ? 1 : 0) + 
         (comunicacao === 'INFORMATIVO' ? 1 : 0);
       
+      // Verifica FINALIZADOR (RESPONDEDOR, MOVIMENTADOR e DIRETO)
       const countFinalizador = 
         (orientacao === 'RESPONDEDOR' ? 1 : 0) + 
         (postura === 'MOVIMENTADOR' ? 1 : 0) + 
         (comunicacao === 'DIRETO' ? 1 : 0);
       
+      // Verifica BASTIDOR (RESPONDEDOR, CONTROLADOR e INFORMATIVO)
       const countBastidor = 
         (orientacao === 'RESPONDEDOR' ? 1 : 0) + 
         (postura === 'CONTROLADOR' ? 1 : 0) + 
         (comunicacao === 'INFORMATIVO' ? 1 : 0);
       
+      // Determina o estilo com base nos resultados
       if (countEstruturador >= 2) return "ESTRUTURADOR";
       if (countInaugurador >= 2) return "INAUGURADOR";
       if (countFinalizador >= 2) return "FINALIZADOR";
       if (countBastidor >= 2) return "BASTIDOR";
-      
       return "INDEFINIDO";
     }
 
     // Função para determinar o tipo de personalidade final
     function determinarTipoPersonalidade(temperamento, estilo, orientacao) {
+      // Mapeamento de tipos de personalidade
       const tipos = {
+        // SJ
         "SJ-ESTRUTURADOR-INICIADOR": "ESTJ",
         "SJ-INAUGURADOR-INICIADOR": "ESFJ",
         "SJ-FINALIZADOR-RESPONDEDOR": "ISTJ",
         "SJ-BASTIDOR-RESPONDEDOR": "ISFJ",
+        // SP
         "SP-ESTRUTURADOR-INICIADOR": "ESTP",
         "SP-INAUGURADOR-INICIADOR": "ESFP",
         "SP-FINALIZADOR-RESPONDEDOR": "ISTP",
         "SP-BASTIDOR-RESPONDEDOR": "ISFP",
+        // NT
         "NT-ESTRUTURADOR-INICIADOR": "ENTJ",
         "NT-INAUGURADOR-INICIADOR": "ENTP",
         "NT-FINALIZADOR-RESPONDEDOR": "INTJ",
         "NT-BASTIDOR-RESPONDEDOR": "INTP",
+        // NF
         "NF-ESTRUTURADOR-INICIADOR": "ENFJ",
         "NF-INAUGURADOR-INICIADOR": "ENFP",
         "NF-FINALIZADOR-RESPONDEDOR": "INFJ",
         "NF-BASTIDOR-RESPONDEDOR": "INFP"
       };
 
+      // Tenta encontrar correspondência exata
       const chaveExata = `${temperamento}-${estilo}-${orientacao}`;
       if (tipos[chaveExata]) return tipos[chaveExata];
 
+      // Se não encontrar, tenta ignorar a orientação
       const chaveSemOrientacao = `${temperamento}-${estilo}`;
       const possiveisTipos = [];
       for (const [key, value] of Object.entries(tipos)) {
@@ -1262,22 +1198,27 @@
         }
       }
 
+      // Retorna o primeiro tipo encontrado ou INDEFINIDO
       return possiveisTipos.length > 0 ? possiveisTipos[0] : "INDEFINIDO";
     }
 
     // Função para calcular todos os resultados
     function calcularResultados() {
+      // Calcula temperamento, estilo e orientação
       const temperamento = calcularTemperamento();
       const estilo = calcularEstilo();
       const orientacao = resultados.orientacao;
       
+      // Atualiza os resultados na tela
       document.getElementById('temperamentoResult').textContent = temperamento || "-";
       document.getElementById('estiloResult').textContent = estilo || "-";
       document.getElementById('orientacaoResult').textContent = orientacao || "-";
       
+      // Determina o tipo de personalidade final
       const tipoPersonalidade = determinarTipoPersonalidade(temperamento, estilo, orientacao);
       document.getElementById('typeResult').textContent = tipoPersonalidade || "-";
       
+      // Mostra a imagem e descrição correspondente
       const typeInfo = typeDescriptions[tipoPersonalidade] || { 
         title: "Tipo não identificado", 
         text: "Complete todas as dicotomias para obter seu resultado" 
@@ -1286,31 +1227,48 @@
       document.getElementById('typeTitle').textContent = typeInfo.title;
       document.getElementById('typeText').textContent = typeInfo.text;
       
+      // Carrega a imagem correspondente
       carregarImagemTipo(tipoPersonalidade);
     }
 
-    // Função para calcular o resultado de uma dicotomia
-    function calcularResultadoDicotomia(respostas, totalPerguntas) {
+    // Função para calcular o resultado de uma dicotomia (CORRIGIDA)
+    function calcularResultadoDicotomia(respostas, dicotomia) {
+      const valores = Object.values(respostas);
+      if (valores.length === 0) return null;
+      
       const contagem = {};
-      Object.values(respostas).forEach(valor => {
+      
+      // Contar ocorrências de cada valor
+      valores.forEach(valor => {
         contagem[valor] = (contagem[valor] || 0) + 1;
       });
       
-      // Define o limite com base no número de perguntas
-      const minimo = totalPerguntas === 5 ? 3 : 4;
+      // Determinar o valor com mais respostas
+      let resultado = null;
+      let maxContagem = 0;
       
       for (const [valor, quantidade] of Object.entries(contagem)) {
-        if (quantidade >= minimo) {
-          return valor;
+        if (quantidade > maxContagem) {
+          maxContagem = quantidade;
+          resultado = valor;
         }
+      }
+      
+      // Verificar se temos respostas suficientes (maioria simples)
+      const totalRespostas = valores.length;
+      const totalPerguntasDicotomia = totalPerguntas[dicotomia];
+      
+      // Se respondemos pelo menos metade + 1 perguntas, podemos definir o resultado
+      if (totalRespostas >= Math.ceil(totalPerguntasDicotomia / 2)) {
+        return resultado;
       }
       
       return null;
     }
 
-    // Função para atualizar o resultado de uma dicotomia
+    // Função para atualizar o resultado de uma dicotomia (CORRIGIDA)
     function atualizarResultado(dicotomia, elementoId) {
-      const respostas = 
+      const respostasDicotomia = 
         dicotomia === 'orientacao' ? respostasOrientacao :
         dicotomia === 'postura' ? respostasPostura :
         dicotomia === 'enfoque' ? respostasEnfoque :
@@ -1318,14 +1276,14 @@
         dicotomia === 'comunicacao' ? respostasComunicacao :
         respostasInterpretacao;
       
-      const resultado = calcularResultadoDicotomia(respostas, totalPerguntas[dicotomia]);
+      const resultado = calcularResultadoDicotomia(respostasDicotomia, dicotomia);
       resultados[dicotomia] = resultado;
       
       const elemento = document.getElementById(elementoId);
       if (resultado) {
         elemento.innerHTML = `RESULTADO: ${resultado}`;
       } else {
-        elemento.innerHTML = `PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span>`;
+        elemento.innerHTML = `RESPONDA MAIS PERGUNTAS<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span>`;
       }
     }
 
@@ -1351,13 +1309,16 @@
       atualizarResultado('postura', 'resultadoPostura');
     }
 
-    function responderEnfoque(index, resposta, button) {
+    function responderEnfoque(index, resposta1, resposta2, button) {
       const container = button.parentElement;
       container.querySelectorAll('button').forEach(b => {
         b.classList.remove('selected');
       });
       
       button.classList.add('selected');
+      
+      // Determina a resposta com base no texto do botão
+      const resposta = button.textContent === 'CONCORDO' ? resposta1 : resposta2;
       respostasEnfoque[index] = resposta;
       atualizarResultado('enfoque', 'resultadoEnfoque');
     }
@@ -1395,7 +1356,7 @@
       atualizarResultado('interpretacao', 'resultadoInterpretacao');
     }
 
-    // Inicialização
+    // Inicialização - garantir que a página inicial esteja ativa ao carregar
     document.addEventListener('DOMContentLoaded', function() {
       showTab('inicio');
     });
