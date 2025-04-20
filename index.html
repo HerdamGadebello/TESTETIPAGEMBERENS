@@ -111,7 +111,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .active {
+    .content.active {
       display: block;
     }
 
@@ -142,13 +142,13 @@
       margin: 20px 0;
       position: relative;
       padding-left: 50px;
-      text-align: center; /* Centraliza o texto da pergunta */
+      text-align: center;
     }
 
     .numero-pergunta {
       position: absolute;
       left: 0;
-      top: -20px; /* Ajuste a posição para cima */
+      top: -20px;
       width: 36px;
       height: 36px;
       background-color: var(--cor-numero);
@@ -166,7 +166,7 @@
       font-size: 16px;
       margin: 0;
       font-family: 'Aharoni', sans-serif;
-      text-align: center; /* Centraliza o texto da pergunta */
+      text-align: center;
       line-height: 1.6;
       transition: var(--transicao);
       padding: 5px 0;
@@ -446,7 +446,6 @@
       transform: translateZ(5px);
     }
 
-    /* Efeito de profundidade para os containers */
     .content > div:not(.title):not(.button-container) {
       transition: var(--transicao);
     }
@@ -455,7 +454,6 @@
       transform: translateZ(5px);
     }
 
-    /* Melhorias para mobile */
     @media (max-width: 768px) {
       .type-details {
         flex-direction: column;
@@ -498,7 +496,6 @@
       }
     }
 
-    /* Acessibilidade - reduzir movimento para quem preferir */
     @media (prefers-reduced-motion) {
       .content,
       button,
@@ -530,7 +527,7 @@
     </div>
   </div>
 
-  <div id="inicio" class="content">
+  <div id="inicio" class="content active">
     <div class="title">Página Inicial</div>
     <p>Este teste é resultado do aprendizado adquirido durante o Curso de Tipagem, ministrado por @RobertaBernardon com base na teoria de Linda Berens.</p>
     
@@ -748,7 +745,7 @@
     </div>
     <div class="button-container">
       <button onclick="responderOrganizacao(3, 'ESTRUTURADO', this)">CONCORDO</button>
-      <button onclick="responderOrganizacao(3, 'INTERESSADO', this)">DISCORDO</showTab('resultado')</button>
+      <button onclick="responderOrganizacao(3, 'INTERESSADO', this)">DISCORDO</button>
     </div>
 
     <div class="pergunta-container">
@@ -822,7 +819,7 @@
 
     <div class="pergunta-container">
       <div class="numero-pergunta">5</div>
-      <p class="pergunta-texto">Com frequência sou mal interpretado pelas pessoas, acho que é porque eu costumo oscilar muito sutilmente na minha forma de falar_relationships, às vezes começo falando sério, depois faço graça e ironizo e isso acaba meio que "bugando" as pessoas.</p>
+      <p class="pergunta-texto">Com frequência sou mal interpretado pelas pessoas, acho que é porque eu costumo oscilar muito sutilmente na minha forma de falar, às vezes começo falando sério, depois faço graça e ironizo e isso acaba meio que "bugando" as pessoas.</p>
     </div>
     <div class="button-container">
       <button onclick="responderComunicacao(4, 'INFORMATIVO', this)">CONCORDO</button>
@@ -965,7 +962,7 @@
     const typeDescriptions = {
       "ESTJ": {
         title: "O JUIZ",
-        text: "Linda Berens descreve o ESTJ como um tipo executor, voltado para ordem, eficiência e resultados (com Thinking Extravertido dominante). Como parte do temperamento Guardião (SJ), valoriza regras, estabilidade e experiências comprovadas (usando Introverted Sensing como função auxiliar).\n\nLíderes natos em ambientes estruturados, os ESTJs são decisivos e confiáveis, mas podem parecer inflexíveis quando negligenciam aspectos emocionais (sua função inferior é Introverted Feeling). Eles brilham ao implementar sistemas e manter padrões, embora precisem desenvolver equilíbrio entre pragmatismo e empatia."
+        text: "Linda Berens descreve o ESTJ como um tipo executor, voltado para ordem, eficiência e resultados (com Thinking Extravertido dominante). Como parte do temperamento Guardião (SJ), valoriza regras, estabilidade e experiências comprovadas (usando Introverted Sensing como função auxiliar).\n\nLíderes natos em ambientes estruturados, os stacji são decisivos e confiáveis, mas podem parecer inflexíveis quando negligenciam aspectos emocionais (sua função inferior é Introverted Feeling). Eles brilham ao implementar sistemas e manter padrões, embora precisem desenvolver equilíbrio entre pragmatismo e empatia."
       },
       "ESFJ": {
         title: "O CAVALEIRO",
@@ -1035,24 +1032,28 @@
       document.querySelectorAll('.tab').forEach(tab => {
         tab.classList.remove('active-tab');
       });
-      
-      // Adiciona a classe 'active-tab' apenas à aba clicada
-      const clickedTab = document.querySelector(`.tab[onclick="showTab('${tabId}')"]`);
+
+      // Adiciona a classe 'active-tab' à aba clicada
+      const clickedTab = Array.from(document.querySelectorAll('.tab')).find(tab => 
+        tab.getAttribute('onclick') === `showTab('${tabId}')`
+      );
       if (clickedTab) {
         clickedTab.classList.add('active-tab');
       }
-      
-      // Oculta todos os conteúdos
+
+      // Oculta todos os conteúdos e remove a classe 'active'
       document.querySelectorAll('.content').forEach(content => {
+        content.classList.remove('active');
         content.style.display = 'none';
       });
-      
-      // Mostra apenas o conteúdo da aba clicada
+
+      // Mostra o conteúdo da aba selecionada e adiciona a classe 'active'
       const contentToShow = document.getElementById(tabId);
       if (contentToShow) {
+        contentToShow.classList.add('active');
         contentToShow.style.display = 'block';
       }
-      
+
       // Se for a aba de resultado, calcula os resultados
       if (tabId === 'resultado') {
         calcularResultados();
@@ -1329,7 +1330,7 @@
       const tipoPersonalidade = determinarTipoPersonalidade(temperamento, estilo, orientacao);
       document.getElementById('typeResult').textContent = tipoPersonalidade || "-";
       
-      // Mostra a imagem e descrição correspondente
+      // Mostra a descrição correspondente
       const typeInfo = typeDescriptions[tipoPersonalidade] || { 
         title: "Tipo não identificado", 
         text: "Complete todas as dicotomias para obter seu resultado" 
@@ -1396,23 +1397,4 @@
       atualizarResultado('orientacao', 'resultadoOrientacao');
     }
 
-    function responderPostura(index, resposta, button) {
-      const container = button.parentElement;
-      container.querySelectorAll('button').forEach(b => {
-        b.classList.remove('selected');
-      });
-      
-      button.classList.add('selected');
-      respostasPostura[index] = resposta;
-      atualizarResultado('postura', 'resultadoPostura');
-    }
-
-    function responderEnfoque(index, resposta, button) {
-      const container = button.parentElement;
-      container.querySelectorAll('button').forEach(b => {
-        b.classList.remove('selected');
-      });
-      
-      button.classList.add('selected');
-      respostasEnfoque[index] = resposta;
-      atualizarResultado('enfoque', 'resultado
+    function responderPostura(index, resposta, button)
