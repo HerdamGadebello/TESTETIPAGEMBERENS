@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8"/>
-<title>Teste de Tipagem</title>
-<style>
+  <meta charset="UTF-8" />
+  <title>Teste de Tipagem</title>
+  <style>
     :root {
       --cor-primaria: #1c7c5a;
       --cor-secundaria: #931c55;
@@ -101,11 +100,16 @@
       background-color: white;
     }
 
-    .content {
-      display: none;
-      padding: 25px 20px;
-      animation: fadeIn 0.5s ease-out;
-    }
+    
+.content {
+  display: none;
+  padding: 25px 20px;
+  animation: fadeIn 0.5s ease-out;
+}
+.content.active {
+  display: block;
+}
+
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -530,367 +534,425 @@
 </style>
 </head>
 <body>
-<div class="navbar">
-<div class="navbar-container">
-<div class="tab" onclick="showTab('inicio')">PÁGINA INICIAL</div>
-<div class="tab" onclick="showTab('orientacao')">DICOTOMIA ORIENTAÇÃO</div>
-<div class="tab" onclick="showTab('postura')">DICOTOMIA POSTURA</div>
-<div class="tab" onclick="showTab('enfoque')">DICOTOMIA ENFOQUE</div>
-<div class="tab" onclick="showTab('organizacao')">DICOTOMIA ORGANIZAÇÃO</div>
-<div class="tab" onclick="showTab('comunicacao')">DICOTOMIA COMUNICAÇÃO</div>
-<div class="tab" onclick="showTab('interpretacao')">DICOTOMIA INTERPRETAÇÃO</div>
-<div class="tab" onclick="showTab('resultado')">RESULTADO TIPOLÓGICO</div>
-</div>
-</div>
-<div class="content" id="inicio" style="display: block;">
-<div class="title">Página Inicial</div>
-<p>Este teste é resultado do aprendizado adquirido durante o Curso de Tipagem, ministrado por @RobertaBernardon com base na teoria de Linda Berens.</p>
-<div class="logo-container">
-<img alt="ALLTYPES" src="ALLTYPES.png"/>
-</div>
-<p class="footer-text">TESTE ORGANIZADO E PRODUZIDO POR HERMES DAMIÃO BELLO</p>
-</div>
-<div class="content" id="orientacao" style="display: none;">
-<div class="title">DICOTOMIA ORIENTAÇÃO</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">1</div>
-<p class="pergunta-texto">Geralmente durante uma conversa, quando algo me vem à cabeça, não consigo me conter e acabo interrompendo a outra pessoa para falar sobre isso.</p>
-</div>
-<div class="button-container">
-<button onclick="responderOrientacao(0, 'INICIADOR', this)">CONCORDO</button>
-<button onclick="responderOrientacao(0, 'RESPONDEDOR', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">2</div>
-<p class="pergunta-texto">Quase sempre não me importo se alguém está desinformado sobre algo, não é meu problema se ela está desatualizada.</p>
-</div>
-<div class="button-container">
-<button onclick="responderOrientacao(1, 'RESPONDEDOR', this)">CONCORDO</button>
-<button onclick="responderOrientacao(1, 'INICIADOR', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">3</div>
-<p class="pergunta-texto">Usualmente durante uma conversa, prefiro terminar minha linha de pensamento, extraindo o que é possível sobre o tema, não gosto de mudança repentina de assunto.</p>
-</div>
-<div class="button-container">
-<button onclick="responderOrientacao(2, 'RESPONDEDOR', this)">CONCORDO</button>
-<button onclick="responderOrientacao(2, 'INICIADOR', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">4</div>
-<p class="pergunta-texto">Minha maior tendência é escutar o que os outros têm a me dizer, é natural para mim guardar e processar o que me dizem antes de expor o que eu penso.</p>
-</div>
-<div class="button-container">
-<button onclick="responderOrientacao(3, 'RESPONDEDOR', this)">CONCORDO</button>
-<button onclick="responderOrientacao(3, 'INICIADOR', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">5</div>
-<p class="pergunta-texto">Geralmente sou muito inquieto, tenho uma propensão de participar ativamente das coisas, adoro compartilhar assuntos, participar de conversas e frequentemente não percebo que posso estar incomodando.</p>
-</div>
-<div class="button-container">
-<button onclick="responderOrientacao(4, 'INICIADOR', this)">CONCORDO</button>
-<button onclick="responderOrientacao(4, 'RESPONDEDOR', this)">DISCORDO</button>
-</div>
-<div id="resultadoOrientacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
-</div>
-<div class="content" id="postura" style="display: none;">
-<div class="title">DICOTOMIA POSTURA</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">1</div>
-<p class="pergunta-texto">Tenho uma certa impaciência, prefiro fazer as coisas, dar andamento às coisas ao invés de ficar aguardando.</p>
-</div>
-<div class="button-container">
-<button onclick="responderPostura(0, 'MOVIMENTADOR', this)">CONCORDO</button>
-<button onclick="responderPostura(0, 'CONTROLADOR', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">2</div>
-<p class="pergunta-texto">Tendo a ser mais flexível, isso me ajuda a adaptar minhas ações conforme os problemas forem surgindo, isso me faz ser melhor contornando obstáculos do percurso.</p>
-</div>
-<div class="button-container">
-<button onclick="responderPostura(1, 'MOVIMENTADOR', this)">CONCORDO</button>
-<button onclick="responderPostura(1, 'CONTROLADOR', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">3</div>
-<p class="pergunta-texto">Sou uma pessoa que preza pelo primor, na escola meus cadernos eram muito caprichados, meu estojo tinha cores de caneta para cada parte do texto.</p>
-</div>
-<div class="button-container">
-<button onclick="responderPostura(2, 'CONTROLADOR', this)">CONCORDO</button>
-<button onclick="responderPostura(2, 'MOVIMENTADOR', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">4</div>
-<p class="pergunta-texto">Na execução do que deve ser feito tendo a ser mais vagaroso, gasto muito mais tempo refletindo sobre como deve ser feito, assim na hora da execução, o trabalho saia impecável.</p>
-</div>
-<div class="button-container">
-<button onclick="responderPostura(3, 'CONTROLADOR', this)">CONCORDO</button>
-<button onclick="responderPostura(3, 'MOVIMENTADOR', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">5</div>
-<p class="pergunta-texto">Nas apresentações dos trabalhos da escola, eu geralmente não me preparava muito, estudava um pouco antes da aula e improvisava na hora a partir de algumas coisas que eu já sabia.</p>
-</div>
-<div class="button-container">
-<button onclick="responderPostura(4, 'MOVIMENTADOR', this)">CONCORDO</button>
-<button onclick="responderPostura(4, 'CONTROLADOR', this)">DISCORDO</button>
-</div>
-<div id="resultadoPostura">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
-</div>
-<div class="content" id="enfoque" style="display: none;">
-<div class="title">DICOTOMIA ENFOQUE</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">1</div>
-<p class="pergunta-texto">Com frequência sou chamado(a) de "ovelha negra" da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.</p>
-</div>
-<div class="button-container">
-<button onclick="responderEnfoque(0, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
-<button onclick="responderEnfoque(0, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">2</div>
-<p class="pergunta-texto">Costumo me sentir desconfortável em ambientes de trabalho muito competitivos, com metas rígidas e cobranças constantes; esse tipo de clima acaba me desgastando bastante.</p>
-</div>
-<div class="button-container">
-<button onclick="responderEnfoque(1, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
-<button onclick="responderEnfoque(1, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">3</div>
-<p class="pergunta-texto">Sou uma pessoa bastante amistosa, gosto de participar dos rolês com os amigos e detesto gente monossilábica. Até porque se eu não estou interessado em conversar com alguém, tento dar um jeito menos babaca de sair da conversa.</p>
-</div>
-<div class="button-container">
-<button onclick="responderEnfoque(2, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
-<button onclick="responderEnfoque(2, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">4</div>
-<p class="pergunta-texto">Não gosto muito de fazer "a social", sou péssimo em fingir ser sociável com pessoas que não me interessam.</p>
-</div>
-<div class="button-container">
-<button onclick="responderEnfoque(3, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
-<button onclick="responderEnfoque(3, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">5</div>
-<p class="pergunta-texto">Quando meus amigos ou familiares escolhem fazer algo em um lugar onde eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.</p>
-</div>
-<div class="button-container">
-<button onclick="responderEnfoque(4, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
-<button onclick="responderEnfoque(4, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">6</div>
-<p class="pergunta-texto">Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.</p>
-</div>
-<div class="button-container">
-<button onclick="responderEnfoque(5, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
-<button onclick="responderEnfoque(5, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">7</div>
-<p class="pergunta-texto">Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa, isso me ajuda a ver se ela está sendo receptiva ou não com o que eu estou falando.</p>
-</div>
-<div class="button-container">
-<button onclick="responderEnfoque(6, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
-<button onclick="responderEnfoque(6, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
-</div>
-<div id="resultadoEnfoque">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
-</div>
-<div class="content" id="organizacao" style="display: none;">
-<div class="title">DICOTOMIA ORGANIZAÇÃO</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">1</div>
-<p class="pergunta-texto">Eu entendo que as regras existem para que as coisas não virem uma baderna, mas também é necessário particularizar os casos, muitas vezes é preciso afrouxar as estruturas para que acordos benéficos sejam estabelecidos.</p>
-</div>
-<div class="button-container">
-<button onclick="responderOrganizacao(0, 'INTERESSADO', this)">CONCORDO</button>
-<button onclick="responderOrganizacao(0, 'ESTRUTURADO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">2</div>
-<p class="pergunta-texto">Curto manter minha rotina, fazer as coisas que geralmente faço no horário que faço, fico muito estressado quando um imprevisto acontece.</p>
-</div>
-<div class="button-container">
-<button onclick="responderOrganizacao(1, 'ESTRUTURADO', this)">CONCORDO</button>
-<button onclick="responderOrganizacao(1, 'INTERESSADO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">3</div>
-<p class="pergunta-texto">Se o meu trabalho exige que eu siga um protocolo de atendimento, busco sempre o seguir, não costumo abrir exceções a respeito disso.</p>
-</div>
-<div class="button-container">
-<button onclick="responderOrganizacao(2, 'ESTRUTURADO', this)">CONCORDO</button>
-<button onclick="responderOrganizacao(2, 'INTERESSADO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">4</div>
-<p class="pergunta-texto">Às vezes, por buscar garantir que as coisas funcionem, posso soar um pouco ríspido(a) na maneira de tratar as pessoas.</p>
-</div>
-<div class="button-container">
-<button onclick="responderOrganizacao(3, 'ESTRUTURADO', this)">CONCORDO</button>
-<button onclick="responderOrganizacao(3, 'INTERESSADO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">5</div>
-<p class="pergunta-texto">Para mim, justiça é aplicar o que é devido a cada indivíduo, não dá para sair batendo o martelo usando a mesma medida para todo mundo, até porque se uma pessoa furta alimentos para sustentar os filhos, ela não deve sofrer a mesma pena que uma pessoa que roubou por mero desejo e capricho.</p>
-</div>
-<div class="button-container">
-<button onclick="responderOrganizacao(4, 'INTERESSADO', this)">CONCORDO</button>
-<button onclick="responderOrganizacao(4, 'ESTRUTURADO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">6</div>
-<p class="pergunta-texto">Pessoas que moralizam tudo são muito tediosas, penso que se as pessoas envolvidas numa situação não veem problema nela, não tem por que achar ruim.</p>
-</div>
-<div class="button-container">
-<button onclick="responderOrganizacao(5, 'INTERESSADO', this)">CONCORDO</button>
-<button onclick="responderOrganizacao(5, 'ESTRUTURADO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">7</div>
-<p class="pergunta-texto">Sou adepto ao ditado "o combinado não sai caro", afinal se a pessoa é adulta, ela é responsável e consciente das próprias ações.</p>
-</div>
-<div class="button-container">
-<button onclick="responderOrganizacao(6, 'INTERESSADO', this)">CONCORDO</button>
-<button onclick="responderOrganizacao(6, 'ESTRUTURADO', this)">DISCORDO</button>
-</div>
-<div id="resultadoOrganizacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
-</div>
-<div class="content" id="comunicacao" style="display: none;">
-<div class="title">DICOTOMIA COMUNICAÇÃO</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">1</div>
-<p class="pergunta-texto">Gosto de instigar as pessoas quando estou conversando com elas, acho mais interessante fazer um "charminho" ao invés de chegar já deixando claro minhas intenções.</p>
-</div>
-<div class="button-container">
-<button onclick="responderComunicacao(0, 'INFORMATIVO', this)">CONCORDO</button>
-<button onclick="responderComunicacao(0, 'DIRETO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">2</div>
-<p class="pergunta-texto">Minha fala tende a ser mais retilínea, conduzo o que eu falo de maneira mais centrada, raramente me perco ou me embaralho no que estou falando.</p>
-</div>
-<div class="button-container">
-<button onclick="responderComunicacao(1, 'DIRETO', this)">CONCORDO</button>
-<button onclick="responderComunicacao(1, 'INFORMATIVO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">3</div>
-<p class="pergunta-texto">Meus amigos e colegas costumam falar que eu passo muito uma vibe "professor", isso porque eu normalmente trago muito contexto na minha comunicação, e descrevo muito sobre as coisas que falo.</p>
-</div>
-<div class="button-container">
-<button onclick="responderComunicacao(2, 'INFORMATIVO', this)">CONCORDO</button>
-<button onclick="responderComunicacao(2, 'DIRETO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">4</div>
-<p class="pergunta-texto">Detesto fazer rodeios para falar o que eu pretendo, prefiro chegar e já falar o que está acontecendo do que preparar a outra pessoa para receber a informação.</p>
-</div>
-<div class="button-container">
-<button onclick="responderComunicacao(3, 'DIRETO', this)">CONCORDO</button>
-<button onclick="responderComunicacao(3, 'INFORMATIVO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">5</div>
-<p class="pergunta-texto">Com frequência sou mal interpretado pelas pessoas, acho que é porque eu costumo oscilar muito sutilmente na minha forma de falar, às vezes começo falando sério, depois faço graça e ironizo e isso acaba meio que "bugando" as pessoas.</p>
-</div>
-<div class="button-container">
-<button onclick="responderComunicacao(4, 'INFORMATIVO', this)">CONCORDO</button>
-<button onclick="responderComunicacao(4, 'DIRETO', this)">DISCORDO</button>
-</div>
-<div id="resultadoComunicacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
-</div>
-<div class="content" id="interpretacao" style="display: none;">
-<div class="title">DICOTOMIA INTERPRETAÇÃO</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">1</div>
-<p class="pergunta-texto">Tendo a ser uma pessoa mais cética, bem mais pé no chão. Muito raro eu cair nesse papinho de signo e outras coisas afins.</p>
-</div>
-<div class="button-container">
-<button onclick="responderInterpretacao(0, 'CONCRETO', this)">CONCORDO</button>
-<button onclick="responderInterpretacao(0, 'ABSTRATO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">2</div>
-<p class="pergunta-texto">Posso parecer meio acomodado e conformado para as pessoas, mas é que eu gosto de focar mais no que é presente agora. Esse negócio de ir atrás dos sonhos e ideais não cola comigo, nem tudo é possível de se realizar.</p>
-</div>
-<div class="button-container">
-<button onclick="responderInterpretacao(1, 'CONCRETO', this)">CONCORDO</button>
-<button onclick="responderInterpretacao(1, 'ABSTRATO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">3</div>
-<p class="pergunta-texto">Minha inclinação maior é divagar nas coisas que podem acontecer futuramente, penso bastante sobre como pode ser a sociedade do futuro, as novas tecnologias que podem surgir e o que eu poderia estar fazendo nessas novas situações.</p>
-</div>
-<div class="button-container">
-<button onclick="responderInterpretacao(2, 'ABSTRATO', this)">CONCORDO</button>
-<button onclick="responderInterpretacao(2, 'CONCRETO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">4</div>
-<p class="pergunta-texto">Tenho bastante maestria com coisas artesanais, seja em cozinhar, costurar, desenhar, manusear ou de mais artesanatos. Sinto um grande prazer em cada etapa do processo disso.</p>
-</div>
-<div class="button-container">
-<button onclick="responderInterpretacao(3, 'CONCRETO', this)">CONCORDO</button>
-<button onclick="responderInterpretacao(3, 'ABSTRATO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">5</div>
-<p class="pergunta-texto">Costumo ser uma pessoa precavida, é natural para mim elucubrar coisas que podem me acometer e já me preparo mentalmente para lidar com elas.</p>
-</div>
-<div class="button-container">
-<button onclick="responderInterpretacao(4, 'ABSTRATO', this)">CONCORDO</button>
-<button onclick="responderInterpretacao(4, 'CONCRETO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">6</div>
-<p class="pergunta-texto">Meus amigos e familiares frequentemente falam que eu "viajo na maionese", mas é que é muito bacana ficar pensando nas alternativas das coisas, se as coisas fossem de outra maneira, se a história tivesse sido diferente.</p>
-</div>
-<div class="button-container">
-<button onclick="responderInterpretacao(5, 'ABSTRATO', this)">CONCORDO</button>
-<button onclick="responderInterpretacao(5, 'CONCRETO', this)">DISCORDO</button>
-</div>
-<div class="pergunta-container">
-<div class="numero-pergunta">7</div>
-<p class="pergunta-texto">Adoro livros e filmes investigativos e suspense, perceber os cenários de crimes, analisar as inconsistências, prestar atenção nos detalhes e ir associando os materiais. Geralmente eu sou bem assertivo em quem cometeu o crime só observando tudo isso.</p>
-</div>
-<div class="button-container">
-<button onclick="responderInterpretacao(6, 'CONCRETO', this)">CONCORDO</button>
-<button onclick="responderInterpretacao(6, 'ABSTRATO', this)">DISCORDO</button>
-</div>
-<div id="resultadoInterpretacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
-</div>
-<div class="content" id="resultado" style="display: none;">
-<div class="title">RESULTADO TIPOLÓGICO</div>
-<div class="result-container">
-<div class="result-box">
+
+  <div class="navbar">
+    <div class="navbar-container">
+      <div class="tab" onclick="showTab('inicio')">PÁGINA INICIAL</div>
+      <div class="tab" onclick="showTab('orientacao')">DICOTOMIA ORIENTAÇÃO</div>
+      <div class="tab" onclick="showTab('postura')">DICOTOMIA POSTURA</div>
+      <div class="tab" onclick="showTab('enfoque')">DICOTOMIA ENFOQUE</div>
+      <div class="tab" onclick="showTab('organizacao')">DICOTOMIA ORGANIZAÇÃO</div>
+      <div class="tab" onclick="showTab('comunicacao')">DICOTOMIA COMUNICAÇÃO</div>
+      <div class="tab" onclick="showTab('interpretacao')">DICOTOMIA INTERPRETAÇÃO</div>
+      <div class="tab" onclick="showTab('resultado')">RESULTADO TIPOLÓGICO</div>
+    </div>
+  </div>
+
+  <div id="inicio" class="content">
+    <div class="title">Página Inicial</div>
+    <p>Este teste é resultado do aprendizado adquirido durante o Curso de Tipagem, ministrado por @RobertaBernardon com base na teoria de Linda Berens.</p>
+    
+    <div class="logo-container">
+      <img src="ALLTYPES.png" alt="ALLTYPES">
+    </div>
+    
+    <p class="footer-text">TESTE ORGANIZADO E PRODUZIDO POR HERMES DAMIÃO BELLO</p>
+  </div>
+
+  <div id="orientacao" class="content">
+    <div class="title">DICOTOMIA ORIENTAÇÃO</div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">1</div>
+      <p class="pergunta-texto">Geralmente durante uma conversa, quando algo me vem à cabeça, não consigo me conter e acabo interrompendo a outra pessoa para falar sobre isso.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderOrientacao(0, 'INICIADOR', this)">CONCORDO</button>
+      <button onclick="responderOrientacao(0, 'RESPONDEDOR', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">2</div>
+      <p class="pergunta-texto">Quase sempre não me importo se alguém está desinformado sobre algo, não é meu problema se ela está desatualizada.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderOrientacao(1, 'RESPONDEDOR', this)">CONCORDO</button>
+      <button onclick="responderOrientacao(1, 'INICIADOR', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">3</div>
+      <p class="pergunta-texto">Usualmente durante uma conversa, prefiro terminar minha linha de pensamento, extraindo o que é possível sobre o tema, não gosto de mudança repentina de assunto.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderOrientacao(2, 'RESPONDEDOR', this)">CONCORDO</button>
+      <button onclick="responderOrientacao(2, 'INICIADOR', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">4</div>
+      <p class="pergunta-texto">Minha maior tendência é escutar o que os outros têm a me dizer, é natural para mim guardar e processar o que me dizem antes de expor o que eu penso.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderOrientacao(3, 'RESPONDEDOR', this)">CONCORDO</button>
+      <button onclick="responderOrientacao(3, 'INICIADOR', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">5</div>
+      <p class="pergunta-texto">Geralmente sou muito inquieto, tenho uma propensão de participar ativamente das coisas, adoro compartilhar assuntos, participar de conversas e frequentemente não percebo que posso estar incomodando.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderOrientacao(4, 'INICIADOR', this)">CONCORDO</button>
+      <button onclick="responderOrientacao(4, 'RESPONDEDOR', this)">DISCORDO</button>
+    </div>
+
+    <div id="resultadoOrientacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
+  </div>
+
+  <div id="postura" class="content">
+    <div class="title">DICOTOMIA POSTURA</div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">1</div>
+      <p class="pergunta-texto">Tenho uma certa impaciência, prefiro fazer as coisas, dar andamento às coisas ao invés de ficar aguardando.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderPostura(0, 'MOVIMENTADOR', this)">CONCORDO</button>
+      <button onclick="responderPostura(0, 'CONTROLADOR', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">2</div>
+      <p class="pergunta-texto">Tendo a ser mais flexível, isso me ajuda a adaptar minhas ações conforme os problemas forem surgindo, isso me faz ser melhor contornando obstáculos do percurso.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderPostura(1, 'MOVIMENTADOR', this)">CONCORDO</button>
+      <button onclick="responderPostura(1, 'CONTROLADOR', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">3</div>
+      <p class="pergunta-texto">Sou uma pessoa que preza pelo primor, na escola meus cadernos eram muito caprichados, meu estojo tinha cores de caneta para cada parte do texto.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderPostura(2, 'CONTROLADOR', this)">CONCORDO</button>
+      <button onclick="responderPostura(2, 'MOVIMENTADOR', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">4</div>
+      <p class="pergunta-texto">Na execução do que deve ser feito tendo a ser mais vagaroso, gasto muito mais tempo refletindo sobre como deve ser feito, assim na hora da execução, o trabalho saia impecável.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderPostura(3, 'CONTROLADOR', this)">CONCORDO</button>
+      <button onclick="responderPostura(3, 'MOVIMENTADOR', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">5</div>
+      <p class="pergunta-texto">Nas apresentações dos trabalhos da escola, eu geralmente não me preparava muito, estudava um pouco antes da aula e improvisava na hora a partir de algumas coisas que eu já sabia.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderPostura(4, 'MOVIMENTADOR', this)">CONCORDO</button>
+      <button onclick="responderPostura(4, 'CONTROLADOR', this)">DISCORDO</button>
+    </div>
+
+    <div id="resultadoPostura">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
+  </div>
+
+  <div id="enfoque" class="content">
+    <div class="title">DICOTOMIA ENFOQUE</div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">1</div>
+      <p class="pergunta-texto">Com frequência sou chamado(a) de "ovelha negra" da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderEnfoque(0, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(0, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">2</div>
+      <p class="pergunta-texto">Costumo me sentir desconfortável em ambientes de trabalho muito competitivos, com metas rígidas e cobranças constantes; esse tipo de clima acaba me desgastando bastante.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderEnfoque(1, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(1, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">3</div>
+      <p class="pergunta-texto">Sou uma pessoa bastante amistosa, gosto de participar dos rolês com os amigos e detesto gente monossilábica. Até porque se eu não estou interessado em conversar com alguém, tento dar um jeito menos babaca de sair da conversa.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderEnfoque(2, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(2, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">4</div>
+      <p class="pergunta-texto">Não gosto muito de fazer "a social", sou péssimo em fingir ser sociável com pessoas que não me interessam.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderEnfoque(3, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(3, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">5</div>
+      <p class="pergunta-texto">Quando meus amigos ou familiares escolhem fazer algo em um lugar onde eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderEnfoque(4, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(4, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">6</div>
+      <p class="pergunta-texto">Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderEnfoque(5, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(5, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">7</div>
+      <p class="pergunta-texto">Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa, isso me ajuda a ver se ela está sendo receptiva ou não com o que eu estou falando.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderEnfoque(6, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responderEnfoque(6, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
+    </div>
+
+    <div id="resultadoEnfoque">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
+  </div>
+
+  <div id="organizacao" class="content">
+    <div class="title">DICOTOMIA ORGANIZAÇÃO</div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">1</div>
+      <p class="pergunta-texto">Eu entendo que as regras existem para que as coisas não virem uma baderna, mas também é necessário particularizar os casos, muitas vezes é preciso afrouxar as estruturas para que acordos benéficos sejam estabelecidos.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderOrganizacao(0, 'INTERESSADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(0, 'ESTRUTURADO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">2</div>
+      <p class="pergunta-texto">Curto manter minha rotina, fazer as coisas que geralmente faço no horário que faço, fico muito estressado quando um imprevisto acontece.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderOrganizacao(1, 'ESTRUTURADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(1, 'INTERESSADO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">3</div>
+      <p class="pergunta-texto">Se o meu trabalho exige que eu siga um protocolo de atendimento, busco sempre o seguir, não costumo abrir exceções a respeito disso.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderOrganizacao(2, 'ESTRUTURADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(2, 'INTERESSADO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">4</div>
+      <p class="pergunta-texto">Às vezes, por buscar garantir que as coisas funcionem, posso soar um pouco ríspido(a) na maneira de tratar as pessoas.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderOrganizacao(3, 'ESTRUTURADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(3, 'INTERESSADO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">5</div>
+      <p class="pergunta-texto">Para mim, justiça é aplicar o que é devido a cada indivíduo, não dá para sair batendo o martelo usando a mesma medida para todo mundo, até porque se uma pessoa furta alimentos para sustentar os filhos, ela não deve sofrer a mesma pena que uma pessoa que roubou por mero desejo e capricho.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderOrganizacao(4, 'INTERESSADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(4, 'ESTRUTURADO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">6</div>
+      <p class="pergunta-texto">Pessoas que moralizam tudo são muito tediosas, penso que se as pessoas envolvidas numa situação não veem problema nela, não tem por que achar ruim.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderOrganizacao(5, 'INTERESSADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(5, 'ESTRUTURADO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">7</div>
+      <p class="pergunta-texto">Sou adepto ao ditado "o combinado não sai caro", afinal se a pessoa é adulta, ela é responsável e consciente das próprias ações.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderOrganizacao(6, 'INTERESSADO', this)">CONCORDO</button>
+      <button onclick="responderOrganizacao(6, 'ESTRUTURADO', this)">DISCORDO</button>
+    </div>
+
+    <div id="resultadoOrganizacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
+  </div>
+
+  <div id="comunicacao" class="content">
+    <div class="title">DICOTOMIA COMUNICAÇÃO</div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">1</div>
+      <p class="pergunta-texto">Gosto de instigar as pessoas quando estou conversando com elas, acho mais interessante fazer um "charminho" ao invés de chegar já deixando claro minhas intenções.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderComunicacao(0, 'INFORMATIVO', this)">CONCORDO</button>
+      <button onclick="responderComunicacao(0, 'DIRETO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">2</div>
+      <p class="pergunta-texto">Minha fala tende a ser mais retilínea, conduzo o que eu falo de maneira mais centrada, raramente me perco ou me embaralho no que estou falando.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderComunicacao(1, 'DIRETO', this)">CONCORDO</button>
+      <button onclick="responderComunicacao(1, 'INFORMATIVO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">3</div>
+      <p class="pergunta-texto">Meus amigos e colegas costumam falar que eu passo muito uma vibe "professor", isso porque eu normalmente trago muito contexto na minha comunicação, e descrevo muito sobre as coisas que falo.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderComunicacao(2, 'INFORMATIVO', this)">CONCORDO</button>
+      <button onclick="responderComunicacao(2, 'DIRETO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">4</div>
+      <p class="pergunta-texto">Detesto fazer rodeios para falar o que eu pretendo, prefiro chegar e já falar o que está acontecendo do que preparar a outra pessoa para receber a informação.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderComunicacao(3, 'DIRETO', this)">CONCORDO</button>
+      <button onclick="responderComunicacao(3, 'INFORMATIVO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">5</div>
+      <p class="pergunta-texto">Com frequência sou mal interpretado pelas pessoas, acho que é porque eu costumo oscilar muito sutilmente na minha forma de falar, às vezes começo falando sério, depois faço graça e ironizo e isso acaba meio que "bugando" as pessoas.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderComunicacao(4, 'INFORMATIVO', this)">CONCORDO</button>
+      <button onclick="responderComunicacao(4, 'DIRETO', this)">DISCORDO</button>
+    </div>
+
+    <div id="resultadoComunicacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
+  </div>
+
+  <div id="interpretacao" class="content">
+    <div class="title">DICOTOMIA INTERPRETAÇÃO</div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">1</div>
+      <p class="pergunta-texto">Tendo a ser uma pessoa mais cética, bem mais pé no chão. Muito raro eu cair nesse papinho de signo e outras coisas afins.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderInterpretacao(0, 'CONCRETO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(0, 'ABSTRATO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">2</div>
+      <p class="pergunta-texto">Posso parecer meio acomodado e conformado para as pessoas, mas é que eu gosto de focar mais no que é presente agora. Esse negócio de ir atrás dos sonhos e ideais não cola comigo, nem tudo é possível de se realizar.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderInterpretacao(1, 'CONCRETO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(1, 'ABSTRATO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">3</div>
+      <p class="pergunta-texto">Minha inclinação maior é divagar nas coisas que podem acontecer futuramente, penso bastante sobre como pode ser a sociedade do futuro, as novas tecnologias que podem surgir e o que eu poderia estar fazendo nessas novas situações.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderInterpretacao(2, 'ABSTRATO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(2, 'CONCRETO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">4</div>
+      <p class="pergunta-texto">Tenho bastante maestria com coisas artesanais, seja em cozinhar, costurar, desenhar, manusear ou de mais artesanatos. Sinto um grande prazer em cada etapa do processo disso.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderInterpretacao(3, 'CONCRETO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(3, 'ABSTRATO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">5</div>
+      <p class="pergunta-texto">Costumo ser uma pessoa precavida, é natural para mim elucubrar coisas que podem me acometer e já me preparo mentalmente para lidar com elas.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderInterpretacao(4, 'ABSTRATO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(4, 'CONCRETO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">6</div>
+      <p class="pergunta-texto">Meus amigos e familiares frequentemente falam que eu "viajo na maionese", mas é que é muito bacana ficar pensando nas alternativas das coisas, se as coisas fossem de outra maneira, se a história tivesse sido diferente.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderInterpretacao(5, 'ABSTRATO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(5, 'CONCRETO', this)">DISCORDO</button>
+    </div>
+
+    <div class="pergunta-container">
+      <div class="numero-pergunta">7</div>
+      <p class="pergunta-texto">Adoro livros e filmes investigativos e suspense, perceber os cenários de crimes, analisar as inconsistências, prestar atenção nos detalhes e ir associando os materiais. Geralmente eu sou bem assertivo em quem cometeu o crime só observando tudo isso.</p>
+    </div>
+    <div class="button-container">
+      <button onclick="responderInterpretacao(6, 'CONCRETO', this)">CONCORDO</button>
+      <button onclick="responderInterpretacao(6, 'ABSTRATO', this)">DISCORDO</button>
+    </div>
+
+    <div id="resultadoInterpretacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
+  </div>
+
+  <div id="resultado" class="content">
+    <div class="title">RESULTADO TIPOLÓGICO</div>
+    
+    <div class="result-container">
+      <div class="result-box">
         TEMPERAMENTO
         <div class="result-value" id="temperamentoResult">-</div>
-</div>
-<div class="result-box">
+      </div>
+      <div class="result-box">
         ESTILO
         <div class="result-value" id="estiloResult">-</div>
-</div>
-<div class="result-box">
+      </div>
+      <div class="result-box">
         ORIENTAÇÃO
         <div class="result-value" id="orientacaoResult">-</div>
-</div>
-</div>
-<div class="type-box" id="typeResult">-</div>
-<div class="type-details" id="typeDetails">
+      </div>
+    </div>
+    
+    <div class="type-box" id="typeResult">-</div>
+    
+    <div class="type-details" id="typeDetails">
 <div id="destoantesContainer" style="margin: 20px auto; max-width: 800px;"></div>
-<div class="type-image">
-<img alt="Tipo de personalidade" id="typeImage" src=""/>
-</div>
-<div class="type-description">
-<div class="type-title" id="typeTitle"></div>
-<div class="type-text" id="typeText"></div>
-</div>
-</div>
-</div>
-<script>
+
+      <div class="type-image">
+        <img id="typeImage" src="" alt="Tipo de personalidade">
+      </div>
+      <div class="type-description">
+        <div class="type-title" id="typeTitle"></div>
+        <div class="type-text" id="typeText"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
     // Objetos para armazenar respostas
     const respostasOrientacao = {};
     const respostasPostura = {};
@@ -989,60 +1051,30 @@
 
     // Função para mostrar as abas
     
-
 function showTab(tabId) {
-  // Remove a classe 'active-tab' de todas as abas
+  // Remove 'active' de todas as abas
   document.querySelectorAll('.tab').forEach(tab => {
     tab.classList.remove('active-tab');
   });
 
   // Ativa a aba clicada
-  const tabs = document.querySelectorAll('.tab');
-  tabs.forEach(tab => {
-    const onclickAttr = tab.getAttribute('onclick');
-    if (onclickAttr && onclickAttr.includes(tabId)) {
-      tab.classList.add('active-tab');
-    }
+  const currentTab = document.querySelector(`.tab[onclick="showTab('${tabId}')"]`);
+  if (currentTab) {
+    currentTab.classList.add('active-tab');
+  }
+
+  // Esconde todas as seções
+  document.querySelectorAll('.content').forEach(section => {
+    section.classList.remove('active');
   });
 
-  // Esconde todas as seções de conteúdo
-  document.querySelectorAll('.content').forEach(content => {
-    content.style.display = 'none';
-  });
-
-  // Exibe a aba correspondente
-  const contentToShow = document.getElementById(tabId);
-  if (contentToShow) {
-    contentToShow.style.display = 'block';
+  // Mostra a aba correta
+  const target = document.getElementById(tabId);
+  if (target) {
+    target.classList.add('active');
   }
 
-  // Se for resultado, calcula
-  if (tabId === 'resultado') {
-    calcularResultados();
-    const tipo = document.getElementById("typeResult").textContent;
-    mostrarDestoantes(tipo);
-  }
-}
-    );
-
-  // Adicionar 'active-tab' à aba clicada
-  const clickedTab = Array.from(document.querySelectorAll('.tab')).find(tab => tab.getAttribute('onclick') === `showTab('${tabId}')`);
-  if (clickedTab) {
-    clickedTab.classList.add('active-tab');
-  }
-
-  // Esconder todos os conteúdos
-  document.querySelectorAll('.content').forEach(content => {
-    content.style.display = 'none';
-  });
-
-  // Mostrar conteúdo da aba selecionada
-  const contentToShow = document.getElementById(tabId);
-  if (contentToShow) {
-    contentToShow.style.display = 'block';
-  }
-
-  // Se for resultado, calcular
+  // Se for a aba de resultado, executa cálculos
   if (tabId === 'resultado') {
     calcularResultados();
     const tipo = document.getElementById("typeResult").textContent;
@@ -1431,40 +1463,8 @@ function mostrarDestoantes(tipo) {
 
     // Inicialização - garantir que a página inicial esteja ativa ao carregar
     
-
 document.addEventListener('DOMContentLoaded', function() {
-  // Oculta todas as abas
-  document.querySelectorAll('.content').forEach(content => {
-    content.style.display = 'none';
-  });
-
-  // Mostra a aba inicial
-  const inicioTab = document.getElementById('inicio');
-  if (inicioTab) {
-    inicioTab.style.display = 'block';
-  }
-
-  // Marca a aba inicial como ativa
-  const tabInicio = Array.from(document.querySelectorAll('.tab')).find(tab =>
-    tab.getAttribute('onclick') === "showTab('inicio')"
-  );
-  if (tabInicio) {
-    tabInicio.classList.add('active-tab');
-  }
-});
-    
-
-  // Mostra somente a aba inicial
-  const inicioTab = document.getElementById('inicio');
-  if (inicioTab) {
-    inicioTab.style.display = 'block';
-  }
-
-  // Ativa visualmente a aba inicial
-  const tabInicio = Array.from(document.querySelectorAll('.tab')).find(tab => tab.getAttribute('onclick') === "showTab('inicio')");
-  if (tabInicio) {
-    tabInicio.classList.add('active-tab');
-  }
+  showTab('inicio');
 });
     
   </script>
