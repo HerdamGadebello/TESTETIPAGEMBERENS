@@ -96,17 +96,21 @@
 
     .content {
       display: none;
+      opacity: 0;
       padding: 25px 20px;
-      animation: fadeIn 0.5s ease-out;
+      transition: opacity 0.5s ease-out;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .content.active {
       display: block;
+      opacity: 1;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .title {
@@ -292,6 +296,17 @@
       border-top: 1px solid rgba(255,255,255,0.2);
       width: 80%;
       max-width: 500px;
+      text-align: center;
+    }
+
+    .footer-text a {
+      color: white;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .footer-text a:hover {
+      color: #f0f0f0;
     }
 
     .result-container {
@@ -421,8 +436,8 @@
     }
 
     .destoante-box {
-      background-color: #FFD700;
-      color: black;
+      background-color: var(--cor-numero);
+      color: var(--cor-texto-numero);
       padding: 15px;
       border-radius: 10px;
       font-weight: bold;
@@ -489,20 +504,20 @@
 <body>
   <div class="navbar">
     <div class="navbar-container">
-      <div class="tab" onclick="showTab('inicio')">PÁGINA INICIAL</div>
-      <div class="tab" onclick="showTab('orientacao')">DICOTOMIA ORIENTAÇÃO</div>
-      <div class="tab" onclick="showTab('postura')">DICOTOMIA POSTURA</div>
-      <div class="tab" onclick="showTab('enfoque')">DICOTOMIA ENFOQUE</div>
-      <div class="tab" onclick="showTab('organizacao')">DICOTOMIA ORGANIZAÇÃO</div>
-      <div class="tab" onclick="showTab('comunicacao')">DICOTOMIA COMUNICAÇÃO</div>
-      <div class="tab" onclick="showTab('interpretacao')">DICOTOMIA INTERPRETAÇÃO</div>
-      <div class="tab" onclick="showTab('resultado')">RESULTADO TIPOLÓGICO</div>
+      <div class="tab" id="tab-inicio">PÁGINA INICIAL</div>
+      <div class="tab" id="tab-orientacao">DICOTOMIA ORIENTAÇÃO</div>
+      <div class="tab" id="tab-postura">DICOTOMIA POSTURA</div>
+      <div class="tab" id="tab-enfoque">DICOTOMIA ENFOQUE</div>
+      <div class="tab" id="tab-organizacao">DICOTOMIA ORGANIZAÇÃO</div>
+      <div class="tab" id="tab-comunicacao">DICOTOMIA COMUNICAÇÃO</div>
+      <div class="tab" id="tab-interpretacao">DICOTOMIA INTERPRETAÇÃO</div>
+      <div class="tab" id="tab-resultado">RESULTADO TIPOLÓGICO</div>
     </div>
   </div>
 
-  <div id="inicio" class="content">
+  <div id="inicio" class="content active">
     <div class="title">Página Inicial</div>
-    <p>Este teste é resultado do aprendizado adquirido durante o Curso de Tipagem, ministrado por @RobertaBernardon com base na teoria de Linda Berens.</p>
+    <p>Este teste é resultado do aprendizado adquirido durante o Curso de Tipagem, ministrado por <a href="https://www.instagram.com/roberta_bernardon/?igsh=NXdlNXp1em84azNl#" target="_blank">@RobertaBernardon</a> com base na teoria de Linda Berens.</p>
     <div class="logo-container">
       <img src="ALLTYPES.png" alt="ALLTYPES">
     </div>
@@ -602,7 +617,7 @@
   <div id="enfoque" class="content">
     <div class="title">DICOTOMIA ENFOQUE</div>
     <div class="pergunta-container">
-      <div class="numero-pergunta" style="margin-bottom: 20px;">1</div>
+      <div class="numero-pergunta">1</div>
       <p class="pergunta-texto">Com frequência sou chamado(a) de "ovelha negra" da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.</p>
       <div class="button-container">
         <button onclick="responder('enfoque', 0, 'PRAGMÁTICO', this)">CONCORDO</button>
@@ -886,22 +901,70 @@
     };
 
     const typeDescriptions = {
-      "ESTJ": { title: "O JUIZ", text: "Executor, voltado para ordem e eficiência. Líder em ambientes estruturados, valoriza regras e estabilidade, mas pode ser inflexível." },
-      "ESFJ": { title: "O CAVALEIRO", text: "Protetor, focado em harmonia e cuidado. Anfitrião social, atencioso, mas pode ser controlador por buscar aprovação." },
-      "ISTJ": { title: "O ARQUIVISTA", text: "Inspetor, orientado por dever e precisão. Discreto, minucioso, resiste a mudanças abruptas." },
-      "ISFJ": { title: "O DEFENSOR", text: "Leal, atencioso, mantém tradições. Excepcional em criar ambientes acolhedores, precisa expressar próprias necessidades." },
-      "ESTP": { title: "O GLADIADOR", text: "Enérgico, perspicaz, vive o momento. Resolve problemas com pragmatismo, mas precisa planejar a longo prazo." },
-      "ESFP": { title: "O PERFORMADOR", text: "Vibrante, sociável, cria experiências memoráveis. Mediador natural, mas pode negligenciar conflitos profundos." },
-      "ISTP": { title: "O OPERADOR", text: "Independente, analítico, entende sistemas. Solucionador imparcial, mas pode parecer distante emocionalmente." },
-      "ISFP": { title: "O ARTISTA", text: "Sensitivo, autêntico, expressa valores criativamente. Mediador, precisa desenvolver assertividade." },
-      "ENTJ": { title: "O ESTRATEGISTA", text: "Líder estratégico, combina visão e implementação. Organiza sistemas complexos, mas pode negligenciar empatia." },
-      "ENTP": { title: "O VISIONÁRIO", text: "Curioso, inventivo, conecta conceitos. Catalisador de mudanças, precisa de disciplina para implementar." },
-      "INTJ": { title: "O ARQUEIRO", text: "Visionário, analítico, cria sistemas eficazes. Antecipa tendências, precisa equilibrar idealismo e realismo." },
-      "INTP": { title: "O SÁBIO", text: "Analítico, decifra realidade com lógica. Explora padrões, precisa aplicar ideias no mundo real." },
-      "ENFJ": { title: "O CLÉRIGO", text: "Carismático, persuasivo, ativa potencial. Líder transformacional, precisa equilibrar otimismo e confronto." },
-      "ENFP": { title: "O BARDO", text: "Entusiasta, criativo, vê possibilidades. Inspira mudanças, precisa de disciplina para implementar." },
-      "INFJ": { title: "O PALADINO", text: "Profundo, combina insight e propósito. Traduz intuições em orientações, precisa de realismo prático." },
-      "INFP": { title: "O CURANDEIRO", text: "Autêntico, compassivo, guiado por valores. Transforma experiências em narrativas, precisa de assertividade." }
+      "ESTJ": { 
+        title: "O JUIZ", 
+        text: "Linda Berens descreve o ESTJ como um tipo executor, voltado para ordem, eficiência e resultados (com Thinking Extravertido dominante). Como parte do temperamento Guardião (SJ), valoriza regras, estabilidade e experiências comprovadas (usando Introverted Sensing como função auxiliar). Líderes natos em ambientes estruturados, os ESTJs são decisivos e confiáveis, mas podem parecer inflexíveis quando negligenciam aspectos emocionais (sua função inferior é Introverted Feeling). Eles brilham ao implementar sistemas e manter padrões, embora precisem desenvolver equilíbrio entre pragmatismo e empatia."
+      },
+      "ESFJ": { 
+        title: "O CAVALEIRO", 
+        text: "Linda Berens caracteriza o ESFJ como um tipo protetor, voltado para harmonia, cuidado e responsabilidade social (com Feeling Extravertido dominante). Integrante do temperamento Guardião (SJ), valoriza tradições, segurança e bem-estar coletivo (usando Introverted Sensing como função auxiliar). Anfitriões natos em ambientes sociais, os ESFJs são atenciosos e cooperativos, mas podem ser percebidos como controladores quando excessivamente preocupados com aprovação alheia (sua função inferior é Introverted Thinking). Eles se destacam ao criar vínculos e manter estruturas de apoio, embora precisem equilibrar altruísmo com autoproteção."
+      },
+      "ISTJ": { 
+        title: "O ARQUIVISTA", 
+        text: "Linda Berens descreve o ISTJ como um tipo inspetor, orientado por dever, precisão e fatos concretos (com Introverted Thinking dominante). Como parte do temperamento Guardião (SJ), valoriza procedimentos comprovados, responsabilidade e sistemas confiáveis (usando Extraverted Sensing como função auxiliar). Executores discretos e minuciosos, os ISTJs são mestres em manter estruturas e cumprir prazos, mas podem ser vistos como inflexíveis quando resistem a mudanças abruptas (sua função inferior é Extraverted Intuition). Eles brilham em funções que exigem atenção a detalhes e preservação de padrões, enquanto trabalham para desenvolver maior abertura ao novo."
+      },
+      "ISFJ": { 
+        title: "O DEFENSOR", 
+        text: "Linda Berens descreve o ISFJ como um tipo defensor, orientado por Introverted Sensing (Si) dominante – sua memória afetiva e atenção a detalhes concretos. Como Guardião (SJ), valoriza harmonia, dever e cuidado prático (Função Auxiliar: Extraverted Feeling - Fe). Protetores naturais, os ISFJs antecipam necessidades alheias com discreta eficiência. Seu desafio está na Função Inferior: Extraverted Intuition (Ne) – podem resistir a mudanças abruptas ou teorias abstratas, preferindo o conhecido. Quando sob estresse, tendem a catastrofizar possibilidades."
+      },
+      "ESTP": { 
+        title: "O GLADIADOR", 
+        text: "Linda Berens descreve o ESTP como um tipo explorador, impulsionado por Extraverted Sensing (Se) dominante – sua capacidade de agir rapidamente com base em estímulos concretos. Como Artífice (SP), valoriza liberdade, impacto imediato e resolução prática de problemas (Função Auxiliar: Introverted Thinking - Ti). Adaptáveis e persuasivos, os ESTPs são mestres em ler ambientes e tomar decisões sob pressão. Seu desafio está na Função Inferior: Introverted Intuition (Ni) – podem negligenciar planejamento de longo prazo ou significados subjacentes, preferindo focar no 'aqui e agora'."
+      },
+      "ESFP": { 
+        title: "O PERFORMADOR", 
+        text: "Berens descreve o ESFP como o 'Improvisador' – um tipo espontâneo e envolvente que transforma ambientes com energia contagiante. Artistas natos da vida real, priorizam experiências vívidas e conexões autênticas, adaptando-se com flexibilidade aos imprevistos. Como parte dos Artífices (SP), são mestres em ler situações e responder com soluções práticas no momento. Seu talento para animar grupos esconde uma profunda lealdade aos valores pessoais. O desafio está em equilibrar liberdade com responsabilidade, evitando decisões impulsivas."
+      },
+      "ISTP": { 
+        title: "O OPERADOR", 
+        text: "Linda Berens descreve o ISTP como o 'Operador' – um tipo independente e engenhoso, com talento para entender sistemas e resolver problemas concretos. Mestres da lógica prática, aprendem fazendo e valorizam eficiência acima de tudo. Como Artífices (SP), são observadores aguçados que atuam com precisão técnica, muitas vezes em profissões que exigem habilidades manuais ou análise objetiva. Preferem trabalhar sozinhos, confiando em sua competência silenciosa. Seu desafio é equilibrar ceticismo com abertura a perspectivas alheias, evitando isolamento excessivo."
+      },
+      "ISFP": { 
+        title: "O ARTISTA", 
+        text: "Linda Berens caracteriza o ISFP como o 'Compositor' – um tipo autêntico e observador, que valoriza a beleza, a liberdade individual e a harmonia prática. Artistas da vida cotidiana, expressam seus valores profundos através de ações concretas, não palavras. Como Artífices (SP), são adaptáveis e presentes no momento, com uma sensibilidade aguçada para estética e necessidades alheias. Preferem trabalhar nos bastidores, evitando conflitos ou estruturas rígidas. Seu desafio é equilibrar idealismo com realismo, aprendendo a defender seus limites sem culpa."
+      },
+      "ENTJ": { 
+        title: "O ESTRATEGISTA", 
+        text: "Linda Berens descreve o ENTJ como o 'Estrategista' – um tipo visionário e determinado, que enxerga padrões complexos e mobiliza pessoas para alcançar objetivos audaciosos. Líderes natos, combinam lógica implacável com uma energia contagiante para implementar mudanças. Como Avançadores (NT), são mestres em antecipar tendências e criar sistemas eficientes, sempre com foco em resultados mensuráveis. Sua postura direta pode ser interpretada como autoritária, mas seu real propósito é otimizar processos. O desafio está em equilibrar ambição com empatia, reconhecendo que colaboração genuína potencializa seus projetos."
+      },
+      "ENTP": { 
+        title: "O VISIONÁRIO", 
+        text: "Linda Berens caracteriza o ENTP como o 'Explorador Conceitual' – um tipo curioso e inventivo, que enxerga possibilidades onde outros veem limites. Mestres em conectar ideias aparentemente desconexas, desafiam o status quo com perguntas provocativas e soluções inusitadas. Como Avançadores (NT), são estimulados por debates intelectuais e cenários de 'e se...', muitas vezes atuando como catalisadores de mudanças. Sua mente ágil pode dispersar-se em múltiplos projetos simultâneos. O desafio é equilibrar entusiasmo teórico com implementação prática, desenvolvendo foco sem sacrificar criatividade."
+      },
+      "INTJ": { 
+        title: "O ARQUEIRO", 
+        text: "Linda Berens caracteriza o INTJ como o 'Estrategista Visionário' – pensadores profundos que combinam análise rigorosa com uma capacidade singular de transformar conceitos abstratos em sistemas eficazes. São os arquitetos de mudanças estruturais, sempre projetando soluções inovadoras para problemas complexos. Como parte dos Avançadores (NT), destacam-se por sua mente estratégica e foco implacável em longo prazo. Têm um talento único para identificar padrões invisíveis aos outros e antecipar tendências com anos de antecedência. Seu maior desafio? Humanizar sua genialidade – aprender que a verdadeira inovação requer não apenas lógica impecável, mas também conexão com as necessidades emocionais daqueles que implementarão suas visões."
+      },
+      "INTP": { 
+        title: "O SÁBIO", 
+        text: "Berens descreve o INTP como 'Arquitetos de Sistemas' – mentes analíticas que decifram a realidade através de modelos lógicos. Exploradores incansáveis de padrões, vivem para desconstruir e reconstruir ideias, priorizando coerência teórica acima de tudo. Como Avançadores (NT), destacam-se pela capacidade de identificar inconsistências e criar estruturas conceituais elegantes. Sua comunicação direta e não convencional reflete um pensamento radicalmente independente. O desafio é reconhecer que a eficácia de suas ideias depende não apenas da lógica, mas também de conectar-se emocionalmente com aqueles que precisam compreendê-las e aplicá-las."
+      },
+      "ENFJ": { 
+        title: "O CLÉRIGO", 
+        text: "Berens descreve o ENFJ como 'Catalisadores de Potencial Humano' – líderes natos que enxergam e ativam o melhor nos outros. Com uma habilidade ímpar para criar harmonia social, transformam visões coletivas em realidades tangíveis. Como Idealista (NF), combinam calor humano com estratégia, mobilizando grupos através de conexões autênticas. Seu carisma natural máscara um intelecto agudo voltado para o desenvolvimento alheio. O desafio se dá quando sob pressão, podem negligenciar análises objetivas em favor de consensos superficiais, perdendo-se na complexidade de sistemas impessoais que exigem rigor crítico."
+      },
+      "ENFP": { 
+        title: "O BARDO", 
+        text: "Como Idealistas (NF), os ENFPs são catalisadores sociais que enxergam o melhor nas pessoas. Berens os descreve como 'ativadores de talentos', capazes de inspirar mudanças através de conexões autênticas e visões contagiantes. Sua genialidade está em transformar ideias abstratas em movimentos coletivos, unindo diversidade sob propósitos comuns. Comunicadores natos, dão voz a causas invisíveis. Desafio é manter foco em metas concretas sem perder sua essência adaptável - equilibrar entusiasmo com realização sustentável."
+      },
+      "INFJ": { 
+        title: "O PALADINO", 
+        text: "Como Idealistas (NF), os INFJs são arquitetos de significado, combinando intuição profunda com um talento singular para guiar indivíduos em seu crescimento pessoal. Berens os descreve como 'integradores de visões', capazes de traduzir insights complexos em orientações práticas. Sua força está em antecipar padrões sociais e desenvolver estratégias de transformação humana, sempre com sensibilidade ética. O desafio é ancorar suas percepções abstratas na realidade imediata, aprendendo a valorizar dados concretos e experiências tangíveis sem perder sua visão holística."
+      },
+      "INFP": { 
+        title: "O CURANDEIRO", 
+        text: "Como Idealistas (NF), os INFPs são tecelões de significado, transformando valores profundos em expressões autênticas. Berens os descreve como 'alquimistas emocionais', convertendo dor em beleza e conflito em reconciliação. Sua essência é harmonizar contradições humanas através de metáforas vívidas e criações simbólicas, sempre guiados por sua bússola moral interna. O desafio é equilibrar sua rica vida interior com a necessidade de estruturar e comunicar suas visões ao mundo de forma objetiva e acessível, sem trair sua sensibilidade única."
+      }
     };
 
     let audioContext = null;
@@ -910,17 +973,28 @@
     let currentAudio = null;
 
     function showTab(tabId) {
+      console.log(`Switching to tab: ${tabId}`);
       document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active-tab'));
       document.querySelectorAll('.content').forEach(content => {
         content.classList.remove('active');
         content.style.display = 'none';
+        content.style.opacity = '0';
       });
-      const clickedTab = document.querySelector(`.tab[onclick="showTab('${tabId}')"]`);
-      if (clickedTab) clickedTab.classList.add('active-tab');
+      const clickedTab = document.getElementById(`tab-${tabId}`);
+      if (clickedTab) {
+        clickedTab.classList.add('active-tab');
+      } else {
+        console.error(`Tab with ID tab-${tabId} not found`);
+      }
       const contentToShow = document.getElementById(tabId);
       if (contentToShow) {
         contentToShow.style.display = 'block';
         contentToShow.classList.add('active');
+        setTimeout(() => {
+          contentToShow.style.opacity = '1';
+        }, 10);
+      } else {
+        console.error(`Content with ID ${tabId} not found`);
       }
       if (tabId === 'resultado') calcularResultados();
     }
@@ -1130,7 +1204,15 @@
       atualizarResultado(dicotomia);
     }
 
-    document.addEventListener('DOMContentLoaded', () => showTab('inicio'));
+    document.addEventListener('DOMContentLoaded', () => {
+      showTab('inicio');
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          const tabId = tab.id.replace('tab-', '');
+          showTab(tabId);
+        });
+      });
+    });
   </script>
 </body>
 </html>
