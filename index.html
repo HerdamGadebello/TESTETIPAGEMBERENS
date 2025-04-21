@@ -39,27 +39,24 @@
     }
 
     .navbar-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
       max-width: 900px;
       width: 100%;
     }
 
     .tab {
       cursor: pointer;
-      padding: 12px 15px;
+      padding: 12px 10px;
       font-weight: bold;
       color: white;
       text-align: center;
-      margin: 3px;
-      flex: 1;
-      min-width: 200px;
-      max-width: 220px;
       border-radius: 6px;
       transition: var(--transicao);
       position: relative;
       overflow: hidden;
+      min-width: 150px;
     }
 
     .tab::after {
@@ -137,14 +134,12 @@
 
     .pergunta-container {
       margin: 20px 0;
-      padding-left: 50px;
       text-align: center;
+      position: relative;
     }
 
     .numero-pergunta {
-      position: absolute;
-      left: 0;
-      top: -20px;
+      position: relative;
       width: 36px;
       height: 36px;
       background-color: var(--cor-numero);
@@ -156,6 +151,7 @@
       font-weight: bold;
       color: var(--cor-texto-numero);
       box-shadow: var(--sombra);
+      margin: 10px auto -10px;
     }
 
     .pergunta-texto {
@@ -164,7 +160,7 @@
       text-align: center;
       line-height: 1.6;
       transition: var(--transicao);
-      padding: 5px 0;
+      padding: 15px 0;
     }
 
     .pergunta-texto:hover {
@@ -358,18 +354,21 @@
 
     .type-details {
       display: flex;
+      flex-direction: row;
       max-width: 900px;
       margin: 30px auto;
-      gap: 30px;
+      gap: 20px;
       align-items: flex-start;
+      flex-wrap: wrap;
     }
 
     .type-image {
       flex: 1;
-      max-width: 300px;
+      max-width: 50%;
       min-width: 250px;
-      margin-left: 20px;
-      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       transition: var(--transicao);
     }
 
@@ -379,6 +378,7 @@
 
     .type-image img {
       width: 100%;
+      max-width: 400px;
       height: auto;
       border-radius: 12px;
       display: none;
@@ -390,7 +390,7 @@
     }
 
     .type-description {
-      flex: 2;
+      flex: 1;
       font-family: 'Arial', sans-serif;
       text-align: left;
       padding: 0 20px;
@@ -414,6 +414,12 @@
       display: none;
     }
 
+    #destoantesContainer {
+      width: 100%;
+      margin: 20px 0;
+      max-width: 800px;
+    }
+
     .destoante-box {
       background-color: #FFD700;
       color: black;
@@ -427,18 +433,28 @@
     }
 
     @media (max-width: 768px) {
+      .navbar-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .tab {
+        min-width: 120px;
+        padding: 8px 5px;
+        font-size: 12px;
+      }
       .type-details {
         flex-direction: column;
         align-items: center;
       }
       .type-image {
-        margin-left: 0;
         max-width: 100%;
+        margin: 0 auto;
       }
-      .tab {
-        min-width: 150px;
-        padding: 10px 5px;
-        font-size: 14px;
+      .type-description {
+        padding: 0;
+        text-align: center;
+      }
+      .type-text {
+        text-align: center;
       }
       .title {
         font-size: 20px;
@@ -452,7 +468,7 @@
         padding: 15px;
       }
       .pergunta-container {
-        padding-left: 40px;
+        padding-left: 0;
       }
       .numero-pergunta {
         width: 30px;
@@ -498,42 +514,42 @@
     <div class="pergunta-container">
       <div class="numero-pergunta">1</div>
       <p class="pergunta-texto">Geralmente durante uma conversa, quando algo me vem à cabeça, não consigo me conter e acabo interrompendo a outra pessoa para falar sobre isso.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('orientacao', 0, 'INICIADOR', this)">CONCORDO</button>
-      <button onclick="responder('orientacao', 0, 'RESPONDEDOR', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('orientacao', 0, 'INICIADOR', this)">CONCORDO</button>
+        <button onclick="responder('orientacao', 0, 'RESPONDEDOR', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">2</div>
       <p class="pergunta-texto">Quase sempre não me importo se alguém está desinformado sobre algo, não é meu problema se ela está desatualizada.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('orientacao', 1, 'RESPONDEDOR', this)">CONCORDO</button>
-      <button onclick="responder('orientacao', 1, 'INICIADOR', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('orientacao', 1, 'RESPONDEDOR', this)">CONCORDO</button>
+        <button onclick="responder('orientacao', 1, 'INICIADOR', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">3</div>
       <p class="pergunta-texto">Usualmente durante uma conversa, prefiro terminar minha linha de pensamento, extraindo o que é possível sobre o tema, não gosto de mudança repentina de assunto.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('orientacao', 2, 'RESPONDEDOR', this)">CONCORDO</button>
-      <button onclick="responder('orientacao', 2, 'INICIADOR', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('orientacao', 2, 'RESPONDEDOR', this)">CONCORDO</button>
+        <button onclick="responder('orientacao', 2, 'INICIADOR', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">4</div>
       <p class="pergunta-texto">Minha maior tendência é escutar o que os outros têm a me dizer, é natural para mim guardar e processar o que me dizem antes de expor o que eu penso.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('orientacao', 3, 'RESPONDEDOR', this)">CONCORDO</button>
-      <button onclick="responder('orientacao', 3, 'INICIADOR', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('orientacao', 3, 'RESPONDEDOR', this)">CONCORDO</button>
+        <button onclick="responder('orientacao', 3, 'INICIADOR', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">5</div>
       <p class="pergunta-texto">Geralmente sou muito inquieto, tenho uma propensão de participar ativamente das coisas, adoro compartilhar assuntos, participar de conversas e frequentemente não percebo que posso estar incomodando.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('orientacao', 4, 'INICIADOR', this)">CONCORDO</button>
-      <button onclick="responder('orientacao', 4, 'RESPONDEDOR', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('orientacao', 4, 'INICIADOR', this)">CONCORDO</button>
+        <button onclick="responder('orientacao', 4, 'RESPONDEDOR', this)">DISCORDO</button>
+      </div>
     </div>
     <div id="resultadoOrientacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
@@ -543,42 +559,42 @@
     <div class="pergunta-container">
       <div class="numero-pergunta">1</div>
       <p class="pergunta-texto">Tenho uma certa impaciência, prefiro fazer as coisas, dar andamento às coisas ao invés de ficar aguardando.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('postura', 0, 'MOVIMENTADOR', this)">CONCORDO</button>
-      <button onclick="responder('postura', 0, 'CONTROLADOR', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('postura', 0, 'MOVIMENTADOR', this)">CONCORDO</button>
+        <button onclick="responder('postura', 0, 'CONTROLADOR', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">2</div>
       <p class="pergunta-texto">Tendo a ser mais flexível, isso me ajuda a adaptar minhas ações conforme os problemas forem surgindo, isso me faz ser melhor contornando obstáculos do percurso.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('postura', 1, 'MOVIMENTADOR', this)">CONCORDO</button>
-      <button onclick="responder('postura', 1, 'CONTROLADOR', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('postura', 1, 'MOVIMENTADOR', this)">CONCORDO</button>
+        <button onclick="responder('postura', 1, 'CONTROLADOR', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">3</div>
       <p class="pergunta-texto">Sou uma pessoa que preza pelo primor, na escola meus cadernos eram muito caprichados, meu estojo tinha cores de caneta para cada parte do texto.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('postura', 2, 'CONTROLADOR', this)">CONCORDO</button>
-      <button onclick="responder('postura', 2, 'MOVIMENTADOR', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('postura', 2, 'CONTROLADOR', this)">CONCORDO</button>
+        <button onclick="responder('postura', 2, 'MOVIMENTADOR', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">4</div>
       <p class="pergunta-texto">Na execução do que deve ser feito tendo a ser mais vagaroso, gasto muito mais tempo refletindo sobre como deve ser feito, assim na hora da execução, o trabalho saia impecável.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('postura', 3, 'CONTROLADOR', this)">CONCORDO</button>
-      <button onclick="responder('postura', 3, 'MOVIMENTADOR', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('postura', 3, 'CONTROLADOR', this)">CONCORDO</button>
+        <button onclick="responder('postura', 3, 'MOVIMENTADOR', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">5</div>
       <p class="pergunta-texto">Nas apresentações dos trabalhos da escola, eu geralmente não me preparava muito, estudava um pouco antes da aula e improvisava na hora a partir de algumas coisas que eu já sabia.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('postura', 4, 'MOVIMENTADOR', this)">CONCORDO</button>
-      <button onclick="responder('postura', 4, 'CONTROLADOR', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('postura', 4, 'MOVIMENTADOR', this)">CONCORDO</button>
+        <button onclick="responder('postura', 4, 'CONTROLADOR', this)">DISCORDO</button>
+      </div>
     </div>
     <div id="resultadoPostura">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
@@ -586,60 +602,60 @@
   <div id="enfoque" class="content">
     <div class="title">DICOTOMIA ENFOQUE</div>
     <div class="pergunta-container">
-      <div class="numero-pergunta">1</div>
+      <div class="numero-pergunta" style="margin-bottom: 20px;">1</div>
       <p class="pergunta-texto">Com frequência sou chamado(a) de "ovelha negra" da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('enfoque', 0, 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responder('enfoque', 0, 'AFILIATIVO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('enfoque', 0, 'PRAGMÁTICO', this)">CONCORDO</button>
+        <button onclick="responder('enfoque', 0, 'AFILIATIVO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">2</div>
       <p class="pergunta-texto">Costumo me sentir desconfortável em ambientes de trabalho muito competitivos, com metas rígidas e cobranças constantes; esse tipo de clima acaba me desgastando bastante.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('enfoque', 1, 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responder('enfoque', 1, 'PRAGMÁTICO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('enfoque', 1, 'AFILIATIVO', this)">CONCORDO</button>
+        <button onclick="responder('enfoque', 1, 'PRAGMÁTICO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">3</div>
       <p class="pergunta-texto">Sou uma pessoa bastante amistosa, gosto de participar dos rolês com os amigos e detesto gente monossilábica. Até porque se eu não estou interessado em conversar com alguém, tento dar um jeito menos babaca de sair da conversa.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('enfoque', 2, 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responder('enfoque', 2, 'PRAGMÁTICO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('enfoque', 2, 'AFILIATIVO', this)">CONCORDO</button>
+        <button onclick="responder('enfoque', 2, 'PRAGMÁTICO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">4</div>
       <p class="pergunta-texto">Não gosto muito de fazer "a social", sou péssimo em fingir ser sociável com pessoas que não me interessam.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('enfoque', 3, 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responder('enfoque', 3, 'AFILIATIVO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('enfoque', 3, 'PRAGMÁTICO', this)">CONCORDO</button>
+        <button onclick="responder('enfoque', 3, 'AFILIATIVO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">5</div>
       <p class="pergunta-texto">Quando meus amigos ou familiares escolhem fazer algo em um lugar onde eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('enfoque', 4, 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responder('enfoque', 4, 'AFILIATIVO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('enfoque', 4, 'PRAGMÁTICO', this)">CONCORDO</button>
+        <button onclick="responder('enfoque', 4, 'AFILIATIVO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">6</div>
       <p class="pergunta-texto">Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('enfoque', 5, 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responder('enfoque', 5, 'AFILIATIVO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('enfoque', 5, 'PRAGMÁTICO', this)">CONCORDO</button>
+        <button onclick="responder('enfoque', 5, 'AFILIATIVO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">7</div>
       <p class="pergunta-texto">Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa, isso me ajuda a ver se ela está sendo receptiva ou não com o que eu estou falando.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('enfoque', 6, 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responder('enfoque', 6, 'PRAGMÁTICO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('enfoque', 6, 'AFILIATIVO', this)">CONCORDO</button>
+        <button onclick="responder('enfoque', 6, 'PRAGMÁTICO', this)">DISCORDO</button>
+      </div>
     </div>
     <div id="resultadoEnfoque">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
@@ -649,58 +665,58 @@
     <div class="pergunta-container">
       <div class="numero-pergunta">1</div>
       <p class="pergunta-texto">Eu entendo que as regras existem para que as coisas não virem uma baderna, mas também é necessário particularizar os casos, muitas vezes é preciso afrouxar as estruturas para que acordos benéficos sejam estabelecidos.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('organizacao', 0, 'INTERESSADO', this)">CONCORDO</button>
-      <button onclick="responder('organizacao', 0, 'ESTRUTURADO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('organizacao', 0, 'INTERESSADO', this)">CONCORDO</button>
+        <button onclick="responder('organizacao', 0, 'ESTRUTURADO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">2</div>
       <p class="pergunta-texto">Curto manter minha rotina, fazer as coisas que geralmente faço no horário que faço, fico muito estressado quando um imprevisto acontece.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('organizacao', 1, 'ESTRUTURADO', this)">CONCORDO</button>
-      <button onclick="responder('organizacao', 1, 'INTERESSADO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('organizacao', 1, 'ESTRUTURADO', this)">CONCORDO</button>
+        <button onclick="responder('organizacao', 1, 'INTERESSADO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">3</div>
       <p class="pergunta-texto">Se o meu trabalho exige que eu siga um protocolo de atendimento, busco sempre o seguir, não costumo abrir exceções a respeito disso.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('organizacao', 2, 'ESTRUTURADO', this)">CONCORDO</button>
-      <button onclick="responder('organizacao', 2, 'INTERESSADO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('organizacao', 2, 'ESTRUTURADO', this)">CONCORDO</button>
+        <button onclick="responder('organizacao', 2, 'INTERESSADO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">4</div>
       <p class="pergunta-texto">Às vezes, por buscar garantir que as coisas funcionem, posso soar um pouco ríspido(a) na maneira de tratar as pessoas.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('organizacao', 3, 'ESTRUTURADO', this)">CONCORDO</button>
-      <button onclick="responder('organizacao', 3, 'INTERESSADO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('organizacao', 3, 'ESTRUTURADO', this)">CONCORDO</button>
+        <button onclick="responder('organizacao', 3, 'INTERESSADO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">5</div>
       <p class="pergunta-texto">Para mim, justiça é aplicar o que é devido a cada indivíduo, não dá para sair batendo o martelo usando a mesma medida para todo mundo, até porque se uma pessoa furta alimentos para sustentar os filhos, ela não deve sofrer a mesma pena que uma pessoa que roubou por mero desejo e capricho.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('organizacao', 4, 'INTERESSADO', this)">CONCORDO</button>
-      <button onclick="responder('organizacao', 4, 'ESTRUTURADO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('organizacao', 4, 'INTERESSADO', this)">CONCORDO</button>
+        <button onclick="responder('organizacao', 4, 'ESTRUTURADO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">6</div>
       <p class="pergunta-texto">Pessoas que moralizam tudo são muito tediosas, penso que se as pessoas envolvidas numa situação não veem problema nela, não tem por que achar ruim.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('organizacao', 5, 'INTERESSADO', this)">CONCORDO</button>
-      <button onclick="responder('organizacao', 5, 'ESTRUTURADO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('organizacao', 5, 'INTERESSADO', this)">CONCORDO</button>
+        <button onclick="responder('organizacao', 5, 'ESTRUTURADO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">7</div>
       <p class="pergunta-texto">Sou adepto ao ditado "o combinado não sai caro", afinal se a pessoa é adulta, ela é responsável e consciente das próprias ações.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('organizacao', 6, 'ESTRUTURADO', this)">CONCORDO</button>
-      <button onclick="responder('organizacao', 6, 'INTERESSADO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('organizacao', 6, 'ESTRUTURADO', this)">CONCORDO</button>
+        <button onclick="responder('organizacao', 6, 'INTERESSADO', this)">DISCORDO</button>
+      </div>
     </div>
     <div id="resultadoOrganizacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
@@ -710,42 +726,42 @@
     <div class="pergunta-container">
       <div class="numero-pergunta">1</div>
       <p class="pergunta-texto">Gosto de instigar as pessoas quando estou conversando com elas, acho mais interessante fazer um "charminho" ao invés de chegar já deixando claro minhas intenções.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('comunicacao', 0, 'INFORMATIVO', this)">CONCORDO</button>
-      <button onclick="responder('comunicacao', 0, 'DIRETO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('comunicacao', 0, 'INFORMATIVO', this)">CONCORDO</button>
+        <button onclick="responder('comunicacao', 0, 'DIRETO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">2</div>
       <p class="pergunta-texto">Minha fala tende a ser mais retilínea, conduzo o que eu falo de maneira mais centrada, raramente me perco ou me embaralho no que estou falando.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('comunicacao', 1, 'DIRETO', this)">CONCORDO</button>
-      <button onclick="responder('comunicacao', 1, 'INFORMATIVO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('comunicacao', 1, 'DIRETO', this)">CONCORDO</button>
+        <button onclick="responder('comunicacao', 1, 'INFORMATIVO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">3</div>
       <p class="pergunta-texto">Meus amigos e colegas costumam falar que eu passo muito uma vibe "professor", isso porque eu normalmente trago muito contexto na minha comunicação, e descrevo muito sobre as coisas que falo.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('comunicacao', 2, 'INFORMATIVO', this)">CONCORDO</button>
-      <button onclick="responder('comunicacao', 2, 'DIRETO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('comunicacao', 2, 'INFORMATIVO', this)">CONCORDO</button>
+        <button onclick="responder('comunicacao', 2, 'DIRETO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">4</div>
       <p class="pergunta-texto">Detesto fazer rodeios para falar o que eu pretendo, prefiro chegar e já falar o que está acontecendo do que preparar a outra pessoa para receber a informação.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('comunicacao', 3, 'DIRETO', this)">CONCORDO</button>
-      <button onclick="responder('comunicacao', 3, 'INFORMATIVO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('comunicacao', 3, 'DIRETO', this)">CONCORDO</button>
+        <button onclick="responder('comunicacao', 3, 'INFORMATIVO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">5</div>
       <p class="pergunta-texto">Com frequência sou mal interpretado pelas pessoas, acho que é porque eu costumo oscilar muito sutilmente na minha forma de falar, às vezes começo falando sério, depois faço graça e ironizo e isso acaba meio que "bugando" as pessoas.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('comunicacao', 4, 'INFORMATIVO', this)">CONCORDO</button>
-      <button onclick="responder('comunicacao', 4, 'DIRETO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('comunicacao', 4, 'INFORMATIVO', this)">CONCORDO</button>
+        <button onclick="responder('comunicacao', 4, 'DIRETO', this)">DISCORDO</button>
+      </div>
     </div>
     <div id="resultadoComunicacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
@@ -755,58 +771,58 @@
     <div class="pergunta-container">
       <div class="numero-pergunta">1</div>
       <p class="pergunta-texto">Tendo a ser uma pessoa mais cética, bem mais pé no chão. Muito raro eu cair nesse papinho de signo e outras coisas afins.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('interpretacao', 0, 'CONCRETO', this)">CONCORDO</button>
-      <button onclick="responder('interpretacao', 0, 'ABSTRATO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('interpretacao', 0, 'CONCRETO', this)">CONCORDO</button>
+        <button onclick="responder('interpretacao', 0, 'ABSTRATO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">2</div>
       <p class="pergunta-texto">Posso parecer meio acomodado e conformado para as pessoas, mas é que eu gosto de focar mais no que é presente agora. Esse negócio de ir atrás dos sonhos e ideais não cola comigo, nem tudo é possível de se realizar.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('interpretacao', 1, 'CONCRETO', this)">CONCORDO</button>
-      <button onclick="responder('interpretacao', 1, 'ABSTRATO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('interpretacao', 1, 'CONCRETO', this)">CONCORDO</button>
+        <button onclick="responder('interpretacao', 1, 'ABSTRATO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">3</div>
       <p class="pergunta-texto">Minha inclinação maior é divagar nas coisas que podem acontecer futuramente, penso bastante sobre como pode ser a sociedade do futuro, as novas tecnologias que podem surgir e o que eu poderia estar fazendo nessas novas situações.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('interpretacao', 2, 'ABSTRATO', this)">CONCORDO</button>
-      <button onclick="responder('interpretacao', 2, 'CONCRETO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('interpretacao', 2, 'ABSTRATO', this)">CONCORDO</button>
+        <button onclick="responder('interpretacao', 2, 'CONCRETO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">4</div>
       <p class="pergunta-texto">Tenho bastante maestria com coisas artesanais, seja em cozinhar, costurar, desenhar, manusear ou de mais artesanatos. Sinto um grande prazer em cada etapa do processo disso.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('interpretacao', 3, 'CONCRETO', this)">CONCORDO</button>
-      <button onclick="responder('interpretacao', 3, 'ABSTRATO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('interpretacao', 3, 'CONCRETO', this)">CONCORDO</button>
+        <button onclick="responder('interpretacao', 3, 'ABSTRATO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">5</div>
       <p class="pergunta-texto">Costumo ser uma pessoa precavida, é natural para mim elucubrar coisas que podem me acometer e já me preparo mentalmente para lidar com elas.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('interpretacao', 4, 'ABSTRATO', this)">CONCORDO</button>
-      <button onclick="responder('interpretacao', 4, 'CONCRETO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('interpretacao', 4, 'ABSTRATO', this)">CONCORDO</button>
+        <button onclick="responder('interpretacao', 4, 'CONCRETO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">6</div>
       <p class="pergunta-texto">Meus amigos e familiares frequentemente falam que eu "viajo na maionese", mas é que é muito bacana ficar pensando nas alternativas das coisas, se as coisas fossem de outra maneira, se a história tivesse sido diferente.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('interpretacao', 5, 'ABSTRATO', this)">CONCORDO</button>
-      <button onclick="responder('interpretacao', 5, 'CONCRETO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('interpretacao', 5, 'ABSTRATO', this)">CONCORDO</button>
+        <button onclick="responder('interpretacao', 5, 'CONCRETO', this)">DISCORDO</button>
+      </div>
     </div>
     <div class="pergunta-container">
       <div class="numero-pergunta">7</div>
       <p class="pergunta-texto">Adoro livros e filmes investigativos e suspense, perceber os cenários de crimes, analisar as inconsistências, prestar atenção nos detalhes e ir associando os materiais. Geralmente eu sou bem assertivo em quem cometeu o crime só observando tudo isso.</p>
-    </div>
-    <div class="button-container">
-      <button onclick="responder('interpretacao', 6, 'CONCRETO', this)">CONCORDO</button>
-      <button onclick="responder('interpretacao', 6, 'ABSTRATO', this)">DISCORDO</button>
+      <div class="button-container">
+        <button onclick="responder('interpretacao', 6, 'CONCRETO', this)">CONCORDO</button>
+        <button onclick="responder('interpretacao', 6, 'ABSTRATO', this)">DISCORDO</button>
+      </div>
     </div>
     <div id="resultadoInterpretacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
@@ -829,7 +845,6 @@
     </div>
     <div class="type-box" id="typeResult">-</div>
     <div class="type-details" id="typeDetails">
-      <div id="destoantesContainer" style="margin: 20px auto; max-width: 800px;"></div>
       <div class="type-image">
         <img id="typeImage" src="" alt="Tipo de personalidade">
       </div>
@@ -837,7 +852,9 @@
         <div class="type-title" id="typeTitle"></div>
         <div class="type-text" id="typeText"></div>
       </div>
+      <div id="destoantesContainer"></div>
     </div>
+    <audio id="typeAudio"></audio>
   </div>
 
   <script>
@@ -887,28 +904,24 @@
       "INFP": { title: "O CURANDEIRO", text: "Autêntico, compassivo, guiado por valores. Transforma experiências em narrativas, precisa de assertividade." }
     };
 
+    let audioContext = null;
+    let gainNode = null;
+    let audioSource = null;
+    let currentAudio = null;
+
     function showTab(tabId) {
-      // Remove a classe 'active-tab' de todas as abas
       document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active-tab'));
-      
-      // Remove a classe 'active' e define display: none para todos os conteúdos
       document.querySelectorAll('.content').forEach(content => {
         content.classList.remove('active');
         content.style.display = 'none';
       });
-      
-      // Adiciona a classe 'active-tab' à aba clicada
       const clickedTab = document.querySelector(`.tab[onclick="showTab('${tabId}')"]`);
       if (clickedTab) clickedTab.classList.add('active-tab');
-      
-      // Exibe o conteúdo da aba selecionada
       const contentToShow = document.getElementById(tabId);
       if (contentToShow) {
         contentToShow.style.display = 'block';
         contentToShow.classList.add('active');
       }
-      
-      // Calcula resultados se for a aba de resultado
       if (tabId === 'resultado') calcularResultados();
     }
 
@@ -916,11 +929,9 @@
       const imgElement = document.getElementById('typeImage');
       const typeTitle = document.getElementById('typeTitle');
       const typeText = document.getElementById('typeText');
-      
       imgElement.style.display = 'none';
       typeTitle.style.display = 'none';
       typeText.style.display = 'none';
-      
       if (tipo && tipo !== "INDEFINIDO") {
         typeTitle.style.display = 'block';
         typeText.style.display = 'block';
@@ -930,13 +941,56 @@
       }
     }
 
+    function playTypeAudio(tipo) {
+      if (tipo === "INDEFINIDO") return;
+
+      const audioElement = document.getElementById('typeAudio');
+      if (currentAudio) {
+        audioElement.pause();
+        if (audioSource) {
+          audioSource.stop();
+          audioSource = null;
+        }
+      }
+
+      audioElement.src = `${tipo}.mp3`;
+      audioElement.volume = 0.2;
+
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      if (audioSource) {
+        audioSource.stop();
+      }
+
+      audioSource = audioContext.createMediaElementSource(audioElement);
+      gainNode = audioContext.createGain();
+      audioSource.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+
+      gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+      gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 7);
+
+      audioElement.play().then(() => {
+        currentAudio = audioElement;
+        audioElement.onended = () => {
+          gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 10);
+          setTimeout(() => {
+            audioElement.pause();
+            currentAudio = null;
+            audioSource = null;
+          }, 10000);
+        };
+      }).catch(err => console.error("Erro ao reproduzir áudio:", err));
+    }
+
     function calcularTemperamento() {
       const { interpretacao, enfoque, organizacao } = resultados;
       const countSJ = (enfoque === 'AFILIATIVO' ? 1 : 0) + (organizacao === 'ESTRUTURADO' ? 1 : 0) + (interpretacao === 'CONCRETO' ? 1 : 0);
       const countSP = (interpretacao === 'CONCRETO' ? 1 : 0) + (enfoque === 'PRAGMÁTICO' ? 1 : 0) + (organizacao === 'INTERESSADO' ? 1 : 0);
       const countNT = (interpretacao === 'ABSTRATO' ? 1 : 0) + (enfoque === 'PRAGMÁTICO' ? 1 : 0) + (organizacao === 'INTERESSADO' ? 1 : 0);
       const countNF = (interpretacao === 'ABSTRATO' ? 1 : 0) + (enfoque === 'AFILIATIVO' ? 1 : 0) + (organizacao === 'INTERESSADO' ? 1 : 0);
-      
       if (countSJ >= 2) return "SJ";
       if (countSP >= 2) return "SP";
       if (countNT >= 2) return "NT";
@@ -950,7 +1004,6 @@
       const countInaugurador = (orientacao === 'INICIADOR' ? 1 : 0) + (postura === 'MOVIMENTADOR' ? 1 : 0) + (comunicacao === 'INFORMATIVO' ? 1 : 0);
       const countFinalizador = (orientacao === 'RESPONDEDOR' ? 1 : 0) + (postura === 'MOVIMENTADOR' ? 1 : 0) + (comunicacao === 'DIRETO' ? 1 : 0);
       const countBastidor = (orientacao === 'RESPONDEDOR' ? 1 : 0) + (postura === 'CONTROLADOR' ? 1 : 0) + (comunicacao === 'INFORMATIVO' ? 1 : 0);
-      
       if (countEstruturador >= 2) return "ESTRUTURADOR";
       if (countInaugurador >= 2) return "INAUGURADOR";
       if (countFinalizador >= 2) return "FINALIZADOR";
@@ -977,15 +1030,12 @@
         "NF-FINALIZADOR-RESPONDEDOR": "INFJ",
         "NF-BASTIDOR-RESPONDEDOR": "INFP"
       };
-      
       const chaveExata = `${temperamento}-${estilo}-${orientacao}`;
       if (tipos[chaveExata]) return tipos[chaveExata];
-      
       const chaveSemOrientacao = `${temperamento}-${estilo}`;
       const possiveisTipos = Object.entries(tipos)
         .filter(([key]) => key.startsWith(chaveSemOrientacao))
         .map(([, value]) => value);
-      
       return possiveisTipos[0] || "INDEFINIDO";
     }
 
@@ -1008,7 +1058,6 @@
         INFJ: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "DIRETO", "RESPONDEDOR", "MOVIMENTADOR"],
         INFP: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "INFORMATIVO", "RESPONDEDOR", "MOVIMENTADOR"]
       };
-
       const dicotomiasUsuario = [
         resultados.interpretacao,
         resultados.enfoque,
@@ -1017,14 +1066,10 @@
         resultados.orientacao,
         resultados.postura
       ];
-
       const container = document.getElementById("destoantesContainer");
       container.innerHTML = "";
-
       if (!tipo || !gabarito[tipo]) return;
-
       const dicotomiasEsperadas = gabarito[tipo];
-
       for (let i = 0; i < dicotomiasEsperadas.length; i++) {
         if (dicotomiasUsuario[i] && dicotomiasUsuario[i] !== dicotomiasEsperadas[i]) {
           const div = document.createElement("div");
@@ -1039,24 +1084,20 @@
       const temperamento = calcularTemperamento();
       const estilo = calcularEstilo();
       const orientacao = resultados.orientacao;
-      
       document.getElementById('temperamentoResult').textContent = temperamento || "-";
       document.getElementById('estiloResult').textContent = estilo || "-";
       document.getElementById('orientacaoResult').textContent = orientacao || "-";
-      
       const tipoPersonalidade = determinarTipoPersonalidade(temperamento, estilo, orientacao);
       document.getElementById('typeResult').textContent = tipoPersonalidade || "-";
-      
       const typeInfo = typeDescriptions[tipoPersonalidade] || { 
         title: "Tipo não identificado", 
         text: "Complete todas as dicotomias para obter seu resultado" 
       };
-      
       document.getElementById('typeTitle').textContent = typeInfo.title;
       document.getElementById('typeText').textContent = typeInfo.text;
-      
       carregarImagemTipo(tipoPersonalidade);
       mostrarDestoantes(tipoPersonalidade);
+      playTypeAudio(tipoPersonalidade);
     }
 
     function calcularResultadoDicotomia(respostasDicotomia, total) {
@@ -1065,20 +1106,16 @@
         acc[val] = (acc[val] || 0) + 1;
         return acc;
       }, {});
-      
       const minimo = total === 7 ? 4 : 3;
-      
       for (const [valor, quantidade] of Object.entries(contagem)) {
         if (quantidade >= minimo) return valor;
       }
-      
       return null;
     }
 
     function atualizarResultado(dicotomia) {
       const resultado = calcularResultadoDicotomia(respostas[dicotomia], totalPerguntas[dicotomia]);
       resultados[dicotomia] = resultado;
-      
       const elemento = document.getElementById(`resultado${dicotomia.charAt(0).toUpperCase() + dicotomia.slice(1)}`);
       elemento.innerHTML = resultado 
         ? `RESULTADO: ${resultado}`
@@ -1089,7 +1126,6 @@
       const container = button.parentElement;
       container.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
       button.classList.add('selected');
-      
       respostas[dicotomia][index] = resposta;
       atualizarResultado(dicotomia);
     }
