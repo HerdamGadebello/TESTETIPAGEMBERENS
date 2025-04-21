@@ -328,8 +328,8 @@
     }
 
     .result-box {
-      background-color: var(--cor-resultado);
-      color: white;
+      background-color: #FFFFD9;
+      color: #8D2B34;
       padding: 20px;
       border-radius: 12px;
       font-family: 'Arial', sans-serif;
@@ -344,6 +344,11 @@
     .result-box:hover {
       transform: translateY(-5px) scale(1.05);
       box-shadow: var(--sombra-hover);
+    }
+
+    .result-box div:first-child {
+      font-size: 16px;
+      text-transform: uppercase;
     }
 
     .result-value {
@@ -453,8 +458,8 @@
 
     #destoantesContainer {
       width: 100%;
-      margin: 20px 0;
-      max-width: 800px;
+      margin: 20px auto;
+      max-width: 600px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -560,6 +565,12 @@
       .result-box {
         min-width: 120px;
         padding: 15px;
+      }
+      .result-box div:first-child {
+        font-size: 14px;
+      }
+      .result-value {
+        font-size: 18px;
       }
       .pergunta-container {
         padding-left: 0;
@@ -944,7 +955,7 @@
 
   <div id="modalDestoante" class="modal">
     <div class="modal-content">
-      <span class="modal-close">&times;</span>
+      <span class="modal-close">×</span>
       <p id="modalText"></p>
     </div>
   </div>
@@ -1060,6 +1071,9 @@
         tab.addEventListener('click', () => {
           const abaId = tab.id.replace('tab-', '');
           mostrarAba(abaId);
+          const dicButtonSound = new Audio('dicbotton.mp3');
+          dicButtonSound.volume = 0.5;
+          dicButtonSound.play();
         });
       });
       mostrarAba('inicio');
