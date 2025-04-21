@@ -2,69 +2,6 @@
 
 <html lang="pt-BR">
 <head>
-<style>
-  /* Estilo responsivo */
-  @media screen and (max-width: 768px) {
-    .content {
-      padding: 10px;
-    }
-
-    .title {
-      font-size: 1.2em;
-      text-align: center;
-    }
-
-    .pergunta-container {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    .button-container {
-      flex-direction: column;
-      align-items: stretch;
-    }
-
-    button {
-      width: 100%;
-      margin: 5px 0;
-      font-size: 1em;
-    }
-
-    .resultado-retangulo,
-    .resultado-tipo {
-      width: 100% !important;
-      font-size: 1em;
-      text-align: center;
-    }
-
-    .tipo-container {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .tipo-container img {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      margin-bottom: 10px;
-    }
-
-    .tipo-texto {
-      width: 100%;
-      padding: 10px;
-    }
-
-    .tabs {
-      flex-wrap: wrap;
-    }
-
-    .tab {
-      flex: 1 1 45%;
-      font-size: 0.9em;
-    }
-  }
-</style>
-
 <meta charset="utf-8"/>
 <title>Teste de Tipagem</title>
 <style>
@@ -1012,7 +949,7 @@
 <div class="result-value" id="orientacaoFinal">PROCESSANDO...</div>
 </div>
 </div>
-<div class="type-box" id="typeBox">TIPO: PROCESSANDO...</div>
+<div class="type-box" id="typeBox"></div>
 <div class="type-details">
 <div class="type-image">
 <img alt="Imagem do Tipo" id="typeImage" src=""/>
@@ -1268,9 +1205,9 @@
       if (!orientacao || !postura) return 'PROCESSANDO...';
 
       if (orientacao === 'INICIADOR') {
-        return postura === 'MOVIMENTADOR' ? 'EP' : 'EJ';
+        return postura === 'MOVIMENTADOR' ? '' : '';
       } else {
-        return postura === 'MOVIMENTADOR' ? 'IP' : 'IJ';
+        return postura === 'MOVIMENTADOR' ? '' : '';
       }
     }
 
