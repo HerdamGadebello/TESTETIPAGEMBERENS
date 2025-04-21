@@ -31,7 +31,6 @@
     .navbar {
       background-color: var(--cor-secundaria);
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
       padding: 10px 0;
       box-shadow: var(--sombra);
@@ -43,8 +42,8 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      width: 100%;
       max-width: 900px;
+      width: 100%;
     }
 
     .tab {
@@ -57,10 +56,8 @@
       flex: 1;
       min-width: 200px;
       max-width: 220px;
-      box-sizing: border-box;
       border-radius: 6px;
       transition: var(--transicao);
-      transform: translateY(0) scale(1);
       position: relative;
       overflow: hidden;
     }
@@ -106,13 +103,13 @@
       animation: fadeIn 0.5s ease-out;
     }
 
+    .content.active {
+      display: block;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    .active {
-      display: block;
     }
 
     .title {
@@ -140,15 +137,14 @@
 
     .pergunta-container {
       margin: 20px 0;
-      position: relative;
       padding-left: 50px;
-      text-align: center; /* Centraliza o texto da pergunta */
+      text-align: center;
     }
 
     .numero-pergunta {
       position: absolute;
       left: 0;
-      top: -20px; /* Ajuste a posição para cima */
+      top: -20px;
       width: 36px;
       height: 36px;
       background-color: var(--cor-numero);
@@ -156,7 +152,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Andor', sans-serif;
+      font-family: 'Arial', sans-serif;
       font-weight: bold;
       color: var(--cor-texto-numero);
       box-shadow: var(--sombra);
@@ -164,9 +160,8 @@
 
     .pergunta-texto {
       font-size: 16px;
-      margin: 0;
-      font-family: 'Aharoni', sans-serif;
-      text-align: center; /* Centraliza o texto da pergunta */
+      font-family: 'Arial', sans-serif;
+      text-align: center;
       line-height: 1.6;
       transition: var(--transicao);
       padding: 5px 0;
@@ -191,7 +186,7 @@
       border: none;
       border-radius: 6px;
       font-weight: bold;
-      font-family: 'Abadi', sans-serif;
+      font-family: 'Arial', sans-serif;
       cursor: pointer;
       transition: var(--transicao);
       box-shadow: var(--sombra);
@@ -230,12 +225,7 @@
       background-color: var(--cor-botao-selecionado-hover);
     }
 
-    #resultadoOrientacao,
-    #resultadoPostura,
-    #resultadoEnfoque,
-    #resultadoOrganizacao,
-    #resultadoComunicacao,
-    #resultadoInterpretacao {
+    [id^="resultado"] {
       text-align: center;
       margin: 30px auto;
       font-size: 18px;
@@ -281,13 +271,6 @@
       100% { opacity: 0; }
     }
 
-    #inicio {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
     .logo-container {
       width: 70%;
       max-width: 600px;
@@ -302,7 +285,6 @@
     .logo-container img {
       width: 100%;
       height: auto;
-      display: block;
       border-radius: 10px;
       box-shadow: 0 8px 16px rgba(0,0,0,0.3);
     }
@@ -322,7 +304,6 @@
       gap: 25px;
       margin: 30px auto;
       flex-wrap: wrap;
-      perspective: 1000px;
     }
 
     .result-box {
@@ -330,19 +311,17 @@
       color: white;
       padding: 20px;
       border-radius: 12px;
-      font-family: 'Abadi', sans-serif;
+      font-family: 'Arial', sans-serif;
       font-weight: bold;
       text-align: center;
       min-width: 160px;
       flex: 1;
       box-shadow: var(--sombra);
       transition: var(--transicao);
-      transform-style: preserve-3d;
-      transform: translateZ(0);
     }
 
     .result-box:hover {
-      transform: translateY(-5px) translateZ(10px) scale(1.05);
+      transform: translateY(-5px) scale(1.05);
       box-shadow: var(--sombra-hover);
     }
 
@@ -364,7 +343,7 @@
       border-radius: 12px;
       margin: 30px auto;
       max-width: 800px;
-      font-family: 'Andor', sans-serif;
+      font-family: 'Arial', sans-serif;
       font-size: 28px;
       text-align: center;
       font-weight: bold;
@@ -383,7 +362,6 @@
       margin: 30px auto;
       gap: 30px;
       align-items: flex-start;
-      perspective: 1000px;
     }
 
     .type-image {
@@ -393,11 +371,10 @@
       margin-left: 20px;
       margin-bottom: 20px;
       transition: var(--transicao);
-      transform-style: preserve-3d;
     }
 
     .type-image:hover {
-      transform: translateZ(10px) scale(1.05);
+      transform: scale(1.05);
     }
 
     .type-image img {
@@ -406,7 +383,6 @@
       border-radius: 12px;
       display: none;
       box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      transition: var(--transicao);
     }
 
     .type-image:hover img {
@@ -415,10 +391,9 @@
 
     .type-description {
       flex: 2;
-      font-family: 'Aharoni', sans-serif;
+      font-family: 'Arial', sans-serif;
       text-align: left;
       padding: 0 20px;
-      transition: var(--transicao);
     }
 
     .type-title {
@@ -430,7 +405,6 @@
       text-transform: uppercase;
       display: none;
       text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      transition: var(--transicao);
     }
 
     .type-text {
@@ -438,59 +412,48 @@
       line-height: 1.7;
       text-align: justify;
       display: none;
-      transition: var(--transicao);
     }
 
-    .type-details:hover .type-title,
-    .type-details:hover .type-text {
-      transform: translateZ(5px);
+    .destoante-box {
+      background-color: #FFD700;
+      color: black;
+      padding: 15px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin-bottom: 15px;
+      box-shadow: var(--sombra);
     }
 
-    /* Efeito de profundidade para os containers */
-    .content > div:not(.title):not(.button-container) {
-      transition: var(--transicao);
-    }
-
-    .content > div:not(.title):not(.button-container):hover {
-      transform: translateZ(5px);
-    }
-
-    /* Melhorias para mobile */
     @media (max-width: 768px) {
       .type-details {
         flex-direction: column;
         align-items: center;
       }
-      
       .type-image {
         margin-left: 0;
         max-width: 100%;
       }
-      
       .tab {
         min-width: 150px;
         padding: 10px 5px;
         font-size: 14px;
       }
-      
       .title {
         font-size: 20px;
       }
-      
       .type-box {
         font-size: 22px;
         padding: 15px;
       }
-      
       .result-box {
         min-width: 120px;
         padding: 15px;
       }
-      
       .pergunta-container {
         padding-left: 40px;
       }
-      
       .numero-pergunta {
         width: 30px;
         height: 30px;
@@ -498,38 +461,16 @@
       }
     }
 
-    /* Acessibilidade - reduzir movimento para quem preferir */
     @media (prefers-reduced-motion) {
-      .content,
-      button,
-      .tab,
-      .result-box,
-      .type-image,
-      .type-box,
-      .logo-container,
-      .pontos-processando span {
+      .content, button, .tab, .result-box, .type-image, .type-box, .logo-container, .pontos-processando span {
         transition: none !important;
         transform: none !important;
         animation: none !important;
       }
     }
-  
-.destoante-box {
-  background-color: #FFD700;
-  color: black;
-  padding: 15px;
-  border-radius: 10px;
-  font-weight: bold;
-  font-family: 'Aharoni', sans-serif;
-  text-align: center;
-  margin-bottom: 15px;
-  box-shadow: var(--sombra);
-}
-
-</style>
+  </style>
 </head>
 <body>
-
   <div class="navbar">
     <div class="navbar-container">
       <div class="tab" onclick="showTab('inicio')">PÁGINA INICIAL</div>
@@ -546,377 +487,332 @@
   <div id="inicio" class="content">
     <div class="title">Página Inicial</div>
     <p>Este teste é resultado do aprendizado adquirido durante o Curso de Tipagem, ministrado por @RobertaBernardon com base na teoria de Linda Berens.</p>
-    
     <div class="logo-container">
       <img src="ALLTYPES.png" alt="ALLTYPES">
     </div>
-    
     <p class="footer-text">TESTE ORGANIZADO E PRODUZIDO POR HERMES DAMIÃO BELLO</p>
   </div>
 
   <div id="orientacao" class="content">
     <div class="title">DICOTOMIA ORIENTAÇÃO</div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">1</div>
       <p class="pergunta-texto">Geralmente durante uma conversa, quando algo me vem à cabeça, não consigo me conter e acabo interrompendo a outra pessoa para falar sobre isso.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderOrientacao(0, 'INICIADOR', this)">CONCORDO</button>
-      <button onclick="responderOrientacao(0, 'RESPONDEDOR', this)">DISCORDO</button>
+      <button onclick="responder('orientacao', 0, 'INICIADOR', this)">CONCORDO</button>
+      <button onclick="responder('orientacao', 0, 'RESPONDEDOR', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">2</div>
       <p class="pergunta-texto">Quase sempre não me importo se alguém está desinformado sobre algo, não é meu problema se ela está desatualizada.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderOrientacao(1, 'RESPONDEDOR', this)">CONCORDO</button>
-      <button onclick="responderOrientacao(1, 'INICIADOR', this)">DISCORDO</button>
+      <button onclick="responder('orientacao', 1, 'RESPONDEDOR', this)">CONCORDO</button>
+      <button onclick="responder('orientacao', 1, 'INICIADOR', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">3</div>
       <p class="pergunta-texto">Usualmente durante uma conversa, prefiro terminar minha linha de pensamento, extraindo o que é possível sobre o tema, não gosto de mudança repentina de assunto.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderOrientacao(2, 'RESPONDEDOR', this)">CONCORDO</button>
-      <button onclick="responderOrientacao(2, 'INICIADOR', this)">DISCORDO</button>
+      <button onclick="responder('orientacao', 2, 'RESPONDEDOR', this)">CONCORDO</button>
+      <button onclick="responder('orientacao', 2, 'INICIADOR', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">4</div>
       <p class="pergunta-texto">Minha maior tendência é escutar o que os outros têm a me dizer, é natural para mim guardar e processar o que me dizem antes de expor o que eu penso.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderOrientacao(3, 'RESPONDEDOR', this)">CONCORDO</button>
-      <button onclick="responderOrientacao(3, 'INICIADOR', this)">DISCORDO</button>
+      <button onclick="responder('orientacao', 3, 'RESPONDEDOR', this)">CONCORDO</button>
+      <button onclick="responder('orientacao', 3, 'INICIADOR', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">5</div>
       <p class="pergunta-texto">Geralmente sou muito inquieto, tenho uma propensão de participar ativamente das coisas, adoro compartilhar assuntos, participar de conversas e frequentemente não percebo que posso estar incomodando.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderOrientacao(4, 'INICIADOR', this)">CONCORDO</button>
-      <button onclick="responderOrientacao(4, 'RESPONDEDOR', this)">DISCORDO</button>
+      <button onclick="responder('orientacao', 4, 'INICIADOR', this)">CONCORDO</button>
+      <button onclick="responder('orientacao', 4, 'RESPONDEDOR', this)">DISCORDO</button>
     </div>
-
     <div id="resultadoOrientacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
 
   <div id="postura" class="content">
     <div class="title">DICOTOMIA POSTURA</div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">1</div>
       <p class="pergunta-texto">Tenho uma certa impaciência, prefiro fazer as coisas, dar andamento às coisas ao invés de ficar aguardando.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderPostura(0, 'MOVIMENTADOR', this)">CONCORDO</button>
-      <button onclick="responderPostura(0, 'CONTROLADOR', this)">DISCORDO</button>
+      <button onclick="responder('postura', 0, 'MOVIMENTADOR', this)">CONCORDO</button>
+      <button onclick="responder('postura', 0, 'CONTROLADOR', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">2</div>
       <p class="pergunta-texto">Tendo a ser mais flexível, isso me ajuda a adaptar minhas ações conforme os problemas forem surgindo, isso me faz ser melhor contornando obstáculos do percurso.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderPostura(1, 'MOVIMENTADOR', this)">CONCORDO</button>
-      <button onclick="responderPostura(1, 'CONTROLADOR', this)">DISCORDO</button>
+      <button onclick="responder('postura', 1, 'MOVIMENTADOR', this)">CONCORDO</button>
+      <button onclick="responder('postura', 1, 'CONTROLADOR', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">3</div>
       <p class="pergunta-texto">Sou uma pessoa que preza pelo primor, na escola meus cadernos eram muito caprichados, meu estojo tinha cores de caneta para cada parte do texto.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderPostura(2, 'CONTROLADOR', this)">CONCORDO</button>
-      <button onclick="responderPostura(2, 'MOVIMENTADOR', this)">DISCORDO</button>
+      <button onclick="responder('postura', 2, 'CONTROLADOR', this)">CONCORDO</button>
+      <button onclick="responder('postura', 2, 'MOVIMENTADOR', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">4</div>
       <p class="pergunta-texto">Na execução do que deve ser feito tendo a ser mais vagaroso, gasto muito mais tempo refletindo sobre como deve ser feito, assim na hora da execução, o trabalho saia impecável.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderPostura(3, 'CONTROLADOR', this)">CONCORDO</button>
-      <button onclick="responderPostura(3, 'MOVIMENTADOR', this)">DISCORDO</button>
+      <button onclick="responder('postura', 3, 'CONTROLADOR', this)">CONCORDO</button>
+      <button onclick="responder('postura', 3, 'MOVIMENTADOR', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">5</div>
       <p class="pergunta-texto">Nas apresentações dos trabalhos da escola, eu geralmente não me preparava muito, estudava um pouco antes da aula e improvisava na hora a partir de algumas coisas que eu já sabia.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderPostura(4, 'MOVIMENTADOR', this)">CONCORDO</button>
-      <button onclick="responderPostura(4, 'CONTROLADOR', this)">DISCORDO</button>
+      <button onclick="responder('postura', 4, 'MOVIMENTADOR', this)">CONCORDO</button>
+      <button onclick="responder('postura', 4, 'CONTROLADOR', this)">DISCORDO</button>
     </div>
-
     <div id="resultadoPostura">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
 
   <div id="enfoque" class="content">
     <div class="title">DICOTOMIA ENFOQUE</div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">1</div>
       <p class="pergunta-texto">Com frequência sou chamado(a) de "ovelha negra" da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(0, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(0, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
+      <button onclick="responder('enfoque', 0, 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responder('enfoque', 0, 'AFILIATIVO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">2</div>
       <p class="pergunta-texto">Costumo me sentir desconfortável em ambientes de trabalho muito competitivos, com metas rígidas e cobranças constantes; esse tipo de clima acaba me desgastando bastante.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(1, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(1, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
+      <button onclick="responder('enfoque', 1, 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responder('enfoque', 1, 'PRAGMÁTICO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">3</div>
       <p class="pergunta-texto">Sou uma pessoa bastante amistosa, gosto de participar dos rolês com os amigos e detesto gente monossilábica. Até porque se eu não estou interessado em conversar com alguém, tento dar um jeito menos babaca de sair da conversa.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(2, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(2, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
+      <button onclick="responder('enfoque', 2, 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responder('enfoque', 2, 'PRAGMÁTICO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">4</div>
       <p class="pergunta-texto">Não gosto muito de fazer "a social", sou péssimo em fingir ser sociável com pessoas que não me interessam.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(3, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(3, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
+      <button onclick="responder('enfoque', 3, 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responder('enfoque', 3, 'AFILIATIVO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">5</div>
       <p class="pergunta-texto">Quando meus amigos ou familiares escolhem fazer algo em um lugar onde eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(4, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(4, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
+      <button onclick="responder('enfoque', 4, 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responder('enfoque', 4, 'AFILIATIVO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">6</div>
       <p class="pergunta-texto">Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(5, 'PRAGMÁTICO', 'AFILIATIVO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(5, 'AFILIATIVO', 'PRAGMÁTICO', this)">DISCORDO</button>
+      <button onclick="responder('enfoque', 5, 'PRAGMÁTICO', this)">CONCORDO</button>
+      <button onclick="responder('enfoque', 5, 'AFILIATIVO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">7</div>
       <p class="pergunta-texto">Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa, isso me ajuda a ver se ela está sendo receptiva ou não com o que eu estou falando.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderEnfoque(6, 'AFILIATIVO', 'PRAGMÁTICO', this)">CONCORDO</button>
-      <button onclick="responderEnfoque(6, 'PRAGMÁTICO', 'AFILIATIVO', this)">DISCORDO</button>
+      <button onclick="responder('enfoque', 6, 'AFILIATIVO', this)">CONCORDO</button>
+      <button onclick="responder('enfoque', 6, 'PRAGMÁTICO', this)">DISCORDO</button>
     </div>
-
     <div id="resultadoEnfoque">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
 
   <div id="organizacao" class="content">
     <div class="title">DICOTOMIA ORGANIZAÇÃO</div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">1</div>
       <p class="pergunta-texto">Eu entendo que as regras existem para que as coisas não virem uma baderna, mas também é necessário particularizar os casos, muitas vezes é preciso afrouxar as estruturas para que acordos benéficos sejam estabelecidos.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderOrganizacao(0, 'INTERESSADO', this)">CONCORDO</button>
-      <button onclick="responderOrganizacao(0, 'ESTRUTURADO', this)">DISCORDO</button>
+      <button onclick="responder('organizacao', 0, 'INTERESSADO', this)">CONCORDO</button>
+      <button onclick="responder('organizacao', 0, 'ESTRUTURADO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">2</div>
       <p class="pergunta-texto">Curto manter minha rotina, fazer as coisas que geralmente faço no horário que faço, fico muito estressado quando um imprevisto acontece.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderOrganizacao(1, 'ESTRUTURADO', this)">CONCORDO</button>
-      <button onclick="responderOrganizacao(1, 'INTERESSADO', this)">DISCORDO</button>
+      <button onclick="responder('organizacao', 1, 'ESTRUTURADO', this)">CONCORDO</button>
+      <button onclick="responder('organizacao', 1, 'INTERESSADO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">3</div>
       <p class="pergunta-texto">Se o meu trabalho exige que eu siga um protocolo de atendimento, busco sempre o seguir, não costumo abrir exceções a respeito disso.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderOrganizacao(2, 'ESTRUTURADO', this)">CONCORDO</button>
-      <button onclick="responderOrganizacao(2, 'INTERESSADO', this)">DISCORDO</button>
+      <button onclick="responder('organizacao', 2, 'ESTRUTURADO', this)">CONCORDO</button>
+      <button onclick="responder('organizacao', 2, 'INTERESSADO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">4</div>
       <p class="pergunta-texto">Às vezes, por buscar garantir que as coisas funcionem, posso soar um pouco ríspido(a) na maneira de tratar as pessoas.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderOrganizacao(3, 'ESTRUTURADO', this)">CONCORDO</button>
-      <button onclick="responderOrganizacao(3, 'INTERESSADO', this)">DISCORDO</button>
+      <button onclick="responder('organizacao', 3, 'ESTRUTURADO', this)">CONCORDO</button>
+      <button onclick="responder('organizacao', 3, 'INTERESSADO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">5</div>
       <p class="pergunta-texto">Para mim, justiça é aplicar o que é devido a cada indivíduo, não dá para sair batendo o martelo usando a mesma medida para todo mundo, até porque se uma pessoa furta alimentos para sustentar os filhos, ela não deve sofrer a mesma pena que uma pessoa que roubou por mero desejo e capricho.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderOrganizacao(4, 'INTERESSADO', this)">CONCORDO</button>
-      <button onclick="responderOrganizacao(4, 'ESTRUTURADO', this)">DISCORDO</button>
+      <button onclick="responder('organizacao', 4, 'INTERESSADO', this)">CONCORDO</button>
+      <button onclick="responder('organizacao', 4, 'ESTRUTURADO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">6</div>
       <p class="pergunta-texto">Pessoas que moralizam tudo são muito tediosas, penso que se as pessoas envolvidas numa situação não veem problema nela, não tem por que achar ruim.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderOrganizacao(5, 'INTERESSADO', this)">CONCORDO</button>
-      <button onclick="responderOrganizacao(5, 'ESTRUTURADO', this)">DISCORDO</button>
+      <button onclick="responder('organizacao', 5, 'INTERESSADO', this)">CONCORDO</button>
+      <button onclick="responder('organizacao', 5, 'ESTRUTURADO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">7</div>
       <p class="pergunta-texto">Sou adepto ao ditado "o combinado não sai caro", afinal se a pessoa é adulta, ela é responsável e consciente das próprias ações.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderOrganizacao(6, 'INTERESSADO', this)">CONCORDO</button>
-      <button onclick="responderOrganizacao(6, 'ESTRUTURADO', this)">DISCORDO</button>
+      <button onclick="responder('organizacao', 6, 'ESTRUTURADO', this)">CONCORDO</button>
+      <button onclick="responder('organizacao', 6, 'INTERESSADO', this)">DISCORDO</button>
     </div>
-
     <div id="resultadoOrganizacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
 
   <div id="comunicacao" class="content">
     <div class="title">DICOTOMIA COMUNICAÇÃO</div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">1</div>
       <p class="pergunta-texto">Gosto de instigar as pessoas quando estou conversando com elas, acho mais interessante fazer um "charminho" ao invés de chegar já deixando claro minhas intenções.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderComunicacao(0, 'INFORMATIVO', this)">CONCORDO</button>
-      <button onclick="responderComunicacao(0, 'DIRETO', this)">DISCORDO</button>
+      <button onclick="responder('comunicacao', 0, 'INFORMATIVO', this)">CONCORDO</button>
+      <button onclick="responder('comunicacao', 0, 'DIRETO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">2</div>
       <p class="pergunta-texto">Minha fala tende a ser mais retilínea, conduzo o que eu falo de maneira mais centrada, raramente me perco ou me embaralho no que estou falando.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderComunicacao(1, 'DIRETO', this)">CONCORDO</button>
-      <button onclick="responderComunicacao(1, 'INFORMATIVO', this)">DISCORDO</button>
+      <button onclick="responder('comunicacao', 1, 'DIRETO', this)">CONCORDO</button>
+      <button onclick="responder('comunicacao', 1, 'INFORMATIVO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">3</div>
       <p class="pergunta-texto">Meus amigos e colegas costumam falar que eu passo muito uma vibe "professor", isso porque eu normalmente trago muito contexto na minha comunicação, e descrevo muito sobre as coisas que falo.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderComunicacao(2, 'INFORMATIVO', this)">CONCORDO</button>
-      <button onclick="responderComunicacao(2, 'DIRETO', this)">DISCORDO</button>
+      <button onclick="responder('comunicacao', 2, 'INFORMATIVO', this)">CONCORDO</button>
+      <button onclick="responder('comunicacao', 2, 'DIRETO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">4</div>
       <p class="pergunta-texto">Detesto fazer rodeios para falar o que eu pretendo, prefiro chegar e já falar o que está acontecendo do que preparar a outra pessoa para receber a informação.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderComunicacao(3, 'DIRETO', this)">CONCORDO</button>
-      <button onclick="responderComunicacao(3, 'INFORMATIVO', this)">DISCORDO</button>
+      <button onclick="responder('comunicacao', 3, 'DIRETO', this)">CONCORDO</button>
+      <button onclick="responder('comunicacao', 3, 'INFORMATIVO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">5</div>
       <p class="pergunta-texto">Com frequência sou mal interpretado pelas pessoas, acho que é porque eu costumo oscilar muito sutilmente na minha forma de falar, às vezes começo falando sério, depois faço graça e ironizo e isso acaba meio que "bugando" as pessoas.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderComunicacao(4, 'INFORMATIVO', this)">CONCORDO</button>
-      <button onclick="responderComunicacao(4, 'DIRETO', this)">DISCORDO</button>
+      <button onclick="responder('comunicacao', 4, 'INFORMATIVO', this)">CONCORDO</button>
+      <button onclick="responder('comunicacao', 4, 'DIRETO', this)">DISCORDO</button>
     </div>
-
     <div id="resultadoComunicacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
 
   <div id="interpretacao" class="content">
     <div class="title">DICOTOMIA INTERPRETAÇÃO</div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">1</div>
       <p class="pergunta-texto">Tendo a ser uma pessoa mais cética, bem mais pé no chão. Muito raro eu cair nesse papinho de signo e outras coisas afins.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderInterpretacao(0, 'CONCRETO', this)">CONCORDO</button>
-      <button onclick="responderInterpretacao(0, 'ABSTRATO', this)">DISCORDO</button>
+      <button onclick="responder('interpretacao', 0, 'CONCRETO', this)">CONCORDO</button>
+      <button onclick="responder('interpretacao', 0, 'ABSTRATO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">2</div>
       <p class="pergunta-texto">Posso parecer meio acomodado e conformado para as pessoas, mas é que eu gosto de focar mais no que é presente agora. Esse negócio de ir atrás dos sonhos e ideais não cola comigo, nem tudo é possível de se realizar.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderInterpretacao(1, 'CONCRETO', this)">CONCORDO</button>
-      <button onclick="responderInterpretacao(1, 'ABSTRATO', this)">DISCORDO</button>
+      <button onclick="responder('interpretacao', 1, 'CONCRETO', this)">CONCORDO</button>
+      <button onclick="responder('interpretacao', 1, 'ABSTRATO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">3</div>
       <p class="pergunta-texto">Minha inclinação maior é divagar nas coisas que podem acontecer futuramente, penso bastante sobre como pode ser a sociedade do futuro, as novas tecnologias que podem surgir e o que eu poderia estar fazendo nessas novas situações.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderInterpretacao(2, 'ABSTRATO', this)">CONCORDO</button>
-      <button onclick="responderInterpretacao(2, 'CONCRETO', this)">DISCORDO</button>
+      <button onclick="responder('interpretacao', 2, 'ABSTRATO', this)">CONCORDO</button>
+      <button onclick="responder('interpretacao', 2, 'CONCRETO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">4</div>
       <p class="pergunta-texto">Tenho bastante maestria com coisas artesanais, seja em cozinhar, costurar, desenhar, manusear ou de mais artesanatos. Sinto um grande prazer em cada etapa do processo disso.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderInterpretacao(3, 'CONCRETO', this)">CONCORDO</button>
-      <button onclick="responderInterpretacao(3, 'ABSTRATO', this)">DISCORDO</button>
+      <button onclick="responder('interpretacao', 3, 'CONCRETO', this)">CONCORDO</button>
+      <button onclick="responder('interpretacao', 3, 'ABSTRATO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">5</div>
       <p class="pergunta-texto">Costumo ser uma pessoa precavida, é natural para mim elucubrar coisas que podem me acometer e já me preparo mentalmente para lidar com elas.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderInterpretacao(4, 'ABSTRATO', this)">CONCORDO</button>
-      <button onclick="responderInterpretacao(4, 'CONCRETO', this)">DISCORDO</button>
+      <button onclick="responder('interpretacao', 4, 'ABSTRATO', this)">CONCORDO</button>
+      <button onclick="responder('interpretacao', 4, 'CONCRETO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">6</div>
       <p class="pergunta-texto">Meus amigos e familiares frequentemente falam que eu "viajo na maionese", mas é que é muito bacana ficar pensando nas alternativas das coisas, se as coisas fossem de outra maneira, se a história tivesse sido diferente.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderInterpretacao(5, 'ABSTRATO', this)">CONCORDO</button>
-      <button onclick="responderInterpretacao(5, 'CONCRETO', this)">DISCORDO</button>
+      <button onclick="responder('interpretacao', 5, 'ABSTRATO', this)">CONCORDO</button>
+      <button onclick="responder('interpretacao', 5, 'CONCRETO', this)">DISCORDO</button>
     </div>
-
     <div class="pergunta-container">
       <div class="numero-pergunta">7</div>
       <p class="pergunta-texto">Adoro livros e filmes investigativos e suspense, perceber os cenários de crimes, analisar as inconsistências, prestar atenção nos detalhes e ir associando os materiais. Geralmente eu sou bem assertivo em quem cometeu o crime só observando tudo isso.</p>
     </div>
     <div class="button-container">
-      <button onclick="responderInterpretacao(6, 'CONCRETO', this)">CONCORDO</button>
-      <button onclick="responderInterpretacao(6, 'ABSTRATO', this)">DISCORDO</button>
+      <button onclick="responder('interpretacao', 6, 'CONCRETO', this)">CONCORDO</button>
+      <button onclick="responder('interpretacao', 6, 'ABSTRATO', this)">DISCORDO</button>
     </div>
-
     <div id="resultadoInterpretacao">PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span></div>
   </div>
 
   <div id="resultado" class="content">
     <div class="title">RESULTADO TIPOLÓGICO</div>
-    
     <div class="result-container">
       <div class="result-box">
         TEMPERAMENTO
@@ -931,12 +827,9 @@
         <div class="result-value" id="orientacaoResult">-</div>
       </div>
     </div>
-    
     <div class="type-box" id="typeResult">-</div>
-    
     <div class="type-details" id="typeDetails">
-<div id="destoantesContainer" style="margin: 20px auto; max-width: 800px;"></div>
-
+      <div id="destoantesContainer" style="margin: 20px auto; max-width: 800px;"></div>
       <div class="type-image">
         <img id="typeImage" src="" alt="Tipo de personalidade">
       </div>
@@ -948,15 +841,15 @@
   </div>
 
   <script>
-    // Objetos para armazenar respostas
-    const respostasOrientacao = {};
-    const respostasPostura = {};
-    const respostasEnfoque = {};
-    const respostasOrganizacao = {};
-    const respostasComunicacao = {};
-    const respostasInterpretacao = {};
+    const respostas = {
+      orientacao: {},
+      postura: {},
+      enfoque: {},
+      organizacao: {},
+      comunicacao: {},
+      interpretacao: {}
+    };
 
-    // Contadores de perguntas por dicotomia
     const totalPerguntas = {
       orientacao: 5,
       postura: 5,
@@ -966,7 +859,6 @@
       interpretacao: 7
     };
 
-    // Objeto para armazenar resultados finais de cada dicotomia
     const resultados = {
       orientacao: null,
       postura: null,
@@ -976,189 +868,75 @@
       interpretacao: null
     };
 
-    // Descrições dos tipos de personalidade
     const typeDescriptions = {
-      "ESTJ": {
-        title: "O JUIZ",
-        text: "Linda Berens descreve o ESTJ como um tipo executor, voltado para ordem, eficiência e resultados (com Thinking Extravertido dominante). Como parte do temperamento Guardião (SJ), valoriza regras, estabilidade e experiências comprovadas (usando Introverted Sensing como função auxiliar).\n\nLíderes natos em ambientes estruturados, os ESTJs são decisivos e confiáveis, mas podem parecer inflexíveis quando negligenciam aspectos emocionais (sua função inferior é Introverted Feeling). Eles brilham ao implementar sistemas e manter padrões, embora precisem desenvolver equilíbrio entre pragmatismo e empatia."
-      },
-      "ESFJ": {
-        title: "O CAVALEIRO",
-        text: "Linda Berens caracteriza o ESFJ como um tipo protetor, voltado para harmonia, cuidado e responsabilidade social (com Feeling Extravertido dominante). Integrante do temperamento Guardião (SJ), valoriza tradições, segurança e bem-estar coletivo (usando Introverted Sensing como função auxiliar).\n\nAnfitriões natos em ambientes sociais, os ESFJs são atenciosos e cooperativos, mas podem ser percebidos como controladores quando excessivamente preocupados com aprovação alheia (sua função inferior é Introverted Thinking). Eles se destacam ao criar vínculos e manter estruturas de apoio, embora precisem equilibrar altruísmo com autoproteção."
-      },
-      "ISTJ": {
-        title: "O ARQUIVISTA",
-        text: "Linda Berens descreve o ISTJ como um tipo inspetor, orientado por dever, precisão e fatos concretos (com Introverted Thinking dominante). Como parte do temperamento Guardião (SJ), valoriza procedimentos comprovados, responsabilidade e sistemas confiáveis (usando Extraverted Sensing como função auxiliar).\n\nExecutores discretos e minuciosos, os ISTJs são mestres em manter estruturas e cumprir prazos, mas podem ser vistos como inflexíveis quando resistem a mudanças abruptas (sua função inferior é Extraverted Intuition). Eles brilham em funções que exigem atenção a detalhes e preservação de padrões, enquanto trabalham para desenvolver maior abertura ao novo."
-      },
-      "ISFJ": {
-        title: "O DEFENSOR",
-        text: "Linda Berens descreve o ISFJ como 'Defensores' - tipos leais e atenciosos que combinam sensibilidade prática com forte senso de responsabilidade. Como Guardiões (SJ), são meticulosos em cuidar dos outros, antecipando necessidades antes mesmo de serem expressas.\n\nSua memória afetiva (Introverted Sensing dominante) os torna excepcionais em manter tradições e criar ambientes acolhedores. Precisam desenvolver confiança para expressar suas próprias necessidades (Função Inferior: Extraverted Intuition) além de focar nas dos outros."
-      },
-      "ESTP": {
-        title: "O GLADIADOR",
-        text: "Linda Berens descreve o ESTP como 'Promotores' - tipos enérgicos e perspicazes que vivem no momento, resolvendo problemas com pragmatismo e charme. Como Artífices (SP), são mestres em ler situações e improvisar soluções, muitas vezes desafiando convenções para obter resultados.\n\nSua abordagem direta (Extraverted Thinking auxiliar) pode ser mal interpretada como insensibilidade, quando na verdade valorizam honestidade acima de delicadeza social. Seu desafio é desenvolver planejamento de longo prazo (Função Inferior: Introverted Intuition) sem perder sua espontaneidade característica."
-      },
-      "ESFP": {
-        title: "O PERFORMADOR",
-        text: "Linda Berens caracteriza o ESFP como 'Performers' - tipos vibrantes e sociáveis que transformam o ordinário em extraordinário através de seu entusiasmo contagiante. Como Artífices (SP), têm talento único para criar experiências memoráveis, adaptando-se fluidamente a qualquer situação social.\n\nSua capacidade de ler emoções (Extraverted Feeling auxiliar) os torna mediadores naturais, embora possam negligenciar conflitos mais profundos em favor da harmonia imediata. Precisam desenvolver foco estratégico (Função Inferior: Introverted Intuition) sem sacrificar sua autenticidade espontânea."
-      },
-      "ISTP": {
-        title: "O OPERADOR",
-        text: "Linda Berens descreve o ISTP como 'Artesãos' - tipos independentes e analíticos com habilidade excepcional para entender e manipular sistemas mecânicos e lógicos. Como Artífices (SP), valorizam liberdade acima de tudo, resistindo a estruturas que considerem arbitrárias ou ineficientes.\n\nSua mente objetiva (Introverted Thinking dominante) os torna solucionadores de problemas imparciais, embora possam parecer distantes emocionalmente. O desafio é equilibrar ceticismo com abertura a perspectivas alheias (Função Inferior: Extraverted Feeling), mantendo sua integridade característica."
-      },
-      "ISFP": {
-        title: "O ARTISTA",
-        text: "Linda Berens caracteriza o ISFP como 'Compositores' - tipos sensíveis e autênticos que expressam seus valores profundos através de ações criativas. Como Idealistas (NF), são catalisadores de mudanças pessoais e sociais, conectando pessoas e ideias de maneiras inovadoras.\n\nSua profundidade emocional (Introverted Feeling dominante) os torna mediadores naturais de conflitos humanos, embora possam evitar confronto direto. Precisam desenvolver assertividade (Função Inferior: Extraverted Thinking) para defender suas causas sem perder sua sensibilidade característica."
-      },
-      "ENTJ": {
-        title: "O ESTRATEGISTA",
-        text: "Linda Berens descreve o ENTJ como 'Comandantes' - tipos estratégicos e determinados que naturalmente assumem posições de liderança. Como Avançadores (NT), combinam visão de longo prazo com capacidade implacável de implementação, muitas vezes inspirando outros a alcançar mais do que imaginavam possível.\n\nSua mente sistemática (Extraverted Thinking dominante) os torna excepcionais em organizar estruturas complexas, embora possam negligenciar considerações humanas em favor da eficiência. O desafio é equilibrar ambição com empatia genuína (Função Inferior: Introverted Feeling)."
-      },
-      "ENTP": {
-        title: "O VISIONÁRIO",
-        text: "Linda Berens caracteriza o ENTP como 'Inovadores' - tipos curiosos e inventivos que veem possibilidades onde outros veem obstáculos. Como Avançadores (NT), são mestres em conectar conceitos aparentemente desconexos, desafiando o status quo com perguntas provocativas.\n\nSua energia contagiante (Extraverted Intuition dominante) os torna catalisadores de mudanças, embora possam lutar para seguir adiante com suas próprias ideias. Precisam desenvolver disciplina de implementação (Função Inferior: Introverted Sensing) sem sacrificar sua criatividade característica."
-      },
-      "INTJ": {
-        title: "O ARQUEIRO",
-        text: "Linda Berens descreve o INTJ como 'Estrategistas' - tipos visionários e analíticos com capacidade singular de transformar conceitos abstratos em sistemas eficazes. Como Avançadores (NT), são os arquitetos de mudanças estruturais, sempre projetando soluções inovadoras para problemas complexos.\n\nSua mente independente (Introverted Intuition dominante) os permite antecipar tendências com anos de antecedência, embora possam se sentir incompreendidos em ambientes convencionais. O desafio é equilibrar idealismo com realismo prático (Função Inferior: Extraverted Sensing), mantendo sua visão única."
-      },
-      "INTP": {
-        title: "O SÁBIO",
-        text: "Linda Berens caracteriza o INTP como 'Arquitetos de Sistemas' - mentes analíticas que decifram a realidade através de modelos lógicos. Como Avançadores (NT), são exploradores incansáveis de padrões, vivendo para desconstruir e reconstruir ideias, priorizando coerência teórica acima de tudo.\n\nSua abordagem não convencional (Introverted Thinking dominante) muitas vezes os coloca à margem de sistemas estabelecidos. Precisam desenvolver canais para aplicar suas ideias no mundo real (Função Inferior: Extraverted Feeling), mantendo sua integridade intelectual."
-      },
-      "ENFJ": {
-        title: "O CLÉRIGO",
-        text: "Linda Berens descreve o ENFJ como 'Professores' - tipos carismáticos e persuasivos que veem e ativam o potencial nos outros. Como Idealistas (NF), combinam insight psicológico com habilidade excepcional para comunicar visões inspiradoras.\n\nSua empatia natural (Extraverted Feeling dominante) os torna líderes transformacionais, embora possam negligenciar suas próprias necessidades em favor das dos outros. O desafio é equilibrar otimismo com confronto necessário (Função Inferior: Introverted Thinking), mantendo sua autenticidade característica."
-      },
-      "ENFP": {
-        title: "O BARDO",
-        text: "Linda Berens caracteriza o ENFP como 'Campeões' - tipos entusiastas e criativos que veem a vida como uma tela em branco cheia de possibilidades. Como Idealistas (NF), são catalisadores de mudanças pessoais e sociais, conectando pessoas e ideias de maneiras inovadoras.\n\nSua energia contagiante (Extraverted Intuition dominante) inspira outros a saírem de suas zonas de conforto, embora possam lutar com foco e implementação. Precisam desenvolver disciplina (Função Inferior: Introverted Sensing) sem sacrificar sua espontaneidade característica."
-      },
-      "INFJ": {
-        title: "O PALADINO",
-        text: "Linda Berens descreve o INFJ como 'Conselheiros' - tipos raros e profundos que combinam insight psicológico com forte senso de propósito. Como Idealistas (NF), são pontes entre o visível e o invisível, traduzindo intuições complexas em orientações práticas.\n\nSua mente perspicaz (Introverted Intuition dominante) os permite antecipar padrões sociais e interpessoais, embora possam se sentir incompreendidos em ambientes convencionais. O desafio é equilibrar idealismo com realismo prático (Função Inferior: Extraverted Sensing), mantendo sua visão única."
-      },
-      "INFP": {
-        title: "O CURANDEIRO",
-        text: "Linda Berens caracteriza o INFP como 'Curadores' - tipos autênticos e compassivos guiados por seus valores internos. Como Idealistas (NF), são tecelões de significado, transformando experiências em narrativas que inspiram crescimento pessoal e social.\n\nSua profundidade emocional (Introverted Feeling dominante) os torna mediadores naturais de conflitos humanos, embora possam evitar confronto direto. Precisam desenvolver assertividade (Função Inferior: Extraverted Thinking) para defender suas causas sem perder sua sensibilidade característica."
-      }
+      "ESTJ": { title: "O JUIZ", text: "Executor, voltado para ordem e eficiência. Líder em ambientes estruturados, valoriza regras e estabilidade, mas pode ser inflexível." },
+      "ESFJ": { title: "O CAVALEIRO", text: "Protetor, focado em harmonia e cuidado. Anfitrião social, atencioso, mas pode ser controlador por buscar aprovação." },
+      "ISTJ": { title: "O ARQUIVISTA", text: "Inspetor, orientado por dever e precisão. Discreto, minucioso, resiste a mudanças abruptas." },
+      "ISFJ": { title: "O DEFENSOR", text: "Leal, atencioso, mantém tradições. Excepcional em criar ambientes acolhedores, precisa expressar próprias necessidades." },
+      "ESTP": { title: "O GLADIADOR", text: "Enérgico, perspicaz, vive o momento. Resolve problemas com pragmatismo, mas precisa planejar a longo prazo." },
+      "ESFP": { title: "O PERFORMADOR", text: "Vibrante, sociável, cria experiências memoráveis. Mediador natural, mas pode negligenciar conflitos profundos." },
+      "ISTP": { title: "O OPERADOR", text: "Independente, analítico, entende sistemas. Solucionador imparcial, mas pode parecer distante emocionalmente." },
+      "ISFP": { title: "O ARTISTA", text: "Sensitivo, autêntico, expressa valores criativamente. Mediador, precisa desenvolver assertividade." },
+      "ENTJ": { title: "O ESTRATEGISTA", text: "Líder estratégico, combina visão e implementação. Organiza sistemas complexos, mas pode negligenciar empatia." },
+      "ENTP": { title: "O VISIONÁRIO", text: "Curioso, inventivo, conecta conceitos. Catalisador de mudanças, precisa de disciplina para implementar." },
+      "INTJ": { title: "O ARQUEIRO", text: "Visionário, analítico, cria sistemas eficazes. Antecipa tendências, precisa equilibrar idealismo e realismo." },
+      "INTP": { title: "O SÁBIO", text: "Analítico, decifra realidade com lógica. Explora padrões, precisa aplicar ideias no mundo real." },
+      "ENFJ": { title: "O CLÉRIGO", text: "Carismático, persuasivo, ativa potencial. Líder transformacional, precisa equilibrar otimismo e confronto." },
+      "ENFP": { title: "O BARDO", text: "Entusiasta, criativo, vê possibilidades. Inspira mudanças, precisa de disciplina para implementar." },
+      "INFJ": { title: "O PALADINO", text: "Profundo, combina insight e propósito. Traduz intuições em orientações, precisa de realismo prático." },
+      "INFP": { title: "O CURANDEIRO", text: "Autêntico, compassivo, guiado por valores. Transforma experiências em narrativas, precisa de assertividade." }
     };
 
-    // Função para mostrar as abas
-    
     function showTab(tabId) {
       // Remove a classe 'active-tab' de todas as abas
-      document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.remove('active-tab');
+      document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active-tab'));
+      
+      // Remove a classe 'active' e define display: none para todos os conteúdos
+      document.querySelectorAll('.content').forEach(content => {
+        content.classList.remove('active');
+        content.style.display = 'none';
       });
-
+      
       // Adiciona a classe 'active-tab' à aba clicada
       const clickedTab = document.querySelector(`.tab[onclick="showTab('${tabId}')"]`);
-      if (clickedTab) {
-        clickedTab.classList.add('active-tab');
-      }
-
-      // Esconde todos os conteúdos
-      document.querySelectorAll('.content').forEach(content => {
-        content.style.display = 'none';
-        content.classList.remove('active');
-      });
-
-      // Mostra o conteúdo da aba clicada
+      if (clickedTab) clickedTab.classList.add('active-tab');
+      
+      // Exibe o conteúdo da aba selecionada
       const contentToShow = document.getElementById(tabId);
       if (contentToShow) {
         contentToShow.style.display = 'block';
         contentToShow.classList.add('active');
       }
-
-      // Se for a aba de resultado, atualiza os resultados
-      if (tabId === 'resultado') {
-        calcularResultados();
-      }
-    }
-    );
       
-      // Adiciona a classe 'active-tab' apenas à aba clicada
-      const clickedTab = document.querySelector(`.tab[onclick="showTab('${tabId}')"]`);
-      if (clickedTab) {
-        clickedTab.classList.add('active-tab');
-      }
-      
-      // Oculta todos os conteúdos
-      document.querySelectorAll('.content').forEach(content => {
-        content.style.display = 'none';
-      });
-      
-      // Mostra apenas o conteúdo da aba clicada
-      const contentToShow = document.getElementById(tabId);
-      if (contentToShow) {
-        contentToShow.style.display = 'block';
-      }
-      
-      // Se for a aba de resultado, calcula os resultados
-      if (tabId === 'resultado') {
-        calcularResultados();
-      }
+      // Calcula resultados se for a aba de resultado
+      if (tabId === 'resultado') calcularResultados();
     }
 
-    // Função para carregar a imagem do tipo
     function carregarImagemTipo(tipo) {
       const imgElement = document.getElementById('typeImage');
       const typeTitle = document.getElementById('typeTitle');
       const typeText = document.getElementById('typeText');
       
-      // Esconder tudo inicialmente
       imgElement.style.display = 'none';
       typeTitle.style.display = 'none';
       typeText.style.display = 'none';
-
+      
       if (tipo && tipo !== "INDEFINIDO") {
-        // Mostrar elementos
         typeTitle.style.display = 'block';
         typeText.style.display = 'block';
-        
-        // Carregar imagem
         imgElement.src = `${tipo}.jpg`;
-        imgElement.onload = function() {
-          imgElement.style.display = 'block';
-        };
-        imgElement.onerror = function() {
-          imgElement.style.display = 'none';
-        };
+        imgElement.onload = () => imgElement.style.display = 'block';
+        imgElement.onerror = () => imgElement.style.display = 'none';
       }
     }
 
-    // Função para calcular o temperamento (SJ, SP, NT, NF)
     function calcularTemperamento() {
-      const interpretacao = resultados.interpretacao;
-      const enfoque = resultados.enfoque;
-      const organizacao = resultados.organizacao;
+      const { interpretacao, enfoque, organizacao } = resultados;
+      const countSJ = (enfoque === 'AFILIATIVO' ? 1 : 0) + (organizacao === 'ESTRUTURADO' ? 1 : 0) + (interpretacao === 'CONCRETO' ? 1 : 0);
+      const countSP = (interpretacao === 'CONCRETO' ? 1 : 0) + (enfoque === 'PRAGMÁTICO' ? 1 : 0) + (organizacao === 'INTERESSADO' ? 1 : 0);
+      const countNT = (interpretacao === 'ABSTRATO' ? 1 : 0) + (enfoque === 'PRAGMÁTICO' ? 1 : 0) + (organizacao === 'INTERESSADO' ? 1 : 0);
+      const countNF = (interpretacao === 'ABSTRATO' ? 1 : 0) + (enfoque === 'AFILIATIVO' ? 1 : 0) + (organizacao === 'INTERESSADO' ? 1 : 0);
       
-      // Verifica SJ (AFILIATIVO, ESTRUTURADO e CONCRETO)
-      const countSJ = 
-        (enfoque === 'AFILIATIVO' ? 1 : 0) + 
-        (organizacao === 'ESTRUTURADO' ? 1 : 0) + 
-        (interpretacao === 'CONCRETO' ? 1 : 0);
-      
-      // Verifica SP (CONCRETO, PRAGMÁTICO e INTERESSADO)
-      const countSP = 
-        (interpretacao === 'CONCRETO' ? 1 : 0) + 
-        (enfoque === 'PRAGMÁTICO' ? 1 : 0) + 
-        (organizacao === 'INTERESSADO' ? 1 : 0);
-      
-      // Verifica NT (ABSTRATO, PRAGMÁTICO e INTERESSADO)
-      const countNT = 
-        (interpretacao === 'ABSTRATO' ? 1 : 0) + 
-        (enfoque === 'PRAGMÁTICO' ? 1 : 0) + 
-        (organizacao === 'INTERESSADO' ? 1 : 0);
-      
-      // Verifica NF (ABSTRATO, AFILIATIVO e INTERESSADO)
-      const countNF = 
-        (interpretacao === 'ABSTRATO' ? 1 : 0) + 
-        (enfoque === 'AFILIATIVO' ? 1 : 0) + 
-        (organizacao === 'INTERESSADO' ? 1 : 0);
-      
-      // Determina o temperamento com base nos resultados
       if (countSJ >= 2) return "SJ";
       if (countSP >= 2) return "SP";
       if (countNT >= 2) return "NT";
@@ -1166,37 +944,13 @@
       return "INDEFINIDO";
     }
 
-    // Função para calcular o estilo (ESTRUTURADOR, INAUGURADOR, FINALIZADOR, BASTIDOR)
     function calcularEstilo() {
-      const orientacao = resultados.orientacao;
-      const postura = resultados.postura;
-      const comunicacao = resultados.comunicacao;
+      const { orientacao, postura, comunicacao } = resultados;
+      const countEstruturador = (orientacao === 'INICIADOR' ? 1 : 0) + (postura === 'CONTROLADOR' ? 1 : 0) + (comunicacao === 'DIRETO' ? 1 : 0);
+      const countInaugurador = (orientacao === 'INICIADOR' ? 1 : 0) + (postura === 'MOVIMENTADOR' ? 1 : 0) + (comunicacao === 'INFORMATIVO' ? 1 : 0);
+      const countFinalizador = (orientacao === 'RESPONDEDOR' ? 1 : 0) + (postura === 'MOVIMENTADOR' ? 1 : 0) + (comunicacao === 'DIRETO' ? 1 : 0);
+      const countBastidor = (orientacao === 'RESPONDEDOR' ? 1 : 0) + (postura === 'CONTROLADOR' ? 1 : 0) + (comunicacao === 'INFORMATIVO' ? 1 : 0);
       
-      // Verifica ESTRUTURADOR (INICIADOR, CONTROLADOR e DIRETO)
-      const countEstruturador = 
-        (orientacao === 'INICIADOR' ? 1 : 0) + 
-        (postura === 'CONTROLADOR' ? 1 : 0) + 
-        (comunicacao === 'DIRETO' ? 1 : 0);
-      
-      // Verifica INAUGURADOR (INICIADOR, MOVIMENTADOR e INFORMATIVO)
-      const countInaugurador = 
-        (orientacao === 'INICIADOR' ? 1 : 0) + 
-        (postura === 'MOVIMENTADOR' ? 1 : 0) + 
-        (comunicacao === 'INFORMATIVO' ? 1 : 0);
-      
-      // Verifica FINALIZADOR (RESPONDEDOR, MOVIMENTADOR e DIRETO)
-      const countFinalizador = 
-        (orientacao === 'RESPONDEDOR' ? 1 : 0) + 
-        (postura === 'MOVIMENTADOR' ? 1 : 0) + 
-        (comunicacao === 'DIRETO' ? 1 : 0);
-      
-      // Verifica BASTIDOR (RESPONDEDOR, CONTROLADOR e INFORMATIVO)
-      const countBastidor = 
-        (orientacao === 'RESPONDEDOR' ? 1 : 0) + 
-        (postura === 'CONTROLADOR' ? 1 : 0) + 
-        (comunicacao === 'INFORMATIVO' ? 1 : 0);
-      
-      // Determina o estilo com base nos resultados
       if (countEstruturador >= 2) return "ESTRUTURADOR";
       if (countInaugurador >= 2) return "INAUGURADOR";
       if (countFinalizador >= 2) return "FINALIZADOR";
@@ -1204,115 +958,95 @@
       return "INDEFINIDO";
     }
 
-    // Função para determinar o tipo de personalidade final
     function determinarTipoPersonalidade(temperamento, estilo, orientacao) {
-      // Mapeamento de tipos de personalidade
       const tipos = {
-        // SJ
         "SJ-ESTRUTURADOR-INICIADOR": "ESTJ",
         "SJ-INAUGURADOR-INICIADOR": "ESFJ",
         "SJ-FINALIZADOR-RESPONDEDOR": "ISTJ",
         "SJ-BASTIDOR-RESPONDEDOR": "ISFJ",
-        // SP
         "SP-ESTRUTURADOR-INICIADOR": "ESTP",
         "SP-INAUGURADOR-INICIADOR": "ESFP",
         "SP-FINALIZADOR-RESPONDEDOR": "ISTP",
         "SP-BASTIDOR-RESPONDEDOR": "ISFP",
-        // NT
         "NT-ESTRUTURADOR-INICIADOR": "ENTJ",
         "NT-INAUGURADOR-INICIADOR": "ENTP",
         "NT-FINALIZADOR-RESPONDEDOR": "INTJ",
         "NT-BASTIDOR-RESPONDEDOR": "INTP",
-        // NF
         "NF-ESTRUTURADOR-INICIADOR": "ENFJ",
         "NF-INAUGURADOR-INICIADOR": "ENFP",
         "NF-FINALIZADOR-RESPONDEDOR": "INFJ",
         "NF-BASTIDOR-RESPONDEDOR": "INFP"
       };
-
-      // Tenta encontrar correspondência exata
+      
       const chaveExata = `${temperamento}-${estilo}-${orientacao}`;
       if (tipos[chaveExata]) return tipos[chaveExata];
-
-      // Se não encontrar, tenta ignorar a orientação
+      
       const chaveSemOrientacao = `${temperamento}-${estilo}`;
-      const possiveisTipos = [];
-      for (const [key, value] of Object.entries(tipos)) {
-        if (key.startsWith(chaveSemOrientacao)) {
-          possiveisTipos.push(value);
+      const possiveisTipos = Object.entries(tipos)
+        .filter(([key]) => key.startsWith(chaveSemOrientacao))
+        .map(([, value]) => value);
+      
+      return possiveisTipos[0] || "INDEFINIDO";
+    }
+
+    function mostrarDestoantes(tipo) {
+      const gabarito = {
+        ESTJ: ["CONCRETO", "AFILIATIVO", "ESTRUTURADO", "DIRETO", "INICIADOR", "CONTROLADOR"],
+        ESFJ: ["CONCRETO", "AFILIATIVO", "ESTRUTURADO", "INFORMATIVO", "INICIADOR", "MOVIMENTADOR"],
+        ISTJ: ["CONCRETO", "AFILIATIVO", "ESTRUTURADO", "DIRETO", "RESPONDEDOR", "MOVIMENTADOR"],
+        ISFJ: ["CONCRETO", "AFILIATIVO", "ESTRUTURADO", "INFORMATIVO", "RESPONDEDOR", "CONTROLADOR"],
+        ESTP: ["CONCRETO", "PRAGMÁTICO", "INTERESSADO", "DIRETO", "INICIADOR", "CONTROLADOR"],
+        ESFP: ["CONCRETO", "PRAGMÁTICO", "INTERESSADO", "INFORMATIVO", "INICIADOR", "MOVIMENTADOR"],
+        ISTP: ["CONCRETO", "PRAGMÁTICO", "INTERESSADO", "DIRETO", "RESPONDEDOR", "MOVIMENTADOR"],
+        ISFP: ["CONCRETO", "PRAGMÁTICO", "INTERESSADO", "INFORMATIVO", "RESPONDEDOR", "CONTROLADOR"],
+        ENTJ: ["ABSTRATO", "PRAGMÁTICO", "ESTRUTURADO", "DIRETO", "INICIADOR", "CONTROLADOR"],
+        ENTP: ["ABSTRATO", "PRAGMÁTICO", "ESTRUTURADO", "INFORMATIVO", "INICIADOR", "MOVIMENTADOR"],
+        INTJ: ["ABSTRATO", "PRAGMÁTICO", "ESTRUTURADO", "DIRETO", "RESPONDEDOR", "MOVIMENTADOR"],
+        INTP: ["ABSTRATO", "PRAGMÁTICO", "ESTRUTURADO", "INFORMATIVO", "RESPONDEDOR", "CONTROLADOR"],
+        ENFJ: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "DIRETO", "INICIADOR", "CONTROLADOR"],
+        ENFP: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "INFORMATIVO", "INICIADOR", "MOVIMENTADOR"],
+        INFJ: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "DIRETO", "RESPONDEDOR", "MOVIMENTADOR"],
+        INFP: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "INFORMATIVO", "RESPONDEDOR", "MOVIMENTADOR"]
+      };
+
+      const dicotomiasUsuario = [
+        resultados.interpretacao,
+        resultados.enfoque,
+        resultados.organizacao,
+        resultados.comunicacao,
+        resultados.orientacao,
+        resultados.postura
+      ];
+
+      const container = document.getElementById("destoantesContainer");
+      container.innerHTML = "";
+
+      if (!tipo || !gabarito[tipo]) return;
+
+      const dicotomiasEsperadas = gabarito[tipo];
+
+      for (let i = 0; i < dicotomiasEsperadas.length; i++) {
+        if (dicotomiasUsuario[i] && dicotomiasUsuario[i] !== dicotomiasEsperadas[i]) {
+          const div = document.createElement("div");
+          div.className = "destoante-box";
+          div.innerHTML = `<strong>DICOTOMIA DESTOANTE:</strong> ${dicotomiasUsuario[i]}`;
+          container.appendChild(div);
         }
       }
-
-      // Retorna o primeiro tipo encontrado ou INDEFINIDO
-      return possiveisTipos.length > 0 ? possiveisTipos[0] : "INDEFINIDO";
     }
 
-    
-// Adicionando função para verificar dicotomias destoantes com base no tipo
-function mostrarDestoantes(tipo) {
-  const gabarito = {
-    ESTJ: ["CONCRETO", "AFILIATIVO", "ESTRUTURADO", "DIRETO", "INICIADOR", "CONTROLADOR"],
-    ESFJ: ["CONCRETO", "AFILIATIVO", "ESTRUTURADO", "INFORMATIVO", "INICIADOR", "MOVIMENTADOR"],
-    ISTJ: ["CONCRETO", "AFILIATIVO", "ESTRUTURADO", "DIRETO", "RESPONDEDOR", "MOVIMENTADOR"],
-    ISFJ: ["CONCRETO", "AFILIATIVO", "ESTRUTURADO", "INFORMATIVO", "RESPONDEDOR", "CONTROLADOR"],
-    ESTP: ["CONCRETO", "PRAGMÁTICO", "INTERESSADO", "DIRETO", "INICIADOR", "CONTROLADOR"],
-    ESFP: ["CONCRETO", "PRAGMÁTICO", "INTERESSADO", "INFORMATIVO", "INICIADOR", "MOVIMENTADOR"],
-    ISTP: ["CONCRETO", "PRAGMÁTICO", "INTERESSADO", "DIRETO", "RESPONDEDOR", "MOVIMENTADOR"],
-    ISFP: ["CONCRETO", "PRAGMÁTICO", "INTERESSADO", "INFORMATIVO", "RESPONDEDOR", "CONTROLADOR"],
-    ENTJ: ["ABSTRATO", "PRAGMÁTICO", "ESTRUTURADO", "DIRETO", "INICIADOR", "CONTROLADOR"],
-    ENTP: ["ABSTRATO", "PRAGMÁTICO", "ESTRUTURADO", "INFORMATIVO", "INICIADOR", "MOVIMENTADOR"],
-    INTJ: ["ABSTRATO", "PRAGMÁTICO", "ESTRUTURADO", "DIRETO", "RESPONDEDOR", "MOVIMENTADOR"],
-    INTP: ["ABSTRATO", "PRAGMÁTICO", "ESTRUTURADO", "INFORMATIVO", "RESPONDEDOR", "CONTROLADOR"],
-    ENFJ: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "DIRETO", "INICIADOR", "CONTROLADOR"],
-    ENFP: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "INFORMATIVO", "INICIADOR", "MOVIMENTADOR"],
-    INFJ: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "DIRETO", "RESPONDEDOR", "MOVIMENTADOR"],
-    INFP: ["ABSTRATO", "AFILIATIVO", "INTERESSADO", "INFORMATIVO", "RESPONDEDOR", "MOVIMENTADOR"]
-  };
-
-  const dicotomiasUsuario = [
-    resultados.interpretacao,
-    resultados.enfoque,
-    resultados.organizacao,
-    resultados.comunicacao,
-    resultados.orientacao,
-    resultados.postura
-  ];
-
-  const container = document.getElementById("destoantesContainer");
-  container.innerHTML = ""; // limpa conteúdo anterior
-
-  if (!tipo || !gabarito[tipo]) return;
-
-  const dicotomiasEsperadas = gabarito[tipo];
-
-  for (let i = 0; i < dicotomiasEsperadas.length; i++) {
-    if (dicotomiasUsuario[i] && dicotomiasUsuario[i] !== dicotomiasEsperadas[i]) {
-      const div = document.createElement("div");
-      div.className = "destoante-box";
-      div.innerHTML = "<strong>DICOTOMIA DESTOANTE:</strong> " + dicotomiasUsuario[i];
-      container.appendChild(div);
-    }
-  }
-}
-
-
-// Função para calcular todos os resultados
     function calcularResultados() {
-      // Calcula temperamento, estilo e orientação
       const temperamento = calcularTemperamento();
       const estilo = calcularEstilo();
       const orientacao = resultados.orientacao;
       
-      // Atualiza os resultados na tela
       document.getElementById('temperamentoResult').textContent = temperamento || "-";
       document.getElementById('estiloResult').textContent = estilo || "-";
       document.getElementById('orientacaoResult').textContent = orientacao || "-";
       
-      // Determina o tipo de personalidade final
       const tipoPersonalidade = determinarTipoPersonalidade(temperamento, estilo, orientacao);
       document.getElementById('typeResult').textContent = tipoPersonalidade || "-";
       
-      // Mostra a imagem e descrição correspondente
       const typeInfo = typeDescriptions[tipoPersonalidade] || { 
         title: "Tipo não identificado", 
         text: "Complete todas as dicotomias para obter seu resultado" 
@@ -1321,145 +1055,46 @@ function mostrarDestoantes(tipo) {
       document.getElementById('typeTitle').textContent = typeInfo.title;
       document.getElementById('typeText').textContent = typeInfo.text;
       
-      // Carrega a imagem correspondente
       carregarImagemTipo(tipoPersonalidade);
+      mostrarDestoantes(tipoPersonalidade);
     }
 
-    // Função para verificar se todas as perguntas de uma dicotomia foram respondidas
-    function verificarRespostasCompletas(dicotomia, respostas) {
-      const total = totalPerguntas[dicotomia];
-      const respondidas = Object.keys(respostas).length;
-      return respondidas >= Math.ceil(total / 2) + 1;
-    }
-
-    // Função para calcular o resultado de uma dicotomia
-    function calcularResultadoDicotomia(respostas, dicotomia) {
-      const valores = Object.values(respostas);
-      const contagem = {};
+    function calcularResultadoDicotomia(respostasDicotomia, total) {
+      const valores = Object.values(respostasDicotomia);
+      const contagem = valores.reduce((acc, val) => {
+        acc[val] = (acc[val] || 0) + 1;
+        return acc;
+      }, {});
       
-      // Contar ocorrências de cada valor
-      valores.forEach(valor => {
-        contagem[valor] = (contagem[valor] || 0) + 1;
-      });
+      const minimo = total === 7 ? 4 : 3;
       
-      // Verificar a quantidade mínima necessária (4 para 7 perguntas, 3 para 5 perguntas)
-      let minimo;
-      if (totalPerguntas[dicotomia] === 7) {
-        minimo = 4;
-      } else if (totalPerguntas[dicotomia] === 5) {
-        minimo = 3;
-      } else {
-        minimo = Math.ceil(totalPerguntas[dicotomia] / 2) + 1;
-      }
-
-      // Verificar se algum valor atingiu o mínimo
       for (const [valor, quantidade] of Object.entries(contagem)) {
-        if (quantidade >= minimo) {
-          return valor;
-        }
+        if (quantidade >= minimo) return valor;
       }
       
-      return null; // Retorna null se nenhum valor atingiu o mínimo
-    }
-      
-      return null; // Retorna null se nenhum valor atingiu o mínimo
+      return null;
     }
 
-    // Função para atualizar o resultado de uma dicotomia
-    function atualizarResultado(dicotomia, elementoId) {
-      const resultado = calcularResultadoDicotomia(
-        dicotomia === 'orientacao' ? respostasOrientacao :
-        dicotomia === 'postura' ? respostasPostura :
-        dicotomia === 'enfoque' ? respostasEnfoque :
-        dicotomia === 'organizacao' ? respostasOrganizacao :
-        dicotomia === 'comunicacao' ? respostasComunicacao :
-        respostasInterpretacao,
-        dicotomia
-      );
-      
+    function atualizarResultado(dicotomia) {
+      const resultado = calcularResultadoDicotomia(respostas[dicotomia], totalPerguntas[dicotomia]);
       resultados[dicotomia] = resultado;
       
-      const elemento = document.getElementById(elementoId);
-      if (resultado) {
-        elemento.innerHTML = `RESULTADO: ${resultado}`;
-      } else {
-        elemento.innerHTML = `PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span>`;
-      }
+      const elemento = document.getElementById(`resultado${dicotomia.charAt(0).toUpperCase() + dicotomia.slice(1)}`);
+      elemento.innerHTML = resultado 
+        ? `RESULTADO: ${resultado}`
+        : `PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span>`;
     }
 
-    function responderOrientacao(index, resposta, button) {
+    function responder(dicotomia, index, resposta, button) {
       const container = button.parentElement;
-      container.querySelectorAll('button').forEach(b => {
-        b.classList.remove('selected');
-      });
-      
-      button.classList.add('selected');
-      respostasOrientacao[index] = resposta;
-      atualizarResultado('orientacao', 'resultadoOrientacao');
-    }
-
-    function responderPostura(index, resposta, button) {
-      const container = button.parentElement;
-      container.querySelectorAll('button').forEach(b => {
-        b.classList.remove('selected');
-      });
-      
-      button.classList.add('selected');
-      respostasPostura[index] = resposta;
-      atualizarResultado('postura', 'resultadoPostura');
-    }
-
-    function responderEnfoque(index, resposta1, resposta2, button) {
-      const container = button.parentElement;
-      container.querySelectorAll('button').forEach(b => {
-        b.classList.remove('selected');
-      });
-      
+      container.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
       button.classList.add('selected');
       
-      // Determina a resposta com base no texto do botão
-      const resposta = button.textContent === 'CONCORDO' ? resposta1 : resposta2;
-      respostasEnfoque[index] = resposta;
-      atualizarResultado('enfoque', 'resultadoEnfoque');
+      respostas[dicotomia][index] = resposta;
+      atualizarResultado(dicotomia);
     }
 
-    function responderOrganizacao(index, resposta, button) {
-      const container = button.parentElement;
-      container.querySelectorAll('button').forEach(b => {
-        b.classList.remove('selected');
-      });
-      
-      button.classList.add('selected');
-      respostasOrganizacao[index] = resposta;
-      atualizarResultado('organizacao', 'resultadoOrganizacao');
-    }
-
-    function responderComunicacao(index, resposta, button) {
-      const container = button.parentElement;
-      container.querySelectorAll('button').forEach(b => {
-        b.classList.remove('selected');
-      });
-      
-      button.classList.add('selected');
-      respostasComunicacao[index] = resposta;
-      atualizarResultado('comunicacao', 'resultadoComunicacao');
-    }
-
-    function responderInterpretacao(index, resposta, button) {
-      const container = button.parentElement;
-      container.querySelectorAll('button').forEach(b => {
-        b.classList.remove('selected');
-      });
-      
-      button.classList.add('selected');
-      respostasInterpretacao[index] = resposta;
-      atualizarResultado('interpretacao', 'resultadoInterpretacao');
-    }
-
-    // Inicialização - garantir que a página inicial esteja ativa ao carregar
-    document.addEventListener('DOMContentLoaded', function() {
-      showTab('inicio');
-    });
+    document.addEventListener('DOMContentLoaded', () => showTab('inicio'));
   </script>
 </body>
 </html>
