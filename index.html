@@ -971,6 +971,17 @@
     let gainNode = null;
     let audioSource = null;
     let currentAudio = null;
+    let lastType = null;
+
+    function playButtonSound() {
+      const audio = new Audio('Buttonsound.mp3');
+      audio.volume = 0.5;
+      audio.play().catch(err => console.error("Erro ao reproduzir som do botão:", err));
+      setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0;
+      }, 1000);
+    }
 
     function showTab(tabId) {
       console.log(`Switching to tab: ${tabId}`);
@@ -1044,17 +1055,18 @@
       gainNode.connect(audioContext.destination);
 
       gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-      gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 7);
+      gainNode.gain.linearRampToValueAtTime(0.2, audioContext.currentTime + 3);
 
       audioElement.play().then(() => {
         currentAudio = audioElement;
+        lastType = tipo;
         audioElement.onended = () => {
-          gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 10);
+          gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 3);
           setTimeout(() => {
             audioElement.pause();
             currentAudio = null;
             audioSource = null;
-          }, 10000);
+          }, 3000);
         };
       }).catch(err => console.error("Erro ao reproduzir áudio:", err));
     }
@@ -1171,7 +1183,9 @@
       document.getElementById('typeText').textContent = typeInfo.text;
       carregarImagemTipo(tipoPersonalidade);
       mostrarDestoantes(tipoPersonalidade);
-      playTypeAudio(tipoPersonalidade);
+      if (tipoPersonalidade !== lastType) {
+        playTypeAudio(tipoPersonalidade);
+      }
     }
 
     function calcularResultadoDicotomia(respostasDicotomia, total) {
@@ -1194,9 +1208,13 @@
       elemento.innerHTML = resultado 
         ? `RESULTADO: ${resultado}`
         : `PROCESSANDO<span class="pontos-processando"><span>.</span><span>.</span><span>.</span></span>`;
+      if (document.getElementById('resultado').classList.contains('active')) {
+        calcularResultados();
+      }
     }
 
     function responder(dicotomia, index, resposta, button) {
+      playButtonSound();
       const container = button.parentElement;
       container.querySelectorAll('button').forEach(b => b.classList.remove('selected'));
       button.classList.add('selected');
