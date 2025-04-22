@@ -1174,15 +1174,15 @@
       let temperamento;
       if (interpretacao === 'ABSTRATO') {
         if (enfoque === 'AFILIATIVO') {
-          temperamento = 'NF';
+          temperamento = 'DIPLOMÁTICO';
         } else {
-          temperamento = 'NT';
+          temperamento = 'ANALISTA';
         }
       } else {
         if (enfoque === 'AFILIATIVO') {
-          temperamento = 'SJ';
+          temperamento = 'SENTINELA';
         } else {
-          temperamento = 'SP';
+          temperamento = 'ARTÍFICE';
         }
       }
 
@@ -1190,9 +1190,9 @@
       const respostasInterpretacao = respostas.interpretacao.filter(r => r !== null).length;
       if (respostasEnfoque >= 7 && respostasInterpretacao >= 5) {
         if (enfoque === 'AFILIATIVO' && interpretacao === 'ABSTRATO') {
-          temperamento = 'NF';
+          temperamento = 'DIPLOMÁTICO';
         } else if (enfoque === 'AFILIATIVO' && interpretacao === 'CONCRETO') {
-          temperamento = 'SJ';
+          temperamento = 'SENTINELA';
         }
       }
 
@@ -1334,6 +1334,107 @@
     }
 
     document.addEventListener('DOMContentLoaded', inicializarNavegacao);
-  </script>
+  
+const gabaritoTIPOS = {
+  'ESTJ': ['SENTINELA', 'ESTRUTURADOR', 'INICIADOR'],
+  'ESFJ': ['SENTINELA', 'INAUGURADOR', 'INICIADOR'],
+  'ISTJ': ['SENTINELA', 'FINALIZADOR', 'RESPONDEDOR'],
+  'ISFJ': ['SENTINELA', 'BASTIDOR', 'RESPONDEDOR'],
+  'ESTP': ['ARTÍFICE', 'ESTRUTURADOR', 'INICIADOR'],
+  'ESFP': ['ARTÍFICE', 'INAUGURADOR', 'INICIADOR'],
+  'ISTP': ['ARTÍFICE', 'FINALIZADOR', 'RESPONDEDOR'],
+  'ISFP': ['ARTÍFICE', 'BASTIDOR', 'RESPONDEDOR'],
+  'ENTJ': ['ANALISTA', 'ESTRUTURADOR', 'INICIADOR'],
+  'ENTP': ['ANALISTA', 'INAUGURADOR', 'INICIADOR'],
+  'INTJ': ['ANALISTA', 'FINALIZADOR', 'RESPONDEDOR'],
+  'INTP': ['ANALISTA', 'BASTIDOR', 'RESPONDEDOR'],
+  'ENFJ': ['DIPLOMÁTICO', 'ESTRUTURADOR', 'INICIADOR'],
+  'ENFP': ['DIPLOMÁTICO', 'INAUGURADOR', 'INICIADOR'],
+  'INFJ': ['DIPLOMÁTICO', 'FINALIZADOR', 'RESPONDEDOR'],
+  'INFP': ['DIPLOMÁTICO', 'BASTIDOR', 'RESPONDEDOR']
+};
+
+</script>
+
+<script>
+function calcularResultadoFinal() {
+  const resultados = {
+    interpretacao: calcularResultadoUnico('interpretacao'),
+    enfoque: calcularResultadoUnico('enfoque'),
+    organizacao: calcularResultadoUnico('organizacao'),
+    comunicacao: calcularResultadoUnico('comunicacao'),
+    orientacao: calcularResultadoUnico('orientacao'),
+    postura: calcularResultadoUnico('postura')
+  };
+
+  const tipoFinal = calcularTipoMBTI(resultados);
+  const esperado = gabaritoTIPOS[tipoFinal];
+
+  const temperamento = esperado ? esperado[0] : calcularTemperamento();
+  const estilo = esperado ? esperado[1] : calcularEstilo();
+  const orientacao = esperado ? esperado[2] : resultados.orientacao;
+
+  document.getElementById('temperamento').textContent = temperamento;
+  document.getElementById('estilo').textContent = estilo;
+  document.getElementById('orientacaoFinal').textContent = orientacao;
+
+  exibirResultadoFinal(tipoFinal, resultados);
+}
+</script>
+
 </body>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const abaResultado = document.getElementById('resultado');
+  if (abaResultado && abaResultado.classList.contains('active')) {
+    calcularResultadoFinal();
+  }
+
+  // Ou, se o botão/aba for clicado:
+  const btnResultado = document.querySelector('[onclick*="resultado"]');
+  if (btnResultado) {
+    btnResultado.addEventListener('click', () => {
+      setTimeout(() => calcularResultadoFinal(), 300); // delay para garantir que os elementos carreguem
+    });
+  }
+});
+</script>
+
+
+<script>
+function exibirResultadoFinal(tipo, resultados) {
+  document.getElementById('typeBox').textContent = tipo;
+  document.getElementById('typeTitle').textContent = tipo;
+  document.getElementById('typeText').textContent = 'Descrição do tipo ' + tipo;
+  document.getElementById('typeImage').src = tipo + '.png';
+
+  const destoantes = verificarDestoantes(tipo, resultados);
+  const container = document.getElementById('destoantesContainer');
+  const conteudo = document.getElementById('destoanteConteudo');
+
+  if (destoantes.length > 0) {
+    container.style.display = 'block';
+    conteudo.innerHTML = '';
+
+    if (destoantes.length === 1) {
+      conteudo.innerHTML = '<div>' + destoantes[0] + '</div>';
+    } else {
+      destoantes.forEach(d => {
+        const bloco = document.createElement('div');
+        bloco.style.marginTop = '10px';
+        bloco.style.background = '#FFFACD';
+        bloco.style.padding = '8px';
+        bloco.style.borderRadius = '8px';
+        bloco.textContent = d;
+        conteudo.appendChild(bloco);
+      });
+    }
+  } else {
+    container.style.display = 'none';
+    conteudo.innerHTML = '';
+  }
+}
+</script>
+
 </html>
