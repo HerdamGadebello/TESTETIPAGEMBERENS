@@ -1,10 +1,50 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teste Tipológico</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Teste Tipológico</title>
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Cascadia+Code&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Ebrima&display=swap');
     body {
@@ -269,119 +309,108 @@
   </style>
 </head>
 <body>
-
 <div class="tabs">
-  <button class="tab-button active" onclick="openTab('pagina-inicial')">Página Inicial</button>
-  <button class="tab-button" onclick="openTab('orientacao')">Dicotomia Orientação</button>
-  <button class="tab-button" onclick="openTab('postura')">Dicotomia Postura</button>
-  <button class="tab-button" onclick="openTab('enfoque')">Dicotomia Enfoque</button>
-  <button class="tab-button" onclick="openTab('organizacao')">Dicotomia Organização</button>
-  <button class="tab-button" onclick="openTab('comunicacao')">Dicotomia Comunicação</button>
-  <button class="tab-button" onclick="openTab('interpretacao')">Dicotomia Interpretação</button>
-  <button class="tab-button" onclick="openTab('resultado')">Resultado Tipológico</button>
+<button class="tab-button active" onclick="openTab('pagina-inicial')">Página Inicial</button>
+<button class="tab-button" onclick="openTab('orientacao')">Dicotomia Orientação</button>
+<button class="tab-button" onclick="openTab('postura')">Dicotomia Postura</button>
+<button class="tab-button" onclick="openTab('enfoque')">Dicotomia Enfoque</button>
+<button class="tab-button" onclick="openTab('organizacao')">Dicotomia Organização</button>
+<button class="tab-button" onclick="openTab('comunicacao')">Dicotomia Comunicação</button>
+<button class="tab-button" onclick="openTab('interpretacao')">Dicotomia Interpretação</button>
+<button class="tab-button" onclick="openTab('resultado')">Resultado Tipológico</button>
 </div>
-
-<div id="pagina-inicial" class="tab-content active">
-  <div class="card">
-    <button class="start-button" onclick="openTab('orientacao')">INICIAR TESTE</button>
-    <br>
-    <img src="ALLTYPES.png" alt="Tipos MBTI" style="max-width:100%; height:auto; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);">
-    <p style="font-size: 20px; margin-top: 20px;">
-      Teste de tipagem elaborado a partir do conteúdo do curso <strong>TIPOLOGIA PRÁTICA</strong>, ministrado por <a href="https://www.instagram.com/roberta_bernardon/?igsh=NXdlNXp1em84azNl#" target="_blank" style="color: #F8F8F8; font-weight: bold; text-decoration: underline;">Roberta Bernardon</a>.
+<div class="tab-content active" id="pagina-inicial">
+<div class="card">
+<button class="start-button" onclick="openTab('orientacao')">INICIAR TESTE</button>
+<br/>
+<img alt="Tipos MBTI" src="ALLTYPES.png" style="max-width:100%; height:auto; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);"/>
+<p style="font-size: 20px; margin-top: 20px;">
+      Teste de tipagem elaborado a partir do conteúdo do curso <strong>TIPOLOGIA PRÁTICA</strong>, ministrado por <a href="https://www.instagram.com/roberta_bernardon/?igsh=NXdlNXp1em84azNl#" style="color: #F8F8F8; font-weight: bold; text-decoration: underline;" target="_blank">Roberta Bernardon</a>.
     </p>
-    <div class="small-text">
+<div class="small-text">
       Teste elaborado por Hermes Damião Bello
     </div>
-  </div>
 </div>
-
-<div id="orientacao" class="tab-content">
-  <div class="card">
-    <h1>Dicotomia Orientação</h1>
-    <div id="questions-orientacao"></div>
-    <div id="resultado-final-orientacao" class="resultado-final"></div>
-    <button id="botao-avancar-orientacao" class="advance-button" onclick="openTab('postura')">AVANÇAR</button>
-  </div>
 </div>
-
-<div id="postura" class="tab-content">
-  <div class="card">
-    <h1>Dicotomia Postura</h1>
-    <div id="questions-postura"></div>
-    <div id="resultado-final-postura" class="resultado-final"></div>
-    <button id="botao-avancar-postura" class="advance-button" onclick="openTab('enfoque')">AVANÇAR</button>
-  </div>
+<div class="tab-content" id="orientacao">
+<div class="card">
+<h1>Dicotomia Orientação</h1>
+<div id="questions-orientacao"></div>
+<div class="resultado-final" id="resultado-final-orientacao"></div>
+<button class="advance-button" id="botao-avancar-orientacao" onclick="openTab('postura')">AVANÇAR</button>
 </div>
-
-<div id="enfoque" class="tab-content">
-  <div class="card">
-    <h1>Dicotomia Enfoque</h1>
-    <div id="questions-enfoque"></div>
-    <div id="resultado-final-enfoque" class="resultado-final"></div>
-    <button id="botao-avancar-enfoque" class="advance-button" onclick="openTab('organizacao')">AVANÇAR</button>
-  </div>
 </div>
-
-<div id="organizacao" class="tab-content">
-  <div class="card">
-    <h1>Dicotomia Organização</h1>
-    <div id="questions-organizacao"></div>
-    <div id="resultado-final-organizacao" class="resultado-final"></div>
-    <button id="botao-avancar-organizacao" class="advance-button" onclick="openTab('comunicacao')">AVANÇAR</button>
-  </div>
+<div class="tab-content" id="postura">
+<div class="card">
+<h1>Dicotomia Postura</h1>
+<div id="questions-postura"></div>
+<div class="resultado-final" id="resultado-final-postura"></div>
+<button class="advance-button" id="botao-avancar-postura" onclick="openTab('enfoque')">AVANÇAR</button>
 </div>
-
-<div id="comunicacao" class="tab-content">
-  <div class="card">
-    <h1>Dicotomia Comunicação</h1>
-    <div id="questions-comunicacao"></div>
-    <div id="resultado-final-comunicacao" class="resultado-final"></div>
-    <button id="botao-avancar-comunicacao" class="advance-button" onclick="openTab('interpretacao')">AVANÇAR</button>
-  </div>
 </div>
-
-<div id="interpretacao" class="tab-content">
-  <div class="card">
-    <h1>Dicotomia Interpretação</h1>
-    <div id="questions-interpretacao"></div>
-    <div id="resultado-final-interpretacao" class="resultado-final"></div>
-    <button id="botao-avancar-interpretacao" class="advance-button" onclick="openTab('resultado')">AVANÇAR</button>
-  </div>
+<div class="tab-content" id="enfoque">
+<div class="card">
+<h1>Dicotomia Enfoque</h1>
+<div id="questions-enfoque"></div>
+<div class="resultado-final" id="resultado-final-enfoque"></div>
+<button class="advance-button" id="botao-avancar-enfoque" onclick="openTab('organizacao')">AVANÇAR</button>
 </div>
-
-<div id="resultado" class="tab-content">
-  <div class="card">
-    <h1>Resultado Tipológico</h1>
-    <div class="resultados-container">
-      <div class="resultado-retangulo">
-        <h2>TENDÊNCIA</h2>
-        <div id="resultado-tendencia" class="resultado-texto"></div>
-      </div>
-      <div class="resultado-retangulo">
-        <h2>TEMPERAMENTO</h2>
-        <div id="resultado-temperamento" class="resultado-texto"></div>
-      </div>
-      <div class="resultado-retangulo">
-        <h2>EXPRESSÃO</h2>
-        <div id="resultado-expressao" class="resultado-texto"></div>
-      </div>
-    </div>
-    <div class="personalidade-container">
-      <div class="personalidade-retangulo">
-        <h2>PERSONALIDADE</h2>
-        <div id="resultado-personalidade" class="resultado-texto"></div>
-      </div>
-      <img id="personalidade-imagem" class="personalidade-imagem" alt="Imagem da Personalidade">
-      <div id="explicacao-retangulo" class="explicacao-retangulo">
-        <p class="explicacao-texto">VER EXPLICAÇÃO DAS RESPOSTAS</p>
-      </div>
-      <div id="personalidade-descricao" class="personalidade-descricao"></div>
-    </div>
-  </div>
 </div>
-
-<audio id="personalidade-musica" loop></audio>
-
+<div class="tab-content" id="organizacao">
+<div class="card">
+<h1>Dicotomia Organização</h1>
+<div id="questions-organizacao"></div>
+<div class="resultado-final" id="resultado-final-organizacao"></div>
+<button class="advance-button" id="botao-avancar-organizacao" onclick="openTab('comunicacao')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="comunicacao">
+<div class="card">
+<h1>Dicotomia Comunicação</h1>
+<div id="questions-comunicacao"></div>
+<div class="resultado-final" id="resultado-final-comunicacao"></div>
+<button class="advance-button" id="botao-avancar-comunicacao" onclick="openTab('interpretacao')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="interpretacao">
+<div class="card">
+<h1>Dicotomia Interpretação</h1>
+<div id="questions-interpretacao"></div>
+<div class="resultado-final" id="resultado-final-interpretacao"></div>
+<button class="advance-button" id="botao-avancar-interpretacao" onclick="openTab('resultado')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="resultado">
+<div class="card">
+<h1>Resultado Tipológico</h1>
+<div class="resultados-container">
+<div class="resultado-retangulo">
+<h2>TENDÊNCIA</h2>
+<div class="resultado-texto" id="resultado-tendencia"></div>
+</div>
+<div class="resultado-retangulo">
+<h2>TEMPERAMENTO</h2>
+<div class="resultado-texto" id="resultado-temperamento"></div>
+</div>
+<div class="resultado-retangulo">
+<h2>EXPRESSÃO</h2>
+<div class="resultado-texto" id="resultado-expressao"></div>
+</div>
+</div>
+<div class="personalidade-container">
+<div class="personalidade-retangulo">
+<h2>PERSONALIDADE</h2>
+<div class="resultado-texto" id="resultado-personalidade"></div>
+</div>
+<img alt="Imagem da Personalidade" class="personalidade-imagem" id="personalidade-imagem"/>
+<div class="explicacao-retangulo" id="explicacao-retangulo">
+<p class="explicacao-texto">VER EXPLICAÇÃO DAS RESPOSTAS</p>
+</div>
+<div class="personalidade-descricao" id="personalidade-descricao"></div>
+</div>
+</div>
+</div>
+<audio id="personalidade-musica" loop=""></audio>
 <script type="text/javascript">
   var gk_isXlsx = false;
   var gk_xlsxFileLookup = {};
@@ -414,7 +443,6 @@
     return gk_fileData[filename] || "";
   }
 </script>
-
 <script>
   let currentPersonalidade = null;
   let audioElement = document.getElementById('personalidade-musica');
@@ -706,42 +734,42 @@
 
     // Mapear personalidade para a imagem correspondente
     const imagemMap = {
-      'ESTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESTJ.png',
-      'ESFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESFJ.png',
-      'ISTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISTJ.png',
-      'ISFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISFJ.png',
-      'ESTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESTP.png',
-      'ESFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESFP.png',
-      'ISTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISTP.png',
-      'ISFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISFP.png',
-      'ENTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENTJ.png',
-      'ENTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENTP.png',
-      'INTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INTJ.png',
-      'INTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INTP.png',
-      'ENFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENFJ.png',
-      'ENFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENFP.png',
-      'INFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INFJ.png',
-      'INFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INFP.png'
+      'ESTJ': './assets/ESTJ.png',
+      'ESFJ': './assets/ESFJ.png',
+      'ISTJ': './assets/ISTJ.png',
+      'ISFJ': './assets/ISFJ.png',
+      'ESTP': './assets/ESTP.png',
+      'ESFP': './assets/ESFP.png',
+      'ISTP': './assets/ISTP.png',
+      'ISFP': './assets/ISFP.png',
+      'ENTJ': './assets/ENTJ.png',
+      'ENTP': './assets/ENTP.png',
+      'INTJ': './assets/INTJ.png',
+      'INTP': './assets/INTP.png',
+      'ENFJ': './assets/ENFJ.png',
+      'ENFP': './assets/ENFP.png',
+      'INFJ': './assets/INFJ.png',
+      'INFP': './assets/INFP.png'
     };
 
     // Mapear personalidade para a música correspondente
     const musicaMap = {
-      'ESTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESTJ.mp3',
-      'ESFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESFJ.mp3',
-      'ISTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISTJ.mp3',
-      'ISFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISFJ.mp3',
-      'ESTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESTP.mp3',
-      'ESFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESFP.mp3',
-      'ISTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISTP.mp3',
-      'ISFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISFP.mp3',
-      'ENTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENTJ.mp3',
-      'ENTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENTP.mp3',
-      'INTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INTJ.mp3',
-      'INTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INTP.mp3',
-      'ENFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENFJ.mp3',
-      'ENFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENFP.mp3',
-      'INFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INFJ.mp3',
-      'INFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INFP.mp3'
+      'ESTJ': './assets/ESTJ.mp3',
+      'ESFJ': './assets/ESFJ.mp3',
+      'ISTJ': './assets/ISTJ.mp3',
+      'ISFJ': './assets/ISFJ.mp3',
+      'ESTP': './assets/ESTP.mp3',
+      'ESFP': './assets/ESFP.mp3',
+      'ISTP': './assets/ISTP.mp3',
+      'ISFP': './assets/ISFP.mp3',
+      'ENTJ': './assets/ENTJ.mp3',
+      'ENTP': './assets/ENTP.mp3',
+      'INTJ': './assets/INTJ.mp3',
+      'INTP': './assets/INTP.mp3',
+      'ENFJ': './assets/ENFJ.mp3',
+      'ENFP': './assets/ENFP.mp3',
+      'INFJ': './assets/INFJ.mp3',
+      'INFP': './assets/INFP.mp3'
     };
 
     // Mapear personalidade para a descrição correspondente
