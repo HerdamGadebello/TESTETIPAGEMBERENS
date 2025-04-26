@@ -283,7 +283,7 @@
 <div class="card">
 <button class="start-button" id="start-test-button" onclick="openTab('orientacao')">INICIAR TESTE</button>
 <br/>
-<img alt="Tipos MBTI" src="https://raw.githubusercontent.com/usuario/repositorio/main/ALLTYPES.jpg" style="max-width:100%; height:auto; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);"/>
+<img alt="Tipos MBTI" src="https://raw.githubusercontent.com/usuario/repositorio/main/ALLTYPES.png" style="max-width:100%; height:auto; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);"/>
 <p style="font-size: 20px; margin-top: 20px;">
       Teste de tipagem elaborado a partir do conteúdo do curso <strong>TIPOLOGIA PRÁTICA</strong>, ministrado por <a href="https://www.instagram.com/roberta_bernardon/?igsh=NXdlNXp1em84azNl#" style="color: #F8F8F8; font-weight: bold; text-decoration: underline;" target="_blank">Roberta Bernardon</a>.
     </p>
@@ -411,15 +411,19 @@
   let buttonSound = document.getElementById('button-sound');
   let dicButtonSound = document.getElementById('dic-button-sound');
 
-  function playSound(audio) {
+  function playSound(audio, context) {
     audio.currentTime = 0; // Reinicia o som
-    audio.play().catch(error => {
-      console.error("Erro ao tocar som:", error);
-    });
+    console.log(`Tentando tocar som: ${audio.src} (${context})`);
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.error(`Erro ao tocar som (${context}):`, error);
+      });
+    }
   }
 
   function openTab(tabId) {
-    playSound(dicButtonSound); // Toca som ao clicar nas abas
+    playSound(dicButtonSound, 'Botão de dicotomia'); // Toca som ao clicar nas abas
     const tabs = document.querySelectorAll('.tab-content');
     const buttons = document.querySelectorAll('.tab-button');
     tabs.forEach(tab => {
@@ -562,7 +566,7 @@
   }
 
   function selecionarResposta(abaId, index, escolha) {
-    playSound(buttonSound); // Toca som ao clicar em Concordo/Discordo
+    playSound(buttonSound, `Botão ${escolha} (${abaId})`); // Toca som ao clicar em Concordo/Discordo
     const respostasAba = respostas[abaId];
     const perguntasAba = perguntas[abaId];
     if (!respostasAba || !perguntasAba) return;
@@ -722,125 +726,268 @@
     const musicaMap = {
       'ESTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESTJ.mp3',
       'ESFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESFJ.mp3',
-      'ISTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISTJ.mp3',
-      'ISFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISFJ.mp3',
-      'ESTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESTP.mp3',
-      'ESFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESFP.mp3',
-      'ISTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISTP.mp3',
-      'ISFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISFP.mp3',
-      'ENTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENTJ.mp3',
-      'ENTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENTP.mp3',
-      'INTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/INTJ.mp3',
-      'INTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/INTP.mp3',
-      'ENFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENFJ.mp3',
-      'ENFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENFP.mp3',
-      'INFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/INFJ.mp3',
-      'INFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/INFP.mp3'
-    };
+      'ISTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISTJ.mp3 
+System: Desculpe, mas parece que a resposta foi cortada antes de ser concluída. Vou fornecer uma solução completa e concisa para corrigir os problemas mencionados, garantindo que os sons (`Buttonsound.mp3` e `dicbotton.mp3`) e as imagens (`.jpg` para personalidades e `ALLTYPES.png` para a página inicial) funcionem corretamente. Também abordarei por que as correções anteriores podem não ter funcionado e incluirei instruções para depuração.
 
-    const descricaoMap = {
-      'ESTJ': `O JUIZ\nO ESTJ é prático, responsável e altamente conectado ao mundo exterior, valorizando ordem, regras e eficiência. Organizado e detalhista, impacienta-se com quem negligencia processos ou ignora experiências consolidadas. Avalia os outros pelo desempenho operacional, podendo ser direto—às vezes, rígido—com quem desrespeita normas.\n\nLeal a instituições, trabalho e família, cumpre deveres com dedicação, mesmo sob sacrifício. Assume posições de liderança facilmente, participa ativamente da comunidade e valoriza pontualidade. Sua objetividade e foco em resultados o tornam ágil, mas sua impulsividade pode levar a erros. Prefere ação a discussões, precisando desenvolver paciência para ouvir perspectivas alheias.\n\nAdepto de rotinas e tradições, valoriza ambientes estruturados ("um lugar para cada coisa") e socializa por meio de rituais, como eventos familiares. Apesar de não ser minucioso em pequenos detalhes, promove harmonia através de normas claras. Sua dificuldade está em adaptar-se a mudanças radicais ou a visões que desafiem suas convicções.`,
-      'ESFJ': `O CAVALEIRO\nO ESFJ é um tipo sociável e caloroso, que se energiza ao interagir com os outros e valoriza profundamente a harmonia. Conhecido por seu lado "nutridor", ele fortalece instituições como família, escola e comunidade, promovendo conexões e tradições. Memoriza nomes com facilidade e preocupa-se em incluir todos em eventos sociais, muitas vezes revivendo memórias afetivas.\n\nAltamente sensível à rejeição, o ESFJ busca reconhecimento por seus esforços—especialmente em servir aos outros—e prioriza a aprovação social. Sua comunicação é marcada por valores claros ("certo/errado"), e sua carreira tende a áreas assistenciais, vendas ou ensino, onde sua empatia e charme pessoal brilham. Leal e respeitoso com hierarquias, evita conflitos e prefere conversas práticas a debates abstratos.\n\nNa família, é dedicado, organizado e aprecia rituais como comemorações. Porém, pode ser pessimista diante de problemas, antecipando cenários negativos. Sua necessidade de ser indispensável e amado exige equilíbrio para evitar desgaste emocional. Apesar disso, seu afeto e compromisso o tornam um pilar em seus relacionamentos.`,
-      'ISTJ': `O ARQUIVISTA\nO ISTJ é o epítome da confiabilidade, com forte apego a deveres, instituições e princípios práticos. Metódico e reservado, cumpre promessas com integridade, muitas vezes trabalhando silenciosamente sem buscar reconhecimento. Sua precisão e domínio de detalhes o destacam em áreas como contabilidade, direito ou engenharia, onde processos claros e resultados concretos são valorizados.\n\nNo ambiente familiar, é um parceiro leal e pai/mãe responsável, mantendo regras claras e estabilidade. Porém, pode ter dificuldade com filhos rebeldes ou parceiros irresponsáveis, assumindo inadvertidamente um papel de "cuidador". Valoriza ordem, funcionalidade e tradição – desde móveis duráveis até rituais comunitários como escotismo – mas evita ostentação ou modismos.\n\nEmbora sua sensibilidade seja discreta, sua postura prática às vezes é interpretada como frieza. Participa de eventos sociais por obrigação, não por espontaneidade. Sua maior virtude – a constância – também pode levá-lo a resistir a mudanças ou a subestimar a importância da expressão emocional nos relacionamentos.`,
-      'ISFJ': `O DEFENSOR\nO ISFJ é o protótipo do cuidador – dedicado, meticuloso e movido pelo desejo de servir. Sua memória afetiva e apego às tradições o tornam um guardião de valores familiares e sociais. Incansável no trabalho, cumpre obrigações com precisão, seguindo normas à risca e irritando-se quando outros as ignoram.\n\nProfissões como enfermagem, ensino ou secretariado atraem seu senso prático de assistência. Relaciona-se profundamente com quem precisa dele (pacientes, alunos, chefes), mas pode se afastar quando a ajuda deixa de ser necessária. Leal às hierarquias, espera que todos cumpram seus papéis conforme as regras.\n\nNo lar, é organizado e tradicional, criando um ambiente acolhedor. Como pai/mãe, equilibra disciplina com ternura, embora espere conformidade social. Sua modéstia e aversão a ostentação fazem-no valorizar simplicidade, porém, sua tendência a assumir tarefas sozinho (evitando confrontos) leva à sobrecarga. Ressente-se quando seu esforço é visto como obrigação, sofrendo em silêncio. Aprender a delegar e expressar necessidades é seu desafio.`,
-      'ESTP': `O GLADIADOR\nO ESTP é o arquétipo do action taker – carismático, persuasivo e imerso no momento presente. Seu talento para transformar rotina em aventura e ler as intenções alheias com agilidade o torna um mestre da negociação e da diplomacia prática. Com humor contagiante e audácia, opera "à beira do abismo", usando meios não convencionais para alcançar fins imediatos, muitas vezes sem se preocupar com justificativas. Sua energia é catalisadora: revive empresas em crise ou "vende" ideias como ninguém, mas evita o tédio dos detalhes pós-implementação, o que pode levar a críticas sobre sua falta de follow-through.\n\nNo ambiente profissional, brilha como solucionador de crises, mas depende de parceiros meticulosos para complementar sua visão macro. Se mal direcionado, seu espírito aventureiro pode levá-lo a riscos improdutivos. Nos relacionamentos, é encantador e generoso, mas prioriza emoções do presente sobre compromissos profundos – presenteia com viagens surpresa, mas foge de conflitos emocionais.\n\nVivendo sob o lema "por que adiar para amanhã?", o ESTP coleciona experiências intensas, seja como empreendedor, competidor ou jogador. Sua vida é um convite ao risco calculado, onde a "Senhora Sorte" é sempre bem-vinda – mas sua dificuldade em parar e refletir pode deixar lacunas tanto nos negócios quanto nos laços afetivos.`,
-      'ESFP': `O PERFORMADOR\nO ESFP é a alma da festa – carismático, caloroso e imerso no aqui e agora. Como um "artista da vida", seu entusiasmo é contagioso: transforma ambientes com humor, estilo e uma generosidade que convida todos a "curtir o momento". Sua casa vira palco de encontros alegres, onde problemas são banidos com otimismo. Veste-se com glamour, aprecia prazeres sensoriais (gastronomia, moda, conforto) e evita solidão como quem foge do tédio.\n\nProfissionalmente, destaca-se em áreas dinâmicas como relações públicas, vendas ou ensino, onde usa sua intuição social para conectar-se às pessoas. Detesta rotinas isoladas e prefere decisões baseadas em experiências práticas a teorias abstratas. No entanto, sua aversão a conflitos e impulsividade podem levá-lo a evitar responsabilidades difíceis (como crises familiares) ou ceder a tentações.\n\nComo pai/mãe, é divertido e afetuoso, mas pode faltar-lhe paciência em momentos de stress. Vive como se a vida fosse uma festa infinita – um presente para quem o cerca, mas com o desafio de equilibrar prazer e profundidade nos relacionamentos.`,
-      'ISTP': `O OPERADOR\nO ISTP é o maker espontâneo – um misto de habilidade técnica, pragmatismo radical e sede de adrenalina. Vive no presente, guiado por um código pessoal que ignora regras externas. Suas ações nascem de impulsos criativos (como consertar, construir ou arriscar-se), não de planos rígidos. Leal aos seus, mas rebelde com hierarquias, vê autoridade como obstáculo à liberdade.\n\nMestre do "fazer com as mãos", domina ferramentas com precisão artística (à la Da Vinci). Sua coragem física o leva a esportes radicais ou profissões de ação (mecânica, pilotagem), onde brilha resolvendo crises no calor do momento. Paradoxalmente, tolera longas pausas (como pescar) se antevê ação futura. Lidera pelo exemplo direto – é o primeiro a "entrar na batalha" – mas desdenha preparativos.\n\nSocialmente, é descontraído e leal ao grupo, mas comunica-se mais por gestos que palavras. Sua simplicidade e confiabilidade atraem aliados, enquanto seu desapego a convenções pode chocar os mais tradicionais. Vive no limite entre liberdade absoluta e compromisso tácito com quem conquista seu respeito.`,
-      'ISFP': `O ARTISTA\nO ISFP é um artista da existência – vive mergulhado no momento presente, transformando a realidade em experiência sensorial pura. Como Beethoven ou Rembrandt, sua genialidade se expressa não por palavras, mas através de ações concretas: pinceladas, movimentos de dança ou gestos precisos que revelam uma conexão única com texturas, cores e sons. Sua linguagem é a do fazer, não a do explicar.\n\nAmável e compassivo, o ISFP possui uma empatia quase física pelo sofrimento alheio, agindo com generosidade instintiva. Rejeita convenções sociais rígidas, preferindo a liberdade de seguir seus impulsos criativos. Na natureza ou com animais, estabelece ligações quase místicas, como se compartilhasse uma linguagem silenciosa com o mundo natural.\n\nEmbora muitas vezes visto como despreocupado, seu hedonismo esconde uma profundidade singular: a capacidade de extrair beleza do efêmero. Desafia hierarquias não por rebeldia, mas por autenticidade – seu código moral é ditado pela sensibilidade, não por regras. Quando encontra seu meio de expressão (artes, esportes, trabalho manual), torna-se um alquimista do cotidiano, transformando ações simples em poesia concreta.`,
-      'ENTJ': `O GENERAL\nO ENTJ é o arquétipo do líder visionário – um general nato que transforma caos em ordem com decisões implacáveis. Desde cedo, assume o comando naturalmente, estruturando grupos com objetivos claros. Sua mente analítica classifica informações como um computador, priorizando eficiência acima de tudo: procedimentos só valem se servirem aos resultados. Rejeita repetição de erros e emotividade que atrapalhe a produtividade.\n\nMestre da estratégia, enxerga o panorama geral de organizações, antecipando tendências e mobilizando equipes com discursos inspiradores. Ascende a cargos de poder (empresas, governo, militar) por sua capacidade de cortar burocracia e implementar sistemas mecanizados. No trabalho, é incansável – muitas vezes negligencia vida pessoal por projetos.\n\nNo lar, espera excelência: cônjuge autossuficiente, filhos disciplinados e rotinas impecáveis. Valoriza família como extensão de seu legado, criando "soldados produtivos" para a sociedade. Sua força intimidante atrai parceiros que admirem sua determinação, mas pode esmagar relacionamentos mais sensíveis.`,
-      'ENTP': `O VISIONÁRIO\nO ENTP é o arquétipo do inventor social – um gênio conectado a possibilidades que transforma debates em laboratórios e conversas em blueprints mentais. Sua mente ágil faz conexões improváveis, tratando regras como obstáculos criativos a serem contornados. "Isso não pode ser feito?" é seu combustível favorito – cada "não" aciona seu modo "hackear o sistema".\n\nProfissionalmente, é o mestre dos projetos disruptivos (consultoria, empreendedorismo, ensino inovador), mas abandona rotinas como quem foge do tédio. Seu charme magnético e humor contagiante inspiram equipes, embora sua aversão a planos detalhados frustre colegas mais metódicos. Debate por esporte, até com amigos, transformando conflitos em jogos intelectuais.\n\nNos relacionamentos, valoriza parceiros que desafiem seu intelecto. Apesar de seu talento para prover, pode arriscar tudo em apostas desnecessárias só pela adrenalina de resolver crises. Seu maior desafio? Transformar 1% de suas mil ideias em realidade antes de partir para a próxima revolução.`,
-      'INTJ': `O ARQUEIRO\nO INTJ é o arquiteto de sistemas por excelência – uma mente estratégica que opera como um supercomputador humano, transformando teorias abstratas em estruturas funcionais. Sua autoconfiança inabalável vem da capacidade única de enxergar padrões invisíveis para os outros, tratando a realidade como um tabuleiro de xadrez multidimensional onde cada movimento é calculado para eficiência máxima. Hierarquias e autoridades tradicionais são irrelevantes; só a lógica impessoal dita suas ações.\n\nProfissionalmente, brilha em campos que exigem modelagem complexa (engenharia, ciência de dados, planejamento estratégico), onde pode otimizar sistemas eliminando redundâncias. Seu pragmatismo radical descarta qualquer teoria que não possa ser implementada, mesmo que isso exija horas exaustivas de trabalho. Colegas podem vê-lo como frio ou excessivamente crítico, pois sua busca pela perfeição não faz concessões a sensibilidades emocionais.\n\nNos relacionamentos, valoriza parceiros intelectualmente independentes. Sua aparente frieza esconde uma lealdade feroz aos que conquistam seu respeito, mas sua necessidade extrema de privacidade e autonomia pode criar barreiras. Quando erra, é sempre por excesso de confiança na própria lógica, nunca por dúvida.`,
-      'INTP': `O SÁBIO\nO INTP opera como um processador de lógica pura - um Sherlock Holmes intelectual que decifra o universo como um gigantesco sistema a ser desmontado e remontado com perfeição conceitual. Sua mente é uma máquina anti-redundância, detectando falhas lógicas a anos-luz de distância. Autoridades institucionais são irrelevantes; só as leis da coerência governam seu mundo.\n\nMestre da abstração, projeta estruturas teóricas com precisão matemática (ciência, filosofia, programação), mas delega a implementação prática. Quando imerso em quebra-cabeças intelectuais, esquece até necessidades básicas - comida e socialização tornam-se interrupções irritantes. Colegas podem interpretar seu foco absoluto como arrogância, especialmente quando ele desmonta ideias alheias com perguntas socráticas implacáveis.\n\nNos relacionamentos, valoriza parceiros autossuficientes que respeitem sua necessidade cavernosa de solidão criativa. Como pai/mãe, cultiva independência intelectual nos filhos, mas esquece aniversários. Sua maior ironia? Construir sistemas lógicos perfeitos enquanto navega pela vida prática com a desorganização de um gênio distraído.`,
-      'ENFJ': `O CLÉRIGO\nO ENFJ é o arquétipo do líder catalisador - um farol natural de carisma e empatia que magnetiza pessoas em torno de causas e ideais. Com uma combinação rara de calor humano e persuasão eloquente, transforma grupos em times coesos, acreditando piamente no potencial de cada indivíduo. Sua habilidade de "ler almas" o torna um conselheiro nato, capaz de articular emoções que outros mal conseguem nomear.\n\nProfissionalmente, brilha em papéis de mentoria, recursos humanos ou ativismo social, onde pode nutrir o crescimento alheio. Porém, seu maior dom - colocar os outros em primeiro plano - também é sua vulnerabilidade: assume responsabilidades emocionais alheias como se fossem próprias, levando à exaustão. Relacionamentos ideais são sua obsessão, o que pode sufocar parceiros mais independentes.\n\nNos relacionamentos, é dedicado e generoso, às vezes ao extremo - um ímã para parceiros exigentes. Precisa aprender que cuidar do mundo não significa carregá-lo sozinho. Quando equilibra sua compaixão com autoproteção, torna-se não só um líder, mas um farol de transformação humana.`,
-      'ENFP': `O BARDO\nO ENFP é o arquétipo do descobridor de mundos emocionais - um antropólogo nato que enxerga a vida como um caleidoscópio de conexões humanas e significados ocultos. Sua mente é um radar hiperativo que capta nuances emocionais e motivações invisíveis, transformando interações cotidianas em aventuras psicológicas fascinantes. Com carisma que mistura entusiasmo infantil e perspicácia terapêutica, atrai seguidores como um contador de histórias atrai ouvintes ao redor da fogueira.\n\nProfissionalmente, é o mestre das reinvenções (marketing, artes, coaching), onde pode fundir criatividade e insight social. Seu superpoder? Ver potencial bruto em pessoas e projetos - sua criptonita? Implementar detalhes burocráticos. Colegas adoram sua energia contagiosa, mas se frustram quando ele voa para novas ideias antes de concluir as atuais. Relacionamentos são seu oxigênio e sua armadilha: mergulha de cabeça em conexões intensas, mas pode sufocar parceiros com sua necessidade de profundidade constante.\n\nComo pai/mãe ou parceiro, alterna entre o melhor amigo e o guru inspirador, transformando jantares em eventos e rotinas em aventuras. Seu desafio é aprender que nem toda semente plantada precisa florescer imediatamente - às vezes, a magia está em cuidar do que já existe.`,
-      'INFJ': `O PALADINO\nO INFJ é o arquétipo do sábio compassivo - uma rara combinação de místico e terapeuta que opera nos bastidores da psique humana. Com uma intuição quase sobrenatural, decifra emoções alheias como quem lê um livro aberto, antevendo conflitos e potenciais antes mesmo que se manifestem. Sua mente é um laboratório de ideais elevados, onde cada pensamento é filtrado por um profundo senso de propósito ético.\n\nProfissionalmente, é o arquiteto de transformações silenciosas (psicologia, escrita, aconselhamento), onde pode aliar insight humano com criatividade refinada. Seu superpoder? Ver o núcleo de verdade em cada pessoa - sua criptonita? Conflitos abertos e críticas destrutivas. Colegas admiram sua sabedoria, mas muitas vezes não percebem o custo emocional que paga por sua hipersensibilidade.\n\nNos relacionamentos, é um parceiro intensamente leal que cultiva conexões profundas como jardins secretos. Como pai/mãe, mistura devoção quase espiritual com uma preocupação constante pelo bem-estar emocional da família. Seu desafio é aprender que nem toda luz interior precisa ser protegida - às vezes, compartilhar suas próprias fragilidades é a maior forma de coragem.`,
-      'INFP': `O CURANDEIRO\nO INFP é o poeta da alma humana - um sonhador discreto cujo mundo interior fervilha com paixão por ideais e conexões autênticas. Por trás de sua aparente timidez, arde um coração de cavaleiro medieval, pronto para defender causas perdidas com fervor quase místico. Sua linguagem natural é a metáfora, transformando valores abstratos em belas narrativas que inspiram mudanças sutis.\n\nProfissionalmente, é o curador de almas (aconselhamento, artes, ensino), onde pode aliar sensibilidade aguçada com criatividade simbólica. Seu superpoder? Ver o potencial sagrado em cada pessoa - sua criptonita? Rotinas burocráticas e conflitos agressivos. Colegas admiram sua empatia, mas muitas vezes subestimam a força feroz que esconde sob sua suavidade.\n\nNos relacionamentos, é um parceiro leal que cultiva intimidade como arte sacra. Como pai/mãe, mistura proteção intensa com respeito pela individualidade. Seu desafio é aprender que ideais elevados não precisam ser sacrificados na realidade - às vezes, a verdadeira coragem está em encontrar beleza no imperfeito.`
-    };
+### Razões Possíveis para as Correções Não Funcionarem
+1. **Caminhos Incorretos**:
+   - Os arquivos (`Buttonsound.mp3`, `dicbotton.mp3`, imagens `.jpg`, `ALLTYPES.png`) podem não estar na raiz do repositório ou os nomes podem estar errados (ex.: maiúsculas/minúsculas, extensões incorretas).
+   - O repositório GitHub (`usuario/repositorio`) é um placeholder. Sem o URL real (ex.: `hermesdbello/teste_tipologico`), os caminhos estão inválidos.
 
-    const resultadoTendencia = document.getElementById('resultado-tendencia');
-    const resultadoTemperamento = document.getElementById('resultado-temperamento');
-    const resultadoExpressao = document.getElementById('resultado-expressao');
-    const resultadoPersonalidade = document.getElementById('resultado-personalidade');
-    const imagemPersonalidade = document.getElementById('personalidade-imagem');
-    const explicacaoRetangulo = document.getElementById('explicacao-retangulo');
-    const descricaoPersonalidade = document.getElementById('personalidade-descricao');
+2. **Problemas de CORS**:
+   - O GitHub (`raw.githubusercontent.com`) geralmente permite acesso a arquivos brutos, mas, em alguns casos, restrições de CORS podem bloquear sons ou imagens, especialmente se a aplicação está hospedada em um domínio diferente.
 
-    if (resultadoTendencia) {
-      resultadoTendencia.innerHTML = tendencia;
-    }
-    if (resultadoTemperamento) {
-      resultadoTemperamento.innerHTML = temperamento;
-    }
-    if (resultadoExpressao) {
-      resultadoExpressao.innerHTML = expressao;
-    }
-    if (resultadoPersonalidade) {
-      resultadoPersonalidade.innerHTML = personalidade;
-    }
+3. **Políticas de Áudio do Navegador**:
+   - Navegadores modernos bloqueiam a reprodução automática de áudio até que haja uma interação do usuário (ex.: clique). Isso pode fazer com que os sons não toquem se a função `playSound` for chamada sem uma interação direta.
 
-    if (personalidade !== 'Pendente') {
-      if (imagemPersonalidade && imagemMap[personalidade]) {
-        console.log("Tentando carregar imagem:", imagemMap[personalidade]);
-        imagemPersonalidade.src = imagemMap[personalidade];
-        imagemPersonalidade.style.display = 'block';
-        imagemPersonalidade.alt = `Imagem de ${personalidade}`;
-        imagemPersonalidade.onerror = () => {
-          console.error("Erro ao carregar imagem para", personalidade);
-        };
-      }
+4. **Erros de JavaScript**:
+   - Pode haver erros no console (ex.: `404 Not Found` para arquivos ou `Failed to play audio`) que não foram verificados, interrompendo a execução do código.
 
-      if (explicacaoRetangulo) {
-        explicacaoRetangulo.style.display = 'block';
-      }
+5. **Cache ou Implementação**:
+   - Se você está testando localmente ou em um servidor, o cache do navegador pode estar carregando uma versão antiga do código.
+   - As alterações podem não ter sido aplicadas corretamente no arquivo HTML.
 
-      if (descricaoPersonalidade && descricaoMap[personalidade]) {
-        descricaoPersonalidade.innerHTML = descricaoMap[personalidade].replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
-        descricaoPersonalidade.style.display = 'block';
-      }
+### Código Corrigido
+Abaixo está o código revisado, com as seguintes alterações:
+- **Imagem da página inicial**: Corrigida para `ALLTYPES.png` com o caminho do GitHub.
+- **Imagens das personalidades**: Mantidas como `.jpg` no `imagemMap`.
+- **Sons**: Adicionados `Buttonsound.mp3` para "Concordo"/"Discordo" e `dicbotton.mp3` para dicotomias, "Avançar" e "Iniciar Teste".
+- **Depuração**: Adicionados logs no console para verificar o carregamento de sons e imagens.
+- **Áudio com interação**: Garantido que os sons só toquem após cliques para evitar bloqueios do navegador.
 
-      if (musicaMap[personalidade] && personalidade !== currentPersonalidade) {
-        console.log("Tentando tocar música:", musicaMap[personalidade]);
-        playMusicWithFadeIn(musicaMap[personalidade]);
-        currentPersonalidade = personalidade;
-      }
-    } else {
-      if (imagemPersonalidade) {
-        imagemPersonalidade.style.display = 'none';
-      }
-      if (explicacaoRetangulo) {
-        explicacaoRetangulo.style.display = 'none';
-      }
-      if (descricaoPersonalidade) {
-        descricaoPersonalidade.style.display = 'none';
-      }
-      audioElement.pause();
-      currentPersonalidade = null;
-    }
+Para manter a resposta concisa, incluirei apenas as seções modificadas do HTML/JavaScript, focando nas partes relevantes para as imagens e sons. O restante do código (estilos, perguntas, lógica de resultados) permanece idêntico ao artefato original, exceto pelas correções solicitadas.
+
+#### HTML (Seção Relevante)
+```html
+<div class="tab-content active" id="pagina-inicial">
+  <div class="card">
+    <button class="start-button" id="start-test-button" onclick="openTab('orientacao')">INICIAR TESTE</button>
+    <br/>
+    <img alt="Tipos MBTI" src="https://raw.githubusercontent.com/usuario/repositorio/main/ALLTYPES.png" style="max-width:100%; height:auto; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);" onerror="console.error('Erro ao carregar ALLTYPES.png');"/>
+    <p style="font-size: 20px; margin-top: 20px;">
+      Teste de tipagem elaborado a partir do conteúdo do curso <strong>TIPOLOGIA PRÁTICA</strong>, ministrado por <a href="https://www.instagram.com/roberta_bernardon/?igsh=NXdlNXp1em84azNl#" style="color: #F8F8F8; font-weight: bold; text-decoration: underline;" target="_blank">Roberta Bernardon</a>.
+    </p>
+    <div class="small-text">
+      Teste elaborado por Hermes Damião Bello
+    </div>
+  </div>
+</div>
+
+<!-- Elementos de áudio -->
+<audio id="personalidade-musica" loop=""></audio>
+<audio id="button-sound" src="https://raw.githubusercontent.com/usuario/repositorio/main/Buttonsound.mp3" preload="auto" onerror="console.error('Erro ao carregar Buttonsound.mp3');"></audio>
+<audio id="dic-button-sound" src="https://raw.githubusercontent.com/usuario/repositorio/main/dicbotton.mp3" preload="auto" onerror="console.error('Erro ao carregar dicbotton.mp3');"></audio>
+```
+
+#### JavaScript (Seções Modificadas)
+```javascript
+let currentPersonalidade = null;
+let audioElement = document.getElementById('personalidade-musica');
+let buttonSound = document.getElementById('button-sound');
+let dicButtonSound = document.getElementById('dic-button-sound');
+
+// Função para tocar som com depuração
+function playSound(audio, context) {
+  if (!audio) {
+    console.error(`Áudio não encontrado (${context})`);
+    return;
   }
-
-  configurarAba('orientacao', 'postura');
-  configurarAba('postura', 'enfoque');
-  configurarAba('enfoque', 'organizacao');
-  configurarAba('organizacao', 'comunicacao');
-  configurarAba('comunicacao', 'interpretacao');
-  configurarAba('interpretacao', 'resultado');
-
-  // Adicionar som ao botão "Iniciar Teste"
-  const startTestButton = document.getElementById('start-test-button');
-  if (startTestButton) {
-    startTestButton.addEventListener('click', () => {
-      playSound(dicButtonSound);
+  audio.currentTime = 0; // Reinicia o som
+  console.log(`Tentando tocar som: ${audio.src} (${context})`);
+  const playPromise = audio.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(error => {
+      console.error(`Erro ao tocar som (${context}):`, error);
     });
   }
+}
 
-  // Adicionar som aos botões "Avançar"
-  const advanceButtons = document.querySelectorAll('.advance-button');
-  advanceButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      playSound(dicButtonSound);
-    });
+// Função para abrir abas (com som)
+function openTab(tabId) {
+  playSound(dicButtonSound, 'Botão de dicotomia');
+  const tabs = document.querySelectorAll('.tab-content');
+  const buttons = document.querySelectorAll('.tab-button');
+  tabs.forEach(tab => {
+    tab.classList.remove('active');
+    tab.style.animation = 'none';
+    tab.style.opacity = '0';
   });
-</script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93699cd51d39bd41',t:'MTc0NTcwNzU0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-</body>
-</html>
+  buttons.forEach(button => button.classList.remove('active'));
+  const selectedTab = document.getElementById(tabId);
+  if (selectedTab) {
+    selectedTab.classList.add('active');
+    selectedTab.style.animation = 'slideIn 0.6s ease forwards';
+    selectedTab.style.opacity = '1';
+    const button = document.querySelector(`.tab-button[onclick="openTab('${tabId}')"]`);
+    if (button) {
+      button.classList.add('active');
+    }
+  }
+}
+
+// Função para selecionar resposta (com som)
+function selecionarResposta(abaId, index, escolha) {
+  playSound(buttonSound, `Botão ${escolha} (${abaId})`);
+  const respostasAba = respostas[abaId];
+  const perguntasAba = perguntas[abaId];
+  if (!respostasAba || !perguntasAba) return;
+
+  const botoes = document.querySelectorAll(`#questions-${abaId} .card:nth-child(${index + 1}) button`);
+  botoes.forEach(b => b.classList.remove('active'));
+  botoes[escolha === 'concordo' ? 0 : 1].classList.add('active');
+
+  respostasAba[index] = escolha === 'concordo' ? perguntasAba[index].concordo : perguntasAba[index].discordo;
+
+  if (respostasAba.filter(r => r).length === perguntasAba.length) {
+    mostrarResultadoFinal(abaId);
+  }
+}
+
+// Mapear imagens
+const imagemMap = {
+  'ESTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESTJ.jpg',
+  'ESFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESFJ.jpg',
+  'ISTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISTJ.jpg',
+  'ISFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISFJ.jpg',
+  'ESTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESTP.jpg',
+  'ESFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESFP.jpg',
+  'ISTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISTP.jpg',
+  'ISFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISFP.jpg',
+  'ENTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENTJ.jpg',
+  'ENTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENTP.jpg',
+  'INTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/INTJ.jpg',
+  'INTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/INTP.jpg',
+  'ENFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENFJ.jpg',
+  'ENFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENFP.jpg',
+  'INFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/INFJ.jpg',
+  'INFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/INFP.jpg'
+};
+
+// Mapear músicas
+const musicaMap = {
+  'ESTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESTJ.mp3',
+  'ESFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESFJ.mp3',
+  'ISTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISTJ.mp3',
+  'ISFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISFJ.mp3',
+  'ESTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESTP.mp3',
+  'ESFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESFP.mp3',
+  'ISTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISTP.mp3',
+  'ISFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISFP.mp3',
+  'ENTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENTJ.mp3',
+  'ENTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENTP.mp3',
+  'INTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/INTJ.mp3',
+  'INTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/INTP.mp3',
+  'ENFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENFJ.mp3',
+  'ENFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENFP.mp3',
+  'INFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/INFJ.mp3',
+  'INFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/INFP.mp3'
+};
+
+// Adicionar som ao botão "Iniciar Teste"
+const startTestButton = document.getElementById('start-test-button');
+if (startTestButton) {
+  startTestButton.addEventListener('click', () => {
+    playSound(dicButtonSound, 'Botão Iniciar Teste');
+  });
+}
+
+// Adicionar som aos botões "Avançar"
+const advanceButtons = document.querySelectorAll('.advance-button');
+advanceButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    playSound(dicButtonSound, 'Botão Avançar');
+  });
+});
+```
+
+### Instruções para Implementação
+1. **Substituir o caminho do repositório**:
+   - Substitua `usuario/repositorio` pelo caminho real do seu repositório GitHub (ex.: `hermesdbello/teste_tipologico`).
+   - Exemplo de URLs:
+     - Imagem: `https://raw.githubusercontent.com/hermesdbello/teste_tipologico/main/ALLTYPES.png`
+     - Som: `https://raw.githubusercontent.com/hermesdbello/teste_tipologico/main/Buttonsound.mp3`
+
+2. **Verificar os arquivos no repositório**:
+   - Confirme que os arquivos existem no repositório com os nomes exatos:
+     - Imagens: `ALLTYPES.png`, `ESTJ.jpg`, `ESFJ.jpg`, etc.
+     - Sons: `Buttonsound.mp3`, `dicbotton.mp3`, `ESTJ.mp3`, etc.
+   - Acesse as URLs diretamente no navegador (ex.: `https://raw.githubusercontent.com/usuario/repositorio/main/ESTJ.jpg`) para verificar se carregam.
+   - Se os arquivos estão em pastas (ex.: `imagens/`, `musicas/`), ajuste os caminhos no código:
+     ```javascript
+     'ESTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/imagens/ESTJ.jpg',
+     'ESTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/musicas/ESTJ.mp3',
+     ```
+
+3. **Testar a aplicação**:
+   - Abra a aplicação no navegador e use o console de desenvolvedor (F12 > Console) para verificar erros:
+     - Erros como `404 Not Found` indicam que o arquivo não está no caminho especificado.
+     - Erros como `Failed to play audio` podem indicar problemas de CORS ou bloqueio de áudio.
+   - Teste os botões "Concordo"/"Discordo", dicotomias, "Avançar" e "Iniciar Teste" para confirmar que os sons tocam.
+   - Verifique se a imagem `ALLTYPES.png` e as imagens das personalidades (`.jpg`) aparecem corretamente.
+
+4. **Depurar problemas de áudio**:
+   - Se os sons não tocarem, verifique o console para mensagens como `DOMException: play() failed because the user didn't interact with the document first`.
+   - Para contornar bloqueios de áudio, adicione uma interação inicial (ex.: clique em "Iniciar Teste") antes de tentar tocar sons:
+     ```javascript
+     document.body.addEventListener('click', () => {
+       buttonSound.load(); // Pré-carrega o áudio após interação
+       dicButtonSound.load();
+     }, { once: true });
+     ```
+
+5. **Limpar o cache**:
+   - Se você está testando no mesmo domínio, limpe o cache do navegador (Ctrl+Shift+R ou "Limpar dados de navegação") para garantir que a versão atualizada do código seja carregada.
+
+### Possíveis Soluções para Problemas Persistentes
+- **Se os arquivos não carregam (404)**:
+  - Verifique se os arquivos estão no repositório e se os nomes correspondem exatamente (incluindo maiúsculas/minúsculas).
+  - Forneça o URL do repositório GitHub e a estrutura de pastas para que eu ajuste os caminhos.
+
+- **Se os sons não tocam**:
+  - Teste os arquivos `.mp3` diretamente no navegador para confirmar que são válidos.
+  - Considere hospedar os arquivos em um CDN (ex.: Cloudflare, AWS S3) para evitar problemas de CORS ou latência do GitHub.
+  - Adicione um fallback para garantir que a aplicação funcione mesmo sem som:
+    ```javascript
+    function playSound(audio, context) {
+      if (!audio) return;
+      audio.currentTime = 0;
+      console.log(`Tentando tocar som: ${audio.src} (${context})`);
+      audio.play().catch(error => console.error(`Erro ao tocar som (${context}):`, error));
+    }
+    ```
+
+- **Se as imagens não aparecem**:
+  - Verifique o console para erros como `Failed to load resource`.
+  - Confirme que todas as imagens (`.jpg` e `ALLTYPES.png`) estão no repositório e acessíveis.
+  - Adicione um fallback para imagens:
+    ```javascript
+    imagemPersonalidade.onerror = () => {
+      console.error(`Erro ao carregar imagem: ${imagemPersonalidade.src}`);
+      imagemPersonalidade.style.display = 'none';
+    };
+    ```
+
+### Solicitação de Informações
+Para resolver completamente o problema, por favor, forneça:
+1. **URL do repositório GitHub** (ex.: `https://github.com/hermesdbello/teste_tipologico`).
+2. **Estrutura de pastas** (os arquivos estão na raiz ou em pastas como `imagens/`, `musicas/`?).
+3. **Erros no console** (abra o console do navegador com F12 e compartilhe quaisquer mensagens de erro ao testar a aplicação).
+4. **Confirmação dos nomes dos arquivos** (ex.: `Buttonsound.mp3` e `dicbotton.mp3` são exatamente assim, com essas grafias?).
+
+Com essas informações, posso ajustar os caminhos e a lógica para corresponder à sua configuração exata.
+
+### Teste Local (Opcional)
+Se você está testando localmente e os arquivos estão no seu computador, substitua os caminhos do GitHub por caminhos relativos:
+```html
+<img src="./ALLTYPES.png" ... />
+<audio id="button-sound" src="./Buttonsound.mp3"></audio>
+<audio id="dic-button-sound" src="./dicbotton.mp3"></audio>
+```
+E no `imagemMap` e `musicaMap`:
+```javascript
+'ESTJ': './ESTJ.jpg',
+'ESTJ': './ESTJ.mp3',
+```
+Certifique-se de que os arquivos estão na mesma pasta do arquivo HTML ou ajuste os caminhos conforme a estrutura de pastas.
+
+Se precisar de mais ajuda ou quiser que eu revise uma parte específica do código, é só avisar!
