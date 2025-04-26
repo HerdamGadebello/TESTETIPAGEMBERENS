@@ -608,11 +608,14 @@
   }
 
   function playMusicWithFadeIn(src) {
+    console.log("Iniciando reprodução da música:", src);
     if (audioElement.src !== src) {
       audioElement.pause();
       audioElement.src = src;
       audioElement.volume = 0;
-      audioElement.play();
+      audioElement.play().catch(error => {
+        console.error("Erro ao tocar música:", error);
+      });
       let fadeInInterval = setInterval(() => {
         if (audioElement.volume < 0.5) {
           audioElement.volume = Math.min(0.5, audioElement.volume + 0.05);
@@ -695,44 +698,50 @@
     const personalidadeKey = `${temperamento}_${expressao}_${tendencia}`;
     personalidade = personalidadeMap[personalidadeKey] || 'Pendente';
 
+    // Logs para depuração
+    console.log("Tendência:", tendencia);
+    console.log("Temperamento:", temperamento);
+    console.log("Expressão:", expressao);
+    console.log("Personalidade Calculada:", personalidade);
+
     // Mapear personalidade para a imagem correspondente
     const imagemMap = {
-      'ESTJ': 'https://example.com/estj.png',
-      'ESFJ': 'https://example.com/esfj.png',
-      'ISTJ': 'https://example.com/istj.png',
-      'ISFJ': 'https://example.com/isfj.png',
-      'ESTP': 'https://example.com/estp.png',
-      'ESFP': 'https://example.com/esfp.png',
-      'ISTP': 'https://example.com/istp.png',
-      'ISFP': 'https://example.com/isfp.png',
-      'ENTJ': 'https://example.com/entj.png',
-      'ENTP': 'https://example.com/entp.png',
-      'INTJ': 'https://example.com/intj.png',
-      'INTP': 'https://example.com/intp.png',
-      'ENFJ': 'https://example.com/enfj.png',
-      'ENFP': 'https://example.com/enfp.png',
-      'INFJ': 'https://example.com/infj.png',
-      'INFP': 'https://example.com/infp.png'
+      'ESTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESTJ.png',
+      'ESFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESFJ.png',
+      'ISTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISTJ.png',
+      'ISFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISFJ.png',
+      'ESTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESTP.png',
+      'ESFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESFP.png',
+      'ISTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISTP.png',
+      'ISFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISFP.png',
+      'ENTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENTJ.png',
+      'ENTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENTP.png',
+      'INTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INTJ.png',
+      'INTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INTP.png',
+      'ENFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENFJ.png',
+      'ENFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENFP.png',
+      'INFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INFJ.png',
+      'INFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INFP.png'
     };
 
     // Mapear personalidade para a música correspondente
     const musicaMap = {
-      'ESTJ': 'https://example.com/ESTJ.mp3',
-      'ESFJ': 'https://example.com/ESFJ.mp3',
-      'ISTJ': 'https://example.com/ISTJ.mp3',
-      'ISFJ': 'https://example.com/ISFJ.mp3',
-      'ESTP': 'https://example.com/ESTP.mp3',
-      'ESFP': 'https://example.com/ESFP.mp3',
-      'ISTP': 'https://example.com/ISTP.mp3',
-      'ISFP': 'https://example.com/ISFP.mp3',
-      'ENTJ': 'https://example.com/ENTJ.mp3',
-      'ENTP': 'https://example.com/ENTP.mp3',
-      'INTJ': 'https://example.com/INTJ.mp3',
-      'INTP': 'https://example.com/INTP.mp3',
-      'ENFJ': 'https://example.com/ENFJ.mp3',
-      'ENFP': 'https://example.com/ENFP.mp3',
-      'INFJ': 'https://example.com/INFJ.mp3',
-      'INFP': 'https://example.com/INFP.mp3'
+      'ESTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESTJ.mp3',
+      'ESFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESFJ.mp3',
+      'ISTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISTJ.mp3',
+      'ISFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISFJ.mp3',
+      'ESTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESTP.mp3',
+      'ESFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ESFP.mp3',
+      'ISTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISTP.mp3',
+      'ISFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ISFP.mp3',
+      'ENTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENTJ.mp3',
+      'ENTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENTP.mp3',
+      'INTJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INTJ.mp3',
+      'INTP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INTP.mp3',
+      'ENFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENFJ.mp3',
+      'ENFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/ENFP.mp3',
+      'INFJ': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INFJ.mp3',
+      'INFP': 'https://raw.githubusercontent.com/seu-usuario/meu-repositorio/main/assets/INFP.mp3'
     };
 
     // Mapear personalidade para a descrição correspondente
@@ -778,11 +787,15 @@
     }
 
     if (personalidade !== 'Pendente') {
-      // Exibir imagem
+      // Exibir imagem com depuração
       if (imagemPersonalidade && imagemMap[personalidade]) {
+        console.log("Tentando carregar imagem:", imagemMap[personalidade]);
         imagemPersonalidade.src = imagemMap[personalidade];
         imagemPersonalidade.style.display = 'block';
         imagemPersonalidade.alt = `Imagem de ${personalidade}`;
+        imagemPersonalidade.onerror = () => {
+          console.error("Erro ao carregar imagem para", personalidade);
+        };
       }
 
       // Exibir retângulo "VER EXPLICAÇÃO DAS RESPOSTAS"
@@ -796,8 +809,9 @@
         descricaoPersonalidade.style.display = 'block';
       }
 
-      // Tocar música
+      // Tocar música com depuração
       if (musicaMap[personalidade] && personalidade !== currentPersonalidade) {
+        console.log("Tentando tocar música:", musicaMap[personalidade]);
         playMusicWithFadeIn(musicaMap[personalidade]);
         currentPersonalidade = personalidade;
       }
