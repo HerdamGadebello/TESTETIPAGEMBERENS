@@ -734,22 +734,22 @@
 
     // Mapear personalidade para a imagem correspondente
     const imagemMap = {
-      'ESTJ': './ESTJ.jpg',
-      'ESFJ': './ESFJ.jpg',
-      'ISTJ': './ISTJ.jpg',
-      'ISFJ': './ISFJ.jpg',
-      'ESTP': './ESTP.jpg',
-      'ESFP': './ESFP.jpg',
-      'ISTP': './ISTP.jpg',
-      'ISFP': './ISFP.jpg',
-      'ENTJ': './ENTJ.jpg',
-      'ENTP': './ENTP.jpg',
-      'INTJ': './INTJ.jpg',
-      'INTP': './INTP.jpg',
-      'ENFJ': './ENFJ.jpg',
-      'ENFP': './ENFP.jpg',
-      'INFJ': './INFJ.jpg',
-      'INFP': './INFP.jpg'
+      'ESTJ': './ESTJ.png',
+      'ESFJ': './ESFJ.png',
+      'ISTJ': './ISTJ.png',
+      'ISFJ': './ISFJ.png',
+      'ESTP': './ESTP.png',
+      'ESFP': './ESFP.png',
+      'ISTP': './ISTP.png',
+      'ISFP': './ISFP.png',
+      'ENTJ': './ENTJ.png',
+      'ENTP': './ENTP.png',
+      'INTJ': './INTJ.png',
+      'INTP': './INTP.png',
+      'ENFJ': './ENFJ.png',
+      'ENFP': './ENFP.png',
+      'INFJ': './INFJ.png',
+      'INFP': './INFP.png'
     };
 
     // Mapear personalidade para a música correspondente
@@ -895,5 +895,17 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
+
+<script>
+document.getElementById('explicacao-retangulo').addEventListener('click', function() {
+  const link = document.createElement('a');
+  link.href = './EXPLICAÇÃO.pdf';
+  link.download = 'EXPLICAÇÃO.pdf';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+});
+</script>
+
 </body>
 </html>
