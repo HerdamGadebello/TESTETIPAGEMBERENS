@@ -1,44 +1,4 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"/>
@@ -321,9 +281,9 @@
 </div>
 <div class="tab-content active" id="pagina-inicial">
 <div class="card">
-<button class="start-button" onclick="openTab('orientacao')">INICIAR TESTE</button>
+<button class="start-button" id="start-test-button" onclick="openTab('orientacao')">INICIAR TESTE</button>
 <br/>
-<img alt="Tipos MBTI" src="ALLTYPES.png" style="max-width:100%; height:auto; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);"/>
+<img alt="Tipos MBTI" src="https://raw.githubusercontent.com/usuario/repositorio/main/ALLTYPES.jpg" style="max-width:100%; height:auto; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);"/>
 <p style="font-size: 20px; margin-top: 20px;">
       Teste de tipagem elaborado a partir do conteúdo do curso <strong>TIPOLOGIA PRÁTICA</strong>, ministrado por <a href="https://www.instagram.com/roberta_bernardon/?igsh=NXdlNXp1em84azNl#" style="color: #F8F8F8; font-weight: bold; text-decoration: underline;" target="_blank">Roberta Bernardon</a>.
     </p>
@@ -411,6 +371,8 @@
 </div>
 </div>
 <audio id="personalidade-musica" loop=""></audio>
+<audio id="button-sound" src="https://raw.githubusercontent.com/usuario/repositorio/main/Buttonsound.mp3"></audio>
+<audio id="dic-button-sound" src="https://raw.githubusercontent.com/usuario/repositorio/main/dicbotton.mp3"></audio>
 <script type="text/javascript">
   var gk_isXlsx = false;
   var gk_xlsxFileLookup = {};
@@ -446,8 +408,18 @@
 <script>
   let currentPersonalidade = null;
   let audioElement = document.getElementById('personalidade-musica');
+  let buttonSound = document.getElementById('button-sound');
+  let dicButtonSound = document.getElementById('dic-button-sound');
+
+  function playSound(audio) {
+    audio.currentTime = 0; // Reinicia o som
+    audio.play().catch(error => {
+      console.error("Erro ao tocar som:", error);
+    });
+  }
 
   function openTab(tabId) {
+    playSound(dicButtonSound); // Toca som ao clicar nas abas
     const tabs = document.querySelectorAll('.tab-content');
     const buttons = document.querySelectorAll('.tab-button');
     tabs.forEach(tab => {
@@ -590,6 +562,7 @@
   }
 
   function selecionarResposta(abaId, index, escolha) {
+    playSound(buttonSound); // Toca som ao clicar em Concordo/Discordo
     const respostasAba = respostas[abaId];
     const perguntasAba = perguntas[abaId];
     if (!respostasAba || !perguntasAba) return;
@@ -650,12 +623,11 @@
         } else {
           clearInterval(fadeInInterval);
         }
-      }, 300); // 3-second fade-in (300ms * 10 steps)
+      }, 300);
     }
   }
 
   function mostrarResultadoTipologico() {
-    // Calcular TENDÊNCIA
     let tendencia = 'Pendente';
     if (resultados.orientacao === 'RESPONDEDOR') {
       tendencia = 'INTROVERSÃO';
@@ -663,7 +635,6 @@
       tendencia = 'EXTROVERSÃO';
     }
 
-    // Calcular TEMPERAMENTO
     let temperamento = 'Pendente';
     const interpretacao = resultados.interpretacao;
     const organizacao = resultados.organizacao;
@@ -683,7 +654,6 @@
       }
     }
 
-    // Calcular EXPRESSÃO
     let expressao = 'Pendente';
     const orientacao = resultados.orientacao;
     const postura = resultados.postura;
@@ -703,7 +673,6 @@
       }
     }
 
-    // Calcular PERSONALIDADE
     let personalidade = 'Pendente';
     const personalidadeMap = {
       'SENTINELA_ESTRUTURADOR_EXTROVERSÃO': 'ESTJ',
@@ -726,53 +695,49 @@
     const personalidadeKey = `${temperamento}_${expressao}_${tendencia}`;
     personalidade = personalidadeMap[personalidadeKey] || 'Pendente';
 
-    // Logs para depuração
     console.log("Tendência:", tendencia);
     console.log("Temperamento:", temperamento);
     console.log("Expressão:", expressao);
     console.log("Personalidade Calculada:", personalidade);
 
-    // Mapear personalidade para a imagem correspondente
     const imagemMap = {
-      'ESTJ': './assets/ESTJ.png',
-      'ESFJ': './assets/ESFJ.png',
-      'ISTJ': './assets/ISTJ.png',
-      'ISFJ': './assets/ISFJ.png',
-      'ESTP': './assets/ESTP.png',
-      'ESFP': './assets/ESFP.png',
-      'ISTP': './assets/ISTP.png',
-      'ISFP': './assets/ISFP.png',
-      'ENTJ': './assets/ENTJ.png',
-      'ENTP': './assets/ENTP.png',
-      'INTJ': './assets/INTJ.png',
-      'INTP': './assets/INTP.png',
-      'ENFJ': './assets/ENFJ.png',
-      'ENFP': './assets/ENFP.png',
-      'INFJ': './assets/INFJ.png',
-      'INFP': './assets/INFP.png'
+      'ESTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESTJ.jpg',
+      'ESFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESFJ.jpg',
+      'ISTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISTJ.jpg',
+      'ISFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISFJ.jpg',
+      'ESTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESTP.jpg',
+      'ESFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESFP.jpg',
+      'ISTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISTP.jpg',
+      'ISFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISFP.jpg',
+      'ENTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENTJ.jpg',
+      'ENTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENTP.jpg',
+      'INTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/INTJ.jpg',
+      'INTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/INTP.jpg',
+      'ENFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENFJ.jpg',
+      'ENFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENFP.jpg',
+      'INFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/INFJ.jpg',
+      'INFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/INFP.jpg'
     };
 
-    // Mapear personalidade para a música correspondente
     const musicaMap = {
-      'ESTJ': './assets/ESTJ.mp3',
-      'ESFJ': './assets/ESFJ.mp3',
-      'ISTJ': './assets/ISTJ.mp3',
-      'ISFJ': './assets/ISFJ.mp3',
-      'ESTP': './assets/ESTP.mp3',
-      'ESFP': './assets/ESFP.mp3',
-      'ISTP': './assets/ISTP.mp3',
-      'ISFP': './assets/ISFP.mp3',
-      'ENTJ': './assets/ENTJ.mp3',
-      'ENTP': './assets/ENTP.mp3',
-      'INTJ': './assets/INTJ.mp3',
-      'INTP': './assets/INTP.mp3',
-      'ENFJ': './assets/ENFJ.mp3',
-      'ENFP': './assets/ENFP.mp3',
-      'INFJ': './assets/INFJ.mp3',
-      'INFP': './assets/INFP.mp3'
+      'ESTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESTJ.mp3',
+      'ESFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESFJ.mp3',
+      'ISTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISTJ.mp3',
+      'ISFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISFJ.mp3',
+      'ESTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESTP.mp3',
+      'ESFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ESFP.mp3',
+      'ISTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISTP.mp3',
+      'ISFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ISFP.mp3',
+      'ENTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENTJ.mp3',
+      'ENTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENTP.mp3',
+      'INTJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/INTJ.mp3',
+      'INTP': 'https://raw.githubusercontent.com/usuario/repositorio/main/INTP.mp3',
+      'ENFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENFJ.mp3',
+      'ENFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/ENFP.mp3',
+      'INFJ': 'https://raw.githubusercontent.com/usuario/repositorio/main/INFJ.mp3',
+      'INFP': 'https://raw.githubusercontent.com/usuario/repositorio/main/INFP.mp3'
     };
 
-    // Mapear personalidade para a descrição correspondente
     const descricaoMap = {
       'ESTJ': `O JUIZ\nO ESTJ é prático, responsável e altamente conectado ao mundo exterior, valorizando ordem, regras e eficiência. Organizado e detalhista, impacienta-se com quem negligencia processos ou ignora experiências consolidadas. Avalia os outros pelo desempenho operacional, podendo ser direto—às vezes, rígido—com quem desrespeita normas.\n\nLeal a instituições, trabalho e família, cumpre deveres com dedicação, mesmo sob sacrifício. Assume posições de liderança facilmente, participa ativamente da comunidade e valoriza pontualidade. Sua objetividade e foco em resultados o tornam ágil, mas sua impulsividade pode levar a erros. Prefere ação a discussões, precisando desenvolver paciência para ouvir perspectivas alheias.\n\nAdepto de rotinas e tradições, valoriza ambientes estruturados ("um lugar para cada coisa") e socializa por meio de rituais, como eventos familiares. Apesar de não ser minucioso em pequenos detalhes, promove harmonia através de normas claras. Sua dificuldade está em adaptar-se a mudanças radicais ou a visões que desafiem suas convicções.`,
       'ESFJ': `O CAVALEIRO\nO ESFJ é um tipo sociável e caloroso, que se energiza ao interagir com os outros e valoriza profundamente a harmonia. Conhecido por seu lado "nutridor", ele fortalece instituições como família, escola e comunidade, promovendo conexões e tradições. Memoriza nomes com facilidade e preocupa-se em incluir todos em eventos sociais, muitas vezes revivendo memórias afetivas.\n\nAltamente sensível à rejeição, o ESFJ busca reconhecimento por seus esforços—especialmente em servir aos outros—e prioriza a aprovação social. Sua comunicação é marcada por valores claros ("certo/errado"), e sua carreira tende a áreas assistenciais, vendas ou ensino, onde sua empatia e charme pessoal brilham. Leal e respeitoso com hierarquias, evita conflitos e prefere conversas práticas a debates abstratos.\n\nNa família, é dedicado, organizado e aprecia rituais como comemorações. Porém, pode ser pessimista diante de problemas, antecipando cenários negativos. Sua necessidade de ser indispensável e amado exige equilíbrio para evitar desgaste emocional. Apesar disso, seu afeto e compromisso o tornam um pilar em seus relacionamentos.`,
@@ -792,7 +757,6 @@
       'INFP': `O CURANDEIRO\nO INFP é o poeta da alma humana - um sonhador discreto cujo mundo interior fervilha com paixão por ideais e conexões autênticas. Por trás de sua aparente timidez, arde um coração de cavaleiro medieval, pronto para defender causas perdidas com fervor quase místico. Sua linguagem natural é a metáfora, transformando valores abstratos em belas narrativas que inspiram mudanças sutis.\n\nProfissionalmente, é o curador de almas (aconselhamento, artes, ensino), onde pode aliar sensibilidade aguçada com criatividade simbólica. Seu superpoder? Ver o potencial sagrado em cada pessoa - sua criptonita? Rotinas burocráticas e conflitos agressivos. Colegas admiram sua empatia, mas muitas vezes subestimam a força feroz que esconde sob sua suavidade.\n\nNos relacionamentos, é um parceiro leal que cultiva intimidade como arte sacra. Como pai/mãe, mistura proteção intensa com respeito pela individualidade. Seu desafio é aprender que ideais elevados não precisam ser sacrificados na realidade - às vezes, a verdadeira coragem está em encontrar beleza no imperfeito.`
     };
 
-    // Exibir resultados
     const resultadoTendencia = document.getElementById('resultado-tendencia');
     const resultadoTemperamento = document.getElementById('resultado-temperamento');
     const resultadoExpressao = document.getElementById('resultado-expressao');
@@ -815,7 +779,6 @@
     }
 
     if (personalidade !== 'Pendente') {
-      // Exibir imagem com depuração
       if (imagemPersonalidade && imagemMap[personalidade]) {
         console.log("Tentando carregar imagem:", imagemMap[personalidade]);
         imagemPersonalidade.src = imagemMap[personalidade];
@@ -826,18 +789,15 @@
         };
       }
 
-      // Exibir retângulo "VER EXPLICAÇÃO DAS RESPOSTAS"
       if (explicacaoRetangulo) {
         explicacaoRetangulo.style.display = 'block';
       }
 
-      // Exibir descrição
       if (descricaoPersonalidade && descricaoMap[personalidade]) {
         descricaoPersonalidade.innerHTML = descricaoMap[personalidade].replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
         descricaoPersonalidade.style.display = 'block';
       }
 
-      // Tocar música com depuração
       if (musicaMap[personalidade] && personalidade !== currentPersonalidade) {
         console.log("Tentando tocar música:", musicaMap[personalidade]);
         playMusicWithFadeIn(musicaMap[personalidade]);
@@ -864,6 +824,23 @@
   configurarAba('organizacao', 'comunicacao');
   configurarAba('comunicacao', 'interpretacao');
   configurarAba('interpretacao', 'resultado');
+
+  // Adicionar som ao botão "Iniciar Teste"
+  const startTestButton = document.getElementById('start-test-button');
+  if (startTestButton) {
+    startTestButton.addEventListener('click', () => {
+      playSound(dicButtonSound);
+    });
+  }
+
+  // Adicionar som aos botões "Avançar"
+  const advanceButtons = document.querySelectorAll('.advance-button');
+  advanceButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      playSound(dicButtonSound);
+    });
+  });
 </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93699cd51d39bd41',t:'MTc0NTcwNzU0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
