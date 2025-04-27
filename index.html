@@ -917,11 +917,11 @@ document.getElementById('explicacao-retangulo').addEventListener('click', functi
 </div>
 
 
-<!-- Modal de Personalidade -->
-<div id="modal-personalidade" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
-  <div style="background:#FCD0E5; border-radius:20px; padding:20px; max-width:90%; width:700px; height:80%; text-align:center; font-family:'Century Gothic', sans-serif; color:#3C3C3C; position:relative; display:flex; flex-direction:column;">
+<!-- Modal Personalidade -->
+<div id="modal-personalidade" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center;">
+  <div style="background:#FCD0E5; border-radius:20px; padding:20px; width:90%; max-width:700px; height:80%; font-family:'Century Gothic', sans-serif; color:#3C3C3C; position:relative; display:flex; flex-direction:column;">
     <button onclick="fecharModalPersonalidade()" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:24px; color:#6E0838; cursor:pointer;">✖️</button>
-    <iframe id="iframe-personalidade" src="" style="flex:1; width:100%; border:none; border-radius:10px; margin-top:40px;"></iframe>
+    <iframe id="iframe-personalidade" src="" style="flex:1; width:100%; border:none; border-radius:10px; margin-top:50px;"></iframe>
   </div>
 </div>
 
@@ -997,7 +997,7 @@ function fecharModalPersonalidade() {
   document.getElementById('iframe-personalidade').src = '';
 }
 
-// Fecha clicando fora do modal também
+// Fecha clicando fora da janela também
 window.addEventListener('click', function(e) {
   if (e.target.id === 'modal-personalidade') {
     fecharModalPersonalidade();
