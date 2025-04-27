@@ -329,6 +329,128 @@
 }
 </style>
 
+
+<style>
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+    height: auto;
+    overflow-x: hidden;
+  }
+  .tabs {
+    flex-direction: row;
+    overflow-x: auto;
+    width: 100%;
+    min-width: auto;
+    padding: 10px 5px;
+    box-shadow: none;
+  }
+  .tab-button {
+    flex: 1 0 auto;
+    font-size: 16px;
+    white-space: nowrap;
+    padding: 10px 8px;
+  }
+  .tab-content {
+    padding: 15px;
+  }
+  .resultado-retangulo,
+  .personalidade-retangulo,
+  .explicacao-retangulo {
+    width: 90%;
+    max-width: 320px;
+    margin: 10px auto;
+  }
+  .personalidade-imagem {
+    max-width: 90%;
+    height: auto;
+  }
+  .small-text,
+  p {
+    font-size: 16px;
+  }
+  h1 {
+    font-size: 26px;
+  }
+}
+</style>
+
+
+<style>
+@media (max-width: 768px) {
+  body {
+    flex-direction: row;
+    height: auto;
+    overflow-x: hidden;
+  }
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+    min-width: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #FF9F1C;
+    padding: 5px 2px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+  }
+  .tab-button {
+    flex: 0 0 auto;
+    font-size: 12px;
+    padding: 8px 6px;
+    white-space: normal;
+    word-break: break-word;
+    text-align: center;
+    line-height: 1.2;
+    height: auto;
+    min-height: 50px;
+    border-radius: 8px;
+  }
+  .tab-content {
+    padding: 12px;
+    overflow-y: auto;
+    flex-grow: 1;
+  }
+  h1 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  p, .small-text {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+  .card {
+    padding: 15px;
+    border-radius: 12px;
+  }
+  .start-button,
+  .advance-button {
+    font-size: 14px;
+    padding: 10px 20px;
+    margin: 10px 0;
+    width: 100%;
+  }
+  .resultado-retangulo,
+  .personalidade-retangulo,
+  .explicacao-retangulo {
+    width: 90%;
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 15px;
+    border-radius: 10px;
+  }
+  .resultado-texto {
+    font-size: 22px;
+  }
+  .personalidade-imagem {
+    max-width: 95%;
+    height: auto;
+    margin-top: 15px;
+    border-radius: 10px;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="tabs">
