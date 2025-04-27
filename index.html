@@ -37,7 +37,26 @@
         }
         return gk_fileData[filename] || "";
         }
-        </script><!DOCTYPE html>
+        
+function abrirModalPersonalizado() {
+  const tipo = document.getElementById('resultado-personalidade').innerText;
+  const link = linkPersonalidade[tipo];
+
+  if (tipo && link) {
+    const conteudo = `
+      <p style="font-size: 22px;"><strong>Seu tipo é ${tipo}!</strong></p>
+      <p style="margin-top: 10px;">Clique abaixo para ver mais detalhes:</p>
+      <a href="${link}" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background-color: #FF9F1C; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">
+        🔗 Ver descrição no Instagram
+      </a>
+    `;
+    abrirModal('PERSONALIDADE', conteudo);
+  } else {
+    abrirModal('PERSONALIDADE', 'Informação de personalidade não encontrada.');
+  }
+}
+
+</script><!DOCTYPE html>
 
 <html lang="pt-BR">
 <head>
@@ -45,6 +64,13 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Teste Tipológico</title>
+
+
+
+
+
+
+
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Cascadia+Code&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Ebrima&display=swap');
@@ -308,7 +334,6 @@
       }
     }
   </style>
-
 <style>
 @media (max-width: 768px) {
   #modal-conteudo, #modal-personalidade > div {
@@ -328,8 +353,6 @@
   }
 }
 </style>
-
-
 <style>
 @media (max-width: 768px) {
   body {
@@ -374,8 +397,6 @@
   }
 }
 </style>
-
-
 <style>
 @media (max-width: 768px) {
   body {
@@ -450,7 +471,6 @@
   }
 }
 </style>
-
 </head>
 <body>
 <div class="tabs">
@@ -527,22 +547,24 @@
 <div class="tab-content" id="resultado">
 <div class="card">
 <h1>Resultado Tipológico</h1>
+
 <div class="resultados-container">
-<div class="resultado-retangulo">
-<h2>TENDÊNCIA</h2><span id="valor-temperamento"></span><span id="valor-expressao"></span>
+<div class="resultado-retangulo" onclick="abrirModal('TENDÊNCIA', textosTendencia[document.getElementById('resultado-tendencia').innerText])">
+<h2>TENDÊNCIA</h2>
 <div class="resultado-texto" id="resultado-tendencia"></div>
 </div>
-<div class="resultado-retangulo">
-<h2>TEMPERAMENTO</h2><span id="valor-temperamento"></span><span id="valor-expressao"></span>
+<div class="resultado-retangulo" onclick="abrirModal('TEMPERAMENTO', textosTemperamento[document.getElementById('resultado-temperamento').innerText])">
+<h2>TEMPERAMENTO</h2>
 <div class="resultado-texto" id="resultado-temperamento"></div>
 </div>
-<div class="resultado-retangulo">
-<h2>EXPRESSÃO</h2><span id="valor-temperamento"></span><span id="valor-expressao"></span>
+<div class="resultado-retangulo" onclick="abrirModal('EXPRESSÃO', textosExpressao[document.getElementById('resultado-expressao').innerText])">
+<h2>EXPRESSÃO</h2>
 <div class="resultado-texto" id="resultado-expressao"></div>
 </div>
 </div>
+
 <div class="personalidade-container">
-<div class="personalidade-retangulo">
+<div class="personalidade-retangulo" onclick="abrirModalPersonalizado()">
 <h2>PERSONALIDADE</h2><span id="valor-temperamento"></span><span id="valor-expressao"></span>
 <div class="resultado-texto" id="resultado-personalidade"></div>
 </div>
@@ -586,6 +608,25 @@
     }
     return gk_fileData[filename] || "";
   }
+
+function abrirModalPersonalizado() {
+  const tipo = document.getElementById('resultado-personalidade').innerText;
+  const link = linkPersonalidade[tipo];
+
+  if (tipo && link) {
+    const conteudo = `
+      <p style="font-size: 22px;"><strong>Seu tipo é ${tipo}!</strong></p>
+      <p style="margin-top: 10px;">Clique abaixo para ver mais detalhes:</p>
+      <a href="${link}" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background-color: #FF9F1C; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">
+        🔗 Ver descrição no Instagram
+      </a>
+    `;
+    abrirModal('PERSONALIDADE', conteudo);
+  } else {
+    abrirModal('PERSONALIDADE', 'Informação de personalidade não encontrada.');
+  }
+}
+
 </script>
 <script>
   let currentPersonalidade = null;
@@ -715,6 +756,25 @@
   };
 
   const resultados = {};
+const linkPersonalidade = {
+  'ESTJ': 'https://www.instagram.com/p/CfVKwUiNoy3/?igsh=MWYzNDZhdWVpcXg4dw%3D%3D&img_index=1',
+  'ESFJ': 'https://www.instagram.com/p/Ce4fsWWl413/?igsh=YWlpbDZ4YmIyNTdy',
+  'ISTJ': 'https://www.instagram.com/p/CeUa8DRl9kh/?igsh=eDFmMTdicXlubXF2',
+  'ISFJ': 'https://www.instagram.com/p/Cdo1PPFJgDy/?igsh=MTFrdGxyYTdxYXJ0NQ==',
+  'ESTP': 'https://www.instagram.com/p/Cc31k_Cp-Rz/?igsh=dG44MGM3YWZnendw',
+  'ESFP': 'https://www.instagram.com/p/Cb8mNdRJvZK/?igsh=MXR6dWg1eHliNzBybw==',
+  'ISTP': 'https://www.instagram.com/p/CcOi-Ndp38-/?igsh=MTE4a2gzM3lqc2Y3eQ==',
+  'ISFP': 'https://www.instagram.com/p/CcgvCROJRaE/?igsh=Yjd0NHl3N2lyeHFu',
+  'ENTJ': 'https://www.instagram.com/p/CcEap2Opaz3/?igsh=OHd2dW1sazM5eHlh',
+  'ENTP': 'https://www.instagram.com/p/CcWTHicp9hL/?igsh=MWhibHRnMG1ueGlxNQ==',
+  'INTJ': 'https://www.instagram.com/p/CdHVHCapO1W/?igsh=MWdteHFmNWQ5aHR6ag==',
+  'INTP': 'https://www.instagram.com/p/Ccq77oxp3aQ/?igsh=MTI1cHN3emNmMmcxYg==',
+  'ENFJ': 'https://www.instagram.com/p/CdZfAL4rDwT/?igsh=MTh4dGlqeXNodWo3Ng==',
+  'ENFP': 'https://www.instagram.com/p/Cd62RbzNAYv/?igsh=MTUxM202ODg0OGhpMg==',
+  'INFJ': 'https://www.instagram.com/p/Cehh1TGNKvD/?igsh=MWhvMGVvYnVjY2trMw==',
+  'INFP': 'https://www.instagram.com/p/CfDF24LNiE1/?igsh=eTlvcXViZjRkZ3Vq'
+};
+
 
   function configurarAba(abaId, proximaAba) {
     const container = document.getElementById(`questions-${abaId}`);
@@ -840,10 +900,10 @@
         expressao = 'INAUGURADOR';
       }
     } else if (orientacao === 'RESPONDEDOR') {
-      if (postura === 'MOVIMENTADOR' || comunicacao === 'DIRETO') {
-        expressao = 'FINALIZADOR';
-      } else if (postura === 'CONTROLADOR' || comunicacao === 'INFORMATIVO') {
+      if (postura === 'MOVIMENTADOR' || comunicacao === 'INFORMATIVO') {
         expressao = 'BASTIDOR';
+      } else if (postura === 'CONTROLADOR' || comunicacao === 'DIRETO') {
+        expressao = 'FINALIZADOR';
       }
     }
 
@@ -1038,6 +1098,25 @@ window.addEventListener('DOMContentLoaded', () => {
         botao.addEventListener('click', () => tocarSom('dicbotton'));
     });
 });
+
+function abrirModalPersonalizado() {
+  const tipo = document.getElementById('resultado-personalidade').innerText;
+  const link = linkPersonalidade[tipo];
+
+  if (tipo && link) {
+    const conteudo = `
+      <p style="font-size: 22px;"><strong>Seu tipo é ${tipo}!</strong></p>
+      <p style="margin-top: 10px;">Clique abaixo para ver mais detalhes:</p>
+      <a href="${link}" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background-color: #FF9F1C; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">
+        🔗 Ver descrição no Instagram
+      </a>
+    `;
+    abrirModal('PERSONALIDADE', conteudo);
+  } else {
+    abrirModal('PERSONALIDADE', 'Informação de personalidade não encontrada.');
+  }
+}
+
 </script>
 
 <script>
@@ -1049,28 +1128,74 @@ document.getElementById('explicacao-retangulo').addEventListener('click', functi
   link.click();
   document.body.removeChild(link);
 });
+
+function abrirModalPersonalizado() {
+  const tipo = document.getElementById('resultado-personalidade').innerText;
+  const link = linkPersonalidade[tipo];
+
+  if (tipo && link) {
+    const conteudo = `
+      <p style="font-size: 22px;"><strong>Seu tipo é ${tipo}!</strong></p>
+      <p style="margin-top: 10px;">Clique abaixo para ver mais detalhes:</p>
+      <a href="${link}" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background-color: #FF9F1C; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">
+        🔗 Ver descrição no Instagram
+      </a>
+    `;
+    abrirModal('PERSONALIDADE', conteudo);
+  } else {
+    abrirModal('PERSONALIDADE', 'Informação de personalidade não encontrada.');
+  }
+}
+
+</script>
+
+
+<!-- Modal para Temperamento, Tendência e Expressão -->
+<div id="meuModal" class="modal" style="display:none;position:fixed;z-index:1000;padding-top:100px;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.6);">
+  <div class="modal-content" style="background-color:#fefefe;margin:auto;padding:20px;border:1px solid #888;width:90%;max-width:500px;border-radius:12px;color:#333;">
+    <span class="close" onclick="fecharModal()" style="color:#aaa;float:right;font-size:28px;font-weight:bold;cursor:pointer;">&times;</span>
+    <h2 id="modalTitulo"></h2>
+    <p id="modalTexto"></p>
+  </div>
+</div>
+
+
+<script>
+function abrirModal(titulo, conteudo) {
+  document.getElementById('meuModal').style.display = 'flex';
+  document.getElementById('modalTitulo').innerText = titulo;
+  document.getElementById('modalTexto').innerHTML = conteudo || 'Informação não disponível.';
+}
+function fecharModal(event) {
+  const modal = document.getElementById('meuModal');
+  if (!event || event.target === modal) {
+    modal.style.display = 'none';
+  }
+}
 </script>
 
 </body>
 
 <script>
 const textosTemperamento = {
-  'SENTINELA': `Os Sentinelas são os pilares da sociedade, valorizando estabilidade, segurança e tradição. [...]`,
-  'ARTÍFICE': `Artífices vivem no aqui e agora, buscando liberdade, ação e experiências imediatas. [...]`,
-  'ANALISTA': `Analistas são os arquitetos do futuro, movidos por lógica, inovação e eficiência. [...]`,
-  'DIPLOMATA': `Diplomatas são os catalisadores de crescimento, guiados por valores, conexões e significado. [...]`
+  'SENTINELA': `Os Sentinelas são os pilares da sociedade, valorizando estabilidade, segurança e tradição. Representados por tipos como ESTJ, ESFJ, ISTJ e ISFJ, eles são práticos, organizados e confiáveis. Sua força está na manutenção de sistemas eficientes e no cumprimento de responsabilidades. São excelentes em criar estruturas e seguir regras, garantindo que tudo funcione sem problemas. No trabalho, destacam-se em funções que exigem atenção a detalhes e consistência, como administração, saúde e educação. Socialmente, são leais e protetores com aqueles que amam, muitas vezes assumindo papéis de cuidadores. No entanto, podem resistir a mudanças bruscas e ter dificuldade em sair da zona de conforto. Sua ética de trabalho inabalável e senso de dever os tornam indispensáveis em qualquer equipe. Para os Sentinelas, honrar compromissos e manter a ordem são prioridades absolutas. Eles prosperam em ambientes previsíveis, onde podem aplicar sua meticulosidade e garantir que tudo esteja no lugar certo.`,
+  'ARTÍFICE': `AArtífices vivem no aqui e agora, buscando liberdade, ação e experiências imediatas. Representados por tipos como ESTP, ESFP, ISTP e ISFP, eles são espontâneos, adaptáveis e habilidosos em resolver problemas sob pressão. Sua energia vibrante e talento prático os tornam excelentes em áreas que exigem destreza física ou criatividade, como artes, esportes e emergências. Eles enxergam o mundo como um playground, sempre prontos para explorar novas possibilidades. Socialmente, são carismáticos e divertidos, atraindo pessoas com seu entusiasmo contagiante. No entanto, podem evitar planejamentos de longo prazo, preferindo a flexibilidade à rotina. Artífices são mestres em improvisação, usando recursos disponíveis de forma inovadora. Sua coragem e capacidade de pensar rápido os tornam indispensáveis em situações críticas. Para eles, a vida deve ser vivida com intensidade, e regras existem para serem desafiadas quando limitam sua liberdade.`,
+  'ANALISTA': `Analistas são os arquitetos do futuro, movidos por lógica, inovação e eficiência. Representados por tipos como INTJ, ENTJ, INTP e ENTP, eles buscam compreender sistemas complexos e melhorá-los. Sua mente estratégica e visão de longo prazo os tornam excelentes em ciência, tecnologia e liderança. Eles questionam o status quo, preferindo soluções inteligentes a tradições ultrapassadas. No trabalho, são analíticos e independentes, valorizando competência acima de tudo. Socialmente, podem parecer distantes, mas sua paixão por ideias profundas os torna fascinantes conversadores. No entanto, sua busca pela perfeição pode levá-los a negligenciar emoções ou detalhes práticos. Analistas adoram desafios intelectuais e prosperam em ambientes que estimulam sua criatividade. Para eles, o progresso humano depende da razão e da inovação. Eles sonham grande e têm as ferramentas mentais para transformar visões em realidade, mesmo que isso exija romper convenções.`,
+  'DIPLOMATA': `Diplomatas são os catalisadores de crescimento, guiados por valores, conexões e significado. Representados por tipos como INFJ, ENFJ, INFP e ENFP, eles buscam harmonia e autenticidade em todas as esferas da vida. Sua empatia profunda e intuição aguçada os tornam excelentes em áreas como psicologia, artes e educação, onde podem inspirar e transformar pessoas. Eles enxergam potencial em todos e dedicam-se a causas maiores. Socialmente, são calorosos e persuasivos, criando laços significativos. No entanto, podem se frustrar quando a realidade não corresponde aos seus ideais elevados. Diplomatas são sonhadores práticos, unindo compaixão à ação. Eles acreditam no poder das histórias e no crescimento pessoal como motores da mudança social. Para eles, a vida é uma jornada de autodescoberta e impacto positivo. Sua missão é criar um mundo mais justo e conectado, onde cada indivíduo possa florescer em sua singularidade.`
 };
 
 const textosExpressao = {
-  'ESTRUTURADOR': `O estilo Estruturador ou Diretivo é marcado por objetividade e foco em resultados. [...]`,
-  'INAUGURADOR': `O estilo Inaugurador ou Interativo é caloroso, envolvente e cheio de energia. [...]`,
-  'FINALIZADOR': `O estilo Finalizador ou Investigativo é sistemático, preciso e orientado por lógica. [...]`,
-  'BASTIDOR': `O estilo Bastidor ou Acomodativo é empático, harmonioso e orientado para o consenso. [...]`
+  'ESTRUTURADOR': `O estilo Estruturador ou Diretivo é marcado por objetividade e foco em resultados. Pessoas com essa expressão (como ESTJs, ENFJs, ESTPs e ENTJs) comunicam-se de forma clara e assertiva, priorizando ações concretas. Sua linguagem é pragmática, com frases curtas e orientadas a soluções: "Vamos resolver isso agora" ou "Qual é o plano?". Estruturas hierárquicas e eficiência são valorizadas, e conflitos são encarados como oportunidades para ajustes rápidos. No trabalho, assumem liderança naturalmente, delegando tarefas com precisão. Socialmente, podem parecer intensos, mas sua intenção é garantir progresso. Desafiam o status quo quando impede objetivos, usando lógica implacável. Seu mantra: "Menos conversa, mais ação". Porém, precisam moderar a impaciência com processos mais lentos. Típicos em cargos executivos ou emergências, onde decisões rápidas salvam vidas.`,
+  'INAUGURADOR': `O estilo Inaugurador ou Interativo é caloroso, envolvente e cheio de energia, é o estilo dos tipos ESFJs, ESFPs, ENTPs e ENFPs. Esses comunicadores usam histórias, metáforas e linguagem vívida para criar conexões. Sua fala é entusiasta, com variações no tom de voz e expressões faciais animadas. Valorizam o contato pessoal e a construção de relacionamentos. Sua comunicação é repleta de exclamações e perguntas retóricas: "Isso não é incrível?", "Vamos fazer história!". Adaptam-se facilmente a diferentes públicos, usando humor e empatia para engajar os outros. Na comunicação não-verbal, são expressivos com gestos amplos e proximidade física. Tendem a pensar em voz alta e podem mudar de assunto rapidamente, seguindo o fluxo da conversa. Seu maior desafio é manter o foco em detalhes concretos e seguir estruturas pré-definidas. Valorizam a harmonia grupal, mas podem evitar conflitos importantes para manter o clima positivo.`,
+  'FINALIZADOR': `O estilo Finalizador ou Investigativo, é sistemático, preciso e orientado por lógica, presente nos tipos ISTJ, ISTP, INTJ e INFJ. Esses comunicadores preferem dados concretos e evidências, usando linguagem técnica e específica. Sua postura é mais reservada, com tom de voz moderado e pausas frequentes para reflexão. Seu discurso é marcado por qualificações e precisão: "Segundo os dados...", "Teoricamente...". Fazem perguntas profundas para testar hipóteses: "Qual a metodologia usada?" Valorizam a exatidão acima de tudo, revisando constantemente suas próprias afirmações. Na comunicação não-verbal, mantêm postura contida e gestos mínimos. Preferem interações um-a-um ou pequenos grupos onde possam discutir ideias em profundidade. Seu maior desafio é adaptar a complexidade de seu pensamento para públicos diversos sem perder o rigor lógico. Podem parecer frios quando focam demais no conteúdo em detrimento das emoções envolvidas.`,
+  'BASTIDOR': `O estilo Bastidor ou Acomodativo é empático, harmonioso e orientado. para o consenso – presente nos tipos ISFJ, ISFP, INTP e INFP. Esses comunicadores priorizam a escuta ativa e a diplomacia, usando linguagem suave e inclusiva. Seu tom de voz é calmo, com pausas frequentes para verificar o entendimento do outro. Sua fala é repleta de qualificadores e frases de apoio: "Entendo seu ponto...", "Talvez possamos...". Evitam afirmações categóricas, preferindo sugestões: "Que tal tentarmos assim?" Na comunicação não-verbal, mantêm postura aberta e expressão facial receptiva. Valorizam profundamente a harmonia grupal e tendem a mediar conflitos, buscando soluções que atendam a todos. Seu maior desafio é expressar desacordos ou necessidades pessoais de forma direta, muitas vezes priorizando a paz sobre a autenticidade. Podem se beneficiar ao desenvolver maior assertividade sem perder sua natureza conciliadora.`
 };
 
 const textosTendencia = {
-  'EXTROVERSÃO': `Os Extrovertidos ou Iniciadores, segundo Linda Berens, são os motores da ação em qualquer dinâmica social ou profissional. [...]`,
-  'INTROVERSÃO': `Os Introvertidos ou Respondedores, na tipologia de Linda Berens, representam o contraponto reflexivo aos Iniciadores. [...]`
+  'EXTROVERSÃO': `Os Extrovertidos ou Iniciadores, segundo Linda Berens, são os motores da ação em qualquer dinâmica social ou profissional. Eles possuem um impulso natural para dar o primeiro passo, seja em conversas, projetos ou tomadas de decisão. Sua energia é voltada para a proatividade e a implementação rápida de ideias, muitas vezes antecipando-se aos outros e assumindo a liderança de forma espontânea. Esses indivíduos tendem a ser diretos em sua comunicação, expressando opiniões e sugestões sem hesitação. Em ambientes de trabalho, são frequentemente os que propõem novas iniciativas, convocam reuniões ou assumem o controle em situações de crise. Sua postura assertiva pode ser interpretada como dominante, mas surge de uma genuína motivação para fazer as coisas avançarem.\n\nNo entanto, essa tendência a agir rapidamente pode levar os Iniciadores a subestimar detalhes importantes ou negligenciar a opinião de colegas mais reflexivos. Eles se destacam em papéis que exigem tomada de decisão ágil, como em cargos de liderança ou em áreas empreendedoras, onde sua capacidade de iniciar processos é valiosa. Para equilibrar seu estilo, os Iniciadores podem se beneficiar ao desenvolver paciência, ouvindo ativamente antes de agir e reconhecendo o valor da contribuição daqueles que processam informações de maneira mais lenta e cuidadosa.
+`,
+  'INTROVERSÃO': `Os Introvertidos ou Respondedores, na tipologia de Linda Berens, representam o contraponto reflexivo aos Iniciadores. Eles preferem observar, processar informações e compreender plenamente uma situação antes de se manifestarem ou agirem. Essa abordagem cautelosa lhes permite analisar múltiplas perspectivas e oferecer contribuições mais ponderadas e completas.\n\nDiferentemente dos Iniciadores, que são impulsionados pela ação imediata, os Respondedores valorizam o tempo para reflexão. Em discussões, geralmente ouvem mais do que falam inicialmente, absorvendo os detalhes antes de formular respostas. Essa característica os torna excelentes solucionadores de problemas, capazes de identificar nuances que outros podem ignorar. No ambiente profissional, os Respondedores se destacam em funções que exigem análise detalhada, planejamento estratégico ou mediação de conflitos, onde sua capacidade de escuta e síntese é crucial. Eles trazem equilíbrio para equipes, garantindo que decisões sejam tomadas com base em informações sólidas e não apenas no ímpeto do momento.\n\nSeu maior desafio é evitar a paralisia por análise ou a hesitação excessiva, que pode retardar processos. Para maximizar seu potencial, os Respondedores podem trabalhar em expressar suas ideias com mais confiança, mesmo quando não têm todas as respostas, e em se adaptar a situações que exigem agilidade. Essa abordagem complementa perfeitamente a dos Iniciadores, criando uma dinâmica equilibrada entre ação e reflexão.
+`
 };
 
 const linksPersonalidade = {
@@ -1137,6 +1262,25 @@ window.addEventListener('click', function(e) {
   if (e.target.id === 'modal-explicacao') fecharModal();
   if (e.target.id === 'modal-personalidade') fecharModalPersonalidade();
 });
+
+function abrirModalPersonalizado() {
+  const tipo = document.getElementById('resultado-personalidade').innerText;
+  const link = linkPersonalidade[tipo];
+
+  if (tipo && link) {
+    const conteudo = `
+      <p style="font-size: 22px;"><strong>Seu tipo é ${tipo}!</strong></p>
+      <p style="margin-top: 10px;">Clique abaixo para ver mais detalhes:</p>
+      <a href="${link}" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background-color: #FF9F1C; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">
+        🔗 Ver descrição no Instagram
+      </a>
+    `;
+    abrirModal('PERSONALIDADE', conteudo);
+  } else {
+    abrirModal('PERSONALIDADE', 'Informação de personalidade não encontrada.');
+  }
+}
+
 </script>
 
 
@@ -1154,6 +1298,31 @@ function preencherResultados() {
   document.getElementById('valor-personalidade').innerText = resultadoPersonalidade;
 }
 window.onload = preencherResultados;
+
+function abrirModalPersonalizado() {
+  const tipo = document.getElementById('resultado-personalidade').innerText;
+  const link = linkPersonalidade[tipo];
+
+  if (tipo && link) {
+    const conteudo = `
+      <p style="font-size: 22px;"><strong>Seu tipo é ${tipo}!</strong></p>
+      <p style="margin-top: 10px;">Clique abaixo para ver mais detalhes:</p>
+      <a href="${link}" target="_blank" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background-color: #FF9F1C; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">
+        🔗 Ver descrição no Instagram
+      </a>
+    `;
+    abrirModal('PERSONALIDADE', conteudo);
+  } else {
+    abrirModal('PERSONALIDADE', 'Informação de personalidade não encontrada.');
+  }
+}
+
 </script>
+
+
+
+
+
+
 
 </html>
