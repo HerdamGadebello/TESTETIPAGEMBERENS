@@ -1,1 +1,920 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
 
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Teste Tipológico</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Cascadia+Code&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Ebrima&display=swap');
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #086E56, #043B2D);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+      flex-direction: row;
+    }
+    .tabs {
+      display: flex;
+      flex-direction: column;
+      background: #FF9F1C;
+      width: 240px;
+      min-width: 240px;
+      flex-shrink: 0;
+      padding: 20px 10px;
+      gap: 10px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+    }
+    .tab-button {
+      padding: 15px 10px;
+      background: linear-gradient(90deg, #FF9F1C, #fbb040);
+      color: #F8F8F8;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      text-align: right;
+      transition: all 0.3s ease;
+      width: 100%;
+      font-size: 20px;
+      font-family: 'Century Gothic', sans-serif;
+      border-radius: 12px;
+      white-space: normal;
+      word-break: break-word;
+      box-sizing: border-box;
+    }
+    .tab-button:hover {
+      transform: scale(1.02);
+      background: linear-gradient(90deg, #fbb040, #FF9F1C);
+    }
+    .tab-button.active {
+      background: #cc7f17;
+      box-shadow: 0 0 10px #fbb040;
+    }
+    .tab-content {
+      flex-grow: 1;
+      display: none;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      overflow-y: auto;
+      color: white;
+      backdrop-filter: blur(10px);
+      animation: slideIn 0.6s ease forwards;
+      opacity: 0;
+      text-align: center;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    h1 {
+      font-family: 'Cascadia Code', monospace;
+      color: #FF9F1C;
+      font-size: 32px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      margin: 20px 0;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      color: white;
+      backdrop-filter: blur(10px);
+      word-break: break-word;
+      white-space: normal;
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    .start-button {
+      background: #6E0838;
+      color: white;
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .start-button:hover {
+      background: #4a0628;
+      transform: scale(1.05);
+    }
+    .start-button.active {
+      background: #14532d;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #14532d;
+    }
+    .advance-button {
+      background: #FF9F1C;
+      color: white;
+      font-size: 22px;
+      padding: 12px 40px;
+      margin-top: 30px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      display: none;
+    }
+    .advance-button:hover {
+      background: #cc7f17;
+      transform: scale(1.05);
+    }
+    .resultado-final {
+      margin-top: 30px;
+      font-size: 32px;
+      font-weight: bold;
+      color: #FF9F1C;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    }
+    .small-text {
+      font-size: 14px;
+      margin-top: 30px;
+      color: #F8F8F8;
+    }
+    .resultados-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .resultado-retangulo {
+      background: #FF9F1C;
+      border-radius: 12px;
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+    .resultado-retangulo:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    .resultado-retangulo h2 {
+      font-family: 'Cascadia Code', monospace;
+      color: #F8F8F8;
+      font-size: 24px;
+      margin: 0 0 10px 0;
+    }
+    .resultado-texto {
+      font-size: 28px;
+      font-weight: bold;
+      color: #F8F8F8;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    .personalidade-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      flex-direction: column;
+      align-items: center;
+    }
+    .personalidade-retangulo {
+      background: #FF9F1C;
+      border-radius: 12px;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+    .personalidade-retangulo:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    .personalidade-retangulo h2 {
+      font-family: 'Cascadia Code', monospace;
+      color: #F8F8F8;
+      font-size: 24px;
+      margin: 0 0 10px 0;
+    }
+    .personalidade-imagem {
+      margin-top: 20px;
+      max-width: 300px;
+      border-radius: 12px;
+      display: none;
+    }
+    .explicacao-retangulo {
+      background: #6E0838;
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 20px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .explicacao-retangulo:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    .explicacao-texto {
+      font-family: 'Cascadia Code', monospace;
+      color: #F8F8F8;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+    }
+    .personalidade-descricao {
+      font-family: 'Ebrima', sans-serif;
+      font-size: 18px;
+      color: #F8F8F8;
+      margin-top: 20px;
+      max-width: 600px;
+      text-align: center;
+      line-height: 1.6;
+      display: none;
+    }
+    @media (max-width: 768px) {
+      .tabs {
+        width: 200px;
+        min-width: 200px;
+      }
+      .tab-button {
+        font-size: 18px;
+        padding: 12px 8px;
+      }
+      .resultado-retangulo {
+        width: 200px;
+      }
+      .personalidade-retangulo {
+        width: 250px;
+      }
+      .personalidade-imagem {
+        max-width: 250px;
+      }
+      .explicacao-retangulo {
+        width: 250px;
+      }
+      .personalidade-descricao {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="tabs">
+<button class="tab-button active" onclick="openTab('pagina-inicial')">Página Inicial</button>
+<button class="tab-button" onclick="openTab('orientacao')">Dicotomia Orientação</button>
+<button class="tab-button" onclick="openTab('postura')">Dicotomia Postura</button>
+<button class="tab-button" onclick="openTab('enfoque')">Dicotomia Enfoque</button>
+<button class="tab-button" onclick="openTab('organizacao')">Dicotomia Organização</button>
+<button class="tab-button" onclick="openTab('comunicacao')">Dicotomia Comunicação</button>
+<button class="tab-button" onclick="openTab('interpretacao')">Dicotomia Interpretação</button>
+<button class="tab-button" onclick="openTab('resultado')">Resultado Tipológico</button>
+</div>
+<div class="tab-content active" id="pagina-inicial">
+<div class="card">
+<button class="start-button" onclick="openTab('orientacao')">INICIAR TESTE</button>
+<br/>
+<img alt="Tipos MBTI" src="ALLTYPES.png" style="max-width:100%; height:auto; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);"/>
+<p style="font-size: 20px; margin-top: 20px;">
+      Teste de tipagem elaborado a partir do conteúdo do curso <strong>TIPOLOGIA PRÁTICA</strong>, ministrado por <a href="https://www.instagram.com/roberta_bernardon/?igsh=NXdlNXp1em84azNl#" style="color: #F8F8F8; font-weight: bold; text-decoration: underline;" target="_blank">Roberta Bernardon</a>.
+    </p>
+<div class="small-text">
+      Teste elaborado por Hermes Damião Bello
+    </div>
+</div>
+</div>
+<div class="tab-content" id="orientacao">
+<div class="card">
+<h1>Dicotomia Orientação</h1>
+<div id="questions-orientacao"></div>
+<div class="resultado-final" id="resultado-final-orientacao"></div>
+<button class="advance-button" id="botao-avancar-orientacao" onclick="openTab('postura')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="postura">
+<div class="card">
+<h1>Dicotomia Postura</h1>
+<div id="questions-postura"></div>
+<div class="resultado-final" id="resultado-final-postura"></div>
+<button class="advance-button" id="botao-avancar-postura" onclick="openTab('enfoque')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="enfoque">
+<div class="card">
+<h1>Dicotomia Enfoque</h1>
+<div id="questions-enfoque"></div>
+<div class="resultado-final" id="resultado-final-enfoque"></div>
+<button class="advance-button" id="botao-avancar-enfoque" onclick="openTab('organizacao')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="organizacao">
+<div class="card">
+<h1>Dicotomia Organização</h1>
+<div id="questions-organizacao"></div>
+<div class="resultado-final" id="resultado-final-organizacao"></div>
+<button class="advance-button" id="botao-avancar-organizacao" onclick="openTab('comunicacao')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="comunicacao">
+<div class="card">
+<h1>Dicotomia Comunicação</h1>
+<div id="questions-comunicacao"></div>
+<div class="resultado-final" id="resultado-final-comunicacao"></div>
+<button class="advance-button" id="botao-avancar-comunicacao" onclick="openTab('interpretacao')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="interpretacao">
+<div class="card">
+<h1>Dicotomia Interpretação</h1>
+<div id="questions-interpretacao"></div>
+<div class="resultado-final" id="resultado-final-interpretacao"></div>
+<button class="advance-button" id="botao-avancar-interpretacao" onclick="openTab('resultado')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="resultado">
+<div class="card">
+<h1>Resultado Tipológico</h1>
+<div class="resultados-container">
+<div class="resultado-retangulo">
+<h2>TENDÊNCIA</h2>
+<div class="resultado-texto" id="resultado-tendencia"></div>
+</div>
+<div class="resultado-retangulo">
+<h2>TEMPERAMENTO</h2>
+<div class="resultado-texto" id="resultado-temperamento"></div>
+</div>
+<div class="resultado-retangulo">
+<h2>EXPRESSÃO</h2>
+<div class="resultado-texto" id="resultado-expressao"></div>
+</div>
+</div>
+<div class="personalidade-container">
+<div class="personalidade-retangulo">
+<h2>PERSONALIDADE</h2>
+<div class="resultado-texto" id="resultado-personalidade"></div>
+</div>
+<img alt="Imagem da Personalidade" class="personalidade-imagem" id="personalidade-imagem"/>
+<div class="explicacao-retangulo" id="explicacao-retangulo">
+<p class="explicacao-texto">VER EXPLICAÇÃO DAS RESPOSTAS</p>
+</div>
+<div class="personalidade-descricao" id="personalidade-descricao"></div>
+</div>
+</div>
+</div>
+<audio id="personalidade-musica" loop=""></audio>
+<script type="text/javascript">
+  var gk_isXlsx = false;
+  var gk_xlsxFileLookup = {};
+  var gk_fileData = {};
+  function filledCell(cell) {
+    return cell !== '' && cell != null;
+  }
+  function loadFileData(filename) {
+    if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+      try {
+        var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+        var firstSheetName = workbook.SheetNames[0];
+        var worksheet = workbook.Sheets[firstSheetName];
+        var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+        var filteredData = jsonData.filter(row => row.some(filledCell));
+        var headerRowIndex = filteredData.findIndex((row, index) =>
+          row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+        );
+        if (headerRowIndex === -1 || headerRowIndex > 25) {
+          headerRowIndex = 0;
+        }
+        var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
+        csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+        return csv;
+      } catch (e) {
+        console.error(e);
+        return "";
+      }
+    }
+    return gk_fileData[filename] || "";
+  }
+</script>
+<script>
+  let currentPersonalidade = null;
+  let audioElement = document.getElementById('personalidade-musica');
+
+  function openTab(tabId) {
+    const tabs = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-button');
+    tabs.forEach(tab => {
+      tab.classList.remove('active');
+      tab.style.animation = 'none';
+      tab.style.opacity = '0';
+    });
+    buttons.forEach(button => button.classList.remove('active'));
+    const selectedTab = document.getElementById(tabId);
+    if (selectedTab) {
+      selectedTab.classList.add('active');
+      selectedTab.style.animation = 'slideIn 0.6s ease forwards';
+      selectedTab.style.opacity = '1';
+      const button = document.querySelector(`.tab-button[onclick="openTab('${tabId}')"]`);
+      if (button) {
+        button.classList.add('active');
+      }
+    }
+  }
+
+  const perguntasOrientacao = [
+    { texto: "Durante conversas, quando algo me vem à cabeça, dificilmente consigo me conter e acabo interrompendo a outra pessoa para falar sobre o assunto.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
+    { texto: "Na maioria das vezes, não me importo se alguém está desinformado; afinal, não é minha responsabilidade se a pessoa não se atualizou.", concordo: "RESPONDEDOR", discordo: "INICIADOR" },
+    { texto: "Sempre que recebo uma nova tarefa no trabalho, já começo a executá-la do meu jeito, mesmo que ainda não tenha todas as orientações necessárias.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
+    { texto: "Em restaurantes, quando percebo que o atendimento está lento, prefiro aguardar mais um pouco, acreditando que serei atendido naturalmente, sem precisar reclamar.", concordo: "RESPONDEDOR", discordo: "INICIADOR" },
+    { texto: "Sempre que um amigo está com dificuldades, já me adianto para sugerir soluções ou oferecer ajuda prática, nem sempre esperando que ele peça.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
+    { texto: "Ao encontrar uma boa promoção em uma loja, compro imediatamente, sem hesitar.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
+    { texto: "Normalmente, durante uma conversa, prefiro concluir meu raciocínio antes de mudar de assunto, pois não gosto quando a discussão é interrompida abruptamente.", concordo: "RESPONDEDOR", discordo: "INICIADOR" },
+    { texto: "Tenho mais facilidade para ouvir os outros do que para falar: é natural para mim absorver e refletir sobre o que dizem antes de expor minha opinião.", concordo: "RESPONDEDOR", discordo: "INICIADOR" },
+    { texto: "Sou bastante agitado e sempre quero participar ativamente das coisas. Adoro compartilhar ideias e entrar em discussões, mas muitas vezes não percebo que posso estar incomodando os outros.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
+    { texto: "No trabalho, quando identifico um processo que pode ser melhorado, já parto para as mudanças, mesmo sem autorização prévia.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
+    { texto: "Sempre que surge uma nova tecnologia ou ferramenta no meu trabalho, sou um dos primeiros a experimentar e propor formas de usá-la, independentemente de ser adotada oficialmente.", concordo: "INICIADOR", discordo: "RESPONDEDOR" }
+  ];
+
+  const perguntasPostura = [
+    { texto: "Tenho certa impaciência - prefiro fazer as coisas e dar andamento a elas em vez de ficar aguardando.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+    { texto: "Tendo a ser flexível, o que me ajuda a adaptar minhas ações conforme os problemas surgem, tornando-me melhor em contornar obstáculos.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+    { texto: "Se estou em uma fila e vejo uma alternativa mais rápida, mudo imediatamente de estratégia, buscando a forma mais eficiente de alcançar meu objetivo.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+    { texto: "Durante viagens em grupo, costumo sugerir novas atividades no meio do passeio, alterando o roteiro sem esperar o consenso dos outros.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+    { texto: "Sou uma pessoa que preza pelo primor: na escola, meus cadernos eram muito caprichados e meu estojo tinha canetas de cores diferentes para cada parte do texto.", concordo: "CONTROLADOR", discordo: "MOVIMENTADOR" },
+    { texto: "Na execução de tarefas, tendo a ser mais vagaroso - gasto mais tempo refletindo sobre como devem ser feitas para que o resultado saia impecável.", concordo: "CONTROLADOR", discordo: "MOVIMENTADOR" },
+    { texto: "Se estou cozinhando e um ingrediente acaba, improviso com o que tenho disponível sem me preocupar em seguir a receita à risca, já que não verifiquei antes se tinha todos os ingredientes.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+    { texto: "Quando um amigo desmarca um encontro de última hora, rapidamente ligo para outro e combino algo novo, sem criar drama.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+    { texto: "Se estou no trânsito e vejo um atalho possível, mudo de trajeto imediatamente, mesmo sem conhecer bem o caminho.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+    { texto: "Quando algo no meu computador trava, testo várias soluções rapidamente antes de buscar ajuda técnica ou consultar manuais.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+    { texto: "Nas apresentações escolares, geralmente não me preparava muito - estudava um pouco antes da aula e improvisava na hora com base no que já sabia.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" }
+  ];
+
+  const perguntasEnfoque = [
+    { texto: "Com frequência sou chamado(a) de ‘ovelha negra’ da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
+    { texto: "Costumo me sentir desconfortável em ambientes de trabalho muito competitivos, com metas rígidas e cobranças constantes, esse tipo de clima acaba me desgastando bastante.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
+    { texto: "Sou uma pessoa bastante amistosa, gosto de participar dos rolês com os amigos e detesto gente monossilábica.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
+    { texto: "Quando preciso participar de palestras e percebo que o conteúdo delas não me será nada útil, busco sair discretamente em vez de ficar fingindo interesse.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
+    { texto: "No almoço de família, quando percebo que algum primo está deslocado, puxo para perto, perguntando sobre os estudos, o trabalho etc.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
+    { texto: "Não gosto muito de fazer ‘a social’, sou péssimo em fingir ser sociável com pessoas que não me interessam.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
+    { texto: "Quando estou em uma reunião e percebo que o assunto está desviando do objetivo principal, costumo cortar o papo e trazer o foco de volta.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
+    { texto: "Quando meus amigos ou familiares escolhem fazer algo em um lugar de que eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
+    { texto: "Se numa ida ao cinema com amigos, o grupo escolhe com entusiasmo assistir a um determinado filme, geralmente eu opto por escolher também, mesmo que o filme não me desperte muito interesse.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
+    { texto: "Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
+    { texto: "Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" }
+  ];
+
+  const perguntasOrganizacao = [
+    { texto: "Entendo que as regras existem para evitar desordem, mas é necessário particularizar os casos, muitas vezes afrouxando as estruturas para estabelecer acordos benéficos.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
+    { texto: "Gosto de manter minha rotina, fazendo as coisas nos horários habituais, e fico muito estressado com imprevistos.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" },
+    { texto: "Em um mercado, se os caixas estão ocupados e o caixa preferencial está vazio, sigo direto para ele, pois se trata de preferência, não exclusividade.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
+    { texto: "Se meu trabalho exige seguir um protocolo de atendimento, sempre o sigo, sem abrir exceções.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" },
+    { texto: "Quando saio para almoçar com amigos, prefiro decidir na hora onde comer, permitindo que todos escolham o melhor local, em vez de definir no convite.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
+    { texto: "Detesto trabalho em grupo, mas, quando necessário, exijo que todos cumpram suas tarefas no prazo para não atrasar o grupo, e descarto quem não cumpre sua parte.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" },
+    { texto: "Às vezes, ao garantir que as coisas funcionem, posso soar ríspido(a) ao tratar as pessoas.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" },
+    { texto: "Em um churrasco com amigos, se combinamos que cada um leva uma bebida e alguém traz uma de má qualidade, posso achar ruim, mas não me preocupo em exigir que cada um consuma o que trouxe, pois o objetivo é descontrair, não criar regras.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
+    { texto: "Para mim, justiça é aplicar o que é devido a cada indivíduo, não usando a mesma medida para todos, pois alguém que furta alimentos para sustentar os filhos não merece a mesma pena que alguém que rouba por capricho.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
+    { texto: "Acho tediosas as pessoas que moralizam tudo; se os envolvidos em uma situação não veem problema nela, não há motivo para criticar.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
+    { texto: "Sou adepto do ditado ‘o combinado não sai caro’, pois, se a pessoa é adulta, deve ser responsável e consciente de suas ações.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" }
+  ];
+
+  const perguntasComunicacao = [
+    { texto: "Gosto de instigar as pessoas nas conversas – acho mais interessante fazer um 'charminho' do que deixar minhas intenções explícitas logo de início.", concordo: "INFORMATIVO", discordo: "DIRETO" },
+    { texto: "Minha fala tende a ser retilínea: conduzo o raciocínio de maneira centrada, raramente me perdendo ou me embaralhando no que digo.", concordo: "DIRETO", discordo: "INFORMATIVO" },
+    { texto: "Meus amigos e colegas costumam dizer que passo uma vibe de 'professor', pois normalmente trago muito contexto em minha comunicação e descrevo detalhadamente o que falo.", concordo: "INFORMATIVO", discordo: "DIRETO" },
+    { texto: "Quando estou atrasado para compromissos, envio imediatamente um áudio ou mensagem explicando os motivos – considero importante evitar más interpretações.", concordo: "INFORMATIVO", discordo: "DIRETO" },
+    { texto: "No restaurante, se trouxerem o prato errado, procuro suavizar o pedido de troca em vez de simplesmente reclamar do erro.", concordo: "INFORMATIVO", discordo: "DIRETO" },
+    { texto: "Detesto rodeios: prefiro ir direto ao ponto a preparar o outro para receber a informação.", concordo: "DIRETO", discordo: "INFORMATIVO" },
+    { texto: "Ao dar feedbacks no trabalho ou na faculdade, costumo começar destacando os pontos positivos e só depois menciono o que precisa ser melhorado.", concordo: "INFORMATIVO", discordo: "DIRETO" },
+    { texto: "Sinto grande desconforto ao precisar chamar a atenção de alguém. Meu vizinho está estacionando na minha vaga, e já faz tempo que penso na maneira mais adequada de abordá-lo sobre isso.", concordo: "INFORMATIVO", discordo: "DIRETO" },
+    { texto: "Quando preciso desmarcar compromissos, em vez de simplesmente cancelar, explico os motivos – o que geralmente prolonga a conversa, pois discutimos o problema que causou o imprevisto.", concordo: "INFORMATIVO", discordo: "DIRETO" },
+    { texto: "No cinema com amigos, quando perguntam minha opinião sobre o filme, costumo contextualizar, mencionando tanto os aspectos que gostei quanto os que não me agradaram antes de dar meu veredito.", concordo: "INFORMATIVO", discordo: "DIRETO" },
+    { texto: "Frequentemente sou mal interpretado – acredito que porque minha comunicação oscila sutilmente entre seriedade, humor e ironia, o que acaba confundindo as pessoas.", concordo: "INFORMATIVO", discordo: "DIRETO" }
+  ];
+
+  const perguntasInterpretacao = [
+    { texto: "Tendo a ser uma pessoa mais cética, bem mais pé no chão. É muito raro eu cair nesse 'papinho' de signo e outras coisas afins.", concordo: "CONCRETO", discordo: "ABSTRATO" },
+    { texto: "Posso parecer meio acomodado e conformado para as pessoas, mas é que eu gosto de focar mais no que é presente agora. Esse negócio de ir atrás dos sonhos e ideais não cola comigo – nem tudo é possível de se realizar.", concordo: "CONCRETO", discordo: "ABSTRATO" },
+    { texto: "Minha inclinação maior é divagar sobre coisas que podem acontecer no futuro. Penso bastante sobre como pode ser a sociedade do futuro, as novas tecnologias que podem surgir e o que eu poderia estar fazendo nessas novas situações.", concordo: "ABSTRATO", discordo: "CONCRETO" },
+    { texto: "Tenho bastante maestria com coisas artesanais, seja em cozinhar, costurar, desenhar, manusear ou outros tipos de artesanato. Sinto um grande prazer em cada etapa desse processo.", concordo: "CONCRETO", discordo: "ABSTRATO" },
+    { texto: "Costumo ser uma pessoa precavida; é natural para mim elucubrar sobre coisas que podem me acontecer e já me preparo mentalmente para lidar com elas.", concordo: "ABSTRATO", discordo: "CONCRETO" },
+    { texto: "Adoro consumir documentários e coisas afins. Acho muito importante se enriquecer culturalmente e saber coisas novas, mesmo que não sejam muito úteis no dia a dia.", concordo: "ABSTRATO", discordo: "CONCRETO" },
+    { texto: "Meus amigos e familiares frequentemente dizem que eu 'viajo na maionese', mas é que acho muito interessante ficar pensando nas alternativas das coisas, em como seriam se fossem diferentes, ou se a história tivesse sido outra.", concordo: "ABSTRATO", discordo: "CONCRETO" },
+    { texto: "Quando vou pintar uma parede, faço todos os testes de cor possíveis – na luz natural e na artificial – antes de decidir. Não confio só na cor do catálogo.", concordo: "CONCRETO", discordo: "ABSTRATO" },
+    { texto: "Costumo pensar sobre muitas coisas, por exemplo: como seria viver em uma sociedade sem dinheiro, onde as trocas fossem feitas por afinidade ou habilidade... Tipo como faziam os incas – é inacreditável como eles viviam sem um sistema monetário.", concordo: "ABSTRATO", discordo: "CONCRETO" },
+    { texto: "Quando vou ao mercado, sempre prefiro comprar os produtos que já conheço e sei que funcionam. Não vejo muito sentido em experimentar novidades que podem ou não valer a pena.", concordo: "CONCRETO", discordo: "ABSTRATO" },
+    { texto: "Adoro livros e filmes de investigação e suspense: analisar cenários de crimes, observar inconsistências, prestar atenção nos detalhes e ir associando as pistas. Geralmente, acerto quem cometeu o crime só de observar tudo isso.", concordo: "CONCRETO", discordo: "ABSTRATO" }
+  ];
+
+  const respostas = {
+    orientacao: [],
+    postura: [],
+    enfoque: [],
+    organizacao: [],
+    comunicacao: [],
+    interpretacao: []
+  };
+
+  const perguntas = {
+    orientacao: perguntasOrientacao,
+    postura: perguntasPostura,
+    enfoque: perguntasEnfoque,
+    organizacao: perguntasOrganizacao,
+    comunicacao: perguntasComunicacao,
+    interpretacao: perguntasInterpretacao
+  };
+
+  const resultados = {};
+
+  function configurarAba(abaId, proximaAba) {
+    const container = document.getElementById(`questions-${abaId}`);
+    const perguntasAba = perguntas[abaId];
+    if (!perguntasAba) return;
+
+    perguntasAba.forEach((pergunta, index) => {
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.innerHTML = `
+        <p style="font-size: 20px;">${index + 1}. ${pergunta.texto}</p>
+        <button onclick="selecionarResposta('${abaId}', ${index}, 'concordo')" class="start-button">CONCORDO</button>
+        <button onclick="selecionarResposta('${abaId}', ${index}, 'discordo')" class="start-button">DISCORDO</button>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  function selecionarResposta(abaId, index, escolha) {
+    const respostasAba = respostas[abaId];
+    const perguntasAba = perguntas[abaId];
+    if (!respostasAba || !perguntasAba) return;
+
+    const botoes = document.querySelectorAll(`#questions-${abaId} .card:nth-child(${index + 1}) button`);
+    botoes.forEach(b => b.classList.remove('active'));
+    botoes[escolha === 'concordo' ? 0 : 1].classList.add('active');
+
+    respostasAba[index] = escolha === 'concordo' ? perguntasAba[index].concordo : perguntasAba[index].discordo;
+
+    if (respostasAba.filter(r => r).length === perguntasAba.length) {
+      mostrarResultadoFinal(abaId);
+    }
+  }
+
+  function mostrarResultadoFinal(abaId) {
+    const respostasAba = respostas[abaId];
+    const perguntasAba = perguntas[abaId];
+    if (!respostasAba || !perguntasAba) return;
+
+    const tipos = [...new Set(perguntasAba.flatMap(p => [p.concordo, p.discordo]))];
+    const tipo1 = tipos[0];
+    const tipo2 = tipos[1];
+
+    const contagemTipo1 = respostasAba.filter(r => r === tipo1).length;
+    const contagemTipo2 = respostasAba.filter(r => r === tipo2).length;
+
+    const resultadoFinal = contagemTipo1 >= contagemTipo2 ? tipo1 : tipo2;
+
+    const resultadoElement = document.getElementById(`resultado-final-${abaId}`);
+    const botaoAvancar = document.getElementById(`botao-avancar-${abaId}`);
+    if (resultadoElement && botaoAvancar) {
+      resultadoElement.innerHTML = `Resultado: ${resultadoFinal}`;
+      botaoAvancar.style.display = 'inline-block';
+      salvarResultado(abaId, resultadoFinal);
+    }
+  }
+
+  function salvarResultado(abaId, resultado) {
+    resultados[abaId] = resultado;
+    if (Object.keys(resultados).length === 6) {
+      mostrarResultadoTipologico();
+    }
+  }
+
+  function playMusicWithFadeIn(src) {
+    console.log("Iniciando reprodução da música:", src);
+    if (audioElement.src !== src) {
+      audioElement.pause();
+      audioElement.src = src;
+      audioElement.volume = 0;
+      audioElement.play().catch(error => {
+        console.error("Erro ao tocar música:", error);
+      });
+      let fadeInInterval = setInterval(() => {
+        if (audioElement.volume < 0.5) {
+          audioElement.volume = Math.min(0.5, audioElement.volume + 0.05);
+        } else {
+          clearInterval(fadeInInterval);
+        }
+      }, 300); // 3-second fade-in (300ms * 10 steps)
+    }
+  }
+
+  function mostrarResultadoTipologico() {
+    // Calcular TENDÊNCIA
+    let tendencia = 'Pendente';
+    if (resultados.orientacao === 'RESPONDEDOR') {
+      tendencia = 'INTROVERSÃO';
+    } else if (resultados.orientacao === 'INICIADOR') {
+      tendencia = 'EXTROVERSÃO';
+    }
+
+    // Calcular TEMPERAMENTO
+    let temperamento = 'Pendente';
+    const interpretacao = resultados.interpretacao;
+    const organizacao = resultados.organizacao;
+    const enfoque = resultados.enfoque;
+
+    if (interpretacao === 'CONCRETO') {
+      if (organizacao === 'ESTRUTURADO' || enfoque === 'AFILIATIVO') {
+        temperamento = 'SENTINELA';
+      } else if (organizacao === 'INTERESSADO' || enfoque === 'PRAGMÁTICO') {
+        temperamento = 'ARTÍFICE';
+      }
+    } else if (interpretacao === 'ABSTRATO') {
+      if (organizacao === 'ESTRUTURADO' || enfoque === 'PRAGMÁTICO') {
+        temperamento = 'ANALISTA';
+      } else if (organizacao === 'INTERESSADO' || enfoque === 'AFILIATIVO') {
+        temperamento = 'DIPLOMATA';
+      }
+    }
+
+    // Calcular EXPRESSÃO
+    let expressao = 'Pendente';
+    const orientacao = resultados.orientacao;
+    const postura = resultados.postura;
+    const comunicacao = resultados.comunicacao;
+
+    if (orientacao === 'INICIADOR') {
+      if (postura === 'CONTROLADOR' || comunicacao === 'DIRETO') {
+        expressao = 'ESTRUTURADOR';
+      } else if (postura === 'MOVIMENTADOR' || comunicacao === 'INFORMATIVO') {
+        expressao = 'INAUGURADOR';
+      }
+    } else if (orientacao === 'RESPONDEDOR') {
+      if (postura === 'MOVIMENTADOR' || comunicacao === 'DIRETO') {
+        expressao = 'FINALIZADOR';
+      } else if (postura === 'CONTROLADOR' || comunicacao === 'INFORMATIVO') {
+        expressao = 'BASTIDOR';
+      }
+    }
+
+    // Calcular PERSONALIDADE
+    let personalidade = 'Pendente';
+    const personalidadeMap = {
+      'SENTINELA_ESTRUTURADOR_EXTROVERSÃO': 'ESTJ',
+      'SENTINELA_INAUGURADOR_EXTROVERSÃO': 'ESFJ',
+      'SENTINELA_FINALIZADOR_INTROVERSÃO': 'ISTJ',
+      'SENTINELA_BASTIDOR_INTROVERSÃO': 'ISFJ',
+      'ARTÍFICE_ESTRUTURADOR_EXTROVERSÃO': 'ESTP',
+      'ARTÍFICE_INAUGURADOR_EXTROVERSÃO': 'ESFP',
+      'ARTÍFICE_FINALIZADOR_INTROVERSÃO': 'ISTP',
+      'ARTÍFICE_BASTIDOR_INTROVERSÃO': 'ISFP',
+      'ANALISTA_ESTRUTURADOR_EXTROVERSÃO': 'ENTJ',
+      'ANALISTA_INAUGURADOR_EXTROVERSÃO': 'ENTP',
+      'ANALISTA_FINALIZADOR_INTROVERSÃO': 'INTJ',
+      'ANALISTA_BASTIDOR_INTROVERSÃO': 'INTP',
+      'DIPLOMATA_ESTRUTURADOR_EXTROVERSÃO': 'ENFJ',
+      'DIPLOMATA_INAUGURADOR_EXTROVERSÃO': 'ENFP',
+      'DIPLOMATA_FINALIZADOR_INTROVERSÃO': 'INFJ',
+      'DIPLOMATA_BASTIDOR_INTROVERSÃO': 'INFP'
+    };
+    const personalidadeKey = `${temperamento}_${expressao}_${tendencia}`;
+    personalidade = personalidadeMap[personalidadeKey] || 'Pendente';
+
+    // Logs para depuração
+    console.log("Tendência:", tendencia);
+    console.log("Temperamento:", temperamento);
+    console.log("Expressão:", expressao);
+    console.log("Personalidade Calculada:", personalidade);
+
+    // Mapear personalidade para a imagem correspondente
+    const imagemMap = {
+      'ESTJ': './ESTJ.png',
+      'ESFJ': './ESFJ.png',
+      'ISTJ': './ISTJ.png',
+      'ISFJ': './ISFJ.png',
+      'ESTP': './ESTP.png',
+      'ESFP': './ESFP.png',
+      'ISTP': './ISTP.png',
+      'ISFP': './ISFP.png',
+      'ENTJ': './ENTJ.png',
+      'ENTP': './ENTP.png',
+      'INTJ': './INTJ.png',
+      'INTP': './INTP.png',
+      'ENFJ': './ENFJ.png',
+      'ENFP': './ENFP.png',
+      'INFJ': './INFJ.png',
+      'INFP': './INFP.png'
+    };
+
+    // Mapear personalidade para a música correspondente
+    const musicaMap = {
+      'ESTJ': './ESTJ.mp3',
+      'ESFJ': './ESFJ.mp3',
+      'ISTJ': './ISTJ.mp3',
+      'ISFJ': './ISFJ.mp3',
+      'ESTP': './ESTP.mp3',
+      'ESFP': './ESFP.mp3',
+      'ISTP': './ISTP.mp3',
+      'ISFP': './ISFP.mp3',
+      'ENTJ': './ENTJ.mp3',
+      'ENTP': './ENTP.mp3',
+      'INTJ': './INTJ.mp3',
+      'INTP': './INTP.mp3',
+      'ENFJ': './ENFJ.mp3',
+      'ENFP': './ENFP.mp3',
+      'INFJ': './INFJ.mp3',
+      'INFP': './INFP.mp3'
+    };
+
+    // Mapear personalidade para a descrição correspondente
+    const descricaoMap = {
+      'ESTJ': `O JUIZ\nO ESTJ é prático, responsável e altamente conectado ao mundo exterior, valorizando ordem, regras e eficiência. Organizado e detalhista, impacienta-se com quem negligencia processos ou ignora experiências consolidadas. Avalia os outros pelo desempenho operacional, podendo ser direto—às vezes, rígido—com quem desrespeita normas.\n\nLeal a instituições, trabalho e família, cumpre deveres com dedicação, mesmo sob sacrifício. Assume posições de liderança facilmente, participa ativamente da comunidade e valoriza pontualidade. Sua objetividade e foco em resultados o tornam ágil, mas sua impulsividade pode levar a erros. Prefere ação a discussões, precisando desenvolver paciência para ouvir perspectivas alheias.\n\nAdepto de rotinas e tradições, valoriza ambientes estruturados ("um lugar para cada coisa") e socializa por meio de rituais, como eventos familiares. Apesar de não ser minucioso em pequenos detalhes, promove harmonia através de normas claras. Sua dificuldade está em adaptar-se a mudanças radicais ou a visões que desafiem suas convicções.`,
+      'ESFJ': `O CAVALEIRO\nO ESFJ é um tipo sociável e caloroso, que se energiza ao interagir com os outros e valoriza profundamente a harmonia. Conhecido por seu lado "nutridor", ele fortalece instituições como família, escola e comunidade, promovendo conexões e tradições. Memoriza nomes com facilidade e preocupa-se em incluir todos em eventos sociais, muitas vezes revivendo memórias afetivas.\n\nAltamente sensível à rejeição, o ESFJ busca reconhecimento por seus esforços—especialmente em servir aos outros—e prioriza a aprovação social. Sua comunicação é marcada por valores claros ("certo/errado"), e sua carreira tende a áreas assistenciais, vendas ou ensino, onde sua empatia e charme pessoal brilham. Leal e respeitoso com hierarquias, evita conflitos e prefere conversas práticas a debates abstratos.\n\nNa família, é dedicado, organizado e aprecia rituais como comemorações. Porém, pode ser pessimista diante de problemas, antecipando cenários negativos. Sua necessidade de ser indispensável e amado exige equilíbrio para evitar desgaste emocional. Apesar disso, seu afeto e compromisso o tornam um pilar em seus relacionamentos.`,
+      'ISTJ': `O ARQUIVISTA\nO ISTJ é o epítome da confiabilidade, com forte apego a deveres, instituições e princípios práticos. Metódico e reservado, cumpre promessas com integridade, muitas vezes trabalhando silenciosamente sem buscar reconhecimento. Sua precisão e domínio de detalhes o destacam em áreas como contabilidade, direito ou engenharia, onde processos claros e resultados concretos são valorizados.\n\nNo ambiente familiar, é um parceiro leal e pai/mãe responsável, mantendo regras claras e estabilidade. Porém, pode ter dificuldade com filhos rebeldes ou parceiros irresponsáveis, assumindo inadvertidamente um papel de "cuidador". Valoriza ordem, funcionalidade e tradição – desde móveis duráveis até rituais comunitários como escotismo – mas evita ostentação ou modismos.\n\nEmbora sua sensibilidade seja discreta, sua postura prática às vezes é interpretada como frieza. Participa de eventos sociais por obrigação, não por espontaneidade. Sua maior virtude – a constância – também pode levá-lo a resistir a mudanças ou a subestimar a importância da expressão emocional nos relacionamentos.`,
+      'ISFJ': `O DEFENSOR\nO ISFJ é o protótipo do cuidador – dedicado, meticuloso e movido pelo desejo de servir. Sua memória afetiva e apego às tradições o tornam um guardião de valores familiares e sociais. Incansável no trabalho, cumpre obrigações com precisão, seguindo normas à risca e irritando-se quando outros as ignoram.\n\nProfissões como enfermagem, ensino ou secretariado atraem seu senso prático de assistência. Relaciona-se profundamente com quem precisa dele (pacientes, alunos, chefes), mas pode se afastar quando a ajuda deixa de ser necessária. Leal às hierarquias, espera que todos cumpram seus papéis conforme as regras.\n\nNo lar, é organizado e tradicional, criando um ambiente acolhedor. Como pai/mãe, equilibra disciplina com ternura, embora espere conformidade social. Sua modéstia e aversão a ostentação fazem-no valorizar simplicidade, porém, sua tendência a assumir tarefas sozinho (evitando confrontos) leva à sobrecarga. Ressente-se quando seu esforço é visto como obrigação, sofrendo em silêncio. Aprender a delegar e expressar necessidades é seu desafio.`,
+      'ESTP': `O GLADIADOR\nO ESTP é o arquétipo do action taker – carismático, persuasivo e imerso no momento presente. Seu talento para transformar rotina em aventura e ler as intenções alheias com agilidade o torna um mestre da negociação e da diplomacia prática. Com humor contagiante e audácia, opera "à beira do abismo", usando meios não convencionais para alcançar fins imediatos, muitas vezes sem se preocupar com justificativas. Sua energia é catalisadora: revive empresas em crise ou "vende" ideias como ninguém, mas evita o tédio dos detalhes pós-implementação, o que pode levar a críticas sobre sua falta de follow-through.\n\nNo ambiente profissional, brilha como solucionador de crises, mas depende de parceiros meticulosos para complementar sua visão macro. Se mal direcionado, seu espírito aventureiro pode levá-lo a riscos improdutivos. Nos relacionamentos, é encantador e generoso, mas prioriza emoções do presente sobre compromissos profundos – presenteia com viagens surpresa, mas foge de conflitos emocionais.\n\nVivendo sob o lema "por que adiar para amanhã?", o ESTP coleciona experiências intensas, seja como empreendedor, competidor ou jogador. Sua vida é um convite ao risco calculado, onde a "Senhora Sorte" é sempre bem-vinda – mas sua dificuldade em parar e refletir pode deixar lacunas tanto nos negócios quanto nos laços afetivos.`,
+      'ESFP': `O PERFORMADOR\nO ESFP é a alma da festa – carismático, caloroso e imerso no aqui e agora. Como um "artista da vida", seu entusiasmo é contagioso: transforma ambientes com humor, estilo e uma generosidade que convida todos a "curtir o momento". Sua casa vira palco de encontros alegres, onde problemas são banidos com otimismo. Veste-se com glamour, aprecia prazeres sensoriais (gastronomia, moda, conforto) e evita solidão como quem foge do tédio.\n\nProfissionalmente, destaca-se em áreas dinâmicas como relações públicas, vendas ou ensino, onde usa sua intuição social para conectar-se às pessoas. Detesta rotinas isoladas e prefere decisões baseadas em experiências práticas a teorias abstratas. No entanto, sua aversão a conflitos e impulsividade podem levá-lo a evitar responsabilidades difíceis (como crises familiares) ou ceder a tentações.\n\nComo pai/mãe, é divertido e afetuoso, mas pode faltar-lhe paciência em momentos de stress. Vive como se a vida fosse uma festa infinita – um presente para quem o cerca, mas com o desafio de equilibrar prazer e profundidade nos relacionamentos.`,
+      'ISTP': `O OPERADOR\nO ISTP é o maker espontâneo – um misto de habilidade técnica, pragmatismo radical e sede de adrenalina. Vive no presente, guiado por um código pessoal que ignora regras externas. Suas ações nascem de impulsos criativos (como consertar, construir ou arriscar-se), não de planos rígidos. Leal aos seus, mas rebelde com hierarquias, vê autoridade como obstáculo à liberdade.\n\nMestre do "fazer com as mãos", domina ferramentas com precisão artística (à la Da Vinci). Sua coragem física o leva a esportes radicais ou profissões de ação (mecânica, pilotagem), onde brilha resolvendo crises no calor do momento. Paradoxalmente, tolera longas pausas (como pescar) se antevê ação futura. Lidera pelo exemplo direto – é o primeiro a "entrar na batalha" – mas desdenha preparativos.\n\nSocialmente, é descontraído e leal ao grupo, mas comunica-se mais por gestos que palavras. Sua simplicidade e confiabilidade atraem aliados, enquanto seu desapego a convenções pode chocar os mais tradicionais. Vive no limite entre liberdade absoluta e compromisso tácito com quem conquista seu respeito.`,
+      'ISFP': `O ARTISTA\nO ISFP é um artista da existência – vive mergulhado no momento presente, transformando a realidade em experiência sensorial pura. Como Beethoven ou Rembrandt, sua genialidade se expressa não por palavras, mas através de ações concretas: pinceladas, movimentos de dança ou gestos precisos que revelam uma conexão única com texturas, cores e sons. Sua linguagem é a do fazer, não a do explicar.\n\nAmável e compassivo, o ISFP possui uma empatia quase física pelo sofrimento alheio, agindo com generosidade instintiva. Rejeita convenções sociais rígidas, preferindo a liberdade de seguir seus impulsos criativos. Na natureza ou com animais, estabelece ligações quase místicas, como se compartilhasse uma linguagem silenciosa com o mundo natural.\n\nEmbora muitas vezes visto como despreocupado, seu hedonismo esconde uma profundidade singular: a capacidade de extrair beleza do efêmero. Desafia hierarquias não por rebeldia, mas por autenticidade – seu código moral é ditado pela sensibilidade, não por regras. Quando encontra seu meio de expressão (artes, esportes, trabalho manual), torna-se um alquimista do cotidiano, transformando ações simples em poesia concreta.`,
+      'ENTJ': `O GENERAL\nO ENTJ é o arquétipo do líder visionário – um general nato que transforma caos em ordem com decisões implacáveis. Desde cedo, assume o comando naturalmente, estruturando grupos com objetivos claros. Sua mente analítica classifica informações como um computador, priorizando eficiência acima de tudo: procedimentos só valem se servirem aos resultados. Rejeita repetição de erros e emotividade que atrapalhe a produtividade.\n\nMestre da estratégia, enxerga o panorama geral de organizações, antecipando tendências e mobilizando equipes com discursos inspiradores. Ascende a cargos de poder (empresas, governo, militar) por sua capacidade de cortar burocracia e implementar sistemas mecanizados. No trabalho, é incansável – muitas vezes negligencia vida pessoal por projetos.\n\nNo lar, espera excelência: cônjuge autossuficiente, filhos disciplinados e rotinas impecáveis. Valoriza família como extensão de seu legado, criando "soldados produtivos" para a sociedade. Sua força intimidante atrai parceiros que admirem sua determinação, mas pode esmagar relacionamentos mais sensíveis.`,
+      'ENTP': `O VISIONÁRIO\nO ENTP é o arquétipo do inventor social – um gênio conectado a possibilidades que transforma debates em laboratórios e conversas em blueprints mentais. Sua mente ágil faz conexões improváveis, tratando regras como obstáculos criativos a serem contornados. "Isso não pode ser feito?" é seu combustível favorito – cada "não" aciona seu modo "hackear o sistema".\n\nProfissionalmente, é o mestre dos projetos disruptivos (consultoria, empreendedorismo, ensino inovador), mas abandona rotinas como quem foge do tédio. Seu charme magnético e humor contagiante inspiram equipes, embora sua aversão a planos detalhados frustre colegas mais metódicos. Debate por esporte, até com amigos, transformando conflitos em jogos intelectuais.\n\nNos relacionamentos, valoriza parceiros que desafiem seu intelecto. Apesar de seu talento para prover, pode arriscar tudo em apostas desnecessárias só pela adrenalina de resolver crises. Seu maior desafio? Transformar 1% de suas mil ideias em realidade antes de partir para a próxima revolução.`,
+      'INTJ': `O ARQUEIRO\nO INTJ é o arquiteto de sistemas por excelência – uma mente estratégica que opera como um supercomputador humano, transformando teorias abstratas em estruturas funcionais. Sua autoconfiança inabalável vem da capacidade única de enxergar padrões invisíveis para os outros, tratando a realidade como um tabuleiro de xadrez multidimensional onde cada movimento é calculado para eficiência máxima. Hierarquias e autoridades tradicionais são irrelevantes; só a lógica impessoal dita suas ações.\n\nProfissionalmente, brilha em campos que exigem modelagem complexa (engenharia, ciência de dados, planejamento estratégico), onde pode otimizar sistemas eliminando redundâncias. Seu pragmatismo radical descarta qualquer teoria que não possa ser implementada, mesmo que isso exija horas exaustivas de trabalho. Colegas podem vê-lo como frio ou excessivamente crítico, pois sua busca pela perfeição não faz concessões a sensibilidades emocionais.\n\nNos relacionamentos, valoriza parceiros intelectualmente independentes. Sua aparente frieza esconde uma lealdade feroz aos que conquistam seu respeito, mas sua necessidade extrema de privacidade e autonomia pode criar barreiras. Quando erra, é sempre por excesso de confiança na própria lógica, nunca por dúvida.`,
+      'INTP': `O SÁBIO\nO INTP opera como um processador de lógica pura - um Sherlock Holmes intelectual que decifra o universo como um gigantesco sistema a ser desmontado e remontado com perfeição conceitual. Sua mente é uma máquina anti-redundância, detectando falhas lógicas a anos-luz de distância. Autoridades institucionais são irrelevantes; só as leis da coerência governam seu mundo.\n\nMestre da abstração, projeta estruturas teóricas com precisão matemática (ciência, filosofia, programação), mas delega a implementação prática. Quando imerso em quebra-cabeças intelectuais, esquece até necessidades básicas - comida e socialização tornam-se interrupções irritantes. Colegas podem interpretar seu foco absoluto como arrogância, especialmente quando ele desmonta ideias alheias com perguntas socráticas implacáveis.\n\nNos relacionamentos, valoriza parceiros autossuficientes que respeitem sua necessidade cavernosa de solidão criativa. Como pai/mãe, cultiva independência intelectual nos filhos, mas esquece aniversários. Sua maior ironia? Construir sistemas lógicos perfeitos enquanto navega pela vida prática com a desorganização de um gênio distraído.`,
+      'ENFJ': `O CLÉRIGO\nO ENFJ é o arquétipo do líder catalisador - um farol natural de carisma e empatia que magnetiza pessoas em torno de causas e ideais. Com uma combinação rara de calor humano e persuasão eloquente, transforma grupos em times coesos, acreditando piamente no potencial de cada indivíduo. Sua habilidade de "ler almas" o torna um conselheiro nato, capaz de articular emoções que outros mal conseguem nomear.\n\nProfissionalmente, brilha em papéis de mentoria, recursos humanos ou ativismo social, onde pode nutrir o crescimento alheio. Porém, seu maior dom - colocar os outros em primeiro plano - também é sua vulnerabilidade: assume responsabilidades emocionais alheias como se fossem próprias, levando à exaustão. Relacionamentos ideais são sua obsessão, o que pode sufocar parceiros mais independentes.\n\nNos relacionamentos, é dedicado e generoso, às vezes ao extremo - um ímã para parceiros exigentes. Precisa aprender que cuidar do mundo não significa carregá-lo sozinho. Quando equilibra sua compaixão com autoproteção, torna-se não só um líder, mas um farol de transformação humana.`,
+      'ENFP': `O BARDO\nO ENFP é o arquétipo do descobridor de mundos emocionais - um antropólogo nato que enxerga a vida como um caleidoscópio de conexões humanas e significados ocultos. Sua mente é um radar hiperativo que capta nuances emocionais e motivações invisíveis, transformando interações cotidianas em aventuras psicológicas fascinantes. Com carisma que mistura entusiasmo infantil e perspicácia terapêutica, atrai seguidores como um contador de histórias atrai ouvintes ao redor da fogueira.\n\nProfissionalmente, é o mestre das reinvenções (marketing, artes, coaching), onde pode fundir criatividade e insight social. Seu superpoder? Ver potencial bruto em pessoas e projetos - sua criptonita? Implementar detalhes burocráticos. Colegas adoram sua energia contagiosa, mas se frustram quando ele voa para novas ideias antes de concluir as atuais. Relacionamentos são seu oxigênio e sua armadilha: mergulha de cabeça em conexões intensas, mas pode sufocar parceiros com sua necessidade de profundidade constante.\n\nComo pai/mãe ou parceiro, alterna entre o melhor amigo e o guru inspirador, transformando jantares em eventos e rotinas em aventuras. Seu desafio é aprender que nem toda semente plantada precisa florescer imediatamente - às vezes, a magia está em cuidar do que já existe.`,
+      'INFJ': `O PALADINO\nO INFJ é o arquétipo do sábio compassivo - uma rara combinação de místico e terapeuta que opera nos bastidores da psique humana. Com uma intuição quase sobrenatural, decifra emoções alheias como quem lê um livro aberto, antevendo conflitos e potenciais antes mesmo que se manifestem. Sua mente é um laboratório de ideais elevados, onde cada pensamento é filtrado por um profundo senso de propósito ético.\n\nProfissionalmente, é o arquiteto de transformações silenciosas (psicologia, escrita, aconselhamento), onde pode aliar insight humano com criatividade refinada. Seu superpoder? Ver o núcleo de verdade em cada pessoa - sua criptonita? Conflitos abertos e críticas destrutivas. Colegas admiram sua sabedoria, mas muitas vezes não percebem o custo emocional que paga por sua hipersensibilidade.\n\nNos relacionamentos, é um parceiro intensamente leal que cultiva conexões profundas como jardins secretos. Como pai/mãe, mistura devoção quase espiritual com uma preocupação constante pelo bem-estar emocional da família. Seu desafio é aprender que nem toda luz interior precisa ser protegida - às vezes, compartilhar suas próprias fragilidades é a maior forma de coragem.`,
+      'INFP': `O CURANDEIRO\nO INFP é o poeta da alma humana - um sonhador discreto cujo mundo interior fervilha com paixão por ideais e conexões autênticas. Por trás de sua aparente timidez, arde um coração de cavaleiro medieval, pronto para defender causas perdidas com fervor quase místico. Sua linguagem natural é a metáfora, transformando valores abstratos em belas narrativas que inspiram mudanças sutis.\n\nProfissionalmente, é o curador de almas (aconselhamento, artes, ensino), onde pode aliar sensibilidade aguçada com criatividade simbólica. Seu superpoder? Ver o potencial sagrado em cada pessoa - sua criptonita? Rotinas burocráticas e conflitos agressivos. Colegas admiram sua empatia, mas muitas vezes subestimam a força feroz que esconde sob sua suavidade.\n\nNos relacionamentos, é um parceiro leal que cultiva intimidade como arte sacra. Como pai/mãe, mistura proteção intensa com respeito pela individualidade. Seu desafio é aprender que ideais elevados não precisam ser sacrificados na realidade - às vezes, a verdadeira coragem está em encontrar beleza no imperfeito.`
+    };
+
+    // Exibir resultados
+    const resultadoTendencia = document.getElementById('resultado-tendencia');
+    const resultadoTemperamento = document.getElementById('resultado-temperamento');
+    const resultadoExpressao = document.getElementById('resultado-expressao');
+    const resultadoPersonalidade = document.getElementById('resultado-personalidade');
+    const imagemPersonalidade = document.getElementById('personalidade-imagem');
+    const explicacaoRetangulo = document.getElementById('explicacao-retangulo');
+    const descricaoPersonalidade = document.getElementById('personalidade-descricao');
+
+    if (resultadoTendencia) {
+      resultadoTendencia.innerHTML = tendencia;
+    }
+    if (resultadoTemperamento) {
+      resultadoTemperamento.innerHTML = temperamento;
+    }
+    if (resultadoExpressao) {
+      resultadoExpressao.innerHTML = expressao;
+    }
+    if (resultadoPersonalidade) {
+      resultadoPersonalidade.innerHTML = personalidade;
+    }
+
+    if (personalidade !== 'Pendente') {
+      // Exibir imagem com depuração
+      if (imagemPersonalidade && imagemMap[personalidade]) {
+        console.log("Tentando carregar imagem:", imagemMap[personalidade]);
+        imagemPersonalidade.src = imagemMap[personalidade];
+        imagemPersonalidade.style.display = 'block';
+        imagemPersonalidade.alt = `Imagem de ${personalidade}`;
+        imagemPersonalidade.onerror = () => {
+          console.error("Erro ao carregar imagem para", personalidade);
+        };
+      }
+
+      // Exibir retângulo "VER EXPLICAÇÃO DAS RESPOSTAS"
+      if (explicacaoRetangulo) {
+        explicacaoRetangulo.style.display = 'block';
+      }
+
+      // Exibir descrição
+      if (descricaoPersonalidade && descricaoMap[personalidade]) {
+        descricaoPersonalidade.innerHTML = descricaoMap[personalidade].replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+        descricaoPersonalidade.style.display = 'block';
+      }
+
+      // Tocar música com depuração
+      if (musicaMap[personalidade] && personalidade !== currentPersonalidade) {
+        console.log("Tentando tocar música:", musicaMap[personalidade]);
+        playMusicWithFadeIn(musicaMap[personalidade]);
+        currentPersonalidade = personalidade;
+      }
+    } else {
+      if (imagemPersonalidade) {
+        imagemPersonalidade.style.display = 'none';
+      }
+      if (explicacaoRetangulo) {
+        explicacaoRetangulo.style.display = 'none';
+      }
+      if (descricaoPersonalidade) {
+        descricaoPersonalidade.style.display = 'none';
+      }
+      audioElement.pause();
+      currentPersonalidade = null;
+    }
+  }
+
+  configurarAba('orientacao', 'postura');
+  configurarAba('postura', 'enfoque');
+  configurarAba('enfoque', 'organizacao');
+  configurarAba('organizacao', 'comunicacao');
+  configurarAba('comunicacao', 'interpretacao');
+  configurarAba('interpretacao', 'resultado');
+
+// --- Código de som dos botões ---
+const botaoSom = new Audio();
+function tocarSom(tipo) {
+    if (tipo === 'dicbotton') {
+        botaoSom.src = './dicbotton.mp3';
+    } else if (tipo === 'buttonsound') {
+        botaoSom.src = './Buttonsound.mp3';
+    }
+    botaoSom.volume = 0.8;
+    botaoSom.play();
+}
+
+// Aplicar som aos botões após o carregamento
+window.addEventListener('DOMContentLoaded', () => {
+    const botoesConcordoDiscordo = document.querySelectorAll('.start-button');
+    botoesConcordoDiscordo.forEach(botao => {
+        botao.addEventListener('click', () => tocarSom('buttonsound'));
+    });
+
+    const botoesMenu = document.querySelectorAll('.tab-button');
+    botoesMenu.forEach(botao => {
+        botao.addEventListener('click', () => tocarSom('dicbotton'));
+    });
+
+    const botoesAvancar = document.querySelectorAll('.advance-button');
+    botoesAvancar.forEach(botao => {
+        botao.addEventListener('click', () => tocarSom('dicbotton'));
+    });
+});
+</script>
+
+<script>
+document.getElementById('explicacao-retangulo').addEventListener('click', function() {
+  const link = document.createElement('a');
+  link.href = './EXPLICAÇÃO.pdf';
+  link.download = 'EXPLICAÇÃO.pdf';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+});
+</script>
+
+
+<!-- Modal de Explicação -->
+<div id="modal-explicacao" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+  <div id="modal-conteudo" style="background:#FCD0E5; border-radius:20px; padding:30px; max-width:600px; width:90%; text-align:center; font-family:'Century Gothic', sans-serif; color:#3C3C3C; position:relative;">
+    <button onclick="fecharModal()" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:24px; color:#6E0838; cursor:pointer;">✖️</button>
+    <div id="modal-texto" style="font-size:18px; line-height:1.6; margin-top:20px;"></div>
+  </div>
+</div>
+
+</body>
+</html>
