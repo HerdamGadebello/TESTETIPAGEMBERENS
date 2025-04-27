@@ -323,7 +323,7 @@
 <div class="card">
 <button class="start-button" onclick="openTab('orientacao')">INICIAR TESTE</button>
 <br/>
-<img alt="Tipos MBTI" src="ALLTYPES.png" style="max-width:100%; height:auto; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);"/>
+<img alt="Tipos MBTI" src="ALLTYPES.jpg" style="max-width:100%; height:auto; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);"/>
 <p style="font-size: 20px; margin-top: 20px;">
       Teste de tipagem elaborado a partir do conteúdo do curso <strong>TIPOLOGIA PRÁTICA</strong>, ministrado por <a href="https://www.instagram.com/roberta_bernardon/?igsh=NXdlNXp1em84azNl#" style="color: #F8F8F8; font-weight: bold; text-decoration: underline;" target="_blank">Roberta Bernardon</a>.
     </p>
@@ -734,22 +734,22 @@
 
     // Mapear personalidade para a imagem correspondente
     const imagemMap = {
-      'ESTJ': './ESTJ.png',
-      'ESFJ': './ESFJ.png',
-      'ISTJ': './ISTJ.png',
-      'ISFJ': './ISFJ.png',
-      'ESTP': './ESTP.png',
-      'ESFP': './ESFP.png',
-      'ISTP': './ISTP.png',
-      'ISFP': './ISFP.png',
-      'ENTJ': './ENTJ.png',
-      'ENTP': './ENTP.png',
-      'INTJ': './INTJ.png',
-      'INTP': './INTP.png',
-      'ENFJ': './ENFJ.png',
-      'ENFP': './ENFP.png',
-      'INFJ': './INFJ.png',
-      'INFP': './INFP.png'
+      'ESTJ': './ESTJ.jpg',
+      'ESFJ': './ESFJ.jpg',
+      'ISTJ': './ISTJ.jpg',
+      'ISFJ': './ISFJ.jpg',
+      'ESTP': './ESTP.jpg',
+      'ESFP': './ESFP.jpg',
+      'ISTP': './ISTP.jpg',
+      'ISFP': './ISFP.jpg',
+      'ENTJ': './ENTJ.jpg',
+      'ENTP': './ENTP.jpg',
+      'INTJ': './INTJ.jpg',
+      'INTP': './INTP.jpg',
+      'ENFJ': './ENFJ.jpg',
+      'ENFP': './ENFP.jpg',
+      'INFJ': './INFJ.jpg',
+      'INFP': './INFP.jpg'
     };
 
     // Mapear personalidade para a música correspondente
@@ -916,5 +916,93 @@ document.getElementById('explicacao-retangulo').addEventListener('click', functi
   </div>
 </div>
 
+
+<!-- Modal de Personalidade -->
+<div id="modal-personalidade" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+  <div style="background:#FCD0E5; border-radius:20px; padding:20px; max-width:90%; width:700px; height:80%; text-align:center; font-family:'Century Gothic', sans-serif; color:#3C3C3C; position:relative; display:flex; flex-direction:column;">
+    <button onclick="fecharModalPersonalidade()" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:24px; color:#6E0838; cursor:pointer;">✖️</button>
+    <iframe id="iframe-personalidade" src="" style="flex:1; width:100%; border:none; border-radius:10px; margin-top:40px;"></iframe>
+  </div>
+</div>
+
 </body>
+
+<script>
+const textosTemperamento = {
+  'SENTINELA': `Os Sentinelas são os pilares da sociedade, valorizando estabilidade, segurança e tradição. Representados por tipos como ESTJ, ESFJ, ISTJ e ISFJ, eles são práticos, organizados e confiáveis. Sua força está na manutenção de sistemas eficientes e no cumprimento de responsabilidades. São excelentes em criar estruturas e seguir regras, garantindo que tudo funcione sem problemas. No trabalho, destacam-se em funções que exigem atenção a detalhes e consistência, como administração, saúde e educação. Socialmente, são leais e protetores com aqueles que amam, muitas vezes assumindo papéis de cuidadores. No entanto, podem resistir a mudanças bruscas e ter dificuldade em sair da zona de conforto. Sua ética de trabalho inabalável e senso de dever os tornam indispensáveis em qualquer equipe. Para os Sentinelas, honrar compromissos e manter a ordem são prioridades absolutas. Eles prosperam em ambientes previsíveis, onde podem aplicar sua meticulosidade e garantir que tudo esteja no lugar certo.`,
+  'ARTÍFICE': `Artífices vivem no aqui e agora, buscando liberdade, ação e experiências imediatas. Representados por tipos como ESTP, ESFP, ISTP e ISFP, eles são espontâneos, adaptáveis e habilidosos em resolver problemas sob pressão. Sua energia vibrante e talento prático os tornam excelentes em áreas que exigem destreza física ou criatividade, como artes, esportes e emergências. Eles enxergam o mundo como um playground, sempre prontos para explorar novas possibilidades. Socialmente, são carismáticos e divertidos, atraindo pessoas com seu entusiasmo contagiante. No entanto, podem evitar planejamentos de longo prazo, preferindo a flexibilidade à rotina. Artífices são mestres em improvisação, usando recursos disponíveis de forma inovadora. Sua coragem e capacidade de pensar rápido os tornam indispensáveis em situações críticas. Para eles, a vida deve ser vivida com intensidade, e regras existem para serem desafiadas quando limitam sua liberdade.`,
+  'ANALISTA': `Analistas são os arquitetos do futuro, movidos por lógica, inovação e eficiência. Representados por tipos como INTJ, ENTJ, INTP e ENTP, eles buscam compreender sistemas complexos e melhorá-los. Sua mente estratégica e visão de longo prazo os tornam excelentes em ciência, tecnologia e liderança. Eles questionam o status quo, preferindo soluções inteligentes a tradições ultrapassadas. No trabalho, são analíticos e independentes, valorizando competência acima de tudo. Socialmente, podem parecer distantes, mas sua paixão por ideias profundas os torna fascinantes conversadores. No entanto, sua busca pela perfeição pode levá-los a negligenciar emoções ou detalhes práticos. Analistas adoram desafios intelectuais e prosperam em ambientes que estimulam sua criatividade. Para eles, o progresso humano depende da razão e da inovação. Eles sonham grande e têm as ferramentas mentais para transformar visões em realidade, mesmo que isso exija romper convenções.`,
+  'DIPLOMATA': `Diplomatas são os catalisadores de crescimento, guiados por valores, conexões e significado. Representados por tipos como INFJ, ENFJ, INFP e ENFP, eles buscam harmonia e autenticidade em todas as esferas da vida. Sua empatia profunda e intuição aguçada os tornam excelentes em áreas como psicologia, artes e educação, onde podem inspirar e transformar pessoas. Eles enxergam potencial em todos e dedicam-se a causas maiores. Socialmente, são calorosos e persuasivos, criando laços significativos. No entanto, podem se frustrar quando a realidade não corresponde aos seus ideais elevados. Diplomatas são sonhadores práticos, unindo compaixão à ação. Eles acreditam no poder das histórias e no crescimento pessoal como motores da mudança social. Para eles, a vida é uma jornada de autodescoberta e impacto positivo. Sua missão é criar um mundo mais justo e conectado, onde cada indivíduo possa florescer em sua singularidade.`
+};
+
+// (textosExpressao e textosTendencia continuam depois)
+function abrirModal(tipo, categoria) {
+  let texto = '';
+  if (categoria === 'temperamento') {
+    texto = textosTemperamento[tipo] || 'Descrição não encontrada.';
+  } else if (categoria === 'expressao') {
+    texto = textosExpressao[tipo] || 'Descrição não encontrada.';
+  } else if (categoria === 'tendencia') {
+    texto = textosTendencia[tipo] || 'Descrição não encontrada.';
+  }
+  document.getElementById('modal-texto').innerHTML = texto.replace(/\n/g, "<br>");
+  document.getElementById('modal-explicacao').style.display = 'flex';
+}
+
+function fecharModal() {
+  document.getElementById('modal-explicacao').style.display = 'none';
+}
+
+window.addEventListener('click', function(e) {
+  if (e.target.id === 'modal-explicacao') {
+    fecharModal();
+  }
+});
+</script>
+
+
+<script>
+const linksPersonalidade = {
+  'ESTJ': 'https://www.instagram.com/p/CfVKwUiNoy3/?igsh=MWYzNDZhdWVpcXg4dw%3D%3D&img_index=1',
+  'ESFJ': 'https://www.instagram.com/p/Ce4fsWWl413/?igsh=YWlpbDZ4YmIyNTdy',
+  'ISTJ': 'https://www.instagram.com/p/CeUa8DRl9kh/?igsh=eDFmMTdicXlubXF2',
+  'ISFJ': 'https://www.instagram.com/p/Cdo1PPFJgDy/?igsh=MTFrdGxyYTdxYXJ0NQ==',
+  'ESTP': 'https://www.instagram.com/p/Cc31k_Cp-Rz/?igsh=dG44MGM3YWZnendw',
+  'ESFP': 'https://www.instagram.com/p/Cb8mNdRJvZK/?igsh=MXR6dWg1eHliNzBybw==',
+  'ISTP': 'https://www.instagram.com/p/CcOi-Ndp38-/?igsh=MTE4a2gzM3lqc2Y3eQ==',
+  'ISFP': 'https://www.instagram.com/p/CcgvCROJRaE/?igsh=Yjd0NHl3N2lyeHFu',
+  'ENTJ': 'https://www.instagram.com/p/CcEap2Opaz3/?igsh=OHd2dW1sazM5eHlh',
+  'ENTP': 'https://www.instagram.com/p/CcWTHicp9hL/?igsh=MWhibHRnMG1ueGlxNQ==',
+  'INTJ': 'https://www.instagram.com/p/CdHVHCapO1W/?igsh=MWdteHFmNWQ5aHR6ag==',
+  'INTP': 'https://www.instagram.com/p/Ccq77oxp3aQ/?igsh=MTI1cHN3emNmMmcxYg==',
+  'ENFJ': 'https://www.instagram.com/p/CdZfAL4rDwT/?igsh=MTh4dGlqeXNodWo3Ng==',
+  'ENFP': 'https://www.instagram.com/p/Cd62RbzNAYv/?igsh=MTUxM202ODg0OGhpMg==',
+  'INFJ': 'https://www.instagram.com/p/Cehh1TGNKvD/?igsh=MWhvMGVvYnVjY2trMw==',
+  'INFP': 'https://www.instagram.com/p/CfDF24LNiE1/?igsh=eTlvcXViZjRkZ3Vq'
+};
+
+function abrirModalPersonalidade() {
+  const tipo = document.getElementById('resultado-personalidade').innerText.trim();
+  const link = linksPersonalidade[tipo];
+  if (link) {
+    document.getElementById('iframe-personalidade').src = link;
+    document.getElementById('modal-personalidade').style.display = 'flex';
+  } else {
+    alert('Link não encontrado para este tipo.');
+  }
+}
+
+function fecharModalPersonalidade() {
+  document.getElementById('modal-personalidade').style.display = 'none';
+  document.getElementById('iframe-personalidade').src = '';
+}
+
+// Fecha clicando fora do modal também
+window.addEventListener('click', function(e) {
+  if (e.target.id === 'modal-personalidade') {
+    fecharModalPersonalidade();
+  }
+});
+</script>
+
 </html>
