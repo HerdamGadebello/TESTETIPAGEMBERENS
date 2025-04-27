@@ -995,4 +995,21 @@ window.addEventListener('click', function(e) {
 });
 </script>
 
+
+<script>
+function preencherResultados() {
+  // Esses valores viriam da lógica de resultado do teste, estou colocando como exemplo:
+  var resultadoTemperamento = document.getElementById('resultado-temperamento').innerText.trim().replace('TEMPERAMENTO', '').trim();
+  var resultadoExpressao = document.getElementById('resultado-expressao').innerText.trim().replace('EXPRESSÃO', '').trim();
+  var resultadoTendencia = document.getElementById('resultado-tendencia').innerText.trim().replace('TENDÊNCIA', '').trim();
+  var resultadoPersonalidade = document.getElementById('resultado-personalidade').innerText.trim();
+
+  document.getElementById('valor-temperamento').innerText = resultadoTemperamento;
+  document.getElementById('valor-expressao').innerText = resultadoExpressao;
+  document.getElementById('valor-tendencia').innerText = resultadoTendencia;
+  document.getElementById('valor-personalidade').innerText = resultadoPersonalidade;
+}
+window.onload = preencherResultados;
+</script>
+
 </html>
