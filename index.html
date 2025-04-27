@@ -385,21 +385,21 @@
 <h1>Resultado Tipológico</h1>
 <div class="resultados-container">
 <div class="resultado-retangulo">
-<h2>TENDÊNCIA</h2>
+<h2>TENDÊNCIA</h2><span id="valor-temperamento"></span><span id="valor-expressao"></span>
 <div class="resultado-texto" id="resultado-tendencia"></div>
 </div>
 <div class="resultado-retangulo">
-<h2>TEMPERAMENTO</h2>
+<h2>TEMPERAMENTO</h2><span id="valor-temperamento"></span><span id="valor-expressao"></span>
 <div class="resultado-texto" id="resultado-temperamento"></div>
 </div>
 <div class="resultado-retangulo">
-<h2>EXPRESSÃO</h2>
+<h2>EXPRESSÃO</h2><span id="valor-temperamento"></span><span id="valor-expressao"></span>
 <div class="resultado-texto" id="resultado-expressao"></div>
 </div>
 </div>
 <div class="personalidade-container">
 <div class="personalidade-retangulo">
-<h2>PERSONALIDADE</h2>
+<h2>PERSONALIDADE</h2><span id="valor-temperamento"></span><span id="valor-expressao"></span>
 <div class="resultado-texto" id="resultado-personalidade"></div>
 </div>
 <img alt="Imagem da Personalidade" class="personalidade-imagem" id="personalidade-imagem"/>
@@ -734,22 +734,22 @@
 
     // Mapear personalidade para a imagem correspondente
     const imagemMap = {
-      'ESTJ': './ESTJ.png',
-      'ESFJ': './ESFJ.png',
-      'ISTJ': './ISTJ.png',
-      'ISFJ': './ISFJ.png',
-      'ESTP': './ESTP.png',
-      'ESFP': './ESFP.png',
-      'ISTP': './ISTP.png',
-      'ISFP': './ISFP.png',
-      'ENTJ': './ENTJ.png',
-      'ENTP': './ENTP.png',
-      'INTJ': './INTJ.png',
-      'INTP': './INTP.png',
-      'ENFJ': './ENFJ.png',
-      'ENFP': './ENFP.png',
-      'INFJ': './INFJ.png',
-      'INFP': './INFP.png'
+      'ESTJ': './ESTJ.jpg',
+      'ESFJ': './ESFJ.jpg',
+      'ISTJ': './ISTJ.jpg',
+      'ISFJ': './ISFJ.jpg',
+      'ESTP': './ESTP.jpg',
+      'ESFP': './ESFP.jpg',
+      'ISTP': './ISTP.jpg',
+      'ISFP': './ISFP.jpg',
+      'ENTJ': './ENTJ.jpg',
+      'ENTP': './ENTP.jpg',
+      'INTJ': './INTJ.jpg',
+      'INTP': './INTP.jpg',
+      'ENFJ': './ENFJ.jpg',
+      'ENFP': './ENFP.jpg',
+      'INFJ': './INFJ.jpg',
+      'INFP': './INFP.jpg'
     };
 
     // Mapear personalidade para a música correspondente
@@ -907,23 +907,6 @@ document.getElementById('explicacao-retangulo').addEventListener('click', functi
 });
 </script>
 
-
-<!-- Modal de Explicação -->
-<div id="modal-explicacao" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
-  <div id="modal-conteudo" style="background:#FCD0E5; border-radius:20px; padding:30px; max-width:600px; width:90%; text-align:center; font-family:'Century Gothic', sans-serif; color:#3C3C3C; position:relative;">
-    <button onclick="fecharModal()" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:24px; color:#6E0838; cursor:pointer;">✖️</button>
-    <div id="modal-texto" style="font-size:18px; line-height:1.6; margin-top:20px;"></div>
-  </div>
-</div>
-
-<!-- Modal de Personalidade -->
-<div id="modal-personalidade" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center;">
-  <div style="background:#FCD0E5; border-radius:20px; padding:20px; width:90%; max-width:700px; height:80%; font-family:'Century Gothic', sans-serif; color:#3C3C3C; position:relative; display:flex; flex-direction:column;">
-    <button onclick="fecharModalPersonalidade()" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:24px; color:#6E0838; cursor:pointer;">✖️</button>
-    <iframe id="iframe-personalidade" src="" style="flex:1; width:100%; border:none; border-radius:10px; margin-top:50px;"></iframe>
-  </div>
-</div>
-
 </body>
 
 <script>
@@ -965,21 +948,29 @@ const linksPersonalidade = {
   'INFP': 'https://www.instagram.com/p/CfDF24LNiE1/?igsh=eTlvcXViZjRkZ3Vq'
 };
 
-function abrirModal(tipo, categoria) {
-  let texto = '';
-  if (categoria === 'temperamento') texto = textosTemperamento[tipo] || 'Descrição não encontrada.';
-  else if (categoria === 'expressao') texto = textosExpressao[tipo] || 'Descrição não encontrada.';
-  else if (categoria === 'tendencia') texto = textosTendencia[tipo] || 'Descrição não encontrada.';
-  document.getElementById('modal-texto').innerHTML = texto.replace(/\n/g, "<br>");
+function abrirModalTemperamento() {
+  const tipo = document.getElementById('valor-temperamento').innerText.trim();
+  const texto = textosTemperamento[tipo] || "Descrição não encontrada.";
+  document.getElementById('modal-texto').innerHTML = texto;
   document.getElementById('modal-explicacao').style.display = 'flex';
 }
 
-function fecharModal() {
-  document.getElementById('modal-explicacao').style.display = 'none';
+function abrirModalExpressao() {
+  const tipo = document.getElementById('valor-expressao').innerText.trim();
+  const texto = textosExpressao[tipo] || "Descrição não encontrada.";
+  document.getElementById('modal-texto').innerHTML = texto;
+  document.getElementById('modal-explicacao').style.display = 'flex';
+}
+
+function abrirModalTendencia() {
+  const tipo = document.getElementById('valor-tendencia').innerText.trim();
+  const texto = textosTendencia[tipo] || "Descrição não encontrada.";
+  document.getElementById('modal-texto').innerHTML = texto;
+  document.getElementById('modal-explicacao').style.display = 'flex';
 }
 
 function abrirModalPersonalidade() {
-  const tipo = document.getElementById('resultado-personalidade').innerText.trim();
+  const tipo = document.getElementById('valor-personalidade').innerText.trim();
   const link = linksPersonalidade[tipo];
   if (link) {
     document.getElementById('iframe-personalidade').src = link;
@@ -987,6 +978,10 @@ function abrirModalPersonalidade() {
   } else {
     alert('Link não encontrado para este tipo.');
   }
+}
+
+function fecharModal() {
+  document.getElementById('modal-explicacao').style.display = 'none';
 }
 
 function fecharModalPersonalidade() {
