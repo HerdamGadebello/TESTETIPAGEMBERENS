@@ -60,17 +60,10 @@ function abrirModalPersonalizado() {
 
 <html lang="pt-BR">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Teste Tipológico</title>
-
-
-
-
-
-
-
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Cascadia+Code&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Ebrima&display=swap');
@@ -471,7 +464,7 @@ function abrirModalPersonalizado() {
   }
 }
 </style>
-</head>
+</meta></head>
 <body>
 <div class="tabs">
 <button class="tab-button active" onclick="openTab('pagina-inicial')">Página Inicial</button>
@@ -547,7 +540,6 @@ function abrirModalPersonalizado() {
 <div class="tab-content" id="resultado">
 <div class="card">
 <h1>Resultado Tipológico</h1>
-
 <div class="resultados-container">
 <div class="resultado-retangulo" onclick="abrirModal('TENDÊNCIA', textosTendencia[document.getElementById('resultado-tendencia').innerText])">
 <h2>TENDÊNCIA</h2>
@@ -562,7 +554,6 @@ function abrirModalPersonalizado() {
 <div class="resultado-texto" id="resultado-expressao"></div>
 </div>
 </div>
-
 <div class="personalidade-container">
 <div class="personalidade-retangulo" onclick="abrirModalPersonalizado()">
 <h2>PERSONALIDADE</h2><span id="valor-temperamento"></span><span id="valor-expressao"></span>
@@ -1118,7 +1109,6 @@ function abrirModalPersonalizado() {
 }
 
 </script>
-
 <script>
 document.getElementById('explicacao-retangulo').addEventListener('click', function() {
   const link = document.createElement('a');
@@ -1148,18 +1138,14 @@ function abrirModalPersonalizado() {
 }
 
 </script>
-
-
 <!-- Modal para Temperamento, Tendência e Expressão -->
-<div id="meuModal" class="modal" style="display:none;position:fixed;z-index:1000;padding-top:100px;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.6);">
-  <div class="modal-content" style="background-color:#fefefe;margin:auto;padding:20px;border:1px solid #888;width:90%;max-width:500px;border-radius:12px;color:#333;">
-    <span class="close" onclick="fecharModal()" style="color:#aaa;float:right;font-size:28px;font-weight:bold;cursor:pointer;">&times;</span>
-    <h2 id="modalTitulo"></h2>
-    <p id="modalTexto"></p>
-  </div>
+<div class="modal" id="meuModal" style="display:none;position:fixed;z-index:1000;padding-top:100px;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,0.6);">
+<div class="modal-content" style="background-color:#fefefe;margin:auto;padding:20px;border:1px solid #888;width:90%;max-width:500px;border-radius:12px;color:#333;">
+<span class="close" onclick="fecharModal()" style="color:#aaa;float:right;font-size:28px;font-weight:bold;cursor:pointer;">×</span>
+<h2 id="modalTitulo"></h2>
+<p id="modalTexto"></p>
 </div>
-
-
+</div>
 <script>
 function abrirModal(titulo, conteudo) {
   document.getElementById('meuModal').style.display = 'flex';
@@ -1174,8 +1160,71 @@ function fecharModal(event) {
 }
 </script>
 
-</body>
+<style>
+#modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+#modal-content {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+#modal-close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 32px;
+  cursor: pointer;
+  color: #FF9F1C;
+}
+#modal-titulo {
+  color: #6E0838;
+  font-family: 'Cascadia Code', monospace;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+#modal-conteudo {
+  color: #333;
+  font-family: 'Ebrima', sans-serif;
+  font-size: 18px;
+}
+</style>
+<div id="modal-overlay">
+<div id="modal-content">
+<span id="modal-close">×</span>
+<h2 id="modal-titulo"></h2>
+<div id="modal-conteudo"></div>
+</div>
+</div>
+<script>
+document.getElementById('modal-close').onclick = function() {
+  document.getElementById('modal-overlay').style.display = 'none';
+};
 
+function abrirModal(titulo, conteudo) {
+  document.getElementById('modal-titulo').innerText = titulo;
+  document.getElementById('modal-conteudo').innerHTML = conteudo;
+  document.getElementById('modal-overlay').style.display = 'flex';
+}
+function fecharModal() {
+  document.getElementById('modal-overlay').style.display = 'none';
+}
+</script>
+</body>
 <script>
 const textosTemperamento = {
   'SENTINELA': `Os Sentinelas são os pilares da sociedade, valorizando estabilidade, segurança e tradição. Representados por tipos como ESTJ, ESFJ, ISTJ e ISFJ, eles são práticos, organizados e confiáveis. Sua força está na manutenção de sistemas eficientes e no cumprimento de responsabilidades. São excelentes em criar estruturas e seguir regras, garantindo que tudo funcione sem problemas. No trabalho, destacam-se em funções que exigem atenção a detalhes e consistência, como administração, saúde e educação. Socialmente, são leais e protetores com aqueles que amam, muitas vezes assumindo papéis de cuidadores. No entanto, podem resistir a mudanças bruscas e ter dificuldade em sair da zona de conforto. Sua ética de trabalho inabalável e senso de dever os tornam indispensáveis em qualquer equipe. Para os Sentinelas, honrar compromissos e manter a ordem são prioridades absolutas. Eles prosperam em ambientes previsíveis, onde podem aplicar sua meticulosidade e garantir que tudo esteja no lugar certo.`,
@@ -1282,8 +1331,6 @@ function abrirModalPersonalizado() {
 }
 
 </script>
-
-
 <script>
 function preencherResultados() {
   // Esses valores viriam da lógica de resultado do teste, estou colocando como exemplo:
@@ -1318,11 +1365,4 @@ function abrirModalPersonalizado() {
 }
 
 </script>
-
-
-
-
-
-
-
 </html>
