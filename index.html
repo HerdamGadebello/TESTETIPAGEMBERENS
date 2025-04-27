@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Teste Tipológico</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Teste Tipológico</title>
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Cascadia+Code&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Ebrima&display=swap');
-    @import url('https://fonts.googleapis.com/css2?family=Century+Gothic&display=swap');
-
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -19,7 +17,6 @@
       overflow: hidden;
       flex-direction: row;
     }
-
     .tabs {
       display: flex;
       flex-direction: column;
@@ -31,7 +28,6 @@
       gap: 10px;
       box-shadow: 2px 0 5px rgba(0,0,0,0.2);
     }
-
     .tab-button {
       padding: 15px 10px;
       background: linear-gradient(90deg, #FF9F1C, #fbb040);
@@ -49,17 +45,14 @@
       word-break: break-word;
       box-sizing: border-box;
     }
-
     .tab-button:hover {
       transform: scale(1.02);
       background: linear-gradient(90deg, #fbb040, #FF9F1C);
     }
-
     .tab-button.active {
       background: #cc7f17;
       box-shadow: 0 0 10px #fbb040;
     }
-
     .tab-content {
       flex-grow: 1;
       display: none;
@@ -72,24 +65,20 @@
       opacity: 0;
       text-align: center;
     }
-
     .tab-content.active {
       display: block;
       opacity: 1;
     }
-
     @keyframes slideIn {
       from { transform: translateX(20px); opacity: 0; }
       to { transform: translateX(0); opacity: 1; }
     }
-
     h1 {
       font-family: 'Cascadia Code', monospace;
       color: #FF9F1C;
       font-size: 32px;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
-
     .card {
       background: rgba(255, 255, 255, 0.15);
       margin: 20px 0;
@@ -102,12 +91,10 @@
       white-space: normal;
       transition: all 0.3s ease;
     }
-
     .card:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
-
     .start-button {
       background: #6E0838;
       color: white;
@@ -120,18 +107,15 @@
       font-weight: bold;
       transition: all 0.3s ease;
     }
-
     .start-button:hover {
       background: #4a0628;
       transform: scale(1.05);
     }
-
     .start-button.active {
       background: #14532d;
       transform: scale(1.05);
       box-shadow: 0 0 10px #14532d;
     }
-
     .advance-button {
       background: #FF9F1C;
       color: white;
@@ -145,12 +129,41 @@
       transition: all 0.3s ease;
       display: none;
     }
-
     .advance-button:hover {
       background: #cc7f17;
       transform: scale(1.05);
     }
-
+    .question {
+      margin: 20px 0;
+      font-size: 18px;
+      color: #F8F8F8;
+      line-height: 1.6;
+    }
+    .response-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+    .response-button {
+      background: #6E0838;
+      color: white;
+      font-size: 16px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .response-button:hover {
+      background: #4a0628;
+      transform: scale(1.05);
+    }
+    .response-button.active {
+      background: #14532d;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #14532d;
+    }
     .resultado-final {
       margin-top: 30px;
       font-size: 32px;
@@ -158,13 +171,11 @@
       color: #FF9F1C;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
     }
-
     .small-text {
       font-size: 14px;
       margin-top: 30px;
       color: #F8F8F8;
     }
-
     .resultados-container {
       display: flex;
       justify-content: center;
@@ -172,8 +183,7 @@
       flex-wrap: wrap;
       margin-top: 30px;
     }
-
-    .resultado-retangulo {
+    .resultado-retangulo, .personalidade-retangulo {
       background: #FF9F1C;
       border-radius: 12px;
       padding: 20px;
@@ -181,28 +191,26 @@
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       transition: all 0.3s ease;
+      border: none;
       cursor: pointer;
+      font-family: 'Century Gothic', sans-serif;
     }
-
-    .resultado-retangulo:hover {
+    .resultado-retangulo:hover, .personalidade-retangulo:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
-
-    .resultado-retangulo h2 {
+    .resultado-retangulo h2, .personalidade-retangulo h2 {
       font-family: 'Cascadia Code', monospace;
       color: #F8F8F8;
       font-size: 24px;
       margin: 0 0 10px 0;
     }
-
     .resultado-texto {
       font-size: 28px;
       font-weight: bold;
       color: #F8F8F8;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     }
-
     .personalidade-container {
       display: flex;
       justify-content: center;
@@ -210,37 +218,12 @@
       flex-direction: column;
       align-items: center;
     }
-
-    .personalidade-retangulo {
-      background: #FF9F1C;
-      border-radius: 12px;
-      padding: 20px;
-      width: 300px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .personalidade-retangulo:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-    }
-
-    .personalidade-retangulo h2 {
-      font-family: 'Cascadia Code', monospace;
-      color: #F8F8F8;
-      font-size: 24px;
-      margin: 0 0 10px 0;
-    }
-
     .personalidade-imagem {
       margin-top: 20px;
       max-width: 300px;
       border-radius: 12px;
       display: none;
     }
-
     .explicacao-retangulo {
       background: #6E0838;
       border-radius: 12px;
@@ -252,12 +235,10 @@
       transition: all 0.3s ease;
       cursor: pointer;
     }
-
     .explicacao-retangulo:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
-
     .explicacao-texto {
       font-family: 'Cascadia Code', monospace;
       color: #F8F8F8;
@@ -265,7 +246,6 @@
       font-weight: bold;
       margin: 0;
     }
-
     .personalidade-descricao {
       font-family: 'Ebrima', sans-serif;
       font-size: 18px;
@@ -276,8 +256,6 @@
       line-height: 1.6;
       display: none;
     }
-
-    /* Estilo para a Modal */
     .modal {
       display: none;
       position: fixed;
@@ -285,12 +263,11 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0,0,0,0.5);
       z-index: 1000;
       justify-content: center;
       align-items: center;
     }
-
     .modal-content {
       background: #FCD0E5;
       border-radius: 12px;
@@ -300,542 +277,648 @@
       max-height: 80vh;
       overflow-y: auto;
       position: relative;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       font-family: 'Century Gothic', sans-serif;
-      color: #000000;
-      font-size: 18px;
+      color: #333;
       line-height: 1.6;
-      text-align: left;
     }
-
-    .modal-content h2 {
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
       font-size: 24px;
-      margin-bottom: 15px;
-      text-align: center;
-      color: #000000;
+      cursor: pointer;
+      color: #333;
     }
-
-    .modal-content p {
-      margin: 0 0 15px;
-    }
-
     .modal-content a {
       color: #6E0838;
       text-decoration: underline;
       font-weight: bold;
     }
-
     .modal-content a:hover {
       color: #4a0628;
     }
-
-    .close-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #6E0838;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-size: 18px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: all 0.3s ease;
-    }
-
-    .close-button:hover {
-      background: #4a0628;
-      transform: scale(1.1);
-    }
-
     @media (max-width: 768px) {
       .tabs {
         width: 200px;
         min-width: 200px;
       }
-
       .tab-button {
         font-size: 18px;
         padding: 12px 8px;
       }
-
-      .resultado-retangulo {
+      .resultado-retangulo, .personalidade-retangulo {
         width: 200px;
       }
-
-      .personalidade-retangulo {
-        width: 250px;
-      }
-
       .personalidade-imagem {
         max-width: 250px;
       }
-
       .explicacao-retangulo {
         width: 250px;
       }
-
       .personalidade-descricao {
         max-width: 90%;
       }
-
       .modal-content {
         width: 95%;
-        font-size: 16px;
-      }
-
-      .modal-content h2 {
-        font-size: 20px;
+        max-height: 70vh;
       }
     }
-  </style>
+</style>
 </head>
 <body>
-  <div class="tabs">
-    <button class="tab-button active" onclick="openTab('pagina-inicial')">Página Inicial</button>
-    <button class="tab-button" onclick="openTab('orientacao')">Dicotomia Orientação</button>
-    <button class="tab-button" onclick="openTab('postura')">Dicotomia Postura</button>
-    <button class="tab-button" onclick="openTab('enfoque')">Dicotomia Enfoque</button>
-    <button class="tab-button" onclick="openTab('organizacao')">Dicotomia Organização</button>
-    <button class="tab-button" onclick="openTab('comunicacao')">Dicotomia Comunicação</button>
-    <button class="tab-button" onclick="openTab('interpretacao')">Dicotomia Interpretação</button>
-    <button class="tab-button" onclick="openTab('resultado')">Resultado Tipológico</button>
-  </div>
-
-  <div class="tab-content active" id="pagina-inicial">
-    <div class="card">
-      <button class="start-button" onclick="openTab('orientacao')">INICIAR TESTE</button>
-      <br/>
-      <img alt="Tipos MBTI" src="ALLTYPES.png" style="max-width:100%; height:auto; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);"/>
-      <p style="font-size: 20px; margin-top: 20px;">
-        Teste de tipagem elaborado a partir do conteúdo do curso <strong>TIPOLOGIA PRÁTICA</strong>, ministrado por <a href="https://www.instagram.com/roberta_bernardon/?igsh=NXdlNXp1em84azNl#" style="color: #F8F8F8; font-weight: bold; text-decoration: underline;" target="_blank">Roberta Bernardon</a>.
-      </p>
-      <div class="small-text">
-        Teste elaborado por Hermes Damião Bello
-      </div>
+<div class="tabs">
+<button class="tab-button active" onclick="openTab('pagina-inicial')">Página Inicial</button>
+<button class="tab-button" onclick="openTab('orientacao')">Dicotomia Orientação</button>
+<button class="tab-button" onclick="openTab('postura')">Dicotomia Postura</button>
+<button class="tab-button" onclick="openTab('enfoque')">Dicotomia Enfoque</button>
+<button class="tab-button" onclick="openTab('organizacao')">Dicotomia Organização</button>
+<button class="tab-button" onclick="openTab('comunicacao')">Dicotomia Comunicação</button>
+<button class="tab-button" onclick="openTab('interpretacao')">Dicotomia Interpretação</button>
+<button class="tab-button" onclick="openTab('resultado')">Resultado Tipológico</button>
+</div>
+<div class="tab-content active" id="pagina-inicial">
+<div class="card">
+<button class="start-button" onclick="openTab('orientacao')">INICIAR TESTE</button>
+<br/>
+<img alt="Tipos MBTI" src="ALLTYPES.png" style="max-width:100%; height:auto; margin-top: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.4);"/>
+<p style="font-size: 20px; margin-top: 20px;">
+      Teste de tipagem elaborado a partir do conteúdo do curso <strong>TIPOLOGIA PRÁTICA</strong>, ministrado por <a href="https://www.instagram.com/roberta_bernardon/?igsh=NXdlNXp1em84azNl#" style="color: #F8F8F8; font-weight: bold; text-decoration: underline;" target="_blank">Roberta Bernardon</a>.
+    </p>
+<div class="small-text">
+      Teste elaborado por Hermes Damião Bello
     </div>
-  </div>
+</div>
+</div>
+<div class="tab-content" id="orientacao">
+<div class="card">
+<h1>Dicotomia Orientação</h1>
+<div id="questions-orientacao"></div>
+<div class="resultado-final" id="resultado-final-orientacao"></div>
+<button class="advance-button" id="botao-avancar-orientacao" onclick="openTab('postura')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="postura">
+<div class="card">
+<h1>Dicotomia Postura</h1>
+<div id="questions-postura"></div>
+<div class="resultado-final" id="resultado-final-postura"></div>
+<button class="advance-button" id="botao-avancar-postura" onclick="openTab('enfoque')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="enfoque">
+<div class="card">
+<h1>Dicotomia Enfoque</h1>
+<div id="questions-enfoque"></div>
+<div class="resultado-final" id="resultado-final-enfoque"></div>
+<button class="advance-button" id="botao-avancar-enfoque" onclick="openTab('organizacao')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="organizacao">
+<div class="card">
+<h1>Dicotomia Organização</h1>
+<div id="questions-organizacao"></div>
+<div class="resultado-final" id="resultado-final-organizacao"></div>
+<button class="advance-button" id="botao-avancar-organizacao" onclick="openTab('comunicacao')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="comunicacao">
+<div class="card">
+<h1>Dicotomia Comunicação</h1>
+<div id="questions-comunicacao"></div>
+<div class="resultado-final" id="resultado-final-comunicacao"></div>
+<button class="advance-button" id="botao-avancar-comunicacao" onclick="openTab('interpretacao')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="interpretacao">
+<div class="card">
+<h1>Dicotomia Interpretação</h1>
+<div id="questions-interpretacao"></div>
+<div class="resultado-final" id="resultado-final-interpretacao"></div>
+<button class="advance-button" id="botao-avancar-interpretacao" onclick="openTab('resultado')">AVANÇAR</button>
+</div>
+</div>
+<div class="tab-content" id="resultado">
+<div class="card">
+<h1>Resultado Tipológico</h1>
+<div class="resultados-container">
+<button class="resultado-retangulo" id="botao-tendencia" onclick="abrirModal('tendencia')">
+<h2>TENDÊNCIA</h2>
+<div class="resultado-texto" id="resultado-tendencia"></div>
+</button>
+<button class="resultado-retangulo" id="botao-temperamento" onclick="abrirModal('temperamento')">
+<h2>TEMPERAMENTO</h2>
+<div class="resultado-texto" id="resultado-temperamento"></div>
+</button>
+<button class="resultado-retangulo" id="botao-expressao" onclick="abrirModal('expressao')">
+<h2>EXPRESSÃO</h2>
+<div class="resultado-texto" id="resultado-expressao"></div>
+</button>
+</div>
+<div class="personalidade-container">
+<button class="personalidade-retangulo" id="botao-personalidade" onclick="abrirModal('personalidade')">
+<h2>PERSONALIDADE</h2>
+<div class="resultado-texto" id="resultado-personalidade"></div>
+</button>
+<img alt="Imagem da Personalidade" class="personalidade-imagem" id="personalidade-imagem"/>
+<div class="explicacao-retangulo" id="explicacao-retangulo" onclick="downloadPDF()">
+<p class="explicacao-texto">VER EXPLICAÇÃO DAS RESPOSTAS</p>
+</div>
+<div class="personalidade-descricao" id="personalidade-descricao"></div>
+</div>
+</div>
+</div>
+<div id="modal-explicacao" class="modal">
+<div class="modal-content">
+<span class="modal-close">×</span>
+<div id="modal-texto"></div>
+</div>
+</div>
+<audio id="personalidade-musica" loop=""></audio>
+<audio id="button-sound" src="buttonsound.mp3"></audio>
+<audio id="dic-button-sound" src="dicbotton.mp3"></audio>
+<script>
+// Mapa de explicações para TENDÊNCIA, TEMPERAMENTO e EXPRESSÃO
+const explicacaoMap = {
+  tendencia: {
+    EXTROVERSÃO: `Os Extrovertidos ou Iniciadores, segundo Linda Berens, são os motores da ação em qualquer dinâmica social ou profissional. Eles possuem um impulso natural para dar o primeiro passo, seja em conversas, projetos ou tomadas de decisão. Sua energia é voltada para a proatividade e a implementação rápida de ideias, muitas vezes antecipando-se aos outros e assumindo a liderança de forma espontânea. Esses indivíduos tendem a ser diretos em sua comunicação, expressando opiniões e sugestões sem hesitação. Em ambientes de trabalho, são frequentemente os que propõem novas iniciativas, convocam reuniões ou assumem o controle em situações de crise. Sua postura assertiva pode ser interpretada como dominante, mas surge de uma genuína motivação para fazer as coisas avançarem.\n\nNo entanto, essa tendência a agir rapidamente pode levar os Iniciadores a subestimar detalhes importantes ou negligenciar a opinião de colegas mais reflexivos. Eles se destacam em papéis que exigem tomada de decisão ágil, como em cargos de liderança ou em áreas empreendedoras, onde sua capacidade de iniciar processos é valiosa. Para equilibrar seu estilo, os Iniciadores podem se beneficiar ao desenvolver paciência, ouvindo ativamente antes de agir e reconhecendo o valor da contribuição daqueles que processam informações de maneira mais lenta e cuidadosa.`,
+    INTROVERSÃO: `Os Introvertidos ou Respondedores, na tipologia de Linda Berens, representam o contraponto reflexivo aos Iniciadores. Eles preferem observar, processar informações e compreender plenamente uma situação antes de se manifestarem ou agirem. Essa abordagem cautelosa lhes permite analisar múltiplas perspectivas e oferecer contribuições mais ponderadas e completas.\n\nDiferentemente dos Iniciadores, que são impulsionados pela ação imediata, os Respondedores valorizam o tempo para reflexão. Em discussões, geralmente ouvem mais do que falam inicialmente, absorvendo os detalhes antes de formular respostas. Essa característica os torna excelentes solucionadores de problemas, capazes de identificar nuances que outros podem ignorar. No ambiente profissional, os Respondedores se destacam em funções que exigem análise detalhada, planejamento estratégico ou mediação de conflitos, onde sua capacidade de escuta e síntese é crucial. Eles trazem equilíbrio para equipes, garantindo que decisões sejam tomadas com base em informações sólidas e não apenas no ímpeto do momento.\n\nSeu maior desafio é evitar a paralisia por análise ou a hesitação excessiva, que pode retardar processos. Para maximizar seu potencial, os Respondedores podem trabalhar em expressar suas ideias com mais confiança, mesmo quando não têm todas as respostas, e em se adaptar a situações que exigem agilidade. Essa abordagem complementa perfeitamente a dos Iniciadores, criando uma dinâmica equilibrada entre ação e reflexão.`
+  },
+  temperamento: {
+    SENTINELA: `Os Sentinelas são os pilares da sociedade, valorizando estabilidade, segurança e tradição. Representados por tipos como ESTJ, ESFJ, ISTJ e ISFJ, eles são práticos, organizados e confiáveis. Sua força está na manutenção de sistemas eficientes e no cumprimento de responsabilidades. São excelentes em criar estruturas e seguir regras, garantindo que tudo funcione sem problemas. No trabalho, destacam-se em funções que exigem atenção a detalhes e consistência, como administração, saúde e educação. Socialmente, são leais e protetores com aqueles que amam, muitas vezes assumindo papéis de cuidadores. No entanto, podem resistir a mudanças bruscas e ter dificuldade em sair da zona de conforto. Sua ética de trabalho inabalável e senso de dever os tornam indispensáveis em qualquer equipe. Para os Sentinelas, honrar compromissos e manter a ordem são prioridades absolutas. Eles prosperam em ambientes previsíveis, onde podem aplicar sua meticulosidade e garantir que tudo esteja no lugar certo.`,
+    ARTÍFICE: `Artífices vivem no aqui e agora, buscando liberdade, ação e experiências imediatas. Representados por tipos como ESTP, ESFP, ISTP e ISFP, eles são espontâneos, adaptáveis e habilidosos em resolver problemas sob pressão. Sua energia vibrante e talento prático os tornam excelentes em áreas que exigem destreza física ou criatividade, como artes, esportes e emergências. Eles enxergam o mundo como um playground, sempre prontos para explorar novas possibilidades. Socialmente, são carismáticos e divertidos, atraindo pessoas com seu entusiasmo contagiante. No entanto, podem evitar planejamentos de longo prazo, preferindo a flexibilidade à rotina. Artífices são mestres em improvisação, usando recursos disponíveis de forma inovadora. Sua coragem e capacidade de pensar rápido os tornam indispensáveis em situações críticas. Para eles, a vida deve ser vivida com intensidade, e regras existem para serem desafiadas quando limitam sua liberdade.`,
+    ANALISTA: `Analistas são os arquitetos do futuro, movidos por lógica, inovação e eficiência. Representados por tipos como INTJ, ENTJ, INTP e ENTP, eles buscam compreender sistemas complexos e melhorá-los. Sua mente estratégica e visão de longo prazo os tornam excelentes em ciência, tecnologia e liderança. Eles questionam o status quo, preferindo soluções inteligentes a tradições ultrapassadas. No trabalho, são analíticos e independentes, valorizando competência acima de tudo. Socialmente, podem parecer distantes, mas sua paixão por ideias profundas os torna fascinantes conversadores. No entanto, sua busca pela perfeição pode levá-los a negligenciar emoções ou detalhes práticos. Analistas adoram desafios intelectuais e prosperam em ambientes que estimulam sua criatividade. Para eles, o progresso humano depende da razão e da inovação. Eles sonham grande e têm as ferramentas mentais para transformar visões em realidade, mesmo que isso exija romper convenções.`,
+    DIPLOMATA: `Diplomatas são os catalisadores de crescimento, guiados por valores, conexões e significado. Representados por tipos como INFJ, ENFJ, INFP e ENFP, eles buscam harmonia e autenticidade em todas as esferas da vida. Sua empatia profunda e intuição aguçada os tornam excelentes em áreas como psicologia, artes e educação, onde podem inspirar e transformar pessoas. Eles enxergam potencial em todos e dedicam-se a causas maiores. Socialmente, são calorosos e persuasivos, criando laços significativos. No entanto, podem se frustrar quando a realidade não corresponde aos seus ideais elevados. Diplomatas são sonhadores práticos, unindo compaixão à ação. Eles acreditam no poder das histórias e no crescimento pessoal como motores da mudança social. Para eles, a vida é uma jornada de autodescoberta e impacto positivo. Sua missão é criar um mundo mais justo e conectado, onde cada indivíduo possa florescer em sua singularidade.`
+  },
+  expressao: {
+    ESTRUTURADOR: `O estilo Estruturador ou Diretivo é marcado por objetividade e foco em resultados. Pessoas com essa expressão (como ESTJs, ENFJs, ESTPs e ENTJs) comunicam-se de forma clara e assertiva, priorizando ações concretas. Sua linguagem é pragmática, com frases curtas e orientadas a soluções: "Vamos resolver isso agora" ou "Qual é o plano?". Estruturas hierárquicas e eficiência são valorizadas, e conflitos são encarados como oportunidades para ajustes rápidos. No trabalho, assumem liderança naturalmente, delegando tarefas com precisão. Socialmente, podem parecer intensos, mas sua intenção é garantir progresso. Desafiam o status quo quando impede objetivos, usando lógica implacável. Seu mantra: "Menos conversa, mais ação". Porém, precisam moderar a impaciência com processos mais lentos. Típicos em cargos executivos ou emergências, onde decisões rápidas salvam vidas.`,
+    INAUGURADOR: `O estilo Inaugurador ou Interativo é caloroso, envolvente e cheio de energia, é o estilo dos tipos ESFJs, ESFPs, ENTPs e ENFPs. Esses comunicadores usam histórias, metáforas e linguagem vívida para criar conexões. Sua fala é entusiasta, com variações no tom de voz e expressões faciais animadas. Valorizam o contato pessoal e a construção de relacionamentos. Sua comunicação é repleta de exclamações e perguntas retóricas: "Isso não é incrível?", "Vamos fazer história!". Adaptam-se facilmente a diferentes públicos, usando humor e empatia para engajar os outros. Na comunicação não-verbal, são expressivos com gestos amplos e proximidade física. Tendem a pensar em voz alta e podem mudar de assunto rapidamente, seguindo o fluxo da conversa. Seu maior desafio é manter o foco em detalhes concretos e seguir estruturas pré-definidas. Valorizam a harmonia grupal, mas podem evitar conflitos importantes para manter o clima positivo.`,
+    FINALIZADOR: `O estilo Finalizador ou Investigativo, é sistemático, preciso e orientado por lógica, presente nos tipos ISTJ, ISTP, INTJ e INFJ. Esses comunicadores preferem dados concretos e evidências, usando linguagem técnica e específica. Sua postura é mais reservada, com tom de voz moderado e pausas frequentes para reflexão. Seu discurso é marcado por qualificações e precisão: "Segundo os dados...", "Teoricamente...". Fazem perguntas profundas para testar hipóteses: "Qual a metodologia usada?" Valorizam a exatidão acima de tudo, revisando constantemente suas próprias afirmações. Na comunicação não-verbal, mantêm postura contida e gestos mínimos. Preferem interações um-a-um ou pequenos grupos onde possam discutir ideias em profundidade. Seu maior desafio é adaptar a complexidade de seu pensamento para públicos diversos sem perder o rigor lógico. Podem parecer frios quando focam demais no conteúdo em detrimento das emoções envolvidas.`,
+    BASTIDOR: `O estilo Bastidor ou Acomodativo é empático, harmonioso e orientado para o consenso – presente nos tipos ISFJ, ISFP, INTP e INFP. Esses comunicadores priorizam a escuta ativa e a diplomacia, usando linguagem suave e inclusiva. Seu ton de voz é calmo, com pausas frequentes para verificar o entendimento do outro. Sua fala é repleta de qualificadores e frases de apoio: "Entendo seu ponto...", "Talvez possamos...". Evitam afirmações categóricas, preferindo sugestões: "Que tal tentarmos assim?" Na comunicação não-verbal, mantêm postura aberta e expressão facial receptiva. Valorizam profundamente a harmonia grupal e tendem a mediar conflitos, buscando soluções que atendam a todos. Seu maior desafio é expressar desacordos ou necessidades pessoais de forma direta, muitas vezes priorizando a paz sobre a autenticidade. Podem se beneficiar ao desenvolver maior assertividade sem perder sua natureza conciliadora.`
+  }
+};
 
-  <div class="tab-content" id="orientacao">
-    <div class="card">
-      <h1>Dicotomia Orientação</h1>
-      <div id="questions-orientacao"></div>
-      <div class="resultado-final" id="resultado-final-orientacao"></div>
-      <button class="advance-button" id="botao-avancar-orientacao" onclick="openTab('postura')">AVANÇAR</button>
-    </div>
-  </div>
+// Mapa de links para PERSONALIDADE
+const personalidadeLinkMap = {
+  ESTJ: 'https://www.instagram.com/p/CfVKwUiNoy3/?igsh=MWYzNDZhdWVpcXg4dw%3D%3D&img_index=1',
+  ESFJ: 'https://www.instagram.com/p/Ce4fsWWl413/?igsh=YWlpbDZ4YmIyNTdy',
+  ISTJ: 'https://www.instagram.com/p/CeUa8DRl9kh/?igsh=eDFmMTticXlubXF2',
+  ISFJ: 'https://www.instagram.com/p/Cdo1PPFJgDy/?igsh=MTFrdGxyYTdxYXJ0NQ==',
+  ESTP: 'https://www.instagram.com/p/Cc31k_Cp-Rz/?igsh=dG44MGM3YWZnendw',
+  ESFP: 'https://www.instagram.com/p/Cb8mNdRJvZK/?igsh=MXR6dWg1eHliNzBybw==',
+  ISTP: 'https://www.instagram.com/p/CcOi-Ndp38-/?igsh=MTE4a2gzM3lqc2Y3eQ==',
+  ISFP: 'https://www.instagram.com/p/CcgvCROJRaE/?igsh=Yjd0NHl3N2lyeHFu',
+  ENTJ: 'https://www.instagram.com/p/CcEap2Opaz3/?igsh=OHd2dW1sazM5eHlh',
+  ENTP: 'https://www.instagram.com/p/CcWTHicp9hL/?igsh=MWhibHRnMG1ueGlxNQ==',
+  INTJ: 'https://www.instagram.com/p/CdHVHCapO1W/?igsh=MWdteHFmNWQ5aHR6ag==',
+  INTP: 'https://www.instagram.com/p/Ccq77oxp3aQ/?igsh=MTI1cHN3emNmMmcxYg==',
+  ENFJ: 'https://www.instagram.com/p/CdZfAL4rDwT/?igsh=MTh4dGlqeXNodWo3Ng==',
+  ENFP: 'https://www.instagram.com/p/Cd62RbzNAYv/?igsh=MTUxM202ODg0OGhpMg==',
+  INFJ: 'https://www.instagram.com/p/Cehh1TGNKvD/?igsh=MWhvMGVvYnVjY2trMw==',
+  INFP: 'https://www.instagram.com/p/CfDF24LNiE1/?igsh=eTlvcXViZjRkZ3Vq'
+};
 
-  <div class="tab-content" id="postura">
-    <div class="card">
-      <h1>Dicotomia Postura</h1>
-      <div id="questions-postura"></div>
-      <div class="resultado-final" id="resultado-final-postura"></div>
-      <button class="advance-button" id="botao-avancar-postura" onclick="openTab('enfoque')">AVANÇAR</button>
-    </div>
-  </div>
+// Mapa de imagens para PERSONALIDADE
+const imagemMap = {
+  ESTJ: 'ESTJ.png',
+  ESFJ: 'ESFJ.png',
+  ISTJ: 'ISTJ.png',
+  ISFJ: 'ISFJ.png',
+  ESTP: 'ESTP.png',
+  ESFP: 'ESFP.png',
+  ISTP: 'ISTP.png',
+  ISFP: 'ISFP.png',
+  ENTJ: 'ENTJ.png',
+  ENTP: 'ENTP.png',
+  INTJ: 'INTJ.png',
+  INTP: 'INTP.png',
+  ENFJ: 'ENFJ.png',
+  ENFP: 'ENFP.png',
+  INFJ: 'INFJ.png',
+  INFP: 'INFP.png'
+};
 
-  <div class="tab-content" id="enfoque">
-    <div class="card">
-      <h1>Dicotomia Enfoque</h1>
-      <div id="questions-enfoque"></div>
-      <div class="resultado-final" id="resultado-final-enfoque"></div>
-      <button class="advance-button" id="botao-avancar-enfoque" onclick="openTab('organizacao')">AVANÇAR</button>
-    </div>
-  </div>
+// Mapa de músicas para PERSONALIDADE
+const musicaMap = {
+  ESTJ: 'ESTJ.mp3',
+  ESFJ: 'ESFJ.mp3',
+  ISTJ: 'ISTJ.mp3',
+  ISFJ: 'ISFJ.mp3',
+  ESTP: 'ESTP.mp3',
+  ESFP: 'ESFP.mp3',
+  ISTP: 'ISTP.mp3',
+  ISFP: 'ISFP.mp3',
+  ENTJ: 'ENTJ.mp3',
+  ENTP: 'ENTP.mp3',
+  INTJ: 'INTJ.mp3',
+  INTP: 'INTP.mp3',
+  ENFJ: 'ENFJ.mp3',
+  ENFP: 'ENFP.mp3',
+  INFJ: 'INFJ.mp3',
+  INFP: 'INFP.mp3'
+};
 
-  <div class="tab-content" id="organizacao">
-    <div class="card">
-      <h1>Dicotomia Organização</h1>
-      <div id="questions-organizacao"></div>
-      <div class="resultado-final" id="resultado-final-organizacao"></div>
-      <button class="advance-button" id="botao-avancar-organizacao" onclick="openTab('comunicacao')">AVANÇAR</button>
-    </div>
-  </div>
+// Mapa de descrições para PERSONALIDADE
+const descricaoMap = {
+  ESTJ: `Os ESTJs são líderes natos, conhecidos por sua organização, praticidade e foco em resultados. Como Sentinelas, valorizam a estrutura e a eficiência, frequentemente assumindo papéis de comando em equipes. São diretos, decididos e preferem seguir métodos comprovados para alcançar objetivos. No trabalho, destacam-se em administração e logística, garantindo que tudo funcione como planejado. Socialmente, são leais e responsáveis, mas podem parecer rígidos quando as regras são desafiadas. Sua comunicação estruturadora é clara e objetiva, ideal para liderar projetos complexos.\n\nPontos fortes: Organização, liderança, confiabilidade.\nPontos a desenvolver: Flexibilidade, empatia em conflitos.`,
+  ESFJ: `Os ESFJs são conectores sociais, movidos por harmonia e cuidado com os outros. Como Sentinelas, priorizam o bem-estar coletivo, criando ambientes acolhedores. São calorosos, atenciosos e excelentes em organizar eventos ou equipes. No trabalho, brilham em áreas como educação e saúde, onde podem apoiar pessoas. Sua comunicação inauguradora é envolvente, usando empatia para engajar. Podem, porém, evitar confrontos para manter a paz, o que às vezes compromete suas necessidades.\n\nPontos fortes: Empatia, organização social, lealdade.\nPontos a desenvolver: Assertividade, lidar com críticas.`,
+  ISTJ: `Os ISTJs são pilares de confiabilidade, focados em dever e precisão. Como Sentinelas, valorizam a tradição e a consistência, sendo meticulosos em tudo o que fazem. No trabalho, são ideais para funções que exigem atenção aos detalhes, como contabilidade ou engenharia. Sua comunicação finalizadora é lógica e reservada, preferindo fatos a especulações. Podem resistir a mudanças ou parecer distantes emocionalmente, mas sua dedicação é inquestionável.\n\nPontos fortes: Confiabilidade, meticulosidade, disciplina.\nPontos a desenvolver: Adaptabilidade, expressão emocional.`,
+  ISFJ: `Os ISFJs são cuidadores silenciosos, dedicados a proteger e apoiar quem amam. Como Sentinelas, são leais, atenciosos e detalhistas, frequentemente colocando as necessidades dos outros acima das suas. No trabalho, destacam-se em áreas como saúde e assistência social. Sua comunicação bastidor é suave e diplomática, buscando harmonia. Podem evitar confrontos ou se sobrecarregar por querer ajudar demais.\n\nPontos fortes: Lealdade, cuidado, atenção aos detalhes.\nPontos a desenvolver: Assertividade, equilíbrio pessoal.`,
+  ESTP: `Os ESTPs são aventureiros dinâmicos, vivendo o momento com energia contagiante. Como Artífices, são práticos e adaptáveis, resolvendo problemas com rapidez. No trabalho, brilham em áreas como vendas ou esportes, onde sua habilidade de improvisar é valiosa. Sua comunicação estruturadora é direta e persuasiva. Podem, porém, evitar compromissos de longo prazo ou parecer impulsivos.\n\nPontos fortes: Adaptabilidade, carisma, pensamento rápido.\nPontos a desenvolver: Planejamento, paciência.`,
+  ESFP: `Os ESFPs são a alma da festa, trazendo alegria e espontaneidade. Como Artífices, vivem para experiências sensoriais e conexões humanas. No trabalho, destacam-se em artes ou entretenimento, usando seu carisma. Sua comunicação inauguradora é vibrante e envolvente. Podem, porém, lutar com rotinas ou adiamentos de responsabilidades.\n\nPontos fortes: Carisma, criatividade, entusiasmo.\nPontos a desenvolver: Consistência, foco em longo prazo.`,
+  ISTP: `Os ISTPs são solucionadores práticos, fascinados por como as coisas funcionam. Como Artífices, são independentes e habilidosos, preferindo ação a teoria. No trabalho, são ideais para mecânica ou tecnologia. Sua comunicação finalizadora é objetiva e reservada. Podem parecer distantes ou evitar compromissos emocionais.\n\nPontos fortes: Habilidade prática, independência, calma sob pressão.\nPontos a desenvolver: Comunicação emocional, planejamento.`,
+  ISFP: `Os ISFPs são artistas sensíveis, guiados por valores pessoais e estética. Como Artífices, buscam liberdade para expressar sua individualidade. No trabalho, destacam-se em artes ou design. Sua comunicação bastidor é gentil e empática, mas podem evitar conflitos ou se isolar sob pressão.\n\nPontos fortes: Criatividade, autenticidade, empatia.\nPontos a desenvolver: Assertividade, organização.`,
+  ENTJ: `Os ENTJs são estrategistas visionários, sempre planejando o futuro. Como Analistas, são líderes natos, focados em eficiência e inovação. No trabalho, brilham em gestão ou empreendedorismo. Sua comunicação estruturadora é direta e inspiradora. Podem, porém, parecer dominantes ou negligenciar emoções alheias.\n\nPontos fortes: Liderança, visão estratégica, confiança.\nPontos a desenvolver: Empatia, paciência com detalhes.`,
+  ENTP: `Os ENTPs são inovadores incansáveis, adorando debates e ideias novas. Como Analistas, são criativos e questionadores, desafiando convenções. No trabalho, destacam-se em tecnologia ou marketing. Sua comunicação inauguradora é dinâmica e persuasiva. Podem, porém, dispersar ou evitar rotina.\n\nPontos fortes: Criatividade, adaptabilidade, eloquência.\nPontos a desenvolver: Foco, cumprimento de prazos.`,
+  INTJ: `Os INTJs são arquitetos do futuro, movidos por visão e lógica. Como Analistas, planejam meticulosamente para alcançar objetivos de longo prazo. No trabalho, são ideais para ciência ou estratégia. Sua comunicação finalizadora é precisa e reservada. Podem parecer distantes ou inflexíveis.\n\nPontos fortes: Visão estratégica, independência, determinação.\nPontos a desenvolver: Flexibilidade, conexão emocional.`,
+  INTP: `Os INTPs são pensadores profundos, fascinados por ideias e lógica. Como Analistas, buscam compreender o mundo através da análise. No trabalho, destacam-se em pesquisa ou tecnologia. Sua comunicação bastidor é calma e reflexiva. Podem evitar compromissos ou parecer desligados.\n\nPontos fortes: Criatividade intelectual, curiosidade, objetividade.\nPontos a desenvolver: Praticidade, interação social.`,
+  ENFJ: `Os ENFJs são líderes carismáticos, inspirando outros com empatia e visão. Como Diplomatas, buscam harmonia e crescimento coletivo. No trabalho, brilham em educação ou liderança. Sua comunicação estruturadora é motivadora e envolvente. Podem, porém, se sobrecarregar ou evitar conflitos.\n\nPontos fortes: Empatia, liderança inspiradora, conexão.\nPontos a desenvolver: Equilíbrio pessoal, objetividade.`,
+  ENFP: `Os ENFPs são sonhadores entusiastas, movidos por possibilidades e conexões. Como Diplomatas, são criativos e inspiradores. No trabalho, destacam-se em artes ou empreendedorismo. Sua comunicação inauguradora é vibrante e motivadora. Podem, porém, dispersar ou evitar rotina.\n\nPontos fortes: Criatividade, entusiasmo, empatia.\nPontos a desenvolver: Foco, consistência.`,
+  INFJ: `Os INFJs são visionários intuitivos, guiados por valores e empatia. Como Diplomatas, buscam significado e transformação. No trabalho, são ideais para psicologia ou escrita. Sua comunicação finalizadora é profunda e reservada. Podem se isolar ou se sobrecarregar com ideais.\n\nPontos fortes: Intuição, empatia, visão.\nPontos a desenvolver: Praticidade, expressão de necessidades.`,
+  INFP: `Os INFPs são idealistas sonhadores, movidos por autenticidade e valores. Como Diplomatas, buscam expressar sua individualidade. No trabalho, destacam-se em artes ou causas sociais. Sua comunicação bastidor é gentil e reflexiva. Podem evitar conflitos ou procrastinar.\n\nPontos fortes: Autenticidade, empatia, criatividade.\nPontos a desenvolver: Assertividade, organização.`
+};
 
-  <div class="tab-content" id="comunicacao">
-    <div class="card">
-      <h1>Dicotomia Comunicação</h1>
-      <div id="questions-comunicacao"></div>
-      <div class="resultado-final" id="resultado-final-comunicacao"></div>
-      <button class="advance-button" id="botao-avancar-comunicacao" onclick="openTab('interpretacao')">AVANÇAR</button>
-    </div>
-  </div>
+// Variáveis globais
+let currentPersonalidade = null;
+let audioElement = document.getElementById('personalidade-musica');
+let buttonSound = document.getElementById('button-sound');
+let dicButtonSound = document.getElementById('dic-button-sound');
 
-  <div class="tab-content" id="interpretacao">
-    <div class="card">
-      <h1>Dicotomia Interpretação</h1>
-      <div id="questions-interpretacao"></div>
-      <div class="resultado-final" id="resultado-final-interpretacao"></div>
-      <button class="advance-button" id="botao-avancar-interpretacao" onclick="openTab('resultado')">AVANÇAR</button>
-    </div>
-  </div>
+// Funções para sons
+function tocarSom(tipo) {
+  const som = tipo === 'buttonsound' ? buttonSound : dicButtonSound;
+  if (som) {
+    som.currentTime = 0;
+    som.play().catch(e => console.error("Erro ao tocar som:", e));
+  }
+}
 
-  <div class="tab-content" id="resultado">
-    <div class="card">
-      <h1>Resultado Tipológico</h1>
-      <div class="resultados-container">
-        <div class="resultado-retangulo" onclick="abrirModal('tendencia')">
-          <h2>TENDÊNCIA</h2>
-          <div class="resultado-texto" id="resultado-tendencia"></div>
-        </div>
-        <div class="resultado-retangulo" onclick="abrirModal('temperamento')">
-          <h2>TEMPERAMENTO</h2>
-          <div class="resultado-texto" id="resultado-temperamento"></div>
-        </div>
-        <div class="resultado-retangulo" onclick="abrirModal('expressao')">
-          <h2>EXPRESSÃO</h2>
-          <div class="resultado-texto" id="resultado-expressao"></div>
-        </div>
-      </div>
-      <div class="personalidade-container">
-        <div class="personalidade-retangulo" onclick="abrirModal('personalidade')">
-          <h2>PERSONALIDADE</h2>
-          <div class="resultado-texto" id="resultado-personalidade"></div>
-        </div>
-        <img alt="Imagem da Personalidade" class="personalidade-imagem" id="personalidade-imagem"/>
-        <div class="explicacao-retangulo" id="explicacao-retangulo">
-          <p class="explicacao-texto">VER EXPLICAÇÃO DAS RESPOSTAS</p>
-        </div>
-        <div class="personalidade-descricao" id="personalidade-descricao"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal" id="resultado-modal">
-    <div class="modal-content">
-      <button class="close-button" onclick="fecharModal()">×</button>
-      <div id="modal-conteudo"></div>
-    </div>
-  </div>
-
-  <audio id="personalidade-musica" loop=""></audio>
-  <audio id="buttonsound" src="buttonsound.mp3"></audio>
-
-  <script>
-    // Mapa de textos explicativos para a modal
-    const textosExplicativos = {
-      tendencia: {
-        EXTROVERSÃO: `
-          <h2>Extroversão</h2>
-          <p>Os Extrovertidos ou Iniciadores, segundo Linda Berens, são os motores da ação em qualquer dinâmica social ou profissional. Eles possuem um impulso natural para dar o primeiro passo, seja em conversas, projetos ou tomadas de decisão. Sua energia é voltada para a proatividade e a implementação rápida de ideias, muitas vezes antecipando-se aos outros e assumindo a liderança de forma espontânea. Esses indivíduos tendem a ser diretos em sua comunicação, expressando opiniões e sugestões sem hesitação.</p>
-          <p>Em ambientes de trabalho, são frequentemente os que propõem novas iniciativas, convocam reuniões ou assumem o controle em situações de crise. Sua postura assertiva pode ser interpretada como dominante, mas surge de uma genuína motivação para fazer as coisas avançarem.</p>
-          <p>No entanto, essa tendência a agir rapidamente pode levar os Iniciadores a subestimar detalhes importantes ou negligenciar a opinião de colegas mais reflexivos. Eles se destacam em papéis que exigem tomada de decisão ágil, como em cargos de liderança ou em áreas empreendedoras, onde sua capacidade de iniciar processos é valiosa. Para equilibrar seu estilo, os Iniciadores podem se beneficiar ao desenvolver paciência, ouvindo ativamente antes de agir e reconhecendo o valor da contribuição daqueles que processam informações de maneira mais lenta e cuidadosa.</p>
-        `,
-        INTROVERSÃO: `
-          <h2>Introversão</h2>
-          <p>Os Introvertidos ou Respondedores, na tipologia de Linda Berens, representam o contraponto reflexivo aos Iniciadores. Eles preferem observar, processar informações e compreender plenamente uma situação antes de se manifestarem ou agirem. Essa abordagem cautelosa lhes permite analisar múltiplas perspectivas e oferecer contribuições mais ponderadas e completas.</p>
-          <p>Diferentemente dos Iniciadores, que são impulsionados pela ação imediata, os Respondedores valorizam o tempo para reflexão. Em discussões, geralmente ouvem mais do que falam inicialmente, absorvendo os detalhes antes de formular respostas. Essa característica os torna excelentes solucionadores de problemas, capazes de identificar nuances que outros podem ignorar.</p>
-          <p>No ambiente profissional, os Respondedores se destacam em funções que exigem análise detalhada, planejamento estratégico ou mediação de conflitos, onde sua capacidade de escuta e síntese é crucial. Eles trazem equilíbrio para equipes, garantindo que decisões sejam tomadas com base em informações sólidas e não apenas no ímpeto do momento. Seu maior desafio é evitar a paralisia por análise ou a hesitação excessiva, que pode retardar processos.</p>
-        `
-      },
-      temperamento: {
-        SENTINELA: `
-          <h2>Sentinelas</h2>
-          <p>Os Sentinelas são os pilares da sociedade, valorizando estabilidade, segurança e tradição. Representados por tipos como ESTJ, ESFJ, ISTJ e ISFJ, eles são práticos, organizados e confiáveis. Sua força está na manutenção de sistemas eficientes e no cumprimento de responsabilidades.</p>
-          <p>São excelentes em criar estruturas e seguir regras, garantindo que tudo funcione sem problemas. No trabalho, destacam-se em funções que exigem atenção a detalhes e consistência, como administração, saúde e educação. Socialmente, são leais e protetores com aqueles que amam, muitas vezes assumindo papéis de cuidadores.</p>
-          <p>No entanto, podem resistir a mudanças bruscas e ter dificuldade em sair da zona de conforto. Sua ética de trabalho inabalável e senso de dever os tornam indispensáveis em qualquer equipe. Para os Sentinelas, honrar compromissos e manter a ordem são prioridades absolutas. Eles prosperam em ambientes previsíveis, onde podem aplicar sua meticulosidade e garantir que tudo esteja no lugar certo.</p>
-        `,
-        ARTÍFICE: `
-          <h2>Artífices</h2>
-          <p>Artífices vivem no aqui e agora, buscando liberdade, ação e experiências imediatas. Representados por tipos como ESTP, ESFP, ISTP e ISFP, eles são espontâneos, adaptáveis e habilidosos em resolver problemas sob pressão. Sua energia vibrante e talento prático os tornam excelentes em áreas que exigem destreza física ou criatividade, como artes, esportes e emergências.</p>
-          <p>Eles enxergam o mundo como um playground, sempre prontos para explorar novas possibilidades. Socialmente, são carismáticos e divertidos, atraindo pessoas com seu entusiasmo contagiante. No entanto, podem evitar planejamentos de longo prazo, preferindo a flexibilidade à rotina.</p>
-          <p>Artífices são mestres em improvisação, usando recursos disponíveis de forma inovadora. Sua coragem e capacidade de pensar rápido os tornam indispensáveis em situações críticas. Para eles, a vida deve ser vivida com intensidade, e regras existem para serem desafiadas quando limitam sua liberdade.</p>
-        `,
-        ANALISTA: `
-          <h2>Analistas</h2>
-          <p>Analistas são os arquitetos do futuro, movidos por lógica, inovação e eficiência. Representados por tipos como INTJ, ENTJ, INTP e ENTP, eles buscam compreender sistemas complexos e melhorá-los. Sua mente estratégica e visão de longo prazo os tornam excelentes em ciência, tecnologia e liderança.</p>
-          <p>Eles questionam o status quo, preferindo soluções inteligentes a tradições ultrapassadas. No trabalho, são analíticos e independentes, valorizando competência acima de tudo. Socialmente, podem parecer distantes, mas sua paixão por ideias profundas os torna fascinantes conversadores.</p>
-          <p>No entanto, sua busca pela perfeição pode levá-los a negligenciar emoções ou detalhes práticos. Analistas adoram desafios intelectuais e prosperam em ambientes que estimulam sua criatividade. Para eles, o progresso humano depende da razão e da inovação. Eles sonham grande e têm as ferramentas mentais para transformar visões em realidade, mesmo que isso exija romper convenções.</p>
-        `,
-        DIPLOMATA: `
-          <h2>Diplomatas</h2>
-          <p>Diplomatas são os catalisadores de crescimento, guiados por valores, conexões e significado. Representados por tipos como INFJ, ENFJ, INFP e ENFP, eles buscam harmonia e autenticidade em todas as esferas da vida. Sua empatia profunda e intuição aguçada os tornam excelentes em áreas como psicologia, artes e educação, onde podem inspirar e transformar pessoas.</p>
-          <p>Eles enxergam potencial em todos e dedicam-se a causas maiores. Socialmente, são calorosos e persuasivos, criando laços significativos. No entanto, podem se frustrar quando a realidade não corresponde aos seus ideais elevados.</p>
-          <p>Diplomatas são sonhadores práticos, unindo compaixão à ação. Eles acreditam no poder das histórias e no crescimento pessoal como motores da mudança social. Para eles, a vida é uma jornada de autodescoberta e impacto positivo. Sua missão é criar um mundo mais justo e conectado, onde cada indivíduo possa florescer em sua singularidade.</p>
-        `
-      },
-      expressao: {
-        ESTRUTURADOR: `
-          <h2>Estruturador</h2>
-          <p>O estilo Estruturador ou Diretivo é marcado por objetividade e foco em resultados. Pessoas com essa expressão (como ESTJs, ENFJs, ESTPs e ENTJs) comunicam-se de forma clara e assertiva, priorizando ações concretas. Sua linguagem é pragmática, com frases curtas e orientadas a soluções: "Vamos resolver isso agora" ou "Qual é o plano?".</p>
-          <p>Estruturas hierárquicas e eficiência são valorizadas, e conflitos são encarados como oportunidades para ajustes rápidos. No trabalho, assumem liderança naturalmente, delegando tarefas com precisão. Socialmente, podem parecer intensos, mas sua intenção é garantir progresso.</p>
-          <p>Desafiam o status quo quando impede objetivos, usando lógica implacável. Seu mantra: "Menos conversa, mais ação". Porém, precisam moderar a impaciência com processos mais lentos. Típicos em cargos executivos ou emergências, onde decisões rápidas salvam vidas.</p>
-        `,
-        INAUGURADOR: `
-          <h2>Inaugurador</h2>
-          <p>O estilo Inaugurador ou Interativo é caloroso, envolvente e cheio de energia, é o estilo dos tipos ESFJs, ESFPs, ENTPs e ENFPs. Esses comunicadores usam histórias, metáforas e linguagem vívida para criar conexões. Sua fala é entusiasta, com variações no tom de voz e expressões faciais animadas.</p>
-          <p>Valorizam o contato pessoal e a construção de relacionamentos. Sua comunicação é repleta de exclamações e perguntas retóricas: "Isso não é incrível?", "Vamos fazer história!". Adaptam-se facilmente a diferentes públicos, usando humor e empatia para engajar os outros.</p>
-          <p>Na comunicação não-verbal, são expressivos com gestos amplos e proximidade física. Tendem a pensar em voz alta e podem mudar de assunto rapidamente, seguindo o fluxo da conversa. Seu maior desafio é manter o foco em detalhes concretos e seguir estruturas pré-definidas.</p>
-        `,
-        FINALIZADOR: `
-          <h2>Finalizador</h2>
-          <p>O estilo Finalizador ou Investigativo, é sistemático, preciso e orientado por lógica, presente nos tipos ISTJ, ISTP, INTJ e INFJ. Esses comunicadores preferem dados concretos e evidências, usando linguagem técnica e específica. Sua postura é mais reservada, com tom de voz moderado e pausas frequentes para reflexão.</p>
-          <p>Seu discurso é marcado por qualificações e precisão: "Segundo os dados...", "Teoricamente...". Fazem perguntas profundas para testar hipóteses: "Qual a metodologia usada?" Valorizam a exatidão acima de tudo, revisando constantemente suas próprias afirmações.</p>
-          <p>Na comunicação não-verbal, mantêm postura contida e gestos mínimos. Preferem interações um-a-um ou pequenos grupos onde possam discutir ideias em profundidade. Seu maior desafio é adaptar a complexidade de seu pensamento para públicos diversos sem perder o rigor lógico.</p>
-        `,
-        BASTIDOR: `
-          <h2>Bastidor</h2>
-          <p>O estilo Bastidor ou Acomodativo é empático, harmonioso e orientado para o consenso – presente nos tipos ISFJ, ISFP, INTP e INFP. Esses comunicadores priorizam a escuta ativa e a diplomacia, usando linguagem suave e inclusiva. Seu tom de voz é calmo, com pausas frequentes para verificar o entendimento do outro.</p>
-          <p>Sua fala é repleta de qualificadores e frases de apoio: "Entendo seu ponto...", "Talvez possamos...". Evitam afirmações categóricas, preferindo sugestões: "Que tal tentarmos assim?" Na comunicação não-verbal, mantêm postura aberta e expressão facial receptiva.</p>
-          <p>Valorizam profundamente a harmonia grupal e tendem a mediar conflitos, buscando soluções que atendam a todos. Seu maior desafio é expressar desacordos ou necessidades pessoais de forma direta, muitas vezes priorizando a paz sobre a autenticidade.</p>
-        `
-      },
-      personalidade: {
-        ESTJ: `<h2>ESTJ</h2><p>Para mais informações sobre o tipo ESTJ, clique no link abaixo:</p><a href="https://www.instagram.com/p/CfVKwUiNoy3/?igsh=MWYzNDZhdWVpcXg4dw%3D%3D&img_index=1" target="_blank">Ver mais no Instagram</a>`,
-        ESFJ: `<h2>ESFJ</h2><p>Para mais informações sobre o tipo ESFJ, clique no link abaixo:</p><a href="https://www.instagram.com/p/Ce4fsWWl413/?igsh=YWlpbDZ4YmIyNTdy" target="_blank">Ver mais no Instagram</a>`,
-        ISTJ: `<h2>ISTJ</h2><p>Para mais informações sobre o tipo ISTJ, clique no link abaixo:</p><a href="https://www.instagram.com/p/CeUa8DRl9kh/?igsh=eDFmMTbicXlubXF2" target="_blank">Ver mais no Instagram</a>`,
-        ISFJ: `<h2>ISFJ</h2><p>Para mais informações sobre o tipo ISFJ, clique no link abaixo:</p><a href="https://www.instagram.com/p/Cdo1PPFJgDy/?igsh=MTFrdGxyYTdxYXJ0NQ==" target="_blank">Ver mais no Instagram</a>`,
-        ESTP: `<h2>ESTP</h2><p>Para mais informações sobre o tipo ESTP, clique no link abaixo:</p><a href="https://www.instagram.com/p/Cc31k_Cp-Rz/?igsh=dG44MGM3YWZnendw" target="_blank">Ver mais no Instagram</a>`,
-        ESFP: `<h2>ESFP</h2><p>Para mais informações sobre o tipo ESFP, clique no link abaixo:</p><a href="https://www.instagram.com/p/Cb8mNdRJvZK/?igsh=MXR6dWg1eHliNzBybw==" target="_blank">Ver mais no Instagram</a>`,
-        ISTP: `<h2>ISTP</h2><p>Para mais informações sobre o tipo ISTP, clique no link abaixo:</p><a href="https://www.instagram.com/p/CcOi-Ndp38-/?igsh=MTE4a2gzM3lqc2Y3eQ==" target="_blank">Ver mais no Instagram</a>`,
-        ISFP: `<h2>ISFP</h2><p>Para mais informações sobre o tipo ISFP, clique no link abaixo:</p><a href="https://www.instagram.com/p/CcgvCROJRaE/?igsh=Yjd0NHl3N2lyeHFu" target="_blank">Ver mais no Instagram</a>`,
-        ENTJ: `<h2>ENTJ</h2><p>Para mais informações sobre o tipo ENTJ, clique no link abaixo:</p><a href="https://www.instagram.com/p/CcEap2Opaz3/?igsh=OHd2dW1sazM5eHlh" target="_blank">Ver mais no Instagram</a>`,
-        ENTP: `<h2>ENTP</h2><p>Para mais informações sobre o tipo ENTP, clique no link abaixo:</p><a href="https://www.instagram.com/p/CcWTHicp9hL/?igsh=MWhibHRnMG1ueGlxNQ==" target="_blank">Ver mais no Instagram</a>`,
-        INTJ: `<h2>INTJ</h2><p>Para mais informações sobre o tipo INTJ, clique no link abaixo:</p><a href="https://www.instagram.com/p/CdHVHCapO1W/?igsh=MWdteHFmNWQ5aHR6ag==" target="_blank">Ver mais no Instagram</a>`,
-        INTP: `<h2>INTP</h2><p>Para mais informações sobre o tipo INTP, clique no link abaixo:</p><a href="https://www.instagram.com/p/Ccq77oxp3aQ/?igsh=MTI1cHN3emNmMmcxYg==" target="_blank">Ver mais no Instagram</a>`,
-        ENFJ: `<h2>ENFJ</h2><p>Para mais informações sobre o tipo ENFJ, clique no link abaixo:</p><a href="https://www.instagram.com/p/CdZfAL4rDwT/?igsh=MTh4dGlqeXNodWo3Ng==" target="_blank">Ver mais no Instagram</a>`,
-        ENFP: `<h2>ENFP</h2><p>Para mais informações sobre o tipo ENFP, clique no link abaixo:</p><a href="https://www.instagram.com/p/Cd62RbzNAYv/?igsh=MTUxM202ODg0OGhpMg==" target="_blank">Ver mais no Instagram</a>`,
-        INFJ: `<h2>INFJ</h2><p>Para mais informações sobre o tipo INFJ, clique no link abaixo:</p><a href="https://www.instagram.com/p/Cehh1TGNKvD/?igsh=MWhvMGVvYnVjY2trMw==" target="_blank">Ver mais no Instagram</a>`,
-        INFP: `<h2>INFP</h2><p>Para mais informações sobre o tipo INFP, clique no link abaixo:</p><a href="https://www.instagram.com/p/CfDF24LNiE1/?igsh=eTlvcXViZjRkZ3Vq" target="_blank">Ver mais no Instagram</a>`
-      }
-    };
-
-    // Função para abrir a modal
-    function abrirModal(tipo) {
-      const modal = document.getElementById('resultado-modal');
-      const modalConteudo = document.getElementById('modal-conteudo');
-      const resultadoElement = document.getElementById(`resultado-${tipo}`);
-      const resultado = resultadoElement ? resultadoElement.innerHTML : '';
-
-      if (textosExplicativos[tipo] && textosExplicativos[tipo][resultado]) {
-        modalConteudo.innerHTML = textosExplicativos[tipo][resultado];
-        modal.style.display = 'flex';
-        tocarSom('buttonsound');
+function playMusicWithFadeIn(src) {
+  if (audioElement.src !== src) {
+    audioElement.src = src;
+    audioElement.volume = 0;
+    audioElement.play().catch(e => console.error("Erro ao tocar música:", e));
+    let volume = 0;
+    const fadeIn = setInterval(() => {
+      if (volume < 0.5) {
+        volume += 0.05;
+        audioElement.volume = volume;
       } else {
-        console.error(`Nenhum texto explicativo encontrado para ${tipo}: ${resultado}`);
+        clearInterval(fadeIn);
       }
+    }, 200);
+  }
+}
+
+// Funções do modal
+function abrirModal(tipo) {
+  const modal = document.getElementById('modal-explicacao');
+  const modalTexto = document.getElementById('modal-texto');
+  const resultadoTendencia = document.getElementById('resultado-tendencia').innerText;
+  const resultadoTemperamento = document.getElementById('resultado-temperamento').innerText;
+  const resultadoExpressao = document.getElementById('resultado-expressao').innerText;
+  const resultadoPersonalidade = document.getElementById('resultado-personalidade').innerText;
+
+  let conteudo = '';
+
+  if (tipo === 'tendencia' && explicacaoMap.tendencia[resultadoTendencia]) {
+    conteudo = explicacaoMap.tendencia[resultadoTendencia].replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+  } else if (tipo === 'temperamento' && explicacaoMap.temperamento[resultadoTemperamento]) {
+    conteudo = explicacaoMap.temperamento[resultadoTemperamento].replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+  } else if (tipo === 'expressao' && explicacaoMap.expressao[resultadoExpressao]) {
+    conteudo = explicacaoMap.expressao[resultadoExpressao].replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+  } else if (tipo === 'personalidade' && personalidadeLinkMap[resultadoPersonalidade]) {
+    conteudo = `Saiba mais sobre o tipo <strong>${resultadoPersonalidade}</strong>:<br><a href="${personalidadeLinkMap[resultadoPersonalidade]}" target="_blank">Acesse o conteúdo no Instagram</a>`;
+  } else {
+    conteudo = 'Resultado não disponível ou incompleto.';
+  }
+
+  modalTexto.innerHTML = conteudo;
+  modal.style.display = 'flex';
+  tocarSom('buttonsound');
+}
+
+function fecharModal() {
+  const modal = document.getElementById('modal-explicacao');
+  modal.style.display = 'none';
+  tocarSom('buttonsound');
+}
+
+// Função para download do PDF
+function downloadPDF() {
+  const link = document.createElement('a');
+  link.href = 'explicacao_respostas.pdf';
+  link.download = 'explicacao_respostas.pdf';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  tocarSom('buttonsound');
+}
+
+// Função para abrir abas
+function openTab(tabId) {
+  const tabs = document.querySelectorAll('.tab-content');
+  const buttons = document.querySelectorAll('.tab-button');
+  tabs.forEach(tab => {
+    tab.classList.remove('active');
+    tab.style.animation = 'none';
+    tab.style.opacity = '0';
+  });
+  buttons.forEach(button => button.classList.remove('active'));
+  const selectedTab = document.getElementById(tabId);
+  if (selectedTab) {
+    selectedTab.classList.add('active');
+    selectedTab.style.animation = 'slideIn 0.6s ease forwards';
+    selectedTab.style.opacity = '1';
+    const button = document.querySelector(`.tab-button[onclick="openTab('${tabId}')"]`);
+    if (button) {
+      button.classList.add('active');
     }
-
-    // Função para fechar a modal
-    function fecharModal() {
-      const modal = document.getElementById('resultado-modal');
-      modal.style.display = 'none';
-      tocarSom('buttonsound');
+    if (tabId === 'resultado') {
+      mostrarResultadoTipologico();
     }
+  }
+  tocarSom('buttonsound');
+}
 
-    // Função para tocar som dos botões
-    function tocarSom(soundId) {
-      const sound = document.getElementById(soundId);
-      if (sound) {
-        sound.currentTime = 0;
-        sound.play().catch(e => console.error('Erro ao tocar som:', e));
-      }
+// Perguntas das dicotomias
+const perguntasOrientacao = [
+  { texto: "Durante conversas, quando algo me vem à cabeça, dificilmente consigo me conter e acabo interrompendo a outra pessoa para falar sobre o assunto.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
+  { texto: "Na maioria das vezes, não me importo se alguém está desinformado; afinal, não é minha responsabilidade se a pessoa não se atualizou.", concordo: "RESPONDEDOR", discordo: "INICIADOR" },
+  { texto: "Sempre que recebo uma nova tarefa no trabalho, já começo a executá-la do meu jeito, mesmo que ainda não tenha todas as orientações necessárias.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
+  { texto: "Em restaurantes, quando percebo que o atendimento está lento, prefiro aguardar mais um pouco, acreditando que serei atendido naturalmente, sem precisar reclamar.", concordo: "RESPONDEDOR", discordo: "INICIADOR" },
+  { texto: "Sempre que um amigo está com dificuldades, já me adianto para sugerir soluções ou oferecer ajuda prática, nem sempre esperando que ele peça.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
+  { texto: "Ao encontrar uma boa promoção em uma loja, compro imediatamente, sem hesitar.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
+  { texto: "Normalmente, durante uma conversa, prefiro concluir meu raciocínio antes de mudar de assunto, pois não gosto quando a discussão é interrompida abruptamente.", concordo: "RESPONDEDOR", discordo: "INICIADOR" },
+  { texto: "Tenho mais facilidade para ouvir os outros do que para falar: é natural para mim absorver e refletir sobre o que dizem antes de expor minha opinião.", concordo: "RESPONDEDOR", discordo: "INICIADOR" },
+  { texto: "Sou bastante agitado e sempre quero participar ativamente das coisas. Adoro compartilhar ideias e entrar em discussões, mas muitas vezes não percebo que posso estar incomodando os outros.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
+  { texto: "No trabalho, quando identifico um processo que pode ser melhorado, já parto para as mudanças, mesmo sem autorização prévia.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
+  { texto: "Sempre que surge uma nova tecnologia ou ferramenta no meu trabalho, sou um dos primeiros a experimentar e propor formas de usá-la, independentemente de ser adotada oficialmente.", concordo: "INICIADOR", discordo: "RESPONDEDOR" }
+];
+
+const perguntasPostura = [
+  { texto: "Tenho certa impaciência - prefiro fazer as coisas e dar andamento a elas em vez de ficar aguardando.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+  { texto: "Tendo a ser flexível, o que me ajuda a adaptar minhas ações conforme os problemas surgem, tornando-me melhor em contornar obstáculos.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+  { texto: "Se estou em uma fila e vejo uma alternativa mais rápida, mudo imediatamente de estratégia, buscando a forma mais eficiente de alcançar meu objetivo.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+  { texto: "Durante viagens em grupo, costumo sugerir novas atividades no meio do passeio, alterando o roteiro sem esperar o consenso dos outros.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+  { texto: "Sou uma pessoa que preza pelo primor: na escola, meus cadernos eram muito caprichados e meu estojo tinha canetas de cores diferentes para cada parte do texto.", concordo: "CONTROLADOR", discordo: "MOVIMENTADOR" },
+  { texto: "Na execução de tarefas, tendo a ser mais vagaroso - gasto mais tempo refletindo sobre como devem ser feitas para que o resultado saia impecável.", concordo: "CONTROLADOR", discordo: "MOVIMENTADOR" },
+  { texto: "Se estou cozinhando e um ingrediente acaba, improviso com o que tenho disponível sem me preocupar em seguir a receita à risca, já que não verifiquei antes se tinha todos os ingredientes.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+  { texto: "Quando um amigo desmarca um encontro de última hora, rapidamente ligo para outro e combino algo novo, sem criar drama.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+  { texto: "Se estou no trânsito e vejo um atalho possível, mudo de trajeto imediatamente, mesmo sem conhecer bem o caminho.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+  { texto: "Quando algo no meu computador trava, testo várias soluções rapidamente antes de buscar ajuda técnica ou consultar manuais.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
+  { texto: "Nas apresentações escolares, geralmente não me preparava muito - estudava um pouco antes da aula e improvisava na hora com base no que já sabia.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" }
+];
+
+const perguntasEnfoque = [
+  { texto: "Com frequência sou chamado(a) de ‘ovelha negra’ da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
+  { texto: "Costumo me sentir desconfortável em ambientes de trabalho muito competitivos, com metas rígidas e cobranças constantes, esse tipo de clima acaba me desgastando bastante.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
+  { texto: "Sou uma pessoa bastante amistosa, gosto de participar dos rolês com os amigos e detesto gente monossilábica.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
+  { texto: "Quando preciso participar de palestras e percebo que o conteúdo delas não me será nada útil, busco sair discretamente em vez de ficar fingindo interesse.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
+  { texto: "No almoço de família, quando percebo que algum primo está deslocado, puxo para perto, perguntando sobre os estudos, o trabalho etc.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
+  { texto: "Não gosto muito de fazer ‘a social’, sou péssimo em fingir ser sociável com pessoas que não me interessam.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
+  { texto: "Quando estou em uma reunião e percebo que o assunto está desviando do objetivo principal, costumo cortar o papo e trazer o foco de volta.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
+  { texto: "Quando meus amigos ou familiares escolhem fazer algo em um lugar de que eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
+  { texto: "Se numa ida ao cinema com amigos, o grupo escolhe com entusiasmo assistir a um determinado filme, geralmente eu opto por escolher também, mesmo que o filme não me desperte muito interesse.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
+  { texto: "Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
+  { texto: "Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" }
+];
+
+const perguntasOrganizacao = [
+  { texto: "Entendo que as regras existem para evitar desordem, mas é necessário particularizar os casos, muitas vezes afrouxando as estruturas para estabelecer acordos benéficos.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
+  { texto: "Gosto de manter minha rotina, fazendo as coisas nos horários habituais, e fico muito estressado com imprevistos.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" },
+  { texto: "Em um mercado, se os caixas estão ocupados e o caixa preferencial está vazio, sigo direto para ele, pois se trata de preferência, não exclusividade.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
+  { texto: "Se meu trabalho exige seguir um protocolo de atendimento, sempre o sigo, sem abrir exceções.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" },
+  { texto: "Quando saio para almoçar com amigos, prefiro decidir na hora onde comer, permitindo que todos escolham o melhor local, em vez de definir no convite.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
+  { texto: "Detesto trabalho em grupo, mas, quando necessário, exijo que todos cumpram suas tarefas no prazo para não atrasar o grupo, e descarto quem não cumpre sua parte.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" },
+  { texto: "Às vezes, ao garantir que as coisas funcionem, posso soar ríspido(a) ao tratar as pessoas.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" },
+  { texto: "Em um churrasco com amigos, se combinamos que cada um leva uma bebida e alguém traz uma de má qualidade, posso achar ruim, mas não me preocupo em exigir que cada um consuma o que trouxe, pois o objetivo é descontrair, não criar regras.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
+  { texto: "Para mim, justiça é aplicar o que é devido a cada indivíduo, não usando a mesma medida para todos, pois alguém que furta alimentos para sustentar os filhos não merece a mesma pena que alguém que rouba por capricho.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
+  { texto: "Acho tediosas as pessoas que moralizam tudo; se os envolvidos em uma situação não veem problema nela, não há motivo para criticar.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
+  { texto: "Sou adepto do ditado ‘o combinado não sai caro’, pois, se a pessoa é adulta, deve ser responsável e consciente de suas ações.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" }
+];
+
+const perguntasComunicacao = [
+  { texto: "Quando estou conversando com alguém, faço questão de demonstrar que estou acompanhando o papo, seja com gestos, expressões faciais ou pequenos comentários.", concordo: "EXPRESSIVO", discordo: "CONTIDO" },
+  { texto: "Prefiro conversas mais objetivas, indo direto ao ponto, sem muitos rodeios ou detalhes desnecessários.", concordo: "CONTIDO", discordo: "EXPRESSIVO" },
+  { texto: "Sou uma pessoa que gosta de contar histórias, muitas vezes usando metáforas ou exemplos para explicar minhas ideias.", concordo: "EXPRESSIVO", discordo: "CONTIDO" },
+  { texto: "Quando estou em uma discussão, costumo manter um tom de voz mais neutro e evito gestos exagerados, focando no conteúdo do que estou dizendo.", concordo: "CONTIDO", discordo: "EXPRESSIVO" },
+  { texto: "Adoro usar humor nas conversas, mesmo com pessoas que acabei de conhecer, para deixar o clima mais leve.", concordo: "EXPRESSIVO", discordo: "CONTIDO" },
+  { texto: "Em reuniões, prefiro ouvir primeiro e só me manifestar quando tenho algo realmente relevante a dizer.", concordo: "CONTIDO", discordo: "EXPRESSIVO" },
+  { texto: "Quando conto algo, costumo ser bem enfático, usando variações no tom de voz e gestos para destacar os pontos principais.", concordo: "EXPRESSIVO", discordo: "CONTIDO" },
+  { texto: "Não sou muito de demonstrar emoções durante conversas; prefiro manter a compostura e focar no que está sendo discutido.", concordo: "CONTIDO", discordo: "EXPRESSIVO" },
+  { texto: "Gosto de interagir com as pessoas de forma calorosa, muitas vezes com contato visual intenso ou até um toque amigável no ombro.", concordo: "EXPRESSIVO", discordo: "CONTIDO" },
+  { texto: "Quando estou explicando algo, prefiro ser claro e conciso, evitando floreios ou histórias paralelas.", concordo: "CONTIDO", discordo: "EXPRESSIVO" },
+  { texto: "Em grupos, costumo ser aquele que anima a conversa, trazendo energia e incentivando todos a participarem.", concordo: "EXPRESSIVO", discordo: "CONTIDO" }
+];
+
+const perguntasInterpretacao = [
+  { texto: "Quando assisto a um filme ou série, fico mais intrigado com os significados por trás da história do que com a história em si.", concordo: "INTUITIVO", discordo: "SENSORIAL" },
+  { texto: "Prefiro tarefas que me permitam seguir instruções claras e bem definidas, em vez de ter que criar algo do zero.", concordo: "SENSORIAL", discordo: "INTUITIVO" },
+  { texto: "Gosto de imaginar como as coisas podem ser no futuro, mesmo que isso signifique lidar com ideias que ainda não têm base concreta.", concordo: "INTUITIVO", discordo: "SENSORIAL" },
+  { texto: "Quando estou aprendendo algo novo, prefiro focar nos detalhes práticos e no que já está funcionando, em vez de explorar teorias ou possibilidades.", concordo: "SENSORIAL", discordo: "INTUITIVO" },
+  { texto: "Costumo perceber padrões ou conexões entre coisas que outras pessoas nem sempre notam.", concordo: "INTUITIVO", discordo: "SENSORIAL" },
+  { texto: "Quando vou a um lugar novo, presto mais atenção nos detalhes do ambiente, como cores, cheiros e texturas, do que em imaginar o que poderia ser feito ali.", concordo: "SENSORIAL", discordo: "INTUITIVO" },
+  { texto: "Acho mais interessante discutir ideias abstratas ou conceitos do que conversar sobre fatos concretos ou experiências do dia a dia.", concordo: "INTUITIVO", discordo: "SENSORIAL" },
+  { texto: "Quando resolvo um problema, prefiro usar métodos testados e confiáveis, em vez de tentar abordagens novas que ainda não foram comprovadas.", concordo: "SENSORIAL", discordo: "INTUITIVO" },
+  { texto: "Muitas vezes, tenho insights ou pressentimentos sobre algo, mesmo sem saber explicar exatamente de onde vieram.", concordo: "INTUITIVO", discordo: "SENSORIAL" },
+  { texto: "Quando estou em um projeto, gosto de trabalhar com o que já tenho em mãos, focando em resultados práticos, em vez de sonhar com o que poderia ser.", concordo: "SENSORIAL", discordo: "INTUITIVO" },
+  { texto: "Acho mais fácil me conectar com ideias ou visões de longo prazo do que com tarefas que exigem atenção imediata aos detalhes.", concordo: "INTUITIVO", discordo: "SENSORIAL" }
+];
+
+// Função para gerar perguntas
+function gerarPerguntas(containerId, perguntas, prefixo, resultadoId, botaoAvancarId) {
+  const container = document.getElementById(containerId);
+  perguntas.forEach((pergunta, index) => {
+    const div = document.createElement('div');
+    div.className = 'question';
+    div.innerHTML = `<p>${pergunta.texto}</p>
+      <div class="response-buttons">
+        <button class="response-button" onclick="responder('${prefixo}', ${index}, 'concordo', '${resultadoId}', '${botaoAvancarId}')">Concordo</button>
+        <button class="response-button" onclick="responder('${prefixo}', ${index}, 'discordo', '${resultadoId}', '${botaoAvancarId}')">Discordo</button>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+// Função para processar respostas
+const respostas = {
+  orientacao: {},
+  postura: {},
+  enfoque: {},
+  organizacao: {},
+  comunicacao: {},
+  interpretacao: {}
+};
+
+function responder(categoria, index, resposta, resultadoId, botaoAvancarId) {
+  respostas[categoria][index] = resposta;
+  const buttons = document.querySelectorAll(`#questions-${categoria} .question:nth-child(${index + 1}) .response-button`);
+  buttons.forEach(button => {
+    button.classList.remove('active');
+    if (button.textContent.toLowerCase() === resposta) {
+      button.classList.add('active');
     }
+  });
+  calcularResultado(categoria, resultadoId, botaoAvancarId);
+  tocarSom('dicbotton');
+}
 
-    // Gestão de abas
-    let currentPersonalidade = null;
-    let audioElement = document.getElementById('personalidade-musica');
-
-    function openTab(tabId) {
-      const tabs = document.querySelectorAll('.tab-content');
-      const buttons = document.querySelectorAll('.tab-button');
-      tabs.forEach(tab => {
-        tab.classList.remove('active');
-        tab.style.animation = 'none';
-        tab.style.opacity = '0';
-      });
-      buttons.forEach(button => button.classList.remove('active'));
-      const selectedTab = document.getElementById(tabId);
-      if (selectedTab) {
-        selectedTab.classList.add('active');
-        selectedTab.style.animation = 'slideIn 0.6s ease forwards';
-        selectedTab.style.opacity = '1';
-        const button = document.querySelector(`.tab-button[onclick="openTab('${tabId}')"]`);
-        if (button) {
-          button.classList.add('active');
-        }
-      }
-      tocarSom('buttonsound');
+function calcularResultado(categoria, resultadoId, botaoAvancarId) {
+  const respostasCategoria = Object.values(respostas[categoria]);
+  if (respostasCategoria.length === perguntas[categoria].length) {
+    const contagem = respostasCategoria.reduce((acc, resposta) => {
+      const pergunta = perguntas[categoria][respostasCategoria.indexOf(resposta)];
+      const tipo = resposta === 'concordo' ? pergunta.concordo : pergunta.discordo;
+      acc[tipo] = (acc[tipo] || 0) + 1;
+      return acc;
+    }, {});
+    let resultado = Object.keys(contagem).reduce((a, b) => contagem[a] > contagem[b] ? a : b);
+    if (categoria === 'orientacao') {
+      resultado = resultado === 'INICIADOR' ? 'EXTROVERSÃO' : 'INTROVERSÃO';
     }
+    document.getElementById(resultadoId).innerText = resultado;
+    document.getElementById(botaoAvancarId).style.display = 'block';
+  }
+}
 
-    // Dados das perguntas
-    const perguntasOrientacao = [
-      { texto: "Durante conversas, quando algo me vem à cabeça, dificilmente consigo me conter e acabo interrompendo a outra pessoa para falar sobre o assunto.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
-      { texto: "Na maioria das vezes, não me importo se alguém está desinformado; afinal, não é minha responsabilidade se a pessoa não se atualizou.", concordo: "RESPONDEDOR", discordo: "INICIADOR" },
-      { texto: "Sempre que recebo uma nova tarefa no trabalho, já começo a executá-la do meu jeito, mesmo que ainda não tenha todas as orientações necessárias.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
-      { texto: "Em restaurantes, quando percebo que o atendimento está lento, prefiro aguardar mais um pouco, acreditando que serei atendido naturalmente, sem precisar reclamar.", concordo: "RESPONDEDOR", discordo: "INICIADOR" },
-      { texto: "Sempre que um amigo está com dificuldades, já me adianto para sugerir soluções ou oferecer ajuda prática, nem sempre esperando que ele peça.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
-      { texto: "Ao encontrar uma boa promoção em uma loja, compro imediatamente, sem hesitar.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
-      { texto: "Normalmente, durante uma conversa, prefiro concluir meu raciocínio antes de mudar de assunto, pois não gosto quando a discussão é interrompida abruptamente.", concordo: "RESPONDEDOR", discordo: "INICIADOR" },
-      { texto: "Tenho mais facilidade para ouvir os outros do que para falar: é natural para mim absorver e refletir sobre o que dizem antes de expor minha opinião.", concordo: "RESPONDEDOR", discordo: "INICIADOR" },
-      { texto: "Sou bastante agitado e sempre quero participar ativamente das coisas. Adoro compartilhar ideias e entrar em discussões, mas muitas vezes não percebo que posso estar incomodando os outros.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
-      { texto: "No trabalho, quando identifico um processo que pode ser melhorado, já parto para as mudanças, mesmo sem autorização prévia.", concordo: "INICIADOR", discordo: "RESPONDEDOR" },
-      { texto: "Sempre que surge uma nova tecnologia ou ferramenta no meu trabalho, sou um dos primeiros a experimentar e propor formas de usá-la, independentemente de ser adotada oficialmente.", concordo: "INICIADOR", discordo: "RESPONDEDOR" }
-    ];
+// Função para calcular e exibir resultados tipológicos
+function mostrarResultadoTipologico() {
+  let tendencia = document.getElementById('resultado-final-orientacao').innerText || 'Pendente';
+  let temperamento = 'Pendente';
+  let expressao = 'Pendente';
+  let personalidade = 'Pendente';
 
-    const perguntasPostura = [
-      { texto: "Tenho certa impaciência - prefiro fazer as coisas e dar andamento a elas em vez de ficar aguardando.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
-      { texto: "Tendo a ser flexível, o que me ajuda a adaptar minhas ações conforme os problemas surgem, tornando-me melhor em contornar obstáculos.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
-      { texto: "Se estou em uma fila e vejo uma alternativa mais rápida, mudo imediatamente de estratégia, buscando a forma mais eficiente de alcançar meu objetivo.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
-      { texto: "Durante viagens em grupo, costumo sugerir novas atividades no meio do passeio, alterando o roteiro sem esperar o consenso dos outros.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
-      { texto: "Sou uma pessoa que preza pelo primor: na escola, meus cadernos eram muito caprichados e meu estojo tinha canetas de cores diferentes para cada parte do texto.", concordo: "CONTROLADOR", discordo: "MOVIMENTADOR" },
-      { texto: "Na execução de tarefas, tendo a ser mais vagaroso - gasto mais tempo refletindo sobre como devem ser feitas para que o resultado saia impecável.", concordo: "CONTROLADOR", discordo: "MOVIMENTADOR" },
-      { texto: "Se estou cozinhando e um ingrediente acaba, improviso com o que tenho disponível sem me preocupar em seguir a receita à risca, já que não verifiquei antes se tinha todos os ingredientes.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
-      { texto: "Quando um amigo desmarca um encontro de última hora, rapidamente ligo para outro e combino algo novo, sem criar drama.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
-      { texto: "Se estou no trânsito e vejo um atalho possível, mudo de trajeto imediatamente, mesmo sem conhecer bem o caminho.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
-      { texto: "Quando algo no meu computador trava, testo várias soluções rapidamente antes de buscar ajuda técnica ou consultar manuais.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" },
-      { texto: "Nas apresentações escolares, geralmente não me preparava muito - estudava um pouco antes da aula e improvisava na hora com base no que já sabia.", concordo: "MOVIMENTADOR", discordo: "CONTROLADOR" }
-    ];
+  const enfoque = document.getElementById('resultado-final-enfoque').innerText;
+  const organizacao = document.getElementById('resultado-final-organizacao').innerText;
+  const interpretacao = document.getElementById('resultado-final-interpretacao').innerText;
+  const comunicacao = document.getElementById('resultado-final-comunicacao').innerText;
+  const postura = document.getElementById('resultado-final-postura').innerText;
 
-    const perguntasEnfoque = [
-      { texto: "Com frequência sou chamado(a) de ‘ovelha negra’ da família, isso porque nos eventos familiares ou eu não participo ou quando participo acabo falando sobre assuntos que eles não curtem muito.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
-      { texto: "Costumo me sentir desconfortável em ambientes de trabalho muito competitivos, com metas rígidas e cobranças constantes, esse tipo de clima acaba me desgastando bastante.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
-      { texto: "Sou uma pessoa bastante amistosa, gosto de participar dos rolês com os amigos e detesto gente monossilábica.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
-      { texto: "Quando preciso participar de palestras e percebo que o conteúdo delas não me será nada útil, busco sair discretamente em vez de ficar fingindo interesse.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
-      { texto: "No almoço de família, quando percebo que algum primo está deslocado, puxo para perto, perguntando sobre os estudos, o trabalho etc.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
-      { texto: "Não gosto muito de fazer ‘a social’, sou péssimo em fingir ser sociável com pessoas que não me interessam.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
-      { texto: "Quando estou em uma reunião e percebo que o assunto está desviando do objetivo principal, costumo cortar o papo e trazer o foco de volta.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
-      { texto: "Quando meus amigos ou familiares escolhem fazer algo em um lugar de que eu não gosto, geralmente prefiro não ir em vez de só ceder e participar.", concordo: "PRAGMÁTICO", discordo: "AFILIATIVO" },
-      { texto: "Se numa ida ao cinema com amigos, o grupo escolhe com entusiasmo assistir a um determinado filme, geralmente eu opto por escolher também, mesmo que o filme não me desperte muito interesse.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
-      { texto: "Geralmente sou muito franco e sincero com as pessoas, mas não tenho intenção de machucá-las, então acabo sempre tendo que me desculpar para não magoar os outros.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" },
-      { texto: "Acredito que ao falar com outros é sempre bom pesar as palavras e durante a conversa ir tateando a reação da outra pessoa.", concordo: "AFILIATIVO", discordo: "PRAGMÁTICO" }
-    ];
+  if (enfoque === 'PRAGMÁTICO' && interpretacao === 'SENSORIAL') {
+    temperamento = 'ARTÍFICE';
+  } else if (enfoque === 'AFILIATIVO' && organizacao === 'ESTRUTURADO') {
+    temperamento = 'SENTINELA';
+  } else if (enfoque === 'PRAGMÁTICO' && interpretacao === 'INTUITIVO') {
+    temperamento = 'ANALISTA';
+  } else if (enfoque === 'AFILIATIVO' && organizacao === 'INTERESSADO') {
+    temperamento = 'DIPLOMATA';
+  }
 
-    const perguntasOrganizacao = [
-      { texto: "Entendo que as regras existem para evitar desordem, mas é necessário particularizar os casos, muitas vezes afrouxando as estruturas para estabelecer acordos benéficos.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
-      { texto: "Gosto de manter minha rotina, fazendo as coisas nos horários habituais, e fico muito estressado com imprevistos.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" },
-      { texto: "Em um mercado, se os caixas estão ocupados e o caixa preferencial está vazio, sigo direto para ele, pois se trata de preferência, não exclusividade.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
-      { texto: "Se meu trabalho exige seguir um protocolo de atendimento, sempre o sigo, sem abrir exceções.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" },
-      { texto: "Quando saio para almoçar com amigos, prefiro decidir na hora onde comer, permitindo que todos escolham o melhor local, em vez de definir no convite.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
-      { texto: "Detesto trabalho em grupo, mas, quando necessário, exijo que todos cumpram suas tarefas no prazo para não atrasar o grupo, e descarto quem não cumpre sua parte.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" },
-      { texto: "Às vezes, ao garantir que as coisas funcionem, posso soar ríspido(a) ao tratar as pessoas.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" },
-      { texto: "Em um churrasco com amigos, se combinamos que cada um leva uma bebida e alguém traz uma de má qualidade, posso achar ruim, mas não me preocupo em exigir que cada um consuma o que trouxe, pois o objetivo é descontrair, não criar regras.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
-      { texto: "Para mim, justiça é aplicar o que é devido a cada indivíduo, não usando a mesma medida para todos, pois alguém que furta alimentos para sustentar os filhos não merece a mesma pena que alguém que rouba por capricho.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
-      { texto: "Acho tediosas as pessoas que moralizam tudo; se os envolvidos em uma situação não veem problema nela, não há motivo para criticar.", concordo: "INTERESSADO", discordo: "ESTRUTURADO" },
-      { texto: "Sou adepto do ditado ‘o combinado não sai caro’, pois, se a pessoa é adulta, deve ser responsável e consciente de suas ações.", concordo: "ESTRUTURADO", discordo: "INTERESSADO" }
-    ];
+  if (comunicacao === 'EXPRESSIVO' && postura === 'CONTROLADOR') {
+    expressao = 'ESTRUTURADOR';
+  } else if (comunicacao === 'EXPRESSIVO' && postura === 'MOVIMENTADOR') {
+    expressao = 'INAUGURADOR';
+  } else if (comunicacao === 'CONTIDO' && postura === 'CONTROLADOR') {
+    expressao = 'FINALIZADOR';
+  } else if (comunicacao === 'CONTIDO' && postura === 'MOVIMENTADOR') {
+    expressao = 'BASTIDOR';
+  }
 
-    const perguntasComunicacao = [
-      { texto: "Gosto de instigar as pessoas nas conversas – acho mais interessante fazer um 'charminho' do que deixar minhas intenções explícitas logo de início.", concordo: "INFORMATIVO", discordo: "DIRETO" },
-      { texto: "Minha fala tende a ser retilínea: conduzo o raciocínio de maneira centrada, raramente me perdendo ou me embaralhando no que digo.", concordo: "DIRETO", discordo: "INFORMATIVO" },
-      { texto: "Meus amigos e colegas costumam dizer que passo uma vibe de 'professor', pois normalmente trago muito contexto em minha comunicação e descrevo detalhadamente o que falo.", concordo: "INFORMATIVO", discordo: "DIRETO" },
-      { texto: "Quando estou atrasado para compromissos, envio imediatamente um áudio ou mensagem explicando os motivos – considero importante evitar más interpretações.", concordo: "INFORMATIVO", discordo: "DIRETO" },
-      { texto: "No restaurante, se trouxerem o prato errado, procuro suavizar o pedido de troca em vez de simplesmente reclamar do erro.", concordo: "INFORMATIVO", discordo: "DIRETO" },
-      { texto: "Detesto rodeios: se alguém me pergunta algo, respondo diretamente, sem floreios ou explicações desnecessárias.", concordo: "DIRETO", discordo: "INFORMATIVO" },
-      { texto: "Quando estou em uma discussão, costumo usar exemplos e histórias para ilustrar meu ponto de vista, mesmo que isso alongue a conversa.", concordo: "INFORMATIVO", discordo: "DIRETO" },
-      { texto: "Se estou em uma reunião e alguém faz uma pergunta fora do contexto, prefiro responder de forma curta e voltar ao tema principal rapidamente.", concordo: "DIRETO", discordo: "INFORMATIVO" },
-      { texto: "Gosto de dar detalhes e contexto quando explico algo, pois acredito que isso ajuda as pessoas a entenderem melhor o que quero dizer.", concordo: "INFORMATIVO", discordo: "DIRETO" },
-      { texto: "Quando recebo uma crítica, prefiro que a pessoa vá direto ao ponto, sem tentar suavizar ou explicar muito.", concordo: "DIRETO", discordo: "INFORMATIVO" },
-      { texto: "Em conversas, costumo fazer perguntas para entender melhor o que a outra pessoa pensa, mesmo que isso leve a conversa por caminhos inesperados.", concordo: "INFORMATIVO", discordo: "DIRETO" }
-    ];
+  const mapPersonalidade = {
+    'EXTROVERSÃO-SENTINELA-ESTRUTURADOR': 'ESTJ',
+    'EXTROVERSÃO-SENTINELA-INAUGURADOR': 'ESFJ',
+    'INTROVERSÃO-SENTINELA-FINALIZADOR': 'ISTJ',
+    'INTROVERSÃO-SENTINELA-BASTIDOR': 'ISFJ',
+    'EXTROVERSÃO-ARTÍFICE-ESTRUTURADOR': 'ESTP',
+    'EXTROVERSÃO-ARTÍFICE-INAUGURADOR': 'ESFP',
+    'INTROVERSÃO-ARTÍFICE-FINALIZADOR': 'ISTP',
+    'INTROVERSÃO-ARTÍFICE-BASTIDOR': 'ISFP',
+    'EXTROVERSÃO-ANALISTA-ESTRUTURADOR': 'ENTJ',
+    'EXTROVERSÃO-ANALISTA-INAUGURADOR': 'ENTP',
+    'INTROVERSÃO-ANALISTA-FINALIZADOR': 'INTJ',
+    'INTROVERSÃO-ANALISTA-BASTIDOR': 'INTP',
+    'EXTROVERSÃO-DIPLOMATA-ESTRUTURADOR': 'ENFJ',
+    'EXTROVERSÃO-DIPLOMATA-INAUGURADOR': 'ENFP',
+    'INTROVERSÃO-DIPLOMATA-FINALIZADOR': 'INFJ',
+    'INTROVERSÃO-DIPLOMATA-BASTIDOR': 'INFP'
+  };
 
-    const perguntasInterpretacao = [
-      { texto: "Quando assisto a filmes ou séries, costumo prestar muita atenção aos detalhes visuais e às mensagens implícitas, percebendo coisas que outras pessoas não notam.", concordo: "INTUITIVO", discordo: "SENSORIAL" },
-      { texto: "Prefiro atividades práticas, como cozinhar ou consertar coisas, do que ficar imaginando possibilidades ou cenários futuros.", concordo: "SENSORIAL", discordo: "INTUITIVO" },
-      { texto: "Gosto de planejar o futuro e imaginar como as coisas podem evoluir, mesmo que isso signifique pensar em cenários que ainda não existem.", concordo: "INTUITIVO", discordo: "SENSORIAL" },
-      { texto: "Quando estou em um lugar novo, foco mais nos detalhes concretos, como a decoração ou a disposição dos objetos, do que em imaginar o que aquele lugar poderia ser.", concordo: "SENSORIAL", discordo: "INTUITIVO" },
-      { texto: "Em reuniões, costumo pensar em ideias ou soluções inovadoras, mesmo que não sejam imediatamente aplicáveis.", concordo: "INTUITIVO", discordo: "SENSORIAL" },
-      { texto: "Sou bom em lembrar detalhes específicos, como datas, nomes ou o que alguém estava vestindo em um evento.", concordo: "SENSORIAL", discordo: "INTUITIVO" },
-      { texto: "Quando resolvo problemas, gosto de explorar várias possibilidades e conexões, mesmo que isso me leve a soluções não convencionais.", concordo: "INTUITIVO", discordo: "SENSORIAL" },
-      { texto: "Prefiro seguir instruções claras e bem definidas ao realizar uma tarefa, em vez de tentar algo novo sem um guia.", concordo: "SENSORIAL", discordo: "INTUITIVO" },
-      { texto: "Costumo ter insights ou pressentimentos sobre o que vai acontecer, mesmo sem evidências concretas para apoiar.", concordo: "INTUITIVO", discordo: "SENSORIAL" },
-      { texto: "Quando aprendo algo novo, prefiro focar em como aplicar isso na prática, em vez de explorar teorias ou conceitos abstratos.", concordo: "SENSORIAL", discordo: "INTUITIVO" },
-      { texto: "Gosto de discussões que exploram ideias abstratas, como o significado da vida ou o futuro da tecnologia, mesmo que não cheguemos a uma conclusão prática.", concordo: "INTUITIVO", discordo: "SENSORIAL" }
-    ];
+  const chave = `${tendencia}-${temperamento}-${expressao}`;
+  personalidade = mapPersonalidade[chave] || 'Pendente';
 
-    // Lógica para carregar perguntas e resultados
-    function carregarPerguntas(tabId, perguntas, resultadoId, botaoId) {
-      const container = document.getElementById(`questions-${tabId}`);
-      const resultado = document.getElementById(`resultado-final-${tabId}`);
-      const botao = document.getElementById(`botao-avancar-${tabId}`);
-      container.innerHTML = '';
-      let respostas = {};
+  const resultadoTendencia = document.getElementById('resultado-tendencia');
+  const resultadoTemperamento = document.getElementById('resultado-temperamento');
+  const resultadoExpressao = document.getElementById('resultado-expressao');
+  const resultadoPersonalidade = document.getElementById('resultado-personalidade');
+  const imagemPersonalidade = document.getElementById('personalidade-imagem');
+  const explicacaoRetangulo = document.getElementById('explicacao-retangulo');
+  const descricaoPersonalidade = document.getElementById('personalidade-descricao');
 
-      perguntas.forEach((pergunta, index) => {
-        const div = document.createElement('div');
-        div.style.margin = '20px 0';
-        div.innerHTML = `
-          <p style="font-size: 18px; color: #F8F8F8; margin-bottom: 10px;">${pergunta.texto}</p>
-          <button style="background: #6E0838; color: white; padding: 10px 20px; margin: 5px; border: none; border-radius: 8px; cursor: pointer;" onclick="responder('${tabId}', ${index}, 'concordo')">Concordo</button>
-          <button style="background: #6E0838; color: white; padding: 10px 20px; margin: 5px; border: none; border-radius: 8px; cursor: pointer;" onclick="responder('${tabId}', ${index}, 'discordo')">Discordo</button>
-        `;
-        container.appendChild(div);
-      });
+  if (resultadoTendencia) {
+    resultadoTendencia.innerHTML = tendencia;
+  }
+  if (resultadoTemperamento) {
+    resultadoTemperamento.innerHTML = temperamento;
+  }
+  if (resultadoExpressao) {
+    resultadoExpressao.innerHTML = expressao;
+  }
+  if (resultadoPersonalidade) {
+    resultadoPersonalidade.innerHTML = personalidade;
+  }
 
-      window.responder = (tab, index, resposta) => {
-        respostas[index] = resposta;
-        tocarSom('buttonsound');
-        if (Object.keys(respostas).length === perguntas.length) {
-          const contagem = { concordo: 0, discordo: 0 };
-          Object.values(respostas).forEach(r => contagem[r]++);
-          const resultadoFinal = contagem.concordo > contagem.discordo
-            ? perguntas[0].concordo
-            : perguntas[0].discordo;
-          resultado.innerHTML = resultadoFinal;
-          botao.style.display = 'block';
-          localStorage.setItem(tabId, resultadoFinal);
-        }
+  if (personalidade !== 'Pendente') {
+    if (imagemPersonalidade && imagemMap[personalidade]) {
+      console.log("Tentando carregar imagem:", imagemMap[personalidade]);
+      imagemPersonalidade.src = imagemMap[personalidade];
+      imagemPersonalidade.style.display = 'block';
+      imagemPersonalidade.alt = `Imagem de ${personalidade}`;
+      imagemPersonalidade.onerror = () => {
+        console.error("Erro ao carregar imagem para", personalidade);
       };
     }
 
-    // Mapear resultados para Tendência, Temperamento, Expressão e Personalidade
-    function calcularResultados() {
-      const orientacao = localStorage.getItem('orientacao') || 'Pendente';
-      const postura = localStorage.getItem('postura') || 'Pendente';
-      const enfoque = localStorage.getItem('enfoque') || 'Pendente';
-      const organizacao = localStorage.getItem('organizacao') || 'Pendente';
-      const comunicacao = localStorage.getItem('comunicacao') || 'Pendente';
-      const interpretacao = localStorage.getItem('interpretacao') || 'Pendente';
-
-      // Tendência
-      const tendencia = orientacao === 'INICIADOR' ? 'EXTROVERSÃO' : orientacao === 'RESPONDEDOR' ? 'INTROVERSÃO' : 'Pendente';
-      document.getElementById('resultado-tendencia').innerHTML = tendencia;
-
-      // Temperamento
-      let temperamento = 'Pendente';
-      if (enfoque === 'AFILIATIVO' && organizacao === 'ESTRUTURADO') temperamento = 'SENTINELA';
-      else if (enfoque === 'PRAGMÁTICO' && organizacao === 'INTERESSADO') temperamento = 'ARTÍFICE';
-      else if (enfoque === 'PRAGMÁTICO' && organizacao === 'ESTRUTURADO') temperamento = 'ANALISTA';
-      else if (enfoque === 'AFILIATIVO' && organizacao === 'INTERESSADO') temperamento = 'DIPLOMATA';
-      document.getElementById('resultado-temperamento').innerHTML = temperamento;
-
-      // Expressão
-      let expressao = 'Pendente';
-      if (comunicacao === 'DIRETO' && postura === 'CONTROLADOR') expressao = 'ESTRUTURADOR';
-      else if (comunicacao === 'INFORMATIVO' && postura === 'MOVIMENTADOR') expressao = 'INAUGURADOR';
-      else if (comunicacao === 'DIRETO' && postura === 'MOVIMENTADOR') expressao = 'FINALIZADOR';
-      else if (comunicacao === 'INFORMATIVO' && postura === 'CONTROLADOR') expressao = 'BASTIDOR';
-      document.getElementById('resultado-expressao').innerHTML = expressao;
-
-      // Personalidade
-      let personalidade = 'Pendente';
-      const tipo = {
-        orientacao: orientacao === 'INICIADOR' ? 'E' : 'I',
-        interpretacao: interpretacao === 'SENSORIAL' ? 'S' : 'N',
-        enfoque: enfoque === 'AFILIATIVO' ? 'F' : 'T',
-        organizacao: organizacao === 'ESTRUTURADO' ? 'J' : 'P'
-      };
-      personalidade = `${tipo.orientacao}${tipo.interpretacao}${tipo.enfoque}${tipo.organizacao}`;
-      document.getElementById('resultado-personalidade').innerHTML = personalidade;
+    if (explicacaoRetangulo) {
+      explicacaoRetangulo.style.display = 'block';
     }
 
-    // Inicializar perguntas
-    carregarPerguntas('orientacao', perguntasOrientacao, 'resultado-final-orientacao', 'botao-avancar-orientacao');
-    carregarPerguntas('postura', perguntasPostura, 'resultado-final-postura', 'botao-avancar-postura');
-    carregarPerguntas('enfoque', perguntasEnfoque, 'resultado-final-enfoque', 'botao-avancar-enfoque');
-    carregarPerguntas('organizacao', perguntasOrganizacao, 'resultado-final-organizacao', 'botao-avancar-organizacao');
-    carregarPerguntas('comunicacao', perguntasComunicacao, 'resultado-final-comunicacao', 'botao-avancar-comunicacao');
-    carregarPerguntas('interpretacao', perguntasInterpretacao, 'resultado-final-interpretacao', 'botao-avancar-interpretacao');
+    if (descricaoPersonalidade && descricaoMap[personalidade]) {
+      descricaoPersonalidade.innerHTML = descricaoMap[personalidade].replace(/\n\n/g, '<br><br>').replace(/\n/g, '<br>');
+      descricaoPersonalidade.style.display = 'block';
+    }
 
-    // Calcular resultados ao carregar a aba Resultado
-    document.querySelector('.tab-button[onclick="openTab(\'resultado\')"]').addEventListener('click', calcularResultados);
+    if (musicaMap[personalidade] && personalidade !== currentPersonalidade) {
+      console.log("Tentando tocar música:", musicaMap[personalidade]);
+      playMusicWithFadeIn(musicaMap[personalidade]);
+      currentPersonalidade = personalidade;
+    }
+  } else {
+    if (imagemPersonalidade) {
+      imagemPersonalidade.style.display = 'none';
+    }
+    if (explicacaoRetangulo) {
+      explicacaoRetangulo.style.display = 'none';
+    }
+    if (descricaoPersonalidade) {
+      descricaoPersonalidade.style.display = 'none';
+    }
+    audioElement.pause();
+    currentPersonalidade = null;
+  }
+}
 
-    // Inicialização
-    openTab('pagina-inicial');
-  </script>
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+  gerarPerguntas('questions-orientacao', perguntasOrientacao, 'orientacao', 'resultado-final-orientacao', 'botao-avancar-orientacao');
+  gerarPerguntas('questions-postura', perguntasPostura, 'postura', 'resultado-final-postura', 'botao-avancar-postura');
+  gerarPerguntas('questions-enfoque', perguntasEnfoque, 'enfoque', 'resultado-final-enfoque', 'botao-avancar-enfoque');
+  gerarPerguntas('questions-organizacao', perguntasOrganizacao, 'organizacao', 'resultado-final-organizacao', 'botao-avancar-organizacao');
+  gerarPerguntas('questions-comunicacao', perguntasComunicacao, 'comunicacao', 'resultado-final-comunicacao', 'botao-avancar-comunicacao');
+  gerarPerguntas('questions-interpretacao', perguntasInterpretacao, 'interpretacao', 'resultado-final-interpretacao', 'botao-avancar-interpretacao');
+
+  const closeButton = document.querySelector('.modal-close');
+  if (closeButton) {
+    closeButton.addEventListener('click', fecharModal);
+  }
+
+  const modal = document.getElementById('modal-explicacao');
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      fecharModal();
+    }
+  });
+});
+</script>
 </body>
 </html>
